@@ -9,5 +9,7 @@
 <body>
 	hello
 	hi
+	hellojava!@#!@#
+	±ê ¹è½Ã
 </body>
 </html>
