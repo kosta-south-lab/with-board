@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,11 +22,12 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_no_seq")
 	@SequenceGenerator(sequenceName = "member_no_seq", allocationSize = 1, name="member_no_seq")
-	private int memberNo;
+	private Long memberNo;
 	
 	@Column(nullable = false, length = 30)
 	private String id;

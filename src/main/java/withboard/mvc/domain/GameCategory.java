@@ -22,7 +22,7 @@ public class GameCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_category_no_seq")
 	@SequenceGenerator(sequenceName = "game_ategory_no_seq", allocationSize = 1, name="game_category_no_seq")
-	private int gameCategoryNo;
+	private Long gameCategoryNo;
 	
 	@Column(nullable = false, length = 100)
 	private String gameCategoryName;

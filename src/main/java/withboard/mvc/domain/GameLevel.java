@@ -24,7 +24,7 @@ public class GameLevel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_level_no_seq")
 	@SequenceGenerator(sequenceName = "game_level_no_seq", allocationSize = 1, name = "game_level_no_seq")
-	private int gameLevelNo;
+	private Long gameLevelNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "game_no")

@@ -22,7 +22,7 @@ public class NormalCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "normal_category_no_seq")
 	@SequenceGenerator(sequenceName = "normal_category_no_seq", allocationSize = 1, name="normal_category_no_seq")
-	private int normalCategoryNo;
+	private Long normalCategoryNo;
 	
 	@Column(nullable = false, length = 100)
 	private String normalCategoryName;

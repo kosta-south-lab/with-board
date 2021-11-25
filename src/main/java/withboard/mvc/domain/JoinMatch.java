@@ -23,7 +23,7 @@ public class JoinMatch {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "join_match_no_seq")
 	@SequenceGenerator(sequenceName = "join_match_no_seq", allocationSize = 1, name = "join_match_no_seq")
-	private int joinMatchNo;
+	private Long joinMatchNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "member_no")

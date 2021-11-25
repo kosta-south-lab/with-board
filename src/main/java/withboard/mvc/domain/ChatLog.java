@@ -24,7 +24,7 @@ public class ChatLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chat_log_no_seq")
 	@SequenceGenerator(sequenceName = "chat_log_no_seq", allocationSize = 1, name = "chat_log_no_seq")
-	private int chatLogNo;
+	private Long chatLogNo;
 	
 	@Column(length = 250)
 	private String chatLogContent;

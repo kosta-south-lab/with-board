@@ -22,7 +22,7 @@ public class DealCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "deal_category_no_seq")
 	@SequenceGenerator(sequenceName = "deal_category_no_seq", allocationSize = 1, name = "deal_category_no_seq")
-	private int dealCategoryNo;
+	private Long dealCategoryNo;
 	
 	@Column(nullable = false, length=100)
 	private String dealCategoryName;
