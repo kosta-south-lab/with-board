@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,11 +24,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Reply {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reply_no_seq")
 	@SequenceGenerator(sequenceName = "reply_no_seq", allocationSize = 1, name = "reply_no_seq")
-	private int replyNo;
+	private Long replyNo;
 	
 	@Column(nullable = false, length = 250)
 	private String replyContent;

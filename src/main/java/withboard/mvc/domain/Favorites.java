@@ -23,7 +23,7 @@ public class Favorites {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "favorites_no_seq")
 	@SequenceGenerator(sequenceName = "favorites_no_seq", allocationSize = 1, name = "favorites_no_seq")
-	private int favoritesNo;
+	private Long favoritesNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "member_no")

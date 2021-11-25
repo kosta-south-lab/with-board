@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,12 +23,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MemberRating {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_rating_no_seq")
 	@SequenceGenerator(sequenceName = "member_rating_no_seq", allocationSize = 1, name="member_rating_no_seq")
-	private int memberRatingNo;
+	private Long memberRatingNo;
 	private int mannerScore;
 	private int joinScore;
 	private int playStyleScore;

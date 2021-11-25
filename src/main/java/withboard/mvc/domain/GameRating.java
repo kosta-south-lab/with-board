@@ -24,7 +24,7 @@ public class GameRating {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_rating_no_seq")
 	@SequenceGenerator(sequenceName = "game_rating_no_seq", allocationSize = 1, name = "game_rating_no_seq")
-	private int gameRatingNo;
+	private Long gameRatingNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "game_no")

@@ -24,7 +24,7 @@ public class Authorities {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "authorities_no_seq")
 	@SequenceGenerator(sequenceName = "authorities_no_seq", allocationSize = 1, name="authorities_no_seq")
-	private int authoritiesNo;
+	private Long authoritiesNo;
 	
 	@Column(nullable = false)
 	private String role;

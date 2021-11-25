@@ -22,7 +22,7 @@ public class GameProcess {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "process_no_seq")
 	@SequenceGenerator(sequenceName = "process_no_seq", allocationSize = 1, name="process_no_seq")
-	private int processNo;
+	private Long processNo;
 	
 	@Column(nullable = false, length = 100)
 	private String processName;

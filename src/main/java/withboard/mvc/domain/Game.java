@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,12 +20,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Game {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_no_seq")
 	@SequenceGenerator(sequenceName = "game_no_seq", allocationSize = 1, name="game_category_no_seq")
-	private int gameNo;
+	private Long gameNo;
 	
 	@Column(length = 100)
 	private String gameName;

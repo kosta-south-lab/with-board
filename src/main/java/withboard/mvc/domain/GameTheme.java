@@ -22,7 +22,7 @@ public class GameTheme {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "theme_no_seq")
 	@SequenceGenerator(sequenceName = "theme_no_seq", allocationSize = 1, name="theme_no_seq")
-	private int themeNo;
+	private Long themeNo;
 	
 	@Column(nullable = false, length = 100)
 	private String themeName;

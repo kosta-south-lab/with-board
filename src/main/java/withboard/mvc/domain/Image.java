@@ -24,7 +24,7 @@ public class Image {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "image_no_seq")
 	@SequenceGenerator(sequenceName = "image_no_seq", allocationSize = 1, name = "image_no_seq")
-	private int imageNo;
+	private Long imageNo;
 	
 	@Column(nullable = false, length = 250)
 	private String imageUrl;
