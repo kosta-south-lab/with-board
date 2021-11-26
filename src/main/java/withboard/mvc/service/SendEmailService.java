@@ -54,7 +54,7 @@ public class SendEmailService {
     }
     
     public void mailSend(Mail mailDto){
-        System.out.println("이멜 전송 완료!");
+        System.out.println("이메일 전송 완료!");
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(mailDto.getAddress());
         message.setFrom(SendEmailService.FROM_ADDRESS);
