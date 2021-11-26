@@ -1,12 +1,15 @@
 package withboard.mvc.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,7 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "member")
+@Table(name = "members")
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_no_seq")
@@ -64,4 +67,8 @@ public class Member {
 	
 	@CreationTimestamp
 	private LocalDateTime joinDate;
+	
+	@OneToMany //MemberRole에 대한 참조
+		@JoinColumn(name = "member")
+		private List<MemberRole> roles;
 }

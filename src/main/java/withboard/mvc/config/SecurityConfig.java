@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import jdk.internal.org.jline.utils.Log;
 import lombok.AllArgsConstructor;
 import withboard.mvc.service.MemberService;
 
@@ -27,13 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담�
 			
 			@Override
 			public boolean matches(CharSequence rawPassword, String encodedPassword) {
-				
 				return rawPassword.equals(encodedPassword);
 			}
 			
 			@Override
 			public String encode(CharSequence rawPassword) {
-				
 				return rawPassword.toString();
 			}
 		};
@@ -48,9 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담�
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        //http.authorizeRequests()
       
-        // 페이지 권한
+       /* // 페이지 권한
         .antMatchers("/**").permitAll()
         // 로그인
         .and() 
@@ -65,12 +64,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담�
         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) //로그아웃을 호출할 경우 해당 경로 
         .logoutSuccessUrl("/login") // 로그아웃이 성공했을 경우 해당 경로 
         .invalidateHttpSession(true); //로그아웃시 인증정보를 지우고 세션을 무효화 시키는 설정
-
+        */
+    	
+    	//log.info("security config......");
+    	http.authorizeRequests().antMatchers("/guest/**").permitAll();
+    	http.authorizeRequests().antMatchers("/manager/**").hasRole("MANAGER");
+    	http.formLogin(); //form 태그 기반의 로그인을 지원하는 설정 (설정하면 별도로 로그인 페이지를 작성하지 않아도 로그인form이 지원된다.)  
     }
 
+	
 	/*
 	 * @Override public void configure(AuthenticationManagerBuilder auth) throws
 	 * Exception {
 	 * auth.userDetailsService(memberService).passwordEncoder(passwordEncoder()); }
 	 */
+	 
 }
