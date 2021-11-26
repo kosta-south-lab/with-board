@@ -21,7 +21,7 @@ public class NomalBoardController {
 	
 	private final BoardService service;	
 	
-	@RequestMapping("/board")
+	@RequestMapping("/board/normalBoard")
 	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		List<Board> postList = service.selectAll();
@@ -30,7 +30,7 @@ public class NomalBoardController {
 			request.setAttribute("postList", postList);
 			System.out.println(postList);
 			
-		return new ModelAndView("WEB-INF/views/board/nomalBoard.jsp");
+		return new ModelAndView("board/normalBoard");
 	}
 
 }

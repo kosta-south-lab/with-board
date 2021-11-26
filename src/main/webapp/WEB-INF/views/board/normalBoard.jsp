@@ -69,16 +69,19 @@ function goes(){
 	</tr>
 	<tr class="table-primary">
         <td valign="middle">
-            <p align="center"><font color="black"><h6>글번호</h6></font></p>
+            <p align="center"><font color="black"><h6>번호</h6></font></p>
         </td>
-        <td valign="middle">
-            <p align="center"><font color="black"><h6>작성자</h6></font></p>
+          <td valign="middle">
+            <p align="center"><font color="black"><h6>카테고리</h6></font></p>
         </td>
         <td valign="middle">
             <p align="center"><font color="black"><h6>제목</h6></font></p>
         </td>
         <td valign="middle">
-            <p align="center"><font color="black"><h6>추천수</h6></font></p>
+            <p align="center"><font color="black"><h6>작성자</h6></font></p>
+        </td>
+        <td valign="middle">
+            <p align="center"><font color="black"><h6>조회수</h6></font></p>
         </td>
         
         <td valign="middle">
@@ -89,7 +92,7 @@ function goes(){
     <c:choose>
     <c:when test="${empty requestScope.postList}">
 	   <tr>
-        <td colspan="5">
+        <td colspan="6">
             <p align="center"><b><span style="font-size:9pt;">등록된 게시글이 없습니다.</span></b></p>
         </td>
     </tr>
@@ -101,29 +104,36 @@ function goes(){
 		        
 		        <!-- 번호 -->
 		        <td bgcolor="" align="center">
-		            <span style="font-size:11pt;">${Post.postNo}</span>
+		            <span style="font-size:11pt;">${Board.boardNo}</span>
+		        </td>
+		        
+		         <!-- 카테고리 -->
+		        <td bgcolor="" align="center">
+		            <span style="font-size:11pt;">${Board.boardType board_type?}</span>
+		        </td>
+		        
+		          <!-- 제목 -->
+		        <td bgcolor="" align="center">
+					<a href="${path}/front?key=post&methodName=postViewPost&postNo=${Post.postNo}"> 
+				  		<span style="font-size:11pt;">${Board.postTitle}</span>
+				  	</a>
 		        </td>
 		        
 		        <!-- 작성자 -->
 		        <td bgcolor="" align="center">
-		            <span style="font-size:11pt;">${Post.userId}</span>
+		            <span style="font-size:11pt;">${Board.Member.No?}</span>
 		        </td>
 		        
-		        <!-- 제목 -->
+		    
+		        
+		        <!-- 조회수 -->
 		        <td bgcolor="" align="center">
-					<a href="${path}/front?key=post&methodName=postViewPost&postNo=${Post.postNo}"> 
-				  		<span style="font-size:11pt;">${Post.postTitle}</span>
-				  	</a>
+					<span style="font-size:11pt;">${Board.viewCount}</span>
 		        </td>
 		        
-		        <!-- 추천수 -->
+		        <!-- 등록날짜 -->
 		        <td bgcolor="" align="center">
-					<span style="font-size:11pt;">${Post.postUp}</span>
-		        </td>
-		        
-		        <!-- 날짜 -->
-		        <td bgcolor="" align="center">
-		            <span style="font-size:11pt;">${Post.postDate}</span>
+		            <span style="font-size:11pt;">${Board.regdate}</span>
 		        </td>
 		        
 		    </tr>
