@@ -2,6 +2,7 @@ package withboard.mvc.domain;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -70,7 +71,21 @@ public class Member {
 	@CreationTimestamp
 	private LocalDateTime joinDate;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER) //MemberRole에 대한 참조
-	@JoinColumn(name = "member")
-	private List<MemberRole> roles;
+	@OneToMany //MemberRole에 대한 참조
+		@JoinColumn(name = "member")
+		private List<MemberRole> roles;
+	
+	private String emailToken;	
+	private boolean isValid;
+	private LocalDateTime joinedAt;
+	
+	  public void generateToken() {
+	        this.emailToken = UUID.randomUUID().toString();
+	    }
+
+	    public void verified() {
+	        this.isValid = true;
+	        joinedAt = LocalDateTime.now();
+	    }
+
 }
