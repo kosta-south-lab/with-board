@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import kosta.mvc.domain.FreeBoard;
+
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Board;
 import withboard.mvc.repository.BoardRepository;
