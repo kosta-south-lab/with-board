@@ -42,9 +42,7 @@ public class MemberController {
 	//로그아웃
 	
 	
-	//회원가입시 이메일 인증
-	@Autowired
-	 private final MemberRepository memberRepository;
+	private MemberRepository memberRepository;
 
 	    @GetMapping("/check-email-token")
 	    public String verifyEmail(String token, String email, Model model) {
