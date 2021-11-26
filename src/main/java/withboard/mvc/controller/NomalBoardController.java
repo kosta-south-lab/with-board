@@ -6,34 +6,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kosta.mvc.controller.ModelAndView;
-import kosta.mvc.dto.Post;
-import kosta.mvc.service.PostReplyService;
-import kosta.mvc.service.PostReplyServiceImpl;
-import kosta.mvc.service.PostService;
-import kosta.mvc.service.PostServicelmpl;
+import org.springframework.stereotype.Controller;
 
+import lombok.RequiredArgsConstructor;
+import withboard.mvc.service.BoardServiceImpl;
+import withboard.mvc.service.BoardService;
+import withboard.mvc.domain.*;
+
+@Controller
+@RequiredArgsConstructor
 public class NomalBoardController {
 	
-private PostService service = new PostServicelmpl();
-	
-	private PostReplyService postReplyService = new PostReplyServiceImpl();
-
-	private String getUserId(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		return (String) session.getAttribute("userId");
-	}
-
+	private final BoardService service;	
 	
 	
-	public ModelAndView postSelectAllPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		List<Post> postList = service.selectAllPost();
+		List<Board> postList = service.selectAll();
 			
 		
 			request.setAttribute("postList", postList);
 			
-		return new ModelAndView("board/freeBoardWrite.jsp");
+		return new ModelAndView("WEB-INF/views/board/nomalBoard.jsp");
 	}
 
 }
