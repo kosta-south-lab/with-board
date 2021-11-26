@@ -1,5 +1,6 @@
 package withboard.mvc.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,7 +18,7 @@ import withboard.mvc.service.MemberService;
 
 @Configuration
 @EnableWebSecurity //어노테이션 추가 
-@AllArgsConstructor
+@lombok.extern.java.Log
 public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담당하는 WebSecurityConfigurerAdapter 상속
 	
 	private MemberService memberService;
@@ -72,11 +73,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담�
     	http.formLogin(); //form 태그 기반의 로그인을 지원하는 설정 (설정하면 별도로 로그인 페이지를 작성하지 않아도 로그인form이 지원된다.)  
     }
 
-	
-	/*
-	 * @Override public void configure(AuthenticationManagerBuilder auth) throws
-	 * Exception {
-	 * auth.userDetailsService(memberService).passwordEncoder(passwordEncoder()); }
-	 */
+	//로그인하기위한 AuthenticationManagerBuilder를 주입해서 인증에대한 처리
+	 @Autowired
+	 public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		 
+		 auth.inMemoryAuthentication()
+		 .withUser("manager")
+		 .password("1111")
+		 .roles("MANAGER");
+	 
+	 }
+	 
 	 
 }
