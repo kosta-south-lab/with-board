@@ -2,6 +2,7 @@ package withboard.mvc.domain;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,4 +72,17 @@ public class Member {
 	@OneToMany //MemberRole에 대한 참조
 		@JoinColumn(name = "member")
 		private List<MemberRole> roles;
+	
+	private String emailToken;	
+	private boolean isValid;
+	private LocalDateTime joinedAt;
+	
+	  public void generateToken() {
+	        this.emailToken = UUID.randomUUID().toString();
+	    }
+
+	    public void verified() {
+	        this.isValid = true;
+	        joinedAt = LocalDateTime.now();
+	    }
 }
