@@ -42,6 +42,8 @@ public class MemberController {
 	//로그아웃
 	
 	
+	//회원가입시 이메일 인증
+	
 	private MemberRepository memberRepository;
 
 	    @GetMapping("/check-email-token")
