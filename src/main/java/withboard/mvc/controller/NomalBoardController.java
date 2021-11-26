@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.service.BoardServiceImpl;
@@ -15,17 +16,19 @@ import withboard.mvc.domain.*;
 
 @Controller
 @RequiredArgsConstructor
+
 public class NomalBoardController {
 	
 	private final BoardService service;	
 	
-	
+	@RequestMapping("/board")
 	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		List<Board> postList = service.selectAll();
 			
 		
 			request.setAttribute("postList", postList);
+			System.out.println(postList);
 			
 		return new ModelAndView("WEB-INF/views/board/nomalBoard.jsp");
 	}
