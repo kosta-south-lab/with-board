@@ -3,8 +3,10 @@ package withboard.mvc.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,7 +70,7 @@ public class Member {
 	@CreationTimestamp
 	private LocalDateTime joinDate;
 	
-	@OneToMany //MemberRole에 대한 참조
-		@JoinColumn(name = "member")
-		private List<MemberRole> roles;
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER) //MemberRole에 대한 참조
+	@JoinColumn(name = "member")
+	private List<MemberRole> roles;
 }
