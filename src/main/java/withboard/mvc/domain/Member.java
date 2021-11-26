@@ -71,9 +71,10 @@ public class Member {
 	@CreationTimestamp
 	private LocalDateTime joinDate;
 	
-	@OneToMany //MemberRole에 대한 참조
-		@JoinColumn(name = "member")
-		private List<MemberRole> roles;
+	//MemberRole에 대한 참조
+	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER) //<-- 권한정보는 회원정보와 같이 필요한 경우가 많아서 fetch 모드를 즉시로딩으로 설정.
+	@JoinColumn(name = "member")
+	private List<MemberRole> roles;
 	
 	private String emailToken;	
 	private boolean isValid;

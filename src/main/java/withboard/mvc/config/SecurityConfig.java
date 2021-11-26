@@ -66,11 +66,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담�
         .logoutSuccessUrl("/login") // 로그아웃이 성공했을 경우 해당 경로 
         .invalidateHttpSession(true); //로그아웃시 인증정보를 지우고 세션을 무효화 시키는 설정
         */
-    	
-    	//log.info("security config......");
+    	// 로그인
     	http.authorizeRequests().antMatchers("/guest/**").permitAll();
     	http.authorizeRequests().antMatchers("/manager/**").hasRole("MANAGER");
-    	http.formLogin(); //form 태그 기반의 로그인을 지원하는 설정 (설정하면 별도로 로그인 페이지를 작성하지 않아도 로그인form이 지원된다.)  
+    	// **********로그인 form 제공 and 페이지 경로 설정 다시하기************ error
+    	http.formLogin().loginProcessingUrl("views/home").permitAll(); //form 태그 기반의 로그인을 지원하는 설정 (설정하면 별도로 로그인 페이지를 작성하지 않아도 로그인form이 지원된다.) 
+    	
+    	//로그아웃
+    	http.exceptionHandling().accessDeniedPage("/accessDenied");
+    	//세션 무효화 시키기
+    	http.logout().invalidateHttpSession(true);
+    	
     }
 
 	//로그인하기위한 AuthenticationManagerBuilder를 주입해서 인증에대한 처리

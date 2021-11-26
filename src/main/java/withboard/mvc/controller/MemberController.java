@@ -3,31 +3,39 @@ package withboard.mvc.controller;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.java.Log;
 import withboard.mvc.domain.Member;
 import withboard.mvc.repository.MemberRepository;
 import withboard.mvc.service.MemberService;
 
+@Log
 @Controller
+//@RequestMapping("/member/")
 public class MemberController {
 	@Autowired 
-	private MemberService memberService;
+	PasswordEncoder pwEncoder;
+	@Autowired
+	MemberRepository repo;
+	
 	
 	//회원가입 페이지
-	@RequestMapping("/user/signup")
-	public String signup() {
+	@GetMapping("/user/signup")
+	public String signupForm() {
 		
-		return "/signup";
+		return "/user/signup";
 	}
 
 	//회원가입 처리
 	@PostMapping("/user/signup")
-	public String doSingup(Member member) {
+	public String Singup(Member member) {
+		
 		//memberService.joinUser(member); //service에 joinUser만들기
 		
 		return "redirect:/user/login";

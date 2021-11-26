@@ -3,116 +3,102 @@
     
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
-<HTML>
-      <HEAD>
-            <TITLE>form 사용예제</TITLE>
-      </HEAD>
-      <BODY bgcolor="#FFFFFF" text="#000000">
-
-  
-<h2>회원가입 양식</h2><br>
-
-<form method="post" action="form.php">
-  <input type="hidden" name="subject" value="회원가입양식">
-<table width="500" border="0" cellspacing="0">
-    <tr>
-      <td>아이디</td>
-<td> 
-     <input type="text" name="id" size="15" maxlength="20">
-     영문,한글 ? 자리 이내.. (*중복체크)
-</td>
-    </tr>
-    
-<tr>
-      <td>패스워드</td>
-<td> 
-     <input type="password" name="pw" size="20" maxlength="20">
-     영문 ? ~ ? 자리미만 (*중복체크)
-</td>
-    </tr>
-    
-<tr>
-      <td>이름</td>
-<td> 
-     <input type="text" name="Name" size="10">
-</td>
-    </tr>
-    
-<tr>
-      <td>닉네임</td>
-<td> 
-     <input type="text" name="NickName" size="10">
-     (*중복체크)
-</td>
-    </tr>    
-    
-<tr>
-      <td>지역</td>
-<td>
-     <select name="select">
-     	  <option>시/도</option>
-          <option>서울특별시</option>
-          <option>경기도</option>
-          <option>경상북도</option>
-     </select>
-         <select name="select">
-          <option>선택</option>
-          <option>강남구</option>
-     </select> 
-   
-</td>
-    </tr>    
-    
-<tr>
-      <td>성별</td>
-<td> 
-     <input type="radio" name="sex" value="male" checked>
-     남     
-     <input type="radio" name="sex" value="female">여
-</td>
-    </tr>
-<tr>
-      <td>생년월일</td>
-<td>
-  <!--    <select name="select">
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+ 
+  <title>회원가입 form</title>
+ </head>
+ <body>
+ <form name="write_form_member" method="post">
+   <table width="940" style="padding:5px 0 5px 0; ">
+      <tr height="2" bgcolor="#FFC8C3"><td colspan="2"></td></tr>
+      <tr>
+         <th> 이름</th>
+         <td><input type="text" name="mbname"></td>
+      </tr>
+      <tr>
+         <th> 닉네임</th>
+         <td><input type="text" name="nickbname"></td>
+      </tr>
+       <tr>
+         <th>아이디</th>
+         <td>
+         <input type="text" name="cursor:pointer">
+         <a href='#' style='cursor:help'> </a>
+         </td>
+       </tr>
+       <tr>
+         <th>비밀번호</th>
+         <td><input type="password" name="mbpw"> </td> <!-- 영문/숫자포함 6자 이상 -->
+       </tr>
+       <tr>
+         <th>비밀번호 확인</th>
+         <td><input type="password" name="mbpw_re"></td>
+       </tr>
+		    
+		<tr>
+     	 <th>성별</th>
+		<td> 
+     	<input type="radio" name="sex" value="male" checked>
+     	남     
+     	<input type="radio" name="sex" value="female">여
+		</td>
+   		 </tr>
+   		 <tr>
+      	<th>생년월일</th>
+		<td>
+  		<!--    <select name="select">
           <option>  </option>
           <option>  </option>
           <option>  </option>
-     </select> -->
+     		</select> -->
           <input type="text" name="year" size="4">년
      	  <input type="text" name="month" size="2">월
      	  <input type="text" name="day" size="2">일
-</td>
-    </tr>
-<tr>
-      <td>이미지</td>
-<td>
-     <input type="image" name="image" value="첨부">       
-</td>
-    </tr>
+		</td>
+   	 </tr>
+        <tr>
+          <th>이메일</th>
+          <td>
+            <input type='text' name="email">@
+            <input type='text' name="email_dns">
+              <select name="emailaddr">
+                 <option value="">직접입력</option>
+                 <option value="daum.net">daum.net</option>
+                 <option value="empal.com">empal.com</option>
+                 <option value="gmail.com">gmail.com</option>
+                 <option value="hanmail.net">hanmail.net</option>
+                 <option value="msn.com">msn.com</option>
+                 <option value="naver.com">naver.com</option>
+                 <option value="nate.com">nate.com</option>
+              </select>
+            </td>
+         </tr>
+         <tr>
+           <th>주소</th>
+           <td>
+             <input type="text" name="zip_h_1"> - 
+             <input type="text" name="zip_h_2">
+             <br>
 
-<tr>
-      <td>이메일</td>
-<td> 
-     <input type="email" name="email" size="10">@
-     <select name="select">
-     	  <option>직접선택</option>
-          <option>naver.com</option>
-          <option>hanmail.net</option>
-          <option>gmail.com</option>
-     </select> <p><p>
-</td>
-
-    </tr>
-           
-<tr align="center">
-      <td colspan="2">
-     <input type="submit" name="Submit" value="회원가입"> 
-        
-     <input type="reset" name="Cancel" value="취소하기">
-</td>
-    </tr>
-  </table>
-</form>
-      </BODY>
-</HTML>
+           </td>
+         </tr>
+        <tr>
+      <th>이미지</th>
+		<td>
+   		  <input type="image" name="image" value="첨부">       
+		</td>
+   		 </tr>
+ 
+           <tr height="2" bgcolor="#FFC8C3"><td colspan="2"></td></tr>
+           <tr>
+             <td colspan="2" align="center">
+               <input type="submit" value="회원가입">
+               <input type="reset" value="취소">
+            </td>
+           </tr>
+           </table>
+          </form>
+ </body>
+</html>
