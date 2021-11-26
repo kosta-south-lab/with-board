@@ -21,6 +21,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Setter
@@ -30,6 +31,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "board_type")
+@ToString
 public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_no_seq")
