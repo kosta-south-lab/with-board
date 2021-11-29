@@ -16,6 +16,9 @@ public class NewsController {
 	
 	private final NewsService newsService;
 	
+	/**
+	 * 뉴스 목록 페이지
+	 * */
 	@RequestMapping("/board/news")
 	public ModelAndView selectAll() {
 		List<News> newsList = newsService.selectAll();

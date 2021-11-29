@@ -30,7 +30,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "members")
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_no_seq")
@@ -65,7 +64,7 @@ public class Member {
 	private String image;
 	
 	//이메일 인증이 되었는지 확인할 컬럼
-	@Column(nullable = false, length = 10)
+	@Column(length = 10)
 	private String emailConfirm;
 	     
 	private int status;
