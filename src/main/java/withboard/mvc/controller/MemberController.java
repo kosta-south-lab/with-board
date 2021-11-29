@@ -9,6 +9,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,8 +60,10 @@ public class MemberController {
 
 
 	// 마이페이지 보기
-	@RequestMapping("/user/mypageMenu")
-	public void mypage(Member member) {}
+	@RequestMapping("/user/{id}")
+	  public String myPage(@PathVariable String id) {
+	    return "user/mypage";
+	  }
 
 	
 	//회원가입 완료 후 이메일 인증 처리
