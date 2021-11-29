@@ -1,0 +1,32 @@
+package withboard.mvc.service;
+
+import java.util.List;
+
+import withboard.mvc.domain.MatchBoard;
+
+public interface MatchBoardService {
+	
+	/*
+	 * 게시글 가져오기
+	*/
+	public static List<MatchBoard> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/*
+	 * 매칭 게시글 등록
+	 * */
+	public void insert(MatchBoard matchBoard);
+	
+	/**
+	 * 매칭 게시글 수정
+	 */
+	public MatchBoard update(MatchBoard matchBoard);
+	
+	/**
+	 * 매칭 게시글 삭제
+	 */
+	public void delete(Long boardNo);
+
+}
