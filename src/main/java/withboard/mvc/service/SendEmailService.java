@@ -1,5 +1,7 @@
 package withboard.mvc.service;
 
+import javax.mail.MessagingException;
+
 import withboard.mvc.domain.Mail;
 
 public interface SendEmailService {
@@ -24,9 +26,14 @@ public interface SendEmailService {
     
     
     /**
-     * 이메일 전송
+     * 비밀번호 이메일 전송
      * */
-    public void mailSend(Mail mailDto);
+    public void passwordMailSend(Mail mailDto);
+    
+    /**
+     * 회원가입 이메일 전송
+     * */
+    void signUpSendEmail(String to, String subject, String text) throws MessagingException;
     
     
 

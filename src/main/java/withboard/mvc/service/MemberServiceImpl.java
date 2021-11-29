@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import withboard.mvc.domain.Mail;
 import withboard.mvc.domain.Member;
 import withboard.mvc.domain.Normal;
 import withboard.mvc.repository.AuthoritiesRepository;
@@ -19,30 +20,22 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberRepository memberRepository;
 
-	private JavaMailSender mailSender;
 
-	@Override
-	public void sendVerificationEmail(Member member) {
-		 SimpleMailMessage mailMessage = new SimpleMailMessage();
-	        mailMessage.setTo(member.getEmail());
-	        mailMessage.setSubject("Webluxible 회원 가입 인증");
-	        mailMessage.setText(String.format("/check-email-token?token=%s&email=%s", member.getEmailToken(),
-	                member.getEmail()));
-	        mailSender.send(mailMessage);
-		
-	}
-
-	@Override
-	public Member findAccountByEmail(String email) {
-	
-		return memberRepository.findByEmail(email);
-	}
-	
 	//회원가입하기 
 	@Override
 	public void joinMember(Member member) {
 		Member mb = memberRepository.save(member);
 		
+	}
+	
+	//이메일 인증확인
+	public Member mailCheck(Mail dto) {
+		Member userEntity = memberRepository.mCheck(dto.getUsername(), dto.getEmailConfirm());
+		return userEntity;
+	}
+	
+	public void mailUpdate(Mail dto) {
+		memberRepository.mUpdate(dto.getUsername());	
 	}
 	
 

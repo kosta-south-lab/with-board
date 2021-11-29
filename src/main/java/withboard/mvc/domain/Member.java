@@ -65,6 +65,10 @@ public class Member {
 	
 	@Column(length = 250)
 	private String image;
+	
+	//이메일 인증이 되었는지 확인할 컬럼
+	@Column(nullable = false, length = 10)
+	private String emailConfirm;
 	     
 	private int status;
 	
@@ -80,24 +84,5 @@ public class Member {
 	private List<Authorities> roles;
 
 	
-	@Transient //칼럼x
-	private String emailToken;
-	
-	@Transient
-	private boolean isValid;
-	@Transient
-	private LocalDateTime joinedAt;
-
-
-	@Transient
-	  public void generateToken() {
-	        this.emailToken = UUID.randomUUID().toString();
-	    }
-	
-		@Transient
-	    public void verified() {
-	        this.isValid = true;
-	        joinedAt = LocalDateTime.now();
-	    }
 
 }
