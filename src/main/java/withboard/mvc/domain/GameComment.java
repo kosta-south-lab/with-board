@@ -40,7 +40,11 @@ public class GameComment {
 	private LocalDateTime commentDate;
 
 	@ManyToOne
-	@JoinColumn(name = "game_no") // Reply테이블에 free_bno라를 필드 추가되고 fk설정
+	@JoinColumn(name = "game_no")
 	private Game game;
+	
+	@ManyToOne
+	@JoinColumn(name = "member_no")
+	private Member member;
 
 }
