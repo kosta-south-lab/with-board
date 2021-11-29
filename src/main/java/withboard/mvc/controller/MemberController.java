@@ -41,12 +41,13 @@ public class MemberController {
 
 
 	//회원가입하기 
-	@RequestMapping("/user/join")
-	public String joinMember(Member member) {
+	@RequestMapping("/user/joinConfirm")
+	public @ResponseBody String joinMember(Member member) {
 		
 		memberService.joinMember(member); 
-		return "user/joinCofirm"; // 회원가입 완료후 갈 페이지 
+		return "/user/joinConfirm"; // 회원가입 완료후 갈 페이지 
 	}
+	
 	
 	//현재 Controller에서 발생하는 모든 에외처리
 	@ExceptionHandler(Exception.class)
@@ -107,7 +108,7 @@ public class MemberController {
 			System.out.println("실패");
 		}
 
-		return "user/emailSuccess";
+		return "/user/emailSuccess";
 	}
 
 	
