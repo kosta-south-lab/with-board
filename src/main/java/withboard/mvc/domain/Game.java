@@ -1,5 +1,8 @@
 package withboard.mvc.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import lombok.AllArgsConstructor;
@@ -40,6 +44,9 @@ public class Game {
 	@Column(length = 250)
 	private String videoUrl;
 	
+	@Column(length = 1000)
+	private String gameDetail;
+	
 	@ManyToOne
 	@JoinColumn(name = "process_no")
 	private GameProcess gameProcess;
@@ -51,5 +58,8 @@ public class Game {
 	@ManyToOne
 	@JoinColumn(name = "game_category_no")
 	private GameCategory gameCategory;
+	
+	@OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+	private List<GameComment> gameCommentList;
 
 }
