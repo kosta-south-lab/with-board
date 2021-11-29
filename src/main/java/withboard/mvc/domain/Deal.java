@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,4 +30,11 @@ public class Deal extends Board{
 	@JoinColumn(name = "deal_category_no")
 	private DealCategory dealCategory;
 	
+	@Builder
+	public Deal(String title, String content, Member member, String location, String location2, DealCategory dealCategory) {
+		super(title, content, member);
+		this.location = location;
+		this.location2 = location2;
+		this.dealCategory = dealCategory;
+	}
 }

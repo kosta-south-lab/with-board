@@ -1,6 +1,7 @@
 package withboard.mvc.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -12,12 +13,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,7 +27,6 @@ import lombok.ToString;
 @Entity
 @Setter
 @Getter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -50,6 +50,15 @@ public class Board {
 	
 	@ManyToOne
 	@JoinColumn(name = "member_no")
-	private Member member;	
+	private Member member;
 	
+	@OneToMany(mappedBy = "board")
+	private List<Image> imageList;
+
+	//title, content, member만 받는 생성자. 자식 클래스에서 빌더 패턴 사용하기 위함.(@Builder)
+	public Board(String title, String content, Member member) {
+		this.title = title;
+		this.content = content;
+		this.member = member;
+	}	
 }

@@ -1,5 +1,6 @@
 package withboard.mvc.domain;
 
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -7,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,5 +30,14 @@ public class Meet extends Board {
 	@ManyToOne
 	@JoinColumn(name = "meet_category_no")
 	private MeetCategory meetCategory;
+	
+	@Builder
+	public Meet(String title, String content, Member member, String location, String location2, MeetCategory meetCategory) {
+		super(title, content, member);
+		this.location = location;
+		this.location2 = location2;
+		this.meetCategory = meetCategory;
+	}
+	
 
 }
