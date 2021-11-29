@@ -27,57 +27,70 @@
 		 }
 }
 
- function checkValid(frm){
-		
-		if(frm.name.value == ""){ //boardTitle 는 id값이다 , ""은 = 공백일경우 
-			alert("이름을 입력해주세요.");
-			frm.name.focus(); // 제목이 입력되지 않은경우 경고창이 뜨고 포커스를 제목으로 가져다준다.
-			return false;
-		}
-		
-		if(frm.nickname.value == ""){
-			alert("닉네임을 입력해주세요.");
-			frm.nickname.focus();
-			return false;
-		}
-		
-		if(frm.id.value == ""){
-			alert("아이디를 입력해주세요.");
-			frm.id.focus();
-			return false;
-		}
-		
-		if(frm.pw.value == ""){
-			alert("패스워드를 입력해주세요.");
-			frm.pw.focus();
-			return false;
-		}
-		
-		if(frm.gender.value == ""){
-			alert("성별을 선택해주세요.");
-			frm.gender.focus();
-			return false;
-		}
-		if(frm.email.value == ""){
-			alert("이메일을 입력해주세요.");
-			frm.email.focus();
-			return false;
-		}
-		if(frm.location.value == ""){
-			alert("주소를 입력해주세요.");
-			frm.location.focus();
-			return false;
-		}
-		if(frm.location2.value == ""){
-			alert("나머지 주소를 입력해주세요.");
-			frm.location2.focus();
-			return false;
-		}
-		
-	}
  
- 
- 
+	//비밀번호 일치 여부
+	$(function(){
+		$('#pw').keyup(function(){
+			$('font[name=check]').text('');
+		});
+		
+		$('#pwcheck').keyup(function(){
+			if($('#pw').val() != $('#pwcheck').val()){
+				$('font[name=check]').text('');
+				$('font[name=check]').html('값이 일치하지 않습니다.');
+			}else{
+				$('font[name=check]').text('');
+				$('font[name=check]').html('값이 일치합니다.');
+			}
+		});//비번 끝
+		
+		//아이디 중복체크 여부
+		$('#id').blur(function(){
+			$.ajax({
+				type: "POST",
+				url: "${pageContext.request.contextPath}/duplicationCheck",
+				data: {
+					"id" : $('#id').val()
+				},
+				
+				success: function(data){
+					if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#idCheck").text("사용중인 아이디입니다.");
+						$("#idCheck").css("color", "red");
+					}else{
+						$("#idCheck").text("");
+					}
+				}error:function() {
+						console.log("실패");
+				}
+			})
+		})//아이디 끝
+		
+		//닉네임 중복체크 여부
+		$('#nickname').blur(function(){
+			$.ajax({
+				type: "POST",
+				url: "${pageContext.request.contextPath}/duplicationCheck",
+				data: {
+					"nickname" : $('#nickname').val()
+				},
+				
+				success: function(data){
+					if (data == 1) {
+						$("#nickname").text("사용중인 닉네임입니다.");
+						$("#nickname").css("color", "red");
+					}else{
+						$("#nickname").text("");
+					}
+				}error:function() {
+						console.log("실패");
+				}
+			})
+		})//닉네임끝
+		
+		
+});//ready 끝
  
  </script>
   
@@ -112,6 +125,10 @@
          <th>비밀번호</th>
          <td><input type="password" name="pw" id="pw"> </td> <!-- 영문/숫자포함 6자 이상 -->
        </tr>
+      <!--  <tr>
+         <th>비밀번호 확인</th>
+         <td><input type="password" name="pwcheck" > </td> 영문/숫자포함 6자 이상
+       </tr> -->
     	<tr>
      	 <th>성별</th>
 		<td> 
@@ -124,8 +141,8 @@
         <tr>
           <th>이메일</th>
           <td>
-            <input type='text' name="email" id="email">@
-            <input type='text' name="email2" id="email2">
+            <input type='text' name="email" id="email">
+           <!--  <input type='text' name="email2" id="email2">
               <select name="emailaddr">
                  <option value="">직접입력</option>
                  <option value="daum.net">daum.net</option>
@@ -135,7 +152,7 @@
                  <option value="msn.com">msn.com</option>
                  <option value="naver.com">naver.com</option>
                  <option value="nate.com">nate.com</option>
-              </select>
+              </select> -->
             </td>
          </tr>
          <tr>

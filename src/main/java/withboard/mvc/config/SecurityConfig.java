@@ -19,7 +19,6 @@ import withboard.mvc.service.MemberService;
 
 @Configuration
 @EnableWebSecurity //어노테이션 추가 
-@lombok.extern.java.Log
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담당하는 WebSecurityConfigurerAdapter 상속
 	@Autowired

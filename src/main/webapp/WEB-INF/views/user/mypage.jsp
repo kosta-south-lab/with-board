@@ -9,31 +9,37 @@
 </head>
 <body>
 
-<form name="readForm" method="post" action="">
+<script type="text/javascript">
+  function withdraw(){
+	  confirm("정말 탈퇴하시겠습니까?");
+  }
   
-<table align="center" cellpadding="5" cellspacing="2" width="600" border='1'>
-    <tr>
-        <td width="1220" height="20" colspan="4" bgcolor="#00cc00">
-            <p align="center"><font color="white" size="3"><b>
-             마이페이지 </b></font></p>
-        </td>
-    </tr>
-   
-    <tr>
-        <td width="100" height="20">
-            <p align="right"><b><span style="font-size:9pt;"> 이름  </span></b></p>
-        </td>
-        <td width="450" height="20" colspan="3">
-        	<span style="font-size:9pt;"><b>${requestScope.Member.name}</b></span>
-        </td>
-    </tr>
-    <tr>
-		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;"> 내용 </span></b></p>
-        </td>
-		<!-- 브라우저에 글 내용을 뿌려줄 때는 개행문자(\n)가 <br>태그로 변환된 문자열을 보여줘야 한다. -->
-        <td width="450" height="200" valign="top" colspan="3">
-        <span style="font-size:9pt;"><b><pre>${requestScope.Post.postContent}</pre></b></span></td>
-    </tr>
+  
+</script>
+  
+<table>
+  <tr>
+    <th>이미지</th>
+    <th>닉네임</th>
+    <th>성별</th>
+  </tr>
+  <tr>
+    <th><input type="text" readonly="readonly" id="image" value="${requestScope.members.image}"></th>
+    <th><input type="text" readonly="readonly" id="nickname" value="${requestScope.members.nickname}"></th>
+    <th><input type="text" readonly="readonly" id="nickname" value="${requestScope.members.gender}"></th>
+  </tr>
+  <tr>
+  	<th>주소</th>
+  	<th>이메일</th>
+    <th>가입날짜</th>
+  </tr>
+  <tr>
+  	<th><input type="text" readonly="readonly" id="email" value="${requestScope.members.location}"></th>
+  	<th><input type="text" readonly="readonly" id="email" value="${requestScope.members.location2}"></th>
+    <th><input type="text" readonly="readonly" id="email" value="${requestScope.members.email}"></th>
+    <th><input type="text" readonly="readonly" id="joinDate" value="${requestScope.members.joinDate}"></th>
+  </tr>
+</table>
+<input type="button" id="withdraw" value="탈퇴하기" onclick="withdraw()">
 </body>
 </html>

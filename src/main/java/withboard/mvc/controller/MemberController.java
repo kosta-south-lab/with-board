@@ -1,6 +1,7 @@
 package withboard.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,10 +32,9 @@ public class MemberController {
 	//회원가입하기 
 	@RequestMapping("/user/join")
 	public String joinMember(Member member) {
-		System.out.println("22222");
+		
 		memberService.joinMember(member); 
-		System.out.println(11111111);
-		return "user/joinCofirm"; // 회원가입 왼료후 갈 페이지 
+		return "user/joinCofirm"; // 회원가입 완료후 갈 페이지 
 	}
 	
 	//현재 Controller에서 발생하는 모든 에외처리
@@ -44,6 +44,9 @@ public class MemberController {
 		
 	}
 
+	// 마이페이지 보기
+	@RequestMapping("/user/mypageMenu")
+	public void mypage(Member member) {}
 	
 
 	

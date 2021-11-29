@@ -1,5 +1,7 @@
 package withboard.mvc.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,6 +16,7 @@ import withboard.mvc.repository.MemberRepository;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
