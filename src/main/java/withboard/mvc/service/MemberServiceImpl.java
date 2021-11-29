@@ -1,5 +1,7 @@
 package withboard.mvc.service;
 
+import java.sql.SQLException;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,8 @@ public class MemberServiceImpl implements MemberService {
 		memberRepository.mUpdate(dto.getUsername());	
 	}
 	
+
+
+
 
 }

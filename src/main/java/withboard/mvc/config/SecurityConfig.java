@@ -59,10 +59,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담�
 		//.antMatchers("/user/**")
 		//.access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 		//.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+    	
 		.and()
-		.formLogin().permitAll().loginProcessingUrl("/home") // 로그인 성공후 가야할 페이지 주소
+		.formLogin()
+		.permitAll()
+		.usernameParameter("id")
+		.passwordParameter("pw")
+		.loginProcessingUrl("/home") // 로그인 성공후 가야할 페이지 주소
 		.and()
-		.logout().permitAll().logoutSuccessUrl("/login");
+		.logout()
+		.permitAll()
+		.logoutUrl("/logout")
+		.logoutSuccessUrl("/login");
     	 
     }
 

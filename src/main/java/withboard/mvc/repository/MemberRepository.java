@@ -18,4 +18,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query(value = "update user set emailConfirm = 'Y' where username = :username", nativeQuery = true)
 	void mUpdate(String username);
 	
+	
+	
+	
 }

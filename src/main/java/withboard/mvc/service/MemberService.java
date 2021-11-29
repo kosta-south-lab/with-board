@@ -14,7 +14,6 @@ public interface MemberService {
 	 * 로그인
 	 */
 	
-	
 	/**
 	 * 로그아웃
 	 */
@@ -28,5 +27,7 @@ public interface MemberService {
 	 * 이메일 업데이트
 	 * */
 	public void mailUpdate(Mail dto);
+
+	
 	
 }
