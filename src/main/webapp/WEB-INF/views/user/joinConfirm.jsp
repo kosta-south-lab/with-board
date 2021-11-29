@@ -8,14 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<h3>${requestScope.members.nickname}님 회원가입을 축하드립니다</h3>
+		<h3>${requestScope.member.nickname}님 회원가입을 축하드립니다</h3>
 		<p>모든 서비스를 이용하기 위해 이메일 인증을 완료하여 주세요</p>
 		<button onclick="sendEmail(event)">이메일 인증하기</button>
 
     <form id="email_form">
-        <input type="hidden" name="username" value="${requestScope.members.nickname}">
-        <input type="hidden" name="email" value="${requestScope.members.email}">
-        <input type="hidden" name="emailConfirm" value="${requestScope.members.emailConfirm}">												
+        <input type="hidden" name="username" value="${requestScope.member.nickname}">
+        <input type="hidden" name="email" value="${requestScope.member.email}">
+        <input type="hidden" name="emailConfirm" value="${requestScope.member.emailConfirm}">												
     </form>
 
 		<script>
