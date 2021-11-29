@@ -27,6 +27,7 @@ public class MemberController {
 		return "/user/signupForm";
 	}
 
+
 	//회원가입하기 
 	@RequestMapping("/user/join")
 	public String joinMember(Member member) {
@@ -42,10 +43,9 @@ public class MemberController {
 		return new ModelAndView();
 		
 	}
+
 	
-	
-	
-	
+
 	
 	
 	//회원가입시 이메일 인증

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.Transient;
@@ -75,18 +76,25 @@ public class Member {
 	//MemberRole에 대한 참조
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER) //<-- 권한정보는 회원정보와 같이 필요한 경우가 많아서 fetch 모드를 즉시로딩으로 설정.
 	@JoinColumn(name = "member")
-	@javax.persistence.Transient
-	private List<Authorities> roles;	
+	@Transient
+	private List<Authorities> roles;
 
 	
-	private String emailToken;	
+	@Transient //칼럼x
+	private String emailToken;
+	
+	@Transient
 	private boolean isValid;
+	@Transient
 	private LocalDateTime joinedAt;
 
+
+	@Transient
 	  public void generateToken() {
 	        this.emailToken = UUID.randomUUID().toString();
 	    }
-
+	
+		@Transient
 	    public void verified() {
 	        this.isValid = true;
 	        joinedAt = LocalDateTime.now();
