@@ -8,17 +8,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.transaction.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+@Transactional
 public class Authorities {
 	
 	@Id
@@ -32,4 +36,6 @@ public class Authorities {
 	@ManyToOne
 	@JoinColumn(name = "member_no")
 	private Member member;
+	
+	
 }

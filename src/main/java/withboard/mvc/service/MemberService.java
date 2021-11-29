@@ -7,14 +7,17 @@ public interface MemberService {
 	/**
 	 * 회원가입
 	 */
+	void joinMember(Member member);
 	
 	/**
 	 * 로그인
 	 */
 	
+	
 	/**
 	 * 로그아웃
 	 */
+	
 	
 	/**
 	 * 회원가입 시 이메일 인증

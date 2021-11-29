@@ -8,4 +8,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 		
 	//이메일 전송
 	Member findByEmail(String email);
+	
+	// 아이디 비교해서 로그인하기
+	Member findById (String id);
+	
 }
