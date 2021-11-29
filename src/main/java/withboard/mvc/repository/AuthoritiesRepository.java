@@ -1,4 +1,4 @@
-package withboard.mvc.repository;
+ package withboard.mvc.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

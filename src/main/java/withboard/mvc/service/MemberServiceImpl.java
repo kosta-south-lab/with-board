@@ -3,17 +3,22 @@ package withboard.mvc.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
 import withboard.mvc.domain.Member;
+import withboard.mvc.domain.Normal;
+import withboard.mvc.repository.AuthoritiesRepository;
 import withboard.mvc.repository.MemberRepository;
 
 @Service
+@AllArgsConstructor
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	private MemberRepository memberRepository;
-	
+	MemberRepository memberRepository;
+
 	private JavaMailSender mailSender;
 
 	@Override
@@ -31,6 +36,13 @@ public class MemberServiceImpl implements MemberService {
 	public Member findAccountByEmail(String email) {
 	
 		return memberRepository.findByEmail(email);
+	}
+	
+	//회원가입하기 
+	@Override
+	public void joinMember(Member member) {
+		Member mb = memberRepository.save(member);
+		
 	}
 	
 

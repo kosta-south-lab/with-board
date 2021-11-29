@@ -1,53 +1,51 @@
 package withboard.mvc.controller;
 
-import javax.persistence.Table;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import lombok.extern.java.Log;
 import withboard.mvc.domain.Member;
 import withboard.mvc.repository.MemberRepository;
 import withboard.mvc.service.MemberService;
 
-@Log
+
 @Controller
 //@RequestMapping("/member/")
 public class MemberController {
-	@Autowired 
-	PasswordEncoder pwEncoder;
+
 	@Autowired
-	MemberRepository repo;
-	
+	 MemberService memberService;
 	
 	//회원가입 페이지
-	@GetMapping("/user/signup")
+	@GetMapping("/user/signupForm")
 	public String signupForm() {
 		
-		return "/user/signup";
+		return "/user/signupForm";
 	}
 
-	//회원가입 처리
-	@PostMapping("/user/signup")
-	public String Singup(Member member) {
-		
-		//memberService.joinUser(member); //service에 joinUser만들기
-		
-		return "redirect:/user/login";
+	//회원가입하기 
+	@RequestMapping("/user/join")
+	public String joinMember(Member member) {
+		System.out.println("22222");
+		memberService.joinMember(member); 
+		System.out.println(11111111);
+		return "user/joinCofirm"; // 회원가입 왼료후 갈 페이지 
 	}
 	
-	//로그인 페이지
+	//현재 Controller에서 발생하는 모든 에외처리
+	@ExceptionHandler(Exception.class)
+	public ModelAndView error(Exception e) {
+		return new ModelAndView();
+		
+	}
 	
 	
 	
 	
-	
-	//로그아웃
 	
 	
 	//회원가입시 이메일 인증

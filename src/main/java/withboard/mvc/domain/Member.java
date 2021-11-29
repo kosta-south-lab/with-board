@@ -17,6 +17,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -63,7 +64,7 @@ public class Member {
 	
 	@Column(length = 250)
 	private String image;
-	
+	     
 	private int status;
 	
 	private int joinCount;
@@ -74,12 +75,14 @@ public class Member {
 	//MemberRole에 대한 참조
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER) //<-- 권한정보는 회원정보와 같이 필요한 경우가 많아서 fetch 모드를 즉시로딩으로 설정.
 	@JoinColumn(name = "member")
-	private List<MemberRole> roles;
+	@javax.persistence.Transient
+	private List<Authorities> roles;	
+
 	
 	private String emailToken;	
 	private boolean isValid;
 	private LocalDateTime joinedAt;
-	
+
 	  public void generateToken() {
 	        this.emailToken = UUID.randomUUID().toString();
 	    }
