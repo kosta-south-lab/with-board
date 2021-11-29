@@ -32,16 +32,17 @@ public class MemberController {
 		return "/user/signup";
 	}
 
+	
 	//회원가입 처리
 	@PostMapping("/user/signup")
-	public String Singup(Member member) {
+	public String Singup(Member member ) {
 		
 		//memberService.joinUser(member); //service에 joinUser만들기
 		
 		return "redirect:/user/login";
 	}
 	
-	//로그인 페이지
+	//로그인 페이지  
 	
 	
 	
