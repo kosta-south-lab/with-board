@@ -13,6 +13,7 @@ public interface MemberService {
 	/**
 	 * 로그인
 	 */
+	public boolean checkLogin(String id,String pw);
 	
 	/**
 	 * 로그아웃

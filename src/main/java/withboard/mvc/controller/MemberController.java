@@ -44,9 +44,8 @@ public class MemberController {
 	//회원가입하기 
 	@RequestMapping("/user/joinConfirm")
 	public String joinMember(Member member) {
-		System.out.println(1111);
 		memberService.joinMember(member); 
-		System.out.println(222);
+	
 		return "user/joinConfirm"; // 회원가입 완료후 갈 페이지 
 	}
 	
@@ -57,14 +56,21 @@ public class MemberController {
 		
 	}
 
-
-
-	// 로그인
-
-
-
+	// 로그인 처리
+	@RequestMapping("/loginProcess")
+	public String loginProcess(Member member) {
+		boolean loginCheck = memberService.checkLogin(member.getId(),member.getPw()); 
+		if(loginCheck){
+			// 시큐리티 인증처리
+		}
+		return "redirect:/home"; // 회원가입 완료후 갈 페이지 
+	}
+	
 	// 로그아웃
 
+	
+	
+	
 	// 마이페이지 보기
 	@RequestMapping("/user/{id}")
 	  public String myPage(@PathVariable String id) {
@@ -73,8 +79,8 @@ public class MemberController {
 
 
 	
-	
 	// id 중복체크 
+	
 	
 	
 	
