@@ -36,16 +36,17 @@ public class MemberController {
 	@GetMapping("/user/signupForm")
 	public String signupForm() {
 		
-		return "/user/signupForm";
+		return "user/signupForm";
 	}
 
 
 	//회원가입하기 
 	@RequestMapping("/user/joinConfirm")
-	public @ResponseBody String joinMember(Member member) {
-		
+	public String joinMember(Member member) {
+		System.out.println(1111);
 		memberService.joinMember(member); 
-		return "/user/joinConfirm"; // 회원가입 완료후 갈 페이지 
+		System.out.println(222);
+		return "user/joinConfirm"; // 회원가입 완료후 갈 페이지 
 	}
 	
 	
@@ -108,7 +109,7 @@ public class MemberController {
 			System.out.println("실패");
 		}
 
-		return "/user/emailSuccess";
+		return "user/emailSuccess";
 	}
 
 	
