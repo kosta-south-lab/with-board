@@ -36,17 +36,19 @@ public class MemberController {
 	@GetMapping("/user/signupForm")
 	public String signupForm() {
 		
-		return "/user/signupForm";
+		return "user/signupForm";
 	}
 
 
 	//회원가입하기 
-	@RequestMapping("/user/join")
+	@RequestMapping("/user/joinConfirm")
 	public String joinMember(Member member) {
-		
+		System.out.println(1111);
 		memberService.joinMember(member); 
-		return "user/joinCofirm"; // 회원가입 완료후 갈 페이지 
+		System.out.println(222);
+		return "user/joinConfirm"; // 회원가입 완료후 갈 페이지 
 	}
+	
 	
 	//현재 Controller에서 발생하는 모든 에외처리
 	@ExceptionHandler(Exception.class)
