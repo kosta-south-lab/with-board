@@ -8,34 +8,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	th, td{
+		padding: 10px 20px;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 	<table class="table">
-	    <tr>
-			<td colspan="2">
-				<div align="left">
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/front?key=search&methodName=searchByLikes&boardNo=1&board=board/freeBoardWrite&postnum='">인기글</button>
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/front?key=search&methodName=searchByRecent&boardNo=1&board=board/freeBoardWrite&postnum='">최근글</button>
-				</div>
-			</td>
 			<td colspan="5">
-				<div align="right">
-					<select name = "search" id=searchs>
-	                    <option id="title" class="btn btn-outline-dark" value = "/src_project/front?key=search&methodName=searchByTitle&postTitle=">제목</option>
-	                	<option id="user" class="btn btn-outline-dark" value = "/src_project/front?key=search&methodName=searchById&userId=">작성자</option>
-	                </select>
-					<input type = "text" id = "searchByTitle" placeholder="검색어를 입력하세요">
-	           		 <button type="button" value = "검색" class="btn btn-primary btn-sm" onclick="go()">검색</button>
-				</div>
+				<form action="${pageContext.request.contextPath}/board/news/newsList" method="get">
+					<div align="right">
+						<select name = "searchOption" id=searchs>
+		                    <option id="title" class="btn btn-outline-dark" value = "title">제목</option>
+		                	<option id="user" class="btn btn-outline-dark" value = "writer">작성자</option>
+		                </select>
+						<input type = "text" id = "searchByTitle" placeholder="검색어를 입력하세요" name="keyword">
+		           		 <button>검색</button>
+					</div>
+				</form>
 			</td>
 		</tr>
 		<tr class="table-primary">
 	        <td valign="middle">
 	            <p align="center"><font color="black"><h6>번호</h6></font></p>
-	        </td>
-<!-- 	          <td valign="middle">
-	            <p align="center"><font color="black"><h6>카테고리</h6></font></p>
-	        </td> -->
 	        <td valign="middle">
 	            <p align="center"><font color="black"><h6>제목</h6></font></p>
 	        </td>
@@ -45,7 +42,6 @@
 	        <td valign="middle">
 	            <p align="center"><font color="black"><h6>조회수</h6></font></p>
 	        </td>
-	        
 	        <td valign="middle">
 	            <p align="center"><font color="black"><h6>등록날짜</h6></font></p>
 	    	</td>
@@ -70,17 +66,13 @@
 						<td bgcolor="" align="center"><span style="font-size: 11pt;">${news.boardNo}</span>
 						</td>
 	
-						<!-- 카테고리 -->
-<%-- 						<td bgcolor="" align="center"><span style="font-size: 11pt;">${news.boardType}</span>
-						</td> --%>
-	
 						<!-- 제목 -->
-						<td bgcolor="" align="center"><a href=""> <span
+						<td bgcolor="" align="center"><a href="${pageContext.request.contextPath}/board/news/read/${news.boardNo}"> <span
 								style="font-size: 11pt;">${news.title}</span>
 						</a></td>
 	
 						<!-- 작성자 -->
-						<td bgcolor="" align="center"><span style="font-size: 11pt;">${news.member.memberNo}</span>
+						<td bgcolor="" align="center"><span style="font-size: 11pt;">${news.member.name}</span>
 						</td>
 	
 						<!-- 조회수 -->
@@ -98,7 +90,7 @@
 	</table>
 	<hr>
 	<div align=right>
-		<button type="submit" class="btn btn-outline-primary" onClick="location.href='${path}/board/WriteInfo.jsp'">글쓰기</button>
+		<button type="submit" class="btn btn-outline-primary" onClick="location.href='${pageContext.request.contextPath}/board/news/registerForm'">글쓰기</button>
 	</div>
 </body>
 </html>

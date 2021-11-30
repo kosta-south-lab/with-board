@@ -43,7 +43,7 @@
 		<b>${reply.replyContent}</b> <button onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${reply.replyNo}?boardType=normal&boardNo=${normal.boardNo}'">댓글삭제</button><br>
 	</c:forEach>	
 	<p>
-	<form action="${pageContext.request.contextPath}/board/normal/insert" method = "post">
+	<form action="${pageContext.request.contextPath}/board/reply/insert" method = "post">
 		
 		<!-- 댓글달고 각각의 글 상세 페이지로 넘어오기 위함 -->
 		<input type="hidden" name="boardNo" value="${normal.boardNo}">
