@@ -32,11 +32,29 @@
 	<div>
 		<button onclick="location.href='${pageContext.request.contextPath}/board/normal/updateForm/${normal.boardNo}'">수정하기</button>
 	</div>
+	
+	<div>
+		<button onclick="location.href='${pageContext.request.contextPath}/board/normal/delete/${normal.boardNo}'">삭제하기</button>
+	</div>
+	<p>
+	
+	<h2>댓글 목록</h2>
+	<c:forEach items="${normal.replyList}" var="reply">
+		<b>${reply.replyContent}</b> <button onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${reply.replyNo}?boardType=normal&boardNo=${normal.boardNo}'">댓글삭제</button><br>
+	</c:forEach>	
+	<p>
+	<form action="${pageContext.request.contextPath}/board/normal/insert" method = "post">
+		
+		<!-- 댓글달고 각각의 글 상세 페이지로 넘어오기 위함 -->
+		<input type="hidden" name="boardNo" value="${normal.boardNo}">
+		<input type="hidden" name="boardType" value="normal">
+		댓글쓰기 <br>
+		<textarea rows="5" cols="40" name="replyContent"></textarea>
+		<input type="submit" value="댓글등록">
+	</form>
+	
 	<div>
 		<button onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList'">리스트로 돌아가기</button>
-	</div>
-	<div>
-		<button onclick="location.href='${pageContext.request.contextPath}/board/normal/delete/${normal.boardNo}'">삭제</button>
 	</div>
 
 </body>

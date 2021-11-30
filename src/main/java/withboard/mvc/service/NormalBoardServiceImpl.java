@@ -44,9 +44,6 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 			Member writer = memberRepository.findByNicknameContaining(keyWord);
 			normalList = normalRepository.findByNormalCategoryAndMember(normalCategory, writer);
 			break;
-		case "location":
-			normalList = normalRepository.findByNormalCategory(normalCategory);
-			break;
 		}
 		return normalList;
 	}

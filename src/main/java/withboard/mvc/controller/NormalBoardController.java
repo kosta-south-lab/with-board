@@ -64,7 +64,6 @@ public class NormalBoardController {
 	@RequestMapping("/insert")
     public String insert(Normal normal, Long normalCategoryNo) {
 		
-		//등록전에 입력한 데이터에 유효하지  않는 특수문자, 스크립트태그등이 있으면 태그가 아닌 문자열로 변경한다.  - 실무에서 filter로 적용
 		normal.getContent().replace("<", "&lt;");
 		normalBoardService.insert(normal,normalCategoryNo);
 		
