@@ -13,11 +13,18 @@ public interface MemberService {
 	/**
 	 * 로그인
 	 */
-	public boolean checkLogin(String id,String pw);
+	/* public boolean checkLogin(String id,String pw); */
+	public boolean checkLogin(String email, String password);
 	
 	/**
-	 * 로그아웃
+	 * 회원정보 수정하기 
 	 */
+	public Member updateInfo(Member member); 
+	
+	/**
+	 * 회원탈퇴하기 
+	 */
+	public void deleteInfo(String id);
 	
 	/**
 	 * 이메일 체크
@@ -28,6 +35,11 @@ public interface MemberService {
 	 * 이메일 업데이트
 	 * */
 	public void mailUpdate(Mail dto);
+	
+	/**
+	 * 아이디에 따른 회원 상세정보 조회
+	 * */
+	Member selectById(Long memberNo);
 
 	
 	

@@ -9,10 +9,7 @@ public interface MatchBoardService {
 	/*
 	 * 게시글 가져오기
 	*/
-	public static List<MatchBoard> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<MatchBoard> selectAll();
 	
 	/*
 	 * 매칭 게시글 등록
@@ -28,5 +25,7 @@ public interface MatchBoardService {
 	 * 매칭 게시글 삭제
 	 */
 	public void delete(Long boardNo);
+	
+	public MatchBoard selectBy(Long boardNo , boolean state);
 
 }

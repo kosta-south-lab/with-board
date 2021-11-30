@@ -26,8 +26,58 @@ public class MatchBoardController {
 	
 	@RequestMapping("/matchBoardList")
 	public ModelAndView list() {
-		List<MatchBoard> matchBoardList = MatchBoardService.selectAll();
+		List<MatchBoard> matchBoardList = matchBoardService.selectAll();
 		return new ModelAndView("board/matchBoard/matchBoardList", "matchBoardList", matchBoardList);
+	}
+	
+	@RequestMapping("/insert")
+	public String insert(MatchBoard matchBoard) {
+		matchBoardService.insert(matchBoard);
+		return "redirect:/board/matchBoard/matchBoardList";
+	}
+	
+	@RequestMapping("/delete/{boardNo}")
+	public String delete(@PathVariable Long boardNo) {
+		matchBoardService.delete(boardNo);
+		return "redirect:/board/matchBoard/matchBoardList";
+	}
+	
+	@RequestMapping("/update")
+	public ModelAndView update(MatchBoard matchBoard) {
+		MatchBoard mb = matchBoardService.update(matchBoard);
+		
+		return new ModelAndView("board/matchBoard/read","matchBoard",mb);
+	}
+	
+	@RequestMapping("/updateForm/{boardNo}")
+	public ModelAndView updateForm(@PathVariable Long boardNo) {
+		MatchBoard mb = matchBoardService.selectBy(boardNo, false);
+		
+		 ModelAndView mv = new ModelAndView("board/matchBoard/update", "matchBoard", mb);
+		 return mv;
+	}
+	
+	@RequestMapping("/read/{boardNo}")
+	public ModelAndView read(@PathVariable Long boardNo , String flag) {
+		
+		//boolean state = flag==null ? true : false;
+		boolean state = flag==null ;
+		
+		MatchBoard matchBoard = matchBoardService.selectBy(boardNo, state);
+		
+		ModelAndView mv =new ModelAndView();
+		mv.setViewName("board/read");
+		mv.addObject("board", matchBoard);
+		return mv;
+	}
+	
+	@RequestMapping("/registerForm")
+	public ModelAndView writeForm() {
+		return new ModelAndView("board/matchBoard/matchBoardRegister");
+	}
+	@RequestMapping("/test")
+	public ModelAndView test() {
+		return new ModelAndView("board/matchBoard/test");
 	}
 	
 
