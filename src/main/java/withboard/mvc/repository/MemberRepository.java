@@ -18,11 +18,20 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query(value = "update user set emailConfirm = 'Y' where username = :username", nativeQuery = true)
 	void mUpdate(String username);
 	
-
 	/**
 	 * 검색어로 멤버 조회
 	 * */
 	Member findByNicknameContaining(String nickname);
-
+	
+	//로그인할때 id,pw맞는지 확인
+	Member findById(String id);
+	
+	/*
+	 * //정보 수정하기
+	 * 
+	 * @Query(
+	 * value="update member m m.set image = ?, m.location= ? , m.location2 = ?, m.nickname =? where id= ?; "
+	 * ) Member updateInfo(Member member);
+	 */
 	
 }
