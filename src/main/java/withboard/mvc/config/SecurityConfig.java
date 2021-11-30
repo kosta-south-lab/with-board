@@ -11,9 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import jdk.internal.org.jline.utils.Log;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.service.MemberService;
 
@@ -59,21 +56,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담�
 		//.antMatchers("/user/**")
 		//.access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 		//.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+    	
 		.and()
-		.formLogin().permitAll().loginProcessingUrl("/home") // 로그인 성공후 가야할 페이지 주소
+		.formLogin()
+		.permitAll()
+		//.loginPage("/login")
+		.usernameParameter("id")
+		.passwordParameter("pw")
+		.loginProcessingUrl("/loginProcess") // 로그인처리를 해주는 곳 "/loginProcess" <= 내가 원하는 이름으로 지정하고 @RequestMapping 처리하면 됨.
 		.and()
-		.logout().permitAll().logoutSuccessUrl("/login");
+		.logout()
+		.permitAll()
+		.logoutUrl("/logout")
+		.logoutSuccessUrl("/home");
     	 
     }
 
 	//로그인하기위한 AuthenticationManagerBuilder를 주입해서 인증에대한 처리
 	 @Autowired
 	 public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		 
+
 		 auth.inMemoryAuthentication()
-		 .withUser("test")
-		 .password("1111")
-		 .roles("admin");
+		 .withUser("yunsol")
+		 .password("12345")
+		 .roles("ADMIN");
 			
 	 }
 	 

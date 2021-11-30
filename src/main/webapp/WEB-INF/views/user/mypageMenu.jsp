@@ -24,7 +24,7 @@
 </ol>
 <table>
   <tr><a href="#" id="/home">메인페이지</a></tr>&nbsp;
-  <tr><a href="#">로그아웃</a></tr>
+  <tr><a href="logout">로그아웃</a></tr>
 </table>
 </body>
 </html>

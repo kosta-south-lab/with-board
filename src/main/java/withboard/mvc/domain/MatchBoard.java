@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,5 +41,20 @@ public class MatchBoard extends Board {
 	@ManyToOne
 	@JoinColumn(name = "game_no")
 	private Game game;
+
+	@Builder
+	public MatchBoard(String title, String content, Member member, int headCount, String location, String location2,
+			String status, String etc, GameCategory gameCategory, Game game) {
+		super(title, content, member);
+		this.headCount = headCount;
+		this.location = location;
+		this.location2 = location2;
+		this.status = status;
+		this.etc = etc;
+		this.gameCategory = gameCategory;
+		this.game = game;
+	}
+	
+	
 	
 }

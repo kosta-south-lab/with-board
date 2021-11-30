@@ -100,7 +100,7 @@
  <!-- spring security POST 전송시 무조건 csrf 를 보내야한다. (GET은 안보내도됨 )  -->
  
 
- <form name="signupForm" method="post" onsubmit="return checkValid(this);" action="${pageContext.request.contextPath}/user/join">
+ <form name="signupForm" method="post" onsubmit="return checkValid(this);" action="${pageContext.request.contextPath}/user/joinConfirm">
  	  <input type = hidden name = "key" value = "members">
       <input type = hidden name = "methodName" value = "joinMember">
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="signupForm">  
