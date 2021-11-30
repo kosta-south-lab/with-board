@@ -21,7 +21,7 @@ public class SendEmailServiceImpl implements SendEmailService {
 	MemberRepository memberRepository;
 	
 	private JavaMailSender mailSender;
-    private static final String FROM_ADDRESS = "본인의 이메일 주소를 입력하세요!";
+    private static final String FROM_ADDRESS = "teamsouthlab@gmail.com";
 
 
 
@@ -69,6 +69,7 @@ public class SendEmailServiceImpl implements SendEmailService {
     }
     
     public void signUpSendEmail(String to, String subject, String text) throws MessagingException {
+    	System.out.println("to : " + to);
     	MimeMessage mimeMessage = mailSender.createMimeMessage();
     	MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
     	
@@ -80,6 +81,7 @@ public class SendEmailServiceImpl implements SendEmailService {
     	helper.setText(text, true);    	
     	
     	mailSender.send(mimeMessage);
+    	System.out.println("SendEmal.....................");
     }
 
 	
