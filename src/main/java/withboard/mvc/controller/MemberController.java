@@ -73,8 +73,15 @@ public class MemberController {
 	
 	// 마이페이지 보기
 	@RequestMapping("/user/{id}")
-	  public String myPage(@PathVariable String id) {
-	    return "user/mypage";
+	  public ModelAndView myPage(@PathVariable Long memberid) {
+		
+		Member member = memberService.selectById(memberid);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user/mypage");
+		mv.addObject("user", member);
+		
+	    return mv;
 	  }
 
 
