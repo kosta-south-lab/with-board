@@ -12,7 +12,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 	/**
 	 * 게임명의 일부로 게임 검색하기
 	 */
-	@Query("select from Game g where g.game_name like %?%")
-	Page<Game> findBygameNameLike();
+//	@Query("select from Game g where g.game_name like %?%")
+//	Page<Game> findBygameNameLike();
 
 }

@@ -22,7 +22,7 @@ public class GameServiceImpl implements GameService {
 	// 검색 결과 - 페이징 처리
 	
 	@Override
-	public Page<Game> selectAll(Pageable pageable, String filterType) {
+	public Page<Game> selectAll(Pageable pageable) {
 		
 		return gameRepository.findAll(pageable);
 	}
@@ -33,7 +33,7 @@ public class GameServiceImpl implements GameService {
 	
 	public Page<Game> searchByName(Pageable pageable){
 		
-		return gameRepository.findBygameNameLike();
+		return null; //gameRepository.findBygameNameLike();
 	}
 	
 	// 상세 보드게임 조회

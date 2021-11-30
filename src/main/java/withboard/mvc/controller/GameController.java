@@ -38,12 +38,11 @@ public class GameController {
 	
 	@RequestMapping("/gameList")
 	public void gameList(Model model ,@RequestParam(defaultValue = "1") int nowPage, 
-							@RequestParam(value = "sortType", defaultValue="gameNo") String sortType, 
-							@RequestParam(value = "filterType", defaultValue="") String filterType ) {
+							@RequestParam(value = "sortType", defaultValue="gameNo") String sortType) {
 		
 		Pageable pageable = PageRequest.of((nowPage - 1), 10, Sort.by(sortType));
 		
-		Page<Game> gameList = gameService.selectAll(pageable, filterType);
+		Page<Game> gameList = gameService.selectAll(pageable);
 		
 		model.addAttribute("gameList", gameList);
 		

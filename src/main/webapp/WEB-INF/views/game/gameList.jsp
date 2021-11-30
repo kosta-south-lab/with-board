@@ -38,7 +38,7 @@
             <p align="center"><font color="white"><b><span style="font-size:9pt;">난이도</span></b></font></p>
         </td>
         <td bgcolor="#00cc00">
-            <p align="center"><font color="white"><b><span style="font-size:9pt;">테마</span></b></font></p>
+            <p align="center"><font color="white"><b><span style="font-size:9pt;">평점</span></b></font></p>
         </td>
     </tr>
     <c:choose>
@@ -50,7 +50,7 @@
     </tr>
     </c:when>
     <c:otherwise>
-	<c:forEach items="${requestScope.gameList}" var="game">
+	<c:forEach items="${requestScope.gameList.content}" var="game">
 		    <tr onmouseover="this.style.background='#eaeaea'" onmouseout="this.style.background='white'">
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
@@ -59,19 +59,19 @@
 		        <td bgcolor="">
 					<p><span style="font-size:9pt;">
 					<a href="${pageContext.request.contextPath}/game/readGame/${game.gameNo}">
-					  ${game.subject}</b>
+					  ${game.gameName}</b>
 					</a>
 					</span></p>
 		        </td>
 		        		       
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
-		            ${game.gameCategory}</span></p>
+		            ${game.gameCategory.gameCategoryName}</span></p>
 		        </td>
 		         	        
 		        <td bgcolor="">
 		            <p align="center"><span style="font-size:9pt;">
-		            ${game.gameTheme}</span></p>
+		            ${game.gameTheme.themeName}</span></p>
 		        </td>
 		    </tr>
     </c:forEach>

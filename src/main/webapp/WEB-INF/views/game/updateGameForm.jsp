@@ -14,7 +14,7 @@
 	<table align="center" cellpadding="5" cellspacing="1" width="600" border="1">
     <tr>
         <td width="1220" height="20" colspan="2" bgcolor="#00cc00">
-            <p align="center"><font color="white" size="3"><b> ${game.bno} 게시물 수정하기</b></font></p>
+            <p align="center"><font color="white" size="3"><b> ${game.gameNo} 게시물 수정하기</b></font></p>
         </td>
     </tr>
     <tr>
@@ -89,25 +89,7 @@
         <td width="450" height="20" ><b><span style="font-size:9pt;">
 		<textarea name="age" cols="50" rows="10">${requestScope.game.age}</textarea></span></b></td>
     </tr>
-    
-    
-    
- <form name="updateGameImage" method="post" action="${pageContext.request.contextPath}/image/updateGameImage">
- 
-     <tr>
-        <td width="150" height="20" >
-            <p align="right"><b><span style="font-size:9pt;">프로필 사진 등록</span></b></p>
-        </td>
-        <td width="450" height="20" ><b><span style="font-size:9pt;">
-		<textarea name="content" cols="50" rows="10">${requestScope.board.content}</textarea></span></b></td>
-    </tr>
- 
- </form>   
-    
-
-
-
-
+  
     <tr>
         <td width="450" height="20" colspan="2" align="center"><b><span style="font-size:9pt;">
 		<input type="submit" value="수정하기"> <input type="reset" value="다시쓰기"></span></b></td>

@@ -15,7 +15,7 @@ public interface GameService {
 	 * 검색 결과 - 페이징 처리
 	 */
 	
-	Page<Game> selectAll(Pageable pageable, String filterType);
+	Page<Game> selectAll(Pageable pageable);
 	
 	
 	/**

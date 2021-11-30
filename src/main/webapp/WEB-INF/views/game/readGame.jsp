@@ -1,10 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>ìƒì„¸ ë³´ë“œê²Œì„ ì •ë³´</title>
+
+<script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		
+		   $("input[value=ìˆ˜ì •í•˜ê¸°]").click(function(){
+			   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
+			   
+			   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/updateGameForm");
+			   $("#requestForm").submit();
+		   });
+		   
+		   
+		   $("input[value=ì‚­ì œí•˜ê¸°]").click(function(){
+	
+				   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/deleteGame");
+				   $("#requestForm").submit();
+			   }
+		   });
+		   
+	});
+</script>
 </head>
 <body>
 
@@ -12,12 +35,12 @@
     <tr>
         <td width="1220" height="20" colspan="4" bgcolor="#00cc00">
             <p align="center"><font color="white" size="3"><b>
-             º¸µå°ÔÀÓ »ó¼¼ Á¤º¸</b></font></p>
+             ë³´ë“œê²Œì„ ìƒì„¸ ì •ë³´</b></font></p>
         </td>
     </tr>
     <tr>
         <td width="100" height="20" >
-            <p align="right"><b><span style="font-size:9pt;">¹øÈ£</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ë²ˆí˜¸</span></b></p>
         </td>
         <td width="450" height="20" colspan="3">
         	<span style="font-size:9pt;"><b>${game.gameNo}</b></span>
@@ -25,13 +48,13 @@
     </tr>
     <tr>
         <td width="100" height="20" >
-            <p align="right"><b><span style="font-size:9pt;">Á¦¸ñ</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ì œëª©</span></b></p>
         </td>
         <td width="300" height="20">
         	<span style="font-size:9pt;"><b>${requestScope.game.gameName}</b></span>
         </td>
         <td width="100" height="20" >
-			<p align="right"><b><span style="font-size:9pt;">ÃÖ´ë ÀÎ¿ø ¼ö</span></b></p>
+			<p align="right"><b><span style="font-size:9pt;">ìµœëŒ€ ì¸ì› ìˆ˜</span></b></p>
 		</td>
         <td width="100" height="20">
 			<p><b><span style="font-size:9pt;"></span>${requestScope.game.playPersonnelMax}</b></p>
@@ -39,7 +62,7 @@
     </tr>
     <tr>
         <td width="100" height="20">
-            <p align="right"><b><span style="font-size:9pt;">ÃÖ¼Ò ÀÎ¿ø ¼ö</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ìµœì†Œ ì¸ì› ìˆ˜</span></b></p>
         </td>
         <td width="450" height="20" colspan="3">
         	<span style="font-size:9pt;"><b>${requestScope.game.playPersonnelMin}</b></span>
@@ -47,72 +70,70 @@
     </tr>
     <tr>
 		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">ÃÖ´ë ÇÃ·¹ÀÌÅ¸ÀÓ</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ìµœëŒ€ í”Œë ˆì´íƒ€ì„</span></b></p>
         </td>
-		<!-- ºê¶ó¿ìÀú¿¡ ±Û ³»¿ëÀ» »Ñ·ÁÁÙ ¶§´Â °³Çà¹®ÀÚ(\n)°¡ <br>ÅÂ±×·Î º¯È¯µÈ ¹®ÀÚ¿­À» º¸¿©Áà¾ß ÇÑ´Ù. -->
+		<!-- ë¸Œë¼ìš°ì €ì— ê¸€ ë‚´ìš©ì„ ë¿Œë ¤ì¤„ ë•ŒëŠ” ê°œí–‰ë¬¸ì(\n)ê°€ <br>íƒœê·¸ë¡œ ë³€í™˜ëœ ë¬¸ìì—´ì„ ë³´ì—¬ì¤˜ì•¼ í•œë‹¤. -->
         <td width="450" height="200" valign="top" colspan="3">
         <span style="font-size:9pt;"><b><pre>${requestScope.game.gamePlaytimeMax}</pre></b></span></td>
     </tr>
     
         <tr>
 		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">ÃÖ´ë ÇÃ·¹ÀÌÅ¸ÀÓ</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ìµœëŒ€ í”Œë ˆì´íƒ€ì„</span></b></p>
         </td>
-		<!-- ºê¶ó¿ìÀú¿¡ ±Û ³»¿ëÀ» »Ñ·ÁÁÙ ¶§´Â °³Çà¹®ÀÚ(\n)°¡ <br>ÅÂ±×·Î º¯È¯µÈ ¹®ÀÚ¿­À» º¸¿©Áà¾ß ÇÑ´Ù. -->
+		<!-- ë¸Œë¼ìš°ì €ì— ê¸€ ë‚´ìš©ì„ ë¿Œë ¤ì¤„ ë•ŒëŠ” ê°œí–‰ë¬¸ì(\n)ê°€ <br>íƒœê·¸ë¡œ ë³€í™˜ëœ ë¬¸ìì—´ì„ ë³´ì—¬ì¤˜ì•¼ í•œë‹¤. -->
         <td width="450" height="200" valign="top" colspan="3">
         <span style="font-size:9pt;"><b><pre>${requestScope.game.gamePlaytimeMax}</pre></b></span></td>
     </tr>
     
         <tr>
 		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">ºñµğ¿À ¸µÅ©</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ë¹„ë””ì˜¤ ë§í¬</span></b></p>
         </td>
-		<!-- ºê¶ó¿ìÀú¿¡ ±Û ³»¿ëÀ» »Ñ·ÁÁÙ ¶§´Â °³Çà¹®ÀÚ(\n)°¡ <br>ÅÂ±×·Î º¯È¯µÈ ¹®ÀÚ¿­À» º¸¿©Áà¾ß ÇÑ´Ù. -->
+		<!-- ë¸Œë¼ìš°ì €ì— ê¸€ ë‚´ìš©ì„ ë¿Œë ¤ì¤„ ë•ŒëŠ” ê°œí–‰ë¬¸ì(\n)ê°€ <br>íƒœê·¸ë¡œ ë³€í™˜ëœ ë¬¸ìì—´ì„ ë³´ì—¬ì¤˜ì•¼ í•œë‹¤. -->
         <td width="450" height="200" valign="top" colspan="3">
         <span style="font-size:9pt;"><b><pre>${requestScope.game.videoUrl}</pre></b></span></td>
     </tr>
     
         <tr>
 		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">ÁøÇà ¹æ½Ä</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ì§„í–‰ ë°©ì‹</span></b></p>
         </td>
-		<!-- ºê¶ó¿ìÀú¿¡ ±Û ³»¿ëÀ» »Ñ·ÁÁÙ ¶§´Â °³Çà¹®ÀÚ(\n)°¡ <br>ÅÂ±×·Î º¯È¯µÈ ¹®ÀÚ¿­À» º¸¿©Áà¾ß ÇÑ´Ù. -->
+		<!-- ë¸Œë¼ìš°ì €ì— ê¸€ ë‚´ìš©ì„ ë¿Œë ¤ì¤„ ë•ŒëŠ” ê°œí–‰ë¬¸ì(\n)ê°€ <br>íƒœê·¸ë¡œ ë³€í™˜ëœ ë¬¸ìì—´ì„ ë³´ì—¬ì¤˜ì•¼ í•œë‹¤. -->
         <td width="450" height="200" valign="top" colspan="3">
         <span style="font-size:9pt;"><b><pre>${requestScope.game.gameProcess}</pre></b></span></td>
     </tr>
     
             <tr>
 		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">Å×¸¶</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">í…Œë§ˆ</span></b></p>
         </td>
-		<!-- ºê¶ó¿ìÀú¿¡ ±Û ³»¿ëÀ» »Ñ·ÁÁÙ ¶§´Â °³Çà¹®ÀÚ(\n)°¡ <br>ÅÂ±×·Î º¯È¯µÈ ¹®ÀÚ¿­À» º¸¿©Áà¾ß ÇÑ´Ù. -->
+		<!-- ë¸Œë¼ìš°ì €ì— ê¸€ ë‚´ìš©ì„ ë¿Œë ¤ì¤„ ë•ŒëŠ” ê°œí–‰ë¬¸ì(\n)ê°€ <br>íƒœê·¸ë¡œ ë³€í™˜ëœ ë¬¸ìì—´ì„ ë³´ì—¬ì¤˜ì•¼ í•œë‹¤. -->
         <td width="450" height="200" valign="top" colspan="3">
         <span style="font-size:9pt;"><b><pre>${requestScope.game.gameTheme}</pre></b></span></td>
     </tr>
     
             <tr>
 		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">Àå¸£</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ì¥ë¥´</span></b></p>
         </td>
-		<!-- ºê¶ó¿ìÀú¿¡ ±Û ³»¿ëÀ» »Ñ·ÁÁÙ ¶§´Â °³Çà¹®ÀÚ(\n)°¡ <br>ÅÂ±×·Î º¯È¯µÈ ¹®ÀÚ¿­À» º¸¿©Áà¾ß ÇÑ´Ù. -->
+		<!-- ë¸Œë¼ìš°ì €ì— ê¸€ ë‚´ìš©ì„ ë¿Œë ¤ì¤„ ë•ŒëŠ” ê°œí–‰ë¬¸ì(\n)ê°€ <br>íƒœê·¸ë¡œ ë³€í™˜ëœ ë¬¸ìì—´ì„ ë³´ì—¬ì¤˜ì•¼ í•œë‹¤. -->
         <td width="450" height="200" valign="top" colspan="3">
         <span style="font-size:9pt;"><b><pre>${requestScope.game.gameCategory}</pre></b></span></td>
     </tr>
-    
- 
-<%--  <c:if test="${¼¼¼Ç¿¡ µé¾î°¡ÀÖ´Â À¯ÀúÀÇ ½ºÅ×ÀÌÅÍ½º°¡ ¾îµå¹ÎÀÏ °æ¿ì}>
+   
    
     <tr>
         <td height="20" colspan="4" align="center" valign="middle">
-			<!-- ¼öÁ¤½Ã ÇÊ¿äÇÑ µ¥ÀÌÅÍµéÀ» hiddenÀ¸·Î ¼û°Ü³õ°í Æû µ¥ÀÌÅÍ·Î º¸³»ÁØ´Ù. -->
+			<!-- ìˆ˜ì •ì‹œ í•„ìš”í•œ ë°ì´í„°ë“¤ì„ hiddenìœ¼ë¡œ ìˆ¨ê²¨ë†“ê³  í¼ ë°ì´í„°ë¡œ ë³´ë‚´ì¤€ë‹¤. -->
 			<form name="requestForm" method="post" id="requestForm">
-				<input type=hidden name="bno" value="${game.gameNo}">
-				<input type=button value="¼öÁ¤ÇÏ±â" >
-				<input type=button value="»èÁ¦ÇÏ±â" >
+				<input type=hidden name="gameNo" value="${game.gameNo}">
+				<input type=button value="ìˆ˜ì •í•˜ê¸°">
+				<input type=button value="ì‚­ì œí•˜ê¸°">
 			</form>
 		</td>
     </tr>   
-  </c:if>     --%> 
+
 </table>
 
 </body>
