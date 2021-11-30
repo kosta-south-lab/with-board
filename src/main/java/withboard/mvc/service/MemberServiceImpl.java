@@ -98,5 +98,12 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public Member selectById(Long memberNo) {
+		Member member = memberRepository.findById(memberNo).orElse(null);
+		
+		return member;
+	}
+
 
 }

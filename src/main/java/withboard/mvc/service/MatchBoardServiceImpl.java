@@ -30,7 +30,13 @@ private final MatchBoardRepository matchBoardRepository;
 		
 		mb.setTitle(matchBoard.getTitle());
 		mb.setContent(matchBoard.getContent());
-		//추가해야함 맵 정보나 여러가지(스케치 확인바람)
+		mb.setHeadCount(matchBoard.getHeadCount());
+		mb.setLocation(matchBoard.getLocation());
+		mb.setLocation2(matchBoard.getLocation2());
+		mb.setEtc(matchBoard.getEtc());
+		mb.setGameCategory(matchBoard.getGameCategory());
+		mb.setGame(matchBoard.getGame());
+		
 		return mb;
 		
 	}
@@ -43,6 +49,22 @@ private final MatchBoardRepository matchBoardRepository;
 		matchBoardRepository.delete(mb);
 		
 	}
+
+	public MatchBoard selectBy(Long boardNo, boolean state) {
+		if(state) {
+			if( matchBoardRepository.viewCountUpdate(boardNo) == 0 ) {
+				throw new RuntimeException(boardNo+"번호 오류로 조회수 증가 실패하여 검색할 수 없습니다.");
+			}
+		}
+		MatchBoard matchBoard = matchBoardRepository.findById(boardNo).orElse(null);
+		
+		return matchBoard;
+		
+		
+		}
+		
+	
 	
 
 }
+
