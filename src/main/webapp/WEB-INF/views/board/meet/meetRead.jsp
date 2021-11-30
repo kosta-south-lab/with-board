@@ -97,6 +97,10 @@ function displayMarker(place) {
 		<button onclick="location.href='${pageContext.request.contextPath}/board/meet/updateForm/${meet.boardNo}'">수정하기</button>
 	</div>
 	<div>
+		<button onclick="location.href='${pageContext.request.contextPath}/board/meet/delete/${meet.boardNo}'">삭제하기</button>
+	</div>
+	<p>
+	<div>
 		<button onclick="location.href='${pageContext.request.contextPath}/board/meet'">리스트로 돌아가기</button>
 	</div>
 </body>

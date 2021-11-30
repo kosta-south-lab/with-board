@@ -61,7 +61,7 @@ public class MeetBoardServiceImpl implements MeetBoardService {
 		meet.setMember(writer);
 		meetRepository.save(meet);
 		
-		//db에 이미지 이름 저장
+		//이미지테이블에 이미지 이름 저장
 		for(String fname : filenameList) {
 			imageRepository.save(new Image(null, fname, meet, null));
 		}
@@ -86,7 +86,7 @@ public class MeetBoardServiceImpl implements MeetBoardService {
 	}
 
 	@Override
-	public void update(Meet meet, Long meetCategoryNo) {
+	public void update(Meet meet, Long meetCategoryNo, List<String> filenameList) {
 		Meet dbMeet = meetRepository.findById(meet.getBoardNo()).orElse(null);
 		if(dbMeet==null) throw new RuntimeException("글번호 오류로 수정될 수 없습니다.");		
 		
@@ -101,5 +101,20 @@ public class MeetBoardServiceImpl implements MeetBoardService {
 		dbMeet.setLocation2(meet.getLocation2());
 		dbMeet.setMeetCategory(meetCategory);
 		
+		//이미지테이블에서 이미지이름 삭제
+		for(Image image : dbMeet.getImageList()) {
+			imageRepository.delete(image);
+		}
+		//이미지테이블에 새로운 이미지 이름 저장
+		for(String fname : filenameList) {
+			imageRepository.save(new Image(null, fname, dbMeet, null));
+		}
 	}
+
+	@Override
+	public void delete(Long BoardNo) {
+		meetRepository.deleteById(BoardNo);
+	}
+	
+	
 }

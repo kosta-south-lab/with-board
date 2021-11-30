@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Meet;
 import withboard.mvc.service.MeetBoardService;
+import withboard.mvc.service.MeetBoardServiceImpl;
 
 @Controller
 @RequestMapping("/board")
@@ -65,15 +66,18 @@ public class MeetBoardController {
 		//파일 저장
 		String path = session.getServletContext().getRealPath("/resources/images/board");
 		List<String> filenameList = new ArrayList<String>();
-		
+
 		for(MultipartFile file : filename) {
-			System.out.println(file.getOriginalFilename());
 			
 			String originalFileName = file.getOriginalFilename();
+			
+			//파일이 들어오지 않아도 파일 1개가 ""로 들어오게된다. 그 경우 걸러내는 작업
+			if(originalFileName == "") {
+				break;
+			}
+			
 			String newFileName = this.changeFileName(originalFileName);
-			
 			File newFile = new File(path + "/" + newFileName);
-			
 			filenameList.add("/resources/images/board/" + newFileName);
 			try {				
 				file.transferTo(newFile);
@@ -83,6 +87,7 @@ public class MeetBoardController {
 		}
 		
 		meetBoardService.insert(meet, meetCategoryNo, filenameList);
+		
 		
 		return "redirect:/board/meet";
 		
@@ -136,13 +141,41 @@ public class MeetBoardController {
 	 * update
 	 * */
 	@RequestMapping("/meet/update")
-	public String update(Meet meet, Long meetCategoryNo) {
-		System.out.println("여기");
-		meetBoardService.update(meet, meetCategoryNo);
-		System.out.println("여기");
+	public String update(Meet meet, Long meetCategoryNo, List<MultipartFile> filename, HttpSession session) {
+		
+		//파일 저장
+		String path = session.getServletContext().getRealPath("/resources/images/board");
+		List<String> filenameList = new ArrayList<String>();
+		
+		for(MultipartFile file : filename) {
+			System.out.println(file.getOriginalFilename());
+			
+			String originalFileName = file.getOriginalFilename();
+			String newFileName = this.changeFileName(originalFileName);
+			
+			File newFile = new File(path + "/" + newFileName);
+			
+			filenameList.add("/resources/images/board/" + newFileName);
+			try {				
+				file.transferTo(newFile);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		meetBoardService.update(meet, meetCategoryNo, filenameList);
+
 		return "redirect:/board/meet/read/" + meet.getBoardNo() + "?flag=1";
 	}
 	
-	
+	/**
+	 * delete
+	 */
+	@RequestMapping("/meet/delete/{boardNo}")
+	public String delete(@PathVariable Long boardNo) {
+		meetBoardService.delete(boardNo);
+		return "redirect:/board/meet";
+	}
+
 	
 }
