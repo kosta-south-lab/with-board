@@ -100,6 +100,20 @@ function displayMarker(place) {
 		<button onclick="location.href='${pageContext.request.contextPath}/board/meet/delete/${meet.boardNo}'">삭제하기</button>
 	</div>
 	<p>
+	<h2>댓글 목록</h2>
+	<c:forEach items="${meet.replyList}" var="reply">
+		<b>${reply.replyContent}</b> <button onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${reply.replyNo}?boardType=meet&boardNo=${meet.boardNo}'">댓글삭제</button><br>
+	</c:forEach>	
+	<p>
+	<form action="${pageContext.request.contextPath}/board/reply/insert" method = "post">
+		
+		<!-- 댓글달고 각각의 글 상세 페이지로 넘어오기 위함 -->
+		<input type="hidden" name="boardNo" value="${meet.boardNo}">
+		<input type="hidden" name="boardType" value="meet">
+		댓글쓰기 <br>
+		<textarea rows="5" cols="40" name="replyContent"></textarea>
+		<input type="submit" value="댓글등록">
+	</form>
 	<div>
 		<button onclick="location.href='${pageContext.request.contextPath}/board/meet'">리스트로 돌아가기</button>
 	</div>

@@ -80,6 +80,4 @@ public class Member {
 	@Transient
 	private List<Authorities> roles;
 
-	
-
 }
