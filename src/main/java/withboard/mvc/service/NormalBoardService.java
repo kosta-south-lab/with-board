@@ -10,12 +10,12 @@ public interface NormalBoardService {
 	 /**
 	    * 전체검색
 	    * */
-	public List<Normal> selectAll();
+	public List<Normal> selectAll(Long normalCategoryNo, String searchOption, String keyword);
 	
 	/**
 	 * 등록
 	 * */
-	void insert(Normal normal);
+	void insert(Normal normal, Long normalCategoryNo);
 	
 	/**
 	 * 글번호 검색 
@@ -28,11 +28,13 @@ public interface NormalBoardService {
 	 * 수정하기
 	 * */
 	
-	Normal update(Normal normal);
+	Normal update(Normal normal, Long normalCategoryNo);
 	
     /**
      * 삭제하기
      * */
-    void delete(Long boardNo,String password);
+    void delete(Long boardNo);
+
+
 	
 }

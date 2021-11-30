@@ -3,6 +3,7 @@ package withboard.mvc.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -52,8 +53,11 @@ public class Board {
 	@JoinColumn(name = "member_no")
 	private Member member;
 	
-	@OneToMany(mappedBy = "board")
+	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
 	private List<Image> imageList;
+	
+	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+	private List<Reply> replyList;
 
 	//title, content, member만 받는 생성자. 자식 클래스에서 빌더 패턴 사용하기 위함.(@Builder)
 	public Board(String title, String content, Member member) {

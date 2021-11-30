@@ -32,7 +32,7 @@ public class MemberController {
 	@Autowired
 	SendEmailService emailService;
 	
-	private HttpSession session; //session 주입
+	
 	
 	//회원가입 페이지
 	@GetMapping("/user/signupForm")
@@ -43,10 +43,13 @@ public class MemberController {
 
 	//회원가입하기 
 	@RequestMapping("/user/joinConfirm")
-	public String joinMember(Member member) {
+	public String joinMember(Member member,HttpSession session) {
+		System.out.println("joinConfirm............................");
 		memberService.joinMember(member); 
-	
-		return "user/joinConfirm"; // 회원가입 완료후 갈 페이지 
+		session.setAttribute("principal",member);
+		
+	      System.out.println(111111);
+		return "user/joinConfirm";// 회원가입 완료후 갈 페이지 
 	}
 	
 	//현재 Controller에서 발생하는 모든 에외처리
@@ -116,7 +119,8 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping(value = "/user/email/send")
 	public void sendmail(Mail dto) throws MessagingException {
-
+		
+		
 		StringBuffer emailcontent = new StringBuffer();
 		
 		emailcontent.append("<!DOCTYPE html>");
@@ -139,11 +143,12 @@ public class MemberController {
 		emailcontent.append("</body>");
 		emailcontent.append("</html>");
 		
-		
-		
 		emailService.signUpSendEmail(dto.getEmail(),"메일 인증",emailcontent.toString());
+		
+		
 	}
 
+	
 
 	@GetMapping(value = "/user/email/certified")
 	public String checkmail(Mail dto) throws MessagingException {

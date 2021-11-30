@@ -15,12 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Board;
+import withboard.mvc.domain.Meet;
 import withboard.mvc.domain.Normal;
 import withboard.mvc.service.NormalBoardService;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/board")
+@RequestMapping("/board/normal")
 public class NormalBoardController {
 	
 	private final NormalBoardService normalBoardService;
@@ -28,33 +29,45 @@ public class NormalBoardController {
 	/**
 	 * 전체검색하기
 	 * */
-	@RequestMapping("/normal")
-	public ModelAndView list() {
+	@RequestMapping("/normalList")
+	public ModelAndView list(Long normalCategoryNo, String searchOption, String keyword) {
 		
-		List<Normal> normalBoardList=normalBoardService.selectAll();
-				
-		return new ModelAndView("board/normalBoard", "normalBoardList", normalBoardList);
+		if(normalCategoryNo == null) {
+			normalCategoryNo = 1L;
+		}
+		if(searchOption == null) {
+			searchOption = "title";
+		}
+		if(keyword == null) {
+			keyword = "";
+		}
 		
+		List<Normal> normalList = normalBoardService.selectAll(normalCategoryNo, searchOption, keyword);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/normal/normalList");          //
+		mv.addObject("normalList", normalList);
+		mv.addObject("normalCategoryNo", normalCategoryNo);
+		return mv;
 	}
 	
 	/**
 	 * 등록폼 
 	 * */
-	@RequestMapping("/write")
-	public void write() {}
+	@RequestMapping("/registerForm")
+	public ModelAndView writeForm() {
+		return new ModelAndView("board/normal/normalRegister");
+	}
 	
 	/**
 	 * 등록하기
 	 * */
 	@RequestMapping("/insert")
-    public String insert(Normal normal) {
+    public String insert(Normal normal, Long normalCategoryNo) {
 		
-		//등록전에 입력한 데이터에 유효하지  않는 특수문자, 스크립트태그등이 있으면 태그가 아닌 문자열로 변경한다.  - 실무에서 filter로 적용
 		normal.getContent().replace("<", "&lt;");
+		normalBoardService.insert(normal,normalCategoryNo);
 		
-		normalBoardService.insert(normal);
-		
-		return "redirect:/board/normal";
+		return "redirect:/board/normal/normalList";
 	}
 	
 	/**
@@ -63,25 +76,26 @@ public class NormalBoardController {
 	@RequestMapping("/read/{boardNo}")
 	public ModelAndView read(@PathVariable Long boardNo , String flag) {
 		
-		//boolean state = flag==null ? true : false;
-		boolean state = flag==null ;
-		
-		Normal nm = normalBoardService.selectBy(boardNo, state);//true는 조회수증가!!!
+		boolean state = flag==null ? true : false;
+		Normal normal = normalBoardService.selectBy(boardNo, state);//true는 조회수증가!!!
 		
 		ModelAndView mv =new ModelAndView();
-		mv.setViewName("board/read");
-		mv.addObject("board", nm);
+		mv.setViewName("board/normal/normalRead");
+		mv.addObject("normal", normal);
 		return mv;
 	}
 	
 	/**
 	 * 수정폼
 	 * */
-	@RequestMapping("/updateForm")
-	public ModelAndView updateForm(Long boardNo) {
-		Normal nm = normalBoardService.selectBy(boardNo, false);//조회수 증가안됨.
+	@RequestMapping("/updateForm/{boardNo}")
+	public ModelAndView updateForm(@PathVariable Long boardNo) {
+		Normal normal = normalBoardService.selectBy(boardNo, false);//조회수 증가안됨.
 		
-		 ModelAndView mv = new ModelAndView("board/update", "normal", nm);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/normal/updateForm");
+		mv.addObject("normal", normal);
+		
 		 return mv;
 	}
 	
@@ -89,21 +103,21 @@ public class NormalBoardController {
 	 * 수정완료
 	 * */
 	@RequestMapping("/update")
-	public ModelAndView update(Normal normal) {
-		Normal nm = normalBoardService.update(normal);
+	public String update(Normal normal, Long normalCategoryNo) {
+		Normal nm = normalBoardService.update(normal,normalCategoryNo);
 		
-		return new ModelAndView("board/read","normal", nm);
+		return "redirect:/board/normal/read/" + nm.getBoardNo() + "?flag=1";
 		
 	}
 	
 	/**
 	 * 삭제하기
 	 * */
-	@RequestMapping("/delete")
-	public String delete(Long boardNo , String password) {
-		normalBoardService.delete(boardNo, password);
+	@RequestMapping("/delete/{boardNo}")
+	public String delete(@PathVariable Long boardNo) {
+		normalBoardService.delete(boardNo);
 		 
-		 return "redirect:/board/list";
+		 return "redirect:/board/normal/normalList";
 		 
 	}
 

@@ -13,15 +13,16 @@
 		<button onclick="sendEmail(event)">이메일 인증하기</button>
 
     <form id="email_form">
-        <input type="hidden" name="username" value="${sessionScope.member.nickname}">
-        <input type="hidden" name="email" value="${sessionScope.member.email}">
-        <input type="hidden" name="emailConfirm" value="${sessionScope.member.emailConfirm}">												
+        <input type="text" name="username" value="${requestScope.member.nickname}">
+        <input type="text" name="email" value="${requestScope.member.email}">
+        <input type="text" name="emailConfirm" value="0">												
+
     </form>
 
 		<script>
 		function sendEmail(event,username, email, emailConfirm) {
 			$.ajax({
-				url : "/user/email/send",
+				url : "${pageContext.request.contextPath}/user/email/send",
 				type : "GET",
 				data : $("#email_form").serialize(),
 				success : function(data) {
