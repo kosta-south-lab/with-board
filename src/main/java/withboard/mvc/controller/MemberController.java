@@ -32,25 +32,22 @@ public class MemberController {
 	@Autowired
 	SendEmailService emailService;
 	
-	
-	
 	//회원가입 페이지
 	@GetMapping("/user/signupForm")
 	public String signupForm() {
 		
-		return "user/signupForm";
+		return "user/signupForm"; //WEB-INF/views/user/signupForm.jsp
 	}
-
+	
 	//회원가입하기 
-	@RequestMapping("/user/joinConfirm")
-	public String joinMember(Member member,HttpSession session) {
-		System.out.println("joinConfirm............................");
-		memberService.joinMember(member); 
-		session.setAttribute("principal",member);
-		
-	      System.out.println(111111);
-		return "user/joinConfirm";// 회원가입 완료후 갈 페이지 
-	}
+		@RequestMapping("/user/joinConfirm")
+		public String joinMember(Member member,HttpSession session) {
+			memberService.joinMember(member); 
+			session.setAttribute("principal",member);
+			
+			return "user/joinConfirm";// 회원가입 완료후 갈 페이지
+			//return "redirect:/login"; // 회원가입 완료후 갈 페이지 
+		}
 	
 	//현재 Controller에서 발생하는 모든 에외처리
 	@ExceptionHandler(Exception.class)
@@ -58,9 +55,15 @@ public class MemberController {
 		return new ModelAndView();
 		
 	}
-
+	//로그인 form
+	@GetMapping("/user/loginForm")
+	public String loginForm() {
+			
+		return "user/loginForm";
+	}
+	
 	// 로그인 처리
-	@RequestMapping("/loginProcess")
+	@RequestMapping("/loginProcess2")
 	public String loginProcess(Member member) {
 		boolean loginCheck = memberService.checkLogin(member.getId(),member.getPw()); 
 		if(loginCheck){
@@ -70,7 +73,12 @@ public class MemberController {
 	}
 	
 	// 로그아웃
-
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		return new ModelAndView("/logout","logout","");
+	}
 	
 	
 	
@@ -119,8 +127,7 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping(value = "/user/email/send")
 	public void sendmail(Mail dto) throws MessagingException {
-		
-		
+
 		StringBuffer emailcontent = new StringBuffer();
 		
 		emailcontent.append("<!DOCTYPE html>");
@@ -143,15 +150,14 @@ public class MemberController {
 		emailcontent.append("</body>");
 		emailcontent.append("</html>");
 		
+		
+		
 		emailService.signUpSendEmail(dto.getEmail(),"메일 인증",emailcontent.toString());
-		
-		
 	}
 
-	
 
 	@GetMapping(value = "/user/email/certified")
-	public String checkmail(Mail dto) throws MessagingException {
+	public String checkmail(Mail dto, HttpSession session) throws MessagingException {
 
 		Member member = memberService.mailCheck(dto);
 		
@@ -164,7 +170,5 @@ public class MemberController {
 
 		return "user/emailSuccess";
 	}
-
-	
 	
 }
