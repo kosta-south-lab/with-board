@@ -1,7 +1,5 @@
 package withboard.mvc.service;
 
-import java.sql.SQLException;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +20,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	MemberRepository memberRepository;
-
 	@Autowired
 	AuthoritiesRepository authoritiesRepository;
-
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -36,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		String pw = passwordEncoder.encode(member.getPw());
 		member.setPw(pw);
-		System.out.println(pw);
+		System.out.println("pw확인 : "+ pw);
 		
 		Member mb = memberRepository.save(member);
 		//권한을 주기위한 ...
@@ -56,13 +52,49 @@ public class MemberServiceImpl implements MemberService {
 		memberRepository.mUpdate(dto.getUsername());	
 	}
 	
-	// id, pw 동일한지 확인
+	// 로그인시 id ,password 체크
 	@Override
-	public boolean checkLogin(String id,String pw) {
+	public boolean checkLogin(String id, String pw) {
+		Member loginMember = memberRepository.findById(id);
 		
-		//회원정보 가지고 와서 맞는지 비교 equls로!
-		
-		return true;
+		if(loginMember==null) {
+		      System.out.println("해당 ID가 존재하지 않습니다.");
+		      return false;
+		   }
+
+		   if(!passwordEncoder.matches(pw, loginMember.getPw())) {
+		      System.out.println("비밀번호가 일치하지 않습니다.");
+		      return false;
+		   }
+	
+		return false;
+	}
+	
+	/*
+	 * //회원정보 수정하기
+	 * 
+	 * @Override public Member updateInfo(Member member) { Member mb =
+	 * memberRepository.updateInfo(member); if(mb==null) throw new
+	 * RuntimeException("");
+	 * 
+	 * mb.setImage(member.getEmail()); mb.setLocation(member.getLocation());
+	 * //mb.setLocation2(member.setLocation2(null));
+	 * mb.setNickname(member.getNickname());
+	 * 
+	 * return mb; }
+	 */
+
+	//정보 수정하기
+	@Override
+	public Member updateInfo(Member member) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	//탈퇴하기
+	@Override
+	public void deleteInfo(String id) {
 		
 	}
 

@@ -83,7 +83,24 @@ public class MemberController {
 		
 	    return mv;
 	  }
-
+	
+	
+	// 정보수정 form 
+	
+	
+	
+	
+	/*
+	 * // 내정보 수정완료
+	 * 
+	 * @RequestMapping("/updateInfo") public ModelAndView updateInfo(Member member){
+	 * Member mb = memberService.updateInfo(member);
+	 * 
+	 * return new ModelAndView("user/mypage","member",mb);
+	 * 
+	 * }
+	 */
+	
 
 	
 	// id 중복체크 
