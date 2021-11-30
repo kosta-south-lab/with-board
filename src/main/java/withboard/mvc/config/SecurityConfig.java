@@ -21,21 +21,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //설정 담�
 	@Autowired
 	MemberService memberService;
 	
-    @Bean 
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder() { //SecurityContext 패스워드에 대한 암호화가 진행
-			
-			@Override
-			public boolean matches(CharSequence rawPassword, String encodedPassword) {
-				return rawPassword.equals(encodedPassword);
-			}
-			@Override
-			public String encode(CharSequence rawPassword) {
-				return rawPassword.toString();
-			}
-		};
+	@Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
+	/*
+	 * @Bean public PasswordEncoder passwordEncoder() { return new
+	 * BCryptPasswordEncoder() { //SecurityContext 패스워드에 대한 암호화가 진행
+	 * 
+	 * @Override public boolean matches(CharSequence rawPassword, String
+	 * encodedPassword) { return rawPassword.equals(encodedPassword); }
+	 * 
+	 * @Override public String encode(CharSequence rawPassword) { return
+	 * rawPassword.toString(); } }; }
+	 */
     @Override
     public void configure(WebSecurity web) throws Exception
     {

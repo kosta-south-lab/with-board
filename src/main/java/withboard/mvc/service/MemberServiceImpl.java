@@ -32,7 +32,6 @@ public class MemberServiceImpl implements MemberService {
 		
 		String pw = passwordEncoder.encode(member.getPw());
 		member.setPw(pw);
-		System.out.println("pw확인 : "+ pw);
 		
 		Member mb = memberRepository.save(member);
 		//권한을 주기위한 ...
@@ -60,15 +59,17 @@ public class MemberServiceImpl implements MemberService {
 		if(loginMember==null) {
 		      System.out.println("해당 ID가 존재하지 않습니다.");
 		      return false;
-		   }
-
+		}
 		   if(!passwordEncoder.matches(pw, loginMember.getPw())) {
 		      System.out.println("비밀번호가 일치하지 않습니다.");
 		      return false;
 		   }
 	
-		return false;
+		return true;
 	}
+	
+	//로그아웃하기 
+	
 	
 	/*
 	 * //회원정보 수정하기
@@ -100,10 +101,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member selectById(Long memberNo) {
-		Member member = memberRepository.findById(memberNo).orElse(null);
-		
-		return member;
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 
 
 }

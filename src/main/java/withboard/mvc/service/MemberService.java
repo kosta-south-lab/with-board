@@ -11,10 +11,10 @@ public interface MemberService {
 	void joinMember(Member member);
 	
 	/**
-	 * 로그인
+	 * 로그인체크
 	 */
-	/* public boolean checkLogin(String id,String pw); */
-	public boolean checkLogin(String email, String password);
+	public boolean checkLogin(String id, String pw); 
+	
 	
 	/**
 	 * 회원정보 수정하기 
