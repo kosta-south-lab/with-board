@@ -98,7 +98,7 @@
 						</td>
 						
 						<!-- 등록인원 -->
-						<td bgcolor="" align="center"><span style="font-size: 11pt;">${matchBoard.headcount}</span>
+						<td bgcolor="" align="center"><span style="font-size: 11pt;">${matchBoard.headCount}</span>
 						</td>
 	
 						<!-- 등록날짜 -->

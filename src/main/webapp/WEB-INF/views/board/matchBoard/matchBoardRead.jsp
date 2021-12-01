@@ -85,7 +85,7 @@ var addArray2=name2.split(' / ');
 		<b>게임 카테고리</b> : ${matchBoard.gameCategory}
 	</div>
 	<div>
-		<b>최대 인원</b> : ${matchBoard.headcount}
+		<b>최대 인원</b> : ${matchBoard.headCount}
 	</div>
 	<div>
 		<div>

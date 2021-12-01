@@ -358,7 +358,7 @@ function removeAllChildNods(el) {
 	<p>
 	조건 :<p>
 	<textarea rows="5" cols="100" name="etc" value="${matchBoard.etc}"></textarea><p>
-	최대 인원 :  <select name="headcount" value="${matchBoard.headcount}">
+	최대 인원 :  <select name="headCount" value="${matchBoard.headCount}">
 		<option value="1">1명</option>
 		<option value="2">2명</option>
 		<option value="3">3명</option>

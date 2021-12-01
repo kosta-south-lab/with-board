@@ -46,19 +46,20 @@ public class MatchBoardController {
 	public ModelAndView update(MatchBoard matchBoard) {
 		MatchBoard mb = matchBoardService.update(matchBoard);
 		
-		return new ModelAndView("board/matchBoard/read","matchBoard",mb);
+		return new ModelAndView("board/matchBoard/matchBoardRead","matchBoard",mb);
 	}
 	
 	@RequestMapping("/updateForm/{boardNo}")
 	public ModelAndView updateForm(@PathVariable Long boardNo) {
 		MatchBoard mb = matchBoardService.selectBy(boardNo, false);
 		
-		 ModelAndView mv = new ModelAndView("board/matchBoard/update", "matchBoard", mb);
+		 ModelAndView mv = new ModelAndView("board/matchBoard/matchBoardupdateForm", "matchBoard", mb);
 		 return mv;
 	}
 	
 	@RequestMapping("/read/{boardNo}")
 	public ModelAndView read(@PathVariable Long boardNo , String flag) {
+		System.out.println("ddd "+boardNo);
 		
 		//boolean state = flag==null ? true : false;
 		boolean state = flag==null ;
@@ -66,8 +67,8 @@ public class MatchBoardController {
 		MatchBoard matchBoard = matchBoardService.selectBy(boardNo, state);
 		
 		ModelAndView mv =new ModelAndView();
-		mv.setViewName("board/read");
-		mv.addObject("board", matchBoard);
+		mv.setViewName("board/matchBoard/matchBoardRead");
+		mv.addObject("matchBoard", matchBoard);
 		return mv;
 	}
 	

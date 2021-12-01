@@ -331,6 +331,7 @@ function removeAllChildNods(el) {
 
 <!-- 등록 form -->
 <form action="${pageContext.request.contextPath}/board/matchBoard/insert" method="post" name="registerForm">
+<input type="hidden" name="status" value="매칭중"> 
 	제목 : 
 	<input type="text" name="title"> 
 	<p>
@@ -358,7 +359,7 @@ function removeAllChildNods(el) {
 	<p>
 	조건 :<p>
 	<textarea rows="5" cols="100" name="etc"></textarea><p>
-	최대 인원 :  <select name="headcount">
+	최대 인원 :  <select name="headCount">
 		<option value="1">1명</option>
 		<option value="2">2명</option>
 		<option value="3">3명</option>
