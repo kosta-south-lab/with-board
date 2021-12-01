@@ -53,7 +53,10 @@
 	        </td>
 	        <td valign="middle">
 	            <p align="center"><font color="black"><h6>인원수</h6></font></p>
-	        </td>     
+	        </td>  
+	        <td valign="middle">
+	            <p align="center"><font color="black"><h6>매칭상태</h6></font></p>
+	        </td>    
 	        <td valign="middle">
 	            <p align="center"><font color="black"><h6>등록날짜</h6></font></p>
 	    	</td>
@@ -98,9 +101,13 @@
 						</td>
 						
 						<!-- 등록인원 -->
-						<td bgcolor="" align="center"><span style="font-size: 11pt;">${matchBoard.headcount}</span>
+						<td bgcolor="" align="center"><span style="font-size: 11pt;">${matchBoard.headCount}</span>
 						</td>
-	
+						
+						<!-- 매칭상태 -->
+						<td bgcolor="" align="center"><span style="font-size: 11pt;">${matchBoard.status}</span>
+						</td>
+						
 						<!-- 등록날짜 -->
 						<td bgcolor="" align="center"><span style="font-size: 11pt;">${matchBoard.regdate}</span>
 						</td>

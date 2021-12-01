@@ -1,9 +1,9 @@
 package withboard.mvc.controller;
 
+
+
 import javax.mail.MessagingException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,14 +39,27 @@ public class MemberController {
 	}
 	
 	//회원가입하기 
-		@RequestMapping("/user/joinConfirm")
-		public String joinMember(Member member,HttpSession session) {
-			memberService.joinMember(member); 
-			session.setAttribute("principal",member);
+	@RequestMapping("/user/joinConfirm")
+	public String joinMember(Member member, Model model) throws Exception {
+
+		boolean idCheck = memberService.idCheck(member.getId());
+		if(idCheck) {
+			//String msg = "The "+member.getId()+" that already exists.";
+			String msg = member.getId() + "는 이미 사용중인 아이디입니다";
+			//return memberService.messageBack(model, msg);
 			
-			return "user/joinConfirm";// 회원가입 완료후 갈 페이지
-			//return "redirect:/login"; // 회원가입 완료후 갈 페이지 
+			model.addAttribute("msg", msg);
+			model.addAttribute("member", member);
+			
+			return "user/signupForm";
 		}
+		
+		memberService.joinMember(member); 
+		//session.setAttribute("principal",member);
+		
+		return "user/joinConfirm";// 회원가입 완료후 갈 페이지
+		//return "redirect:/login"; // 회원가입 완료후 갈 페이지 
+	}
 	
 	//현재 Controller에서 발생하는 모든 에외처리
 	@ExceptionHandler(Exception.class)
@@ -57,31 +69,46 @@ public class MemberController {
 	}
 	//로그인 form
 	@GetMapping("/user/loginForm")
-	public String loginForm() {
-			
+	public String loginForm(HttpServletRequest request, Model model) {
+		
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		if(loginId != null && !"".equals(loginId)) {
+			String msg = "이미 로그인하셨습니다";
+			return memberService.messageBack(model, msg);
+		}
+		
 		return "user/loginForm";
 	}
 	
 	// 로그인 처리
 	@RequestMapping("/loginProcess2")
-	public String loginProcess(Member member) {
-		boolean loginCheck = memberService.checkLogin(member.getId(),member.getPw()); 
-		if(loginCheck){
-			// 시큐리티 인증처리
+	public String loginProcess(Member member, HttpServletRequest request, Model model) {
+		boolean loginCheck = memberService.checkLogin(member.getId(), member.getPw()); 
+		if(!loginCheck){
+			String msg = "아이디 또는 패스워드가 맞지않습니다";
+			return memberService.messageBack(model, msg);
 		}
+		
+		request.getSession().setAttribute("loginId", member.getId());
+		
 		return "redirect:/home"; // 회원가입 완료후 갈 페이지 
 	}
 	
-	// 로그아웃
-	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		session.invalidate();
+	// 로그아웃 처리
+	@RequestMapping("/user/logout2")
+	public String logout2(HttpServletRequest request) throws Exception {
 		
-		return new ModelAndView("/logout","logout","");
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		if(loginId != null && !"".equals(loginId)) {
+			
+			request.getSession().setAttribute("loginId", "");
+			request.getSession().removeAttribute("loginId");//키값(loginId)에 해당되는 세션만 삭제함
+		}
+		
+		return "redirect:/user/loginForm";
 	}
 	
-	
-	
+		
 	// 마이페이지 보기
 	@RequestMapping("/user/{id}")
 	  public ModelAndView myPage(@PathVariable Long memberid) {
@@ -99,29 +126,6 @@ public class MemberController {
 	// 정보수정 form 
 	
 	
-	
-	
-	/*
-	 * // 내정보 수정완료
-	 * 
-	 * @RequestMapping("/updateInfo") public ModelAndView updateInfo(Member member){
-	 * Member mb = memberService.updateInfo(member);
-	 * 
-	 * return new ModelAndView("user/mypage","member",mb);
-	 * 
-	 * }
-	 */
-	
-
-	
-	// id 중복체크 
-	
-	
-	
-	
-	// 닉네임 중복체크 
-
-
 	
 	//회원가입 완료 후 이메일 인증 처리
 	@ResponseBody

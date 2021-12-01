@@ -110,40 +110,44 @@
    <table width="940" style="padding:5px 0 5px 0; ">
       <tr height="2" bgcolor="#FFC8C3"><td colspan="2"></td></tr>
       <tr>
-         <th> 이름</th>
-         <td><input type="text" name="name" id="name"></td>
+         <th><label for="name"> 이름</label></th> <%--label을 사용할때 id값으로 지정해야한다. --%>
+         <td><input type="text" name="name" id="name" value="${member.name}"></td>
       </tr>
       <tr>
-         <th> 닉네임</th>
-         <td><input type="text" name="nickname" id="nickname"></td>
+         <th><label for="nickname">닉네임 </label></th>
+         <td><input type="text" name="nickname" id="nickname" value="${member.nickname}"></td>
       </tr>
        <tr>
-         <th>아이디</th>
+         <th><label for="id">아이디</label></th>
          <td>
-         <input type="text" name="id" id="id">
+         	<input type="text" name="id" id="id" value="">
+         	<c:if test="${!empty msg}">
+         	<span style="color:red;margin-left:15px;">${msg}</span>
+         	</c:if>
          </td>
        </tr>
        <tr>
-         <th>비밀번호</th>
-         <td><input type="password" name="pw" id="pw"> </td> <!-- 영문/숫자포함 6자 이상 -->
+         <th><label for="pw">비밀번호</label></th>
+         <td><input type="password" name="pw" id="pw" value="${member.pw}"> </td> <!-- 영문/숫자포함 6자 이상 -->
        </tr>
       <!--  <tr>
          <th>비밀번호 확인</th>
          <td><input type="password" name="pwcheck" > </td> 영문/숫자포함 6자 이상
        </tr> -->
     	<tr>
-     	 <th>성별</th>
+     	 <th><label for="gender1">성별</label></th>
 		<td> 
-     	<input type="radio" name="gender" id=" gender" value="male" >
-     		MEN  
-     	<input type="radio" name="gender" id=" gender" value="female">WOMAN
+     	<input type="radio" name="gender" id="gender1" value="male"${member.gender eq 'male' ? ' checked="checked"':''}/>
+     		<label for="gender1">MEN</label> 
+     	<input type="radio" name="gender" id="gender2" value="female"${member.gender eq 'female' ? ' checked="checked"':''}/>
+     		<label for="gender2">WOMAN</label> 
 		</td>
    		 </tr>
    		 <tr>
         <tr>
-          <th>이메일</th>
+          <th><label for="email">이메일</label></th>
           <td>
-            <input type='text' name="email" id="email">
+            <input type='text' name="email" id="email" value="${member.email}">
            <!--  <input type='text' name="email2" id="email2">
               <select name="emailaddr">
                  <option value="">직접입력</option>
@@ -158,10 +162,10 @@
             </td>
          </tr>
          <tr>
-           <th>주소</th>
+           <th><label for="location">주소</label></th>
            <td>
-             <input type="text" name="location" id="location"> - 
-             <input type="text" name="location2" id="location2">
+             <input type="text" name="location" id="location" value="${member.location}"> - 
+             <input type="text" name="location2" id="location2" value="${member.location2}">
              <br>
 
            </td>

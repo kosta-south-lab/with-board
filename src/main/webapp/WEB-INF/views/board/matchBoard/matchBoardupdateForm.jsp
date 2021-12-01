@@ -6,7 +6,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>키워드로 장소검색하고 목록으로 표출하기</title>
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -54,7 +53,7 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="${meet.location} ${meet.location2}" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="${matchBoard.location}" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -291,9 +290,6 @@ function displayPagination(pagination) {
 function displayInfowindow(marker, title,addr) {
     var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
     
-   // console.log(addr);
-   console.log(title + " 첫번째");
-    console.log(addr.address_name + " 두번째");
     var add_name= addr.address_name;
     var addArray=add_name.split(' ');
     var str = addArray[2].toString();
@@ -309,9 +305,10 @@ function displayInfowindow(marker, title,addr) {
             	if(str.includes("리")==true){
                 	addArray[2]="";
                 	};
-    console.log(addArray[0],addArray[1],addArray[2]);
-    document.registerForm.location.value = addArray[0]
-    document.registerForm.location2.value = addArray[1] +" "+ addArray[2]
+  
+    document.getElementById('location').value =addr.address_name+" / "+title;
+    document.getElementById('location2').value =addArray[0]+" "+ addArray[1] +" "+ addArray[2];
+    document.getElementById('shoptitle').value =title;
 
     
 
@@ -326,6 +323,13 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
+ 
+setTimeout(function() {
+	name2 = document.getElementById("location").value;
+	addArray2=name2.split(' / ');
+	document.getElementById('shoptitle').value = addArray2[1];
+	
+	}, 100);
 </script>
 
 <!-- 등록 form -->
@@ -346,19 +350,19 @@ function removeAllChildNods(el) {
 		<option value="2">뭐시깽이</option>
 	</select>
 	<p>
-	가게 이름 : <input type="text" name="shoptitle" value="${matchBoard.boardNo}">
+	가게 이름 : <input type="text" name="shoptitle"id="shoptitle" value="" >
 	<p>
 	<p>
 	지역 - 
-	상세 주소 : <input type="text" name="location" value="${matchBoard.location}">
-	매칭 주소 : <input type="text" name="location2" value="${matchBoard.location2}">
+	상세 주소 : <input type = "text" id = "location" name="location" value="${matchBoard.location}">
+	매칭 주소 : <input type="text" name="location2" id = "location2" value="${matchBoard.location2}">
 	<p>
 	내용 :<p>
 	<textarea rows="20" cols="100" name="content" value="${matchBoard.content}"></textarea>
 	<p>
 	조건 :<p>
 	<textarea rows="5" cols="100" name="etc" value="${matchBoard.etc}"></textarea><p>
-	최대 인원 :  <select name="headcount" value="${matchBoard.headcount}">
+	최대 인원 :  <select name="headCount" value="${matchBoard.headCount}">
 		<option value="1">1명</option>
 		<option value="2">2명</option>
 		<option value="3">3명</option>
