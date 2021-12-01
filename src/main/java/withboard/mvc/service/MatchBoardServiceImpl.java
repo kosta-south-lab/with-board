@@ -2,17 +2,21 @@ package withboard.mvc.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.MatchBoard;
+import withboard.mvc.repository.BoardRepository;
 import withboard.mvc.repository.MatchBoardRepository;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MatchBoardServiceImpl implements MatchBoardService {
 
-	
+private final BoardRepository boardRepository;
 private final MatchBoardRepository matchBoardRepository;
 	
 	public List<MatchBoard> selectAll() {
@@ -52,7 +56,7 @@ private final MatchBoardRepository matchBoardRepository;
 
 	public MatchBoard selectBy(Long boardNo, boolean state) {
 		if(state) {
-			if( matchBoardRepository.viewCountUpdate(boardNo) == 0 ) {
+			if( boardRepository.viewCountUpdate(boardNo) == 0 ) {
 				throw new RuntimeException(boardNo+"번호 오류로 조회수 증가 실패하여 검색할 수 없습니다.");
 			}
 		}

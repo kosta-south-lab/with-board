@@ -25,6 +25,12 @@
 			<b>내용</b> : 
 			${news.content}
 		</div>
+	<div>
+	이미지 : 
+		<c:forEach items="${news.imageList}" var="image">
+			<img src="${pageContext.request.contextPath}${image.imageUrl}">
+		</c:forEach>
+	</div>
 	</div>
 	<div>
 		<button onclick="location.href='${pageContext.request.contextPath}/board/news/updateForm/${news.boardNo}'">수정하기</button>

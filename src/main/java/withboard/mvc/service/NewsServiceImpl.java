@@ -7,9 +7,11 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import withboard.mvc.domain.Image;
 import withboard.mvc.domain.Member;
 import withboard.mvc.domain.News;
 import withboard.mvc.repository.BoardRepository;
+import withboard.mvc.repository.ImageRepository;
 import withboard.mvc.repository.MemberRepository;
 import withboard.mvc.repository.NewsRepository;
 
@@ -21,6 +23,7 @@ public class NewsServiceImpl implements NewsService {
 	private final NewsRepository newsRepository;
 	private final BoardRepository boardRepository;
 	private final MemberRepository memberRepository;
+	private final ImageRepository imageRepository;
 	
 	@Override
 	public List<News> selectAll(String searchOption, String keyWord) {
@@ -39,13 +42,16 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public void insert(News news) {
+	public void insert(News news, List<String> filenameList) {
 		
 		//관리자 만들기???? (추후에는 시큐리티 세션에서 얻어올 예정)
 
 		newsRepository.save(news);
 		
-		
+		//이미지테이블에 이미지 이름 저장
+		for(String fname : filenameList) {
+			imageRepository.save(new Image(null, fname, news, null));
+		}
 	}
 
 	@Override
@@ -67,7 +73,7 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public News update(News news) {
+	public void update(News news, List<String> filenameList) {
 		News n = newsRepository.findById(news.getBoardNo()).orElse(null);
 		if(n==null) throw new RuntimeException("글번호 오류로 수정될수 없습니다.");
 			
@@ -76,7 +82,14 @@ public class NewsServiceImpl implements NewsService {
 		n.setTitle( news.getTitle() );
 		n.setContent(news.getContent());
 		
-		return n;
+		//이미지테이블에서 이미지이름 삭제
+		for(Image image : n.getImageList()) {
+			imageRepository.delete(image);
+		}
+		//이미지테이블에 새로운 이미지 이름 저장
+		for(String fname : filenameList) {
+			imageRepository.save(new Image(null, fname, n, null));
+		}
 	}
 
 	@Override

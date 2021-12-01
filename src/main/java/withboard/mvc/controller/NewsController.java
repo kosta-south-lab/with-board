@@ -1,10 +1,16 @@
 package withboard.mvc.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
@@ -52,12 +58,45 @@ public class NewsController {
 	 * 등록하기
 	 * */
 	@RequestMapping("/insert")
-    public String insert(News news) {
+    public String insert(News news, List<MultipartFile> filename, HttpSession session) {
 
+		//파일 저장
+				String path = session.getServletContext().getRealPath("/resources/images/board");
+				List<String> filenameList = new ArrayList<String>();
+
+				for(MultipartFile file : filename) {
+					
+					String originalFileName = file.getOriginalFilename();
+					
+					//파일이 들어오지 않아도 파일 1개가 ""로 들어오게된다. 그 경우 걸러내는 작업
+					if(originalFileName == "") {
+						break;
+					}
+					
+					String newFileName = this.changeFileName(originalFileName);
+					File newFile = new File(path + "/" + newFileName);
+					filenameList.add("/resources/images/board/" + newFileName);
+					try {				
+						file.transferTo(newFile);
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 		news.getContent().replace("<", "&lt;");
-		newsService.insert(news);
+		newsService.insert(news, filenameList);
 		
 		return "redirect:/board/news/newsList";
+	}
+	
+	/**
+	 * 파일이름 랜덤생성
+	 * */
+	private String changeFileName(String originalName){
+		//uuid 생성
+		UUID uuid = UUID.randomUUID();
+		//랜덤생성 + 파일이름
+		String savedName = uuid.toString() + "_" + originalName;		
+		return savedName;
 	}
 	
 	/**
@@ -93,10 +132,31 @@ public class NewsController {
 	 * 수정완료
 	 * */
 	@RequestMapping("/update")
-	public String update(News news) {
-		News n = newsService.update(news);
+	public String update(News news, List<MultipartFile> filename, HttpSession session) {
 		
-		return "redirect:/board/news/read/" + n.getBoardNo() + "?flag=1";
+		//파일 저장
+		String path = session.getServletContext().getRealPath("/resources/images/board");
+		List<String> filenameList = new ArrayList<String>();
+		
+		for(MultipartFile file : filename) {
+			System.out.println(file.getOriginalFilename());
+			
+			String originalFileName = file.getOriginalFilename();
+			String newFileName = this.changeFileName(originalFileName);
+			
+			File newFile = new File(path + "/" + newFileName);
+			
+			filenameList.add("/resources/images/board/" + newFileName);
+			try {				
+				file.transferTo(newFile);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		newsService.update(news, filenameList);
+		
+		return "redirect:/board/news/read/" + news.getBoardNo() + "?flag=1";
 		
 	}
 	

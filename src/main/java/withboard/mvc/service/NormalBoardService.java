@@ -13,25 +13,23 @@ public interface NormalBoardService {
 	public List<Normal> selectAll(Long normalCategoryNo, String searchOption, String keyword);
 	
 	/**
-	 * 등록
+	 * 게시물 등록
 	 * */
-	void insert(Normal normal, Long normalCategoryNo);
+	void insert(Normal normal, Long normalCategoryNo, List<String> filenameList);
 	
 	/**
-	 * 글번호 검색 
-	 *   : 조회수 증가....
-	 *      - state가 true이면 조회수 증가한다.
+	 * 게시물 상세
 	 * */
 	Normal selectBy(Long boardNo , boolean state);
 	
 	/**
-	 * 수정하기
+	 * 게시물 수정
 	 * */
 	
-	Normal update(Normal normal, Long normalCategoryNo);
+	void update(Normal normal, Long normalCategoryNo, List<String> filenameList);
 	
     /**
-     * 삭제하기
+     * 게시물 삭제
      * */
     void delete(Long boardNo);
 

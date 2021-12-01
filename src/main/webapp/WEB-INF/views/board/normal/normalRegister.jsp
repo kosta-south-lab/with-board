@@ -10,7 +10,7 @@
 </head>
 <body>
 <!-- 등록 form -->
-<form action="${pageContext.request.contextPath}/board/normal/insert" method="post" name="registerForm">
+<form action="${pageContext.request.contextPath}/board/normal/insert" method="post" name="registerForm" enctype="multipart/form-data">
 	제목 : 
 	<input type="text" name="title"> 
 	<p>
@@ -26,6 +26,7 @@
 	내용 :<p>
 	<textarea rows="20" cols="100" name="content"></textarea>
 	<p>
+	<input multiple="multiple"  type="file" name="filename" />
 	<input type="submit" value="작성하기">
 	<input type="button" value="돌아가기" onclick="history.back()">
 </form>

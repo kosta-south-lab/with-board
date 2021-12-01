@@ -6,16 +6,13 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import withboard.mvc.domain.Board;
-import withboard.mvc.domain.Meet;
-import withboard.mvc.domain.MeetCategory;
+import withboard.mvc.domain.Image;
 import withboard.mvc.domain.Member;
 import withboard.mvc.domain.Normal;
 import withboard.mvc.domain.NormalCategory;
 import withboard.mvc.repository.BoardRepository;
-import withboard.mvc.repository.MeetCategoryRepository;
+import withboard.mvc.repository.ImageRepository;
 import withboard.mvc.repository.MemberRepository;
 import withboard.mvc.repository.NormalCategoryRepository;
 import withboard.mvc.repository.NormalRepository;
@@ -29,6 +26,7 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 	private final NormalRepository normalRepository;
 	private final NormalCategoryRepository normalCategoryRepository;
 	private final MemberRepository memberRepository;
+	private final ImageRepository imageRepository;
 	
 	@Override
 	public List<Normal> selectAll(Long normalCategoryNo, String searchOption, String keyWord) {
@@ -49,7 +47,7 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 	}
 
 	@Override
-	public void insert(Normal normal, Long normalCategoryNo) {
+	public void insert(Normal normal, Long normalCategoryNo, List<String> filenameList) {
 		NormalCategory normalCategory = normalCategoryRepository.findById(normalCategoryNo).orElse(null);
 		if(normalCategory == null) {
 			throw new RuntimeException("해당 모임 카테고리가 존재하지 않습니다");
@@ -61,6 +59,10 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 		normal.setMember(writer);
 		normalRepository.save(normal);
 		
+		//이미지테이블에 이미지 이름 저장
+		for(String fname : filenameList) {
+			imageRepository.save(new Image(null, fname, normal, null));
+		}
 		
 	}
 
@@ -83,7 +85,7 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 	}
 
 	@Override
-	public Normal update(Normal normal, Long normalCategoryNo) {
+	public void update(Normal normal, Long normalCategoryNo, List<String> filenameList) {
 		Normal nm = normalRepository.findById(normal.getBoardNo()).orElse(null);
 		if(nm==null) throw new RuntimeException("글번호 오류로 수정될수 없습니다.");
 		
@@ -98,7 +100,14 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 		nm.setContent(normal.getContent());
 		nm.setNormalCategory(normalCategory);
 		
-		return nm;
+		//이미지테이블에서 이미지이름 삭제
+		for(Image image : nm.getImageList()) {
+			imageRepository.delete(image);
+		}
+		//이미지테이블에 새로운 이미지 이름 저장
+		for(String fname : filenameList) {
+			imageRepository.save(new Image(null, fname, nm, null));
+		}
 	}
 
 	@Override
