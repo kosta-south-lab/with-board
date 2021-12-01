@@ -7,26 +7,29 @@ import withboard.mvc.domain.Normal;
 
 public interface NewsService {
 	
-public List<News> selectAll(String searchOption, String keyword);
-	
 	/**
-	 * 등록
+	 * 전체검색
 	 * */
-	void insert(News news);
+	public List<News> selectAll(String searchOption, String keyword);
 	
 	/**
-	 * 글번호 검색 
+	 * 공지 등록
+	 * */
+	void insert(News news, List<String> filenameList);
+	
+	/**
+	 * 공지 상세 
 	 * */
 	News selectBy(Long boardNo , boolean state);
 	
 	/**
-	 * 수정하기
+	 * 공지 수정
 	 * */
 	
-	News update(News news);
+	void update(News news, List<String> filenameList);
 	
     /**
-     * 삭제하기
+     * 공지 삭제
      * */
     void delete(Long boardNo);
 

@@ -11,7 +11,7 @@
 <body>
 
 <!-- 등록 form -->
-<form action="${pageContext.request.contextPath}/board/news/update" method="post" name="registerForm">
+<form action="${pageContext.request.contextPath}/board/news/update" method="post" name="registerForm" enctype="multipart/form-data">
 	<input type="hidden" name="boardNo" value="${news.boardNo}">
 	제목 : 
 	<input type="text" name="title" value="${news.title}"> 
@@ -19,6 +19,8 @@
 
 	내용 :<p>
 	<textarea rows="20" cols="100" name="content">${news.content}</textarea>
+	<p>
+	<input multiple="multiple"  type="file" name="filename" />
 	<p>
 	<input type="submit" value="수정하기">
 	<input type="button" value="돌아가기" onclick="history.back()">

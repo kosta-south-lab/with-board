@@ -1,21 +1,19 @@
 package withboard.mvc.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import lombok.RequiredArgsConstructor;
-import withboard.mvc.domain.Board;
-import withboard.mvc.domain.Meet;
 import withboard.mvc.domain.Normal;
 import withboard.mvc.service.NormalBoardService;
 
@@ -62,12 +60,45 @@ public class NormalBoardController {
 	 * 등록하기
 	 * */
 	@RequestMapping("/insert")
-    public String insert(Normal normal, Long normalCategoryNo) {
+    public String insert(Normal normal, Long normalCategoryNo, List<MultipartFile> filename, HttpSession session) {
 		
+		//파일 저장
+				String path = session.getServletContext().getRealPath("/resources/images/board");
+				List<String> filenameList = new ArrayList<String>();
+
+				for(MultipartFile file : filename) {
+					
+					String originalFileName = file.getOriginalFilename();
+					
+					//파일이 들어오지 않아도 파일 1개가 ""로 들어오게된다. 그 경우 걸러내는 작업
+					if(originalFileName == "") {
+						break;
+					}
+					
+					String newFileName = this.changeFileName(originalFileName);
+					File newFile = new File(path + "/" + newFileName);
+					filenameList.add("/resources/images/board/" + newFileName);
+					try {				
+						file.transferTo(newFile);
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 		normal.getContent().replace("<", "&lt;");
-		normalBoardService.insert(normal,normalCategoryNo);
+		normalBoardService.insert(normal,normalCategoryNo, filenameList);
 		
 		return "redirect:/board/normal/normalList";
+	}
+	
+	/**
+	 * 파일이름 랜덤생성
+	 * */
+	private String changeFileName(String originalName){
+		//uuid 생성
+		UUID uuid = UUID.randomUUID();
+		//랜덤생성 + 파일이름
+		String savedName = uuid.toString() + "_" + originalName;		
+		return savedName;
 	}
 	
 	/**
@@ -103,10 +134,31 @@ public class NormalBoardController {
 	 * 수정완료
 	 * */
 	@RequestMapping("/update")
-	public String update(Normal normal, Long normalCategoryNo) {
-		Normal nm = normalBoardService.update(normal,normalCategoryNo);
+	public String update(Normal normal, Long normalCategoryNo, List<MultipartFile> filename, HttpSession session) {
 		
-		return "redirect:/board/normal/read/" + nm.getBoardNo() + "?flag=1";
+		//파일 저장
+		String path = session.getServletContext().getRealPath("/resources/images/board");
+		List<String> filenameList = new ArrayList<String>();
+		
+		for(MultipartFile file : filename) {
+			System.out.println(file.getOriginalFilename());
+			
+			String originalFileName = file.getOriginalFilename();
+			String newFileName = this.changeFileName(originalFileName);
+			
+			File newFile = new File(path + "/" + newFileName);
+			
+			filenameList.add("/resources/images/board/" + newFileName);
+			try {				
+				file.transferTo(newFile);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		normalBoardService.update(normal,normalCategoryNo, filenameList);
+		
+		return "redirect:/board/normal/read/" + normal.getBoardNo() + "?flag=1";
 		
 	}
 	
