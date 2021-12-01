@@ -11,11 +11,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	Member findByEmail(String email);
 	
 	//이메일 값 체크
-	@Query(value = "select * from user where username = :username and emailConfirm = :emailConfirm", nativeQuery = true)
+	@Query(value = "select * from user where username = username and emailConfirm = emailConfirm", nativeQuery = true)
 	Member mCheck(String username, String emailConfirm);
 	
 	//체크 후 계정 활성화
-	@Query(value = "update user set emailConfirm = 'Y' where username = :username", nativeQuery = true)
+	@Query(value = "update user set emailConfirm = 'Y' where username = username", nativeQuery = true)
 	void mUpdate(String username);
 	
 	/**
