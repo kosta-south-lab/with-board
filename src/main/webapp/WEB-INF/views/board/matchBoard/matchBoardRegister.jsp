@@ -4,7 +4,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>키워드로 장소검색하고 목록으로 표출하기</title>
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -288,10 +287,7 @@ function displayPagination(pagination) {
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title,addr) {
     var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
-    
-   // console.log(addr);
-   console.log(title + " 첫번째");
-    console.log(addr.address_name + " 두번째");
+
     var add_name= addr.address_name;
     var addArray=add_name.split(' ');
     var str = addArray[2].toString();
@@ -307,7 +303,6 @@ function displayInfowindow(marker, title,addr) {
             	if(str.includes("리")==true){
                 	addArray[2]="";
                 	};
-    console.log(addArray[0],addArray[1],addArray[2]);
     var name2 = addr.address_name+" / "+title;
     var addArray2=name2.split(' / ');
     document.registerForm.location.value = addr.address_name+" / "+title;
