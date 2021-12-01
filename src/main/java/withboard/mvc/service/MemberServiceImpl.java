@@ -28,13 +28,13 @@ public class MemberServiceImpl implements MemberService {
 
 
 	/**
-	 * 회원정보 가져오기 
-	 */
-	@Override
-	public Member userInfo(String id) {
-		Member userInfo = userInfo(id);
-		return userInfo;
-	}
+     * 회원정보 가져오기 
+     */
+    @Override
+    public Member userInfo(String id) {
+        Member member = memberRepository.userInfo(id);
+        return member;
+    }
 	
 	/**
 	 * 닉네임 가져오기 
@@ -90,16 +90,6 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 	
-
-	
-	
-	 //회원정보 수정하기
-	//@Override
-	//public Member updateInfo(Member member, string id) {
-		//Member mb = memberRepository.
-		//return null;
-	//}
-
 
 	//탈퇴하기
 	@Override

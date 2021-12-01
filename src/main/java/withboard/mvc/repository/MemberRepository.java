@@ -49,14 +49,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 		return false;
 	}
 
-	
-	
-	/*
-	 * //정보 수정하기
-	 * 
-	 * @Query(
-	 * value="update member m m.set image = ?, m.location= ? , m.location2 = ?, m.nickname =? where id= ?; "
-	 * ) Member updateInfo(Member member);
-	 */
+
 	
 }

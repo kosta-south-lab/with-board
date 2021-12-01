@@ -38,15 +38,22 @@ public class MemberController {
 		return "user/signupForm"; //WEB-INF/views/user/signupForm.jsp
 	}
 	
+	//유저 정보 저장    
+	@GetMapping("/user/userInfo")    
+	public Member myInfo(String id ,HttpServletRequest request ) throws Exception {
+	Member user = memberService.userInfo(id);    
+	request.setAttribute("user", user);              
+	return user;      
+	}
+	
+	
 	//회원가입하기 
 	@RequestMapping("/user/joinConfirm")
-	public String joinMember(Member member, Model model) throws Exception {
+	public String joinMember(Member member, Model model,HttpServletRequest request) throws Exception {
 
 		boolean idCheck = memberService.idCheck(member.getId());
 		if(idCheck) {
-			//String msg = "The "+member.getId()+" that already exists.";
 			String msg = member.getId() + "는 이미 사용중인 아이디입니다";
-			//return memberService.messageBack(model, msg);
 			
 			model.addAttribute("msg", msg);
 			model.addAttribute("member", member);
@@ -55,7 +62,7 @@ public class MemberController {
 		}
 		
 		memberService.joinMember(member); 
-		//session.setAttribute("principal",member);
+		request.getSession().setAttribute("member", member);
 		
 		return "user/joinConfirm";// 회원가입 완료후 갈 페이지
 		//return "redirect:/login"; // 회원가입 완료후 갈 페이지 
@@ -80,19 +87,23 @@ public class MemberController {
 		return "user/loginForm";
 	}
 	
+	
 	// 로그인 처리
 	@RequestMapping("/loginProcess2")
 	public String loginProcess(Member member, HttpServletRequest request, Model model) {
 		boolean loginCheck = memberService.checkLogin(member.getId(), member.getPw()); 
+		Member members =  memberService.userInfo(member.getId());
 		if(!loginCheck){
 			String msg = "아이디 또는 패스워드가 맞지않습니다";
 			return memberService.messageBack(model, msg);
 		}
 		
 		request.getSession().setAttribute("loginId", member.getId());
+        request.getSession().setAttribute("member", members);
 		
 		return "redirect:/home"; // 회원가입 완료후 갈 페이지 
 	}
+	
 	
 	// 로그아웃 처리
 	@RequestMapping("/user/logout2")
