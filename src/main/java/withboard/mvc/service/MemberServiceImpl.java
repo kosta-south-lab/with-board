@@ -35,15 +35,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = memberRepository.userInfo(id);
         return member;
     }
-	
-	/**
-	 * 닉네임 가져오기 
-	 */
-	@Override
-	public String nickname(String id) {
-		String nickname = nickname(id);
-		return nickname;
-	}
+
 	
 	//회원가입하기 
 	@Override
@@ -91,12 +83,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 
-	//탈퇴하기
-	@Override
-	public void deleteInfo(String id) {
-		
-	}
-
 	@Override
 	public Member selectById(Long memberNo) {
 		return null;
@@ -111,26 +97,37 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 	
-	//닉네임 중복체크 
+	//닉네임 중복체크
 	@Override
-	public boolean nicknameCheck(String nickname) {
-		if(MemberRepository.nicknameCheck(nickname))
-			return true;
-	
+	public boolean nickCheck(String nickname) {
+		int result = memberRepository.nickCheck(nickname);
+		
+		if(result > 0 ) return true;
 		return false;
 	}
+
 	
-	//
+	//error났을때
 	@Override
 	public String messageBack(Model model, String msg) {
 		model.addAttribute("msg", msg);
 		return "/user/messageBack";
 	}
-
+	
+	// 회원정보 수정
 	@Override
-	public Member updateInfo(Member member) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateInfo(Member member) {
+		Member mb1 = memberRepository.updateInfo(member);
+		
+		//정보수정
+		mb1.setImage(member.getImage());
+		mb1.setLocation(member.getLocation());
+		mb1.setLocation2(member.getLocation2());
+		mb1.setNickname(member.getNickname());
+			
 	}
+
+
+	
 	
 }
