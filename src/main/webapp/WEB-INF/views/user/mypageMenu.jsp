@@ -19,7 +19,6 @@
 <body>
 <ol>
   <li><a href="mypage.jsp" >내정보</a></li><p>
-  <li><a href="infoChange.jsp" >정보수정</a></li><p>
   <li><a href="passChange.jsp" >비밀번호 변경</a></li><p>
 </ol>
 <table>

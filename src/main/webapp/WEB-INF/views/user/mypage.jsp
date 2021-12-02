@@ -16,6 +16,7 @@
   
   
 </script>
+ <form name="mypage" method="post" action="${pageContext.request.contextPath}/user/mypage">
   
 <table>
   <tr>
@@ -42,6 +43,8 @@
   </tr>
   
 </table>
+<input type="submit" id="updateInfo" value="수정하기">
 <input type="button" id="withdraw" value="탈퇴하기" onclick="withdraw()">
+</form>
 </body>
 </html>

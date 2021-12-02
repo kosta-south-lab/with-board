@@ -102,7 +102,7 @@ public class MemberController {
 		}
 		
 		request.getSession().setAttribute("loginId", member.getId());
-        request.getSession().setAttribute("member", members);
+        request.getSession().setAttribute("member", members); //전체 정보 가져오는 ...
 		
 		return "redirect:/home"; // 회원가입 완료후 갈 페이지 
 	}
@@ -137,8 +137,13 @@ public class MemberController {
 	  }
 	
 	
-	// 정보수정 form 
-	
+	// 회원정보 수정 처리
+	@RequestMapping("/user/mypage") 
+	public String updateInfo(Member member) {
+		memberService.updateInfo(member);
+		
+		return "redirect:/user/mypage";
+	}
 	
 	
 	//회원가입 완료 후 이메일 인증 처리
