@@ -3,6 +3,7 @@ package withboard.mvc.service;
 import java.util.List;
 
 import withboard.mvc.domain.Meet;
+import withboard.mvc.domain.Member;
 
 public interface MeetBoardService {
 	
@@ -14,7 +15,7 @@ public interface MeetBoardService {
 	/**
 	 * 모임 등록
 	 * */
-	public void insert(Meet meet, Long meetCategoryNo, List<String> filenameList);
+	public void insert(Meet meet, Long meetCategoryNo, List<String> filenameList, Member member);
 	
 	/**
 	 * 모임 상세

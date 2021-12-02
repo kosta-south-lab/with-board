@@ -48,17 +48,19 @@ public class MeetBoardServiceImpl implements MeetBoardService {
 	}
 	
 	@Override
-	public void insert(Meet meet, Long meetCategoryNo, List<String> filenameList) {
+	public void insert(Meet meet, Long meetCategoryNo, List<String> filenameList, Member member) {
 		MeetCategory meetCategory = meetCategoryRepository.findById(meetCategoryNo).orElse(null);
 		if(meetCategory == null) {
 			throw new RuntimeException("해당 모임 카테고리가 존재하지 않습니다");
 		}
 		
-		//작성자Member 임시로 만들기 (추후에는 시큐리티 세션에서 얻어올 예정)
-		Member writer = Member.builder().memberNo(1L).build();
-		
 		meet.setMeetCategory(meetCategory);
-		meet.setMember(writer);
+		System.out.println(member.getId());
+		System.out.println(member.getName());
+		System.out.println(member.getNickname());
+		System.out.println(member.getEmail());
+		System.out.println(member.getLocation2());
+		meet.setMember(member);
 		meetRepository.save(meet);
 		
 		//이미지테이블에 이미지 이름 저장

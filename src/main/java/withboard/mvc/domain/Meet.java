@@ -31,9 +31,6 @@ public class Meet extends Board {
 	@JoinColumn(name = "meet_category_no")
 	private MeetCategory meetCategory;
 	
-	@ManyToOne
-	@JoinColumn(name = "game_no") //새로 생성해야함....
-	private Game game;
 	
 	@Builder
 	public Meet(String title, String content, Member member, String location, String location2, MeetCategory meetCategory) {

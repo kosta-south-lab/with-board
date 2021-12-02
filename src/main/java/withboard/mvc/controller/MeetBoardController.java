@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Meet;
+import withboard.mvc.domain.Member;
 import withboard.mvc.service.MeetBoardService;
-import withboard.mvc.service.MeetBoardServiceImpl;
 
 @Controller
 @RequestMapping("/board")
@@ -86,7 +86,13 @@ public class MeetBoardController {
 			}
 		}
 		
-		meetBoardService.insert(meet, meetCategoryNo, filenameList);
+		Member member = (Member) session.getAttribute("member");
+		System.out.println(member.getId());
+		System.out.println(member.getName());
+		System.out.println(member.getNickname());
+		System.out.println(member.getEmail());
+		System.out.println(member.getLocation2());
+		meetBoardService.insert(meet, meetCategoryNo, filenameList, member);
 		
 		
 		return "redirect:/board/meet";
