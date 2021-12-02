@@ -14,9 +14,9 @@
 		<button onclick="sendEmail(event)">이메일 인증하기</button>
 
     <form id="email_form">
-        <input type="text" name="username" value="${requestScope.member.nickname}">
+        <input type="text" name="username" value="${requestScope.member.id}">
         <input type="text" name="email" value="${requestScope.member.email}">
-        <input type="text" name="emailConfirm" value="0">												
+        <input type="text" name="emailConfirm" value="${requestScope.member.emailConfirm}">												
 
     </form>
 
