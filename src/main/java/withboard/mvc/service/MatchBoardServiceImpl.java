@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.MatchBoard;
 import withboard.mvc.repository.BoardRepository;
 import withboard.mvc.repository.MatchBoardRepository;
+import withboard.mvc.domain.Member;
 
 @Service
 @Transactional
@@ -23,7 +24,9 @@ private final MatchBoardRepository matchBoardRepository;
 		return matchBoardRepository.findAll();
 	}
 	
-	public void insert(MatchBoard matchBoard) {
+	public void insert(MatchBoard matchBoard,Member member) {
+		matchBoard.setMember(member);
+		System.out.println(member);
 		matchBoardRepository.save(matchBoard);
 		
 		

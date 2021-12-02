@@ -1,9 +1,6 @@
 package withboard.mvc.controller;
 
 
-
-import java.util.Random;
-
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -124,10 +121,9 @@ public class MemberController {
 	
 		
 	// 마이페이지 보기
-	@RequestMapping("/user/{id}")
-	  public ModelAndView myPage(@PathVariable Long memberid) {
-		
-		Member member = memberService.selectById(memberid);
+	@RequestMapping("/user/mypage")
+	public ModelAndView myPage(@PathVariable String id) {
+		Member member = memberService.userInfo(id);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/mypage");
@@ -138,12 +134,12 @@ public class MemberController {
 	
 	
 	// 회원정보 수정 처리
-	@RequestMapping("/user/mypage") 
+/**	@RequestMapping("/user/mypage") 
 	public String updateInfo(Member member) {
 		memberService.updateInfo(member);
 		
-		return "redirect:/user/mypage";
-	}
+		return "user/mypage";
+	}*/
 	
 	
 	//회원가입 완료 후 이메일 인증 처리

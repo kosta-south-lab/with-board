@@ -19,6 +19,7 @@ import withboard.mvc.service.MatchBoardService;
 import withboard.mvc.domain.Board;
 import withboard.mvc.domain.MatchBoard;
 import withboard.mvc.service.NormalBoardService;
+import withboard.mvc.domain.Member;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,8 +34,9 @@ public class MatchBoardController {
 	}
 	
 	@RequestMapping("/insert")
-	public String insert(MatchBoard matchBoard) {
-		matchBoardService.insert(matchBoard);
+	public String insert(MatchBoard matchBoard, HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		matchBoardService.insert(matchBoard,member);
 		return "redirect:/board/matchBoard/matchBoardList";
 	}
 	

@@ -3,6 +3,7 @@ package withboard.mvc.service;
 import java.util.List;
 
 import withboard.mvc.domain.MatchBoard;
+import withboard.mvc.domain.Member;
 
 public interface MatchBoardService {
 	
@@ -14,7 +15,7 @@ public interface MatchBoardService {
 	/*
 	 * 매칭 게시글 등록
 	 * */
-	public void insert(MatchBoard matchBoard);
+	public void insert(MatchBoard matchBoard, Member member);
 	
 	/**
 	 * 매칭 게시글 수정

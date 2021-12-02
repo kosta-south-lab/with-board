@@ -25,14 +25,16 @@ public class MemberServiceImpl implements MemberService {
 	AuthoritiesRepository authoritiesRepository;
 	@Autowired
 	PasswordEncoder passwordEncoder;
-
-
+	
 	/**
      * 회원정보 가져오기 
      */
     @Override
     public Member userInfo(String id) {
         Member member = memberRepository.userInfo(id);
+        if(member==null) {
+        	throw new RuntimeException("회원정보가 존재하지 않습니다.");
+        }
         return member;
     }
 
@@ -91,11 +93,6 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 	
-
-	@Override
-	public Member selectById(Long memberNo) {
-		return null;
-	}
 
 	//아이디 중복체크
 	@Override
