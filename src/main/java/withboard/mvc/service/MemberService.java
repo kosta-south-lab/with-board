@@ -39,11 +39,6 @@ public interface MemberService {
 	 * 이메일 업데이트
 	 * */
 	void mailUpdate(Mail dto);
-	
-	/**
-	 * 아이디에 따른 회원 상세정보 조회
-	 * */
-	Member selectById(Long memberNo);
 
 	/**
 	 * 아이디 중복체크

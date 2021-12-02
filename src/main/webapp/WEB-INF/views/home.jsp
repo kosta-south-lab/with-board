@@ -13,10 +13,11 @@
 	
   <!-- <h3>${member.getId()}님 반갑습니다.</h3>-->
   
-    <h3>${member.getNickname()}님 반갑습니다.</h3>
+    <h3>${sessionScope.member.getNickname()}님 반갑습니다.</h3>
 	
 	
-	<h3>김찬원 test</h3>
+	<h3>test page</h3>
+	<a href="${pageContext.request.contextPath}/user/mypage">마이페이지</a>
 
 
 	<c:if test="${!empty nickname}">
