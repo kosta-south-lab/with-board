@@ -2,6 +2,8 @@ package withboard.mvc.controller;
 
 
 
+import java.util.Random;
+
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -68,6 +70,7 @@ public class MemberController {
 		//return "redirect:/login"; // 회원가입 완료후 갈 페이지 
 	}
 	
+
 	//현재 Controller에서 발생하는 모든 에외처리
 	@ExceptionHandler(Exception.class)
 	public ModelAndView error(Exception e) {
@@ -171,19 +174,13 @@ public class MemberController {
 	}
 
 
-	@GetMapping(value = "/user/email/certified")
+	@GetMapping(value = "/user/email/certified") //username=지윤%20&emailConfirm=confirmNot
 	public String checkmail(Mail dto, HttpSession session) throws MessagingException {
 		System.out.println("checkmail.......");
 
 		Member member = memberService.mailCheck(dto);
 		
-		if(member != null) {
-			memberService.mailUpdate(dto);
-//			session.invalidate(); //  로그아웃
-		}else {
-			System.out.println("실패");
-		}
-
+		
 		return "user/emailSuccess";
 	}
 	

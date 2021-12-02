@@ -64,8 +64,8 @@ public class Member {
 	private String image;
 	
 	//이메일 인증이 되었는지 확인할 컬럼
-	@Column(length = 10)
-	private String emailConfirm;
+	@Column(length = 100)
+	private String emailConfirm = "confirmNot";
 	     
 	private int status;
 	

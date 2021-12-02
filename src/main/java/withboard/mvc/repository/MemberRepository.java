@@ -20,13 +20,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
 	
 	//이메일 값 체크
-	@Query(value = "select * from member where username = username and emailConfirm = emailConfirm", nativeQuery = true)
-	Member mCheck(String username, String emailConfirm);
+	@Query(value = "select * from member where id = :name and email_Confirm = :emailConfirm", nativeQuery = true)
+	Member mCheck(String name , String emailConfirm);
 	
 	
 	//체크 후 계정 활성화
-	@Query(value = "update member set emailConfirm = 'Y' where username = username", nativeQuery = true)
-	void mUpdate(String username);
+	@Query(value = "update member set email_Confirm = 'Y' where name = :name", nativeQuery = true)
+	void mUpdate(String name);
 	
 	/**
 	 * 검색어로 멤버 조회

@@ -63,11 +63,20 @@ public class MemberServiceImpl implements MemberService {
 	//이메일 인증확인
 	public Member mailCheck(Mail dto) {
 		Member userEntity = memberRepository.mCheck(dto.getUsername(), dto.getEmailConfirm());
+		
+		if(userEntity != null) {
+			//memberRepository.mUpdate(dto.getUsername());	
+			userEntity.setEmailConfirm("Y");
+		}else {
+			throw new RuntimeException("이메일 인증에 실패하였습니다.");
+		}
+
+		
 		return userEntity;
 	}
 	
 	public void mailUpdate(Mail dto) {
-		memberRepository.mUpdate(dto.getUsername());	
+		//memberRepository.mUpdate(dto.getUsername());	
 	}
 	
 	
