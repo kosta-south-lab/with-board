@@ -23,10 +23,50 @@
 	
 				   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/deleteGame");
 				   $("#requestForm").submit();
-			   }
+			   
 		   });
 		   
+			$('#btnSend').on('click', function(evt) {
+				  evt.preventDefault();
+				if (socket.readyState !== 1) return;
+					  let msg = $('input#msg').val();
+					  socket.send(msg);
+			});
+			
+			connect();
+		   
 	});
+</script>
+
+<script type="text/javascript">
+
+function connect(){
+	
+	var ws = new WebSocket("ws://localhost:9999/alarmEcho?gameNo=1");
+	
+	socket = ws;
+	
+	ws.onopen = function () {
+	    console.log('Info: connection opened.');
+	    
+	    
+		ws.onmessage = function (event) {
+		    console.log("ReceiveMessage : ", event.data+'\n');
+		};
+	};
+				
+	ws.onclose = function (event) { 
+		
+		console.log('Info: connection closed.'); 
+		//setTimeout( function(){ connect(); }, 1000); // retry connection!!	
+	};
+	ws.onerror = function (err) { console.log('error:', err); };
+	
+}
+	
+
+
+
 </script>
 </head>
 <body>
@@ -135,6 +175,12 @@
     </tr>   
 
 </table>
+
+
+<div class="well">
+	<input type="text" id="msg" value="1212" class="form-control">
+	<button id="btnSend" class="btn btn-primary">Send Message</button>
+</div>
 
 </body>
 </html>
