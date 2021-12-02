@@ -157,7 +157,7 @@ public class MemberController {
 				"		아래 메일 인증 버튼을 클릭하여 회원가입을 완료해 주세요.<br />"+ 
 				"		감사합니다.<br />"+ 
 				"	<a"	+
-				"	href=\"http://localhost:8080/user/email/certified?username=" + dto.getUsername() + "&emailConfirm=" + dto.getEmailConfirm() + "\" target=\"_blank\">"+ 
+				"	href=\"http://localhost:9999/user/email/certified?username=" + dto.getUsername() + "&emailConfirm=" + dto.getEmailConfirm() + "\" target=\"_blank\">"+ 
 				"		<button> 메일 인증 </button>"+ 
 				"	</a>"+
 				" </div>"
@@ -173,12 +173,13 @@ public class MemberController {
 
 	@GetMapping(value = "/user/email/certified")
 	public String checkmail(Mail dto, HttpSession session) throws MessagingException {
+		System.out.println("checkmail.......");
 
 		Member member = memberService.mailCheck(dto);
 		
 		if(member != null) {
 			memberService.mailUpdate(dto);
-			session.invalidate(); //  로그아웃
+//			session.invalidate(); //  로그아웃
 		}else {
 			System.out.println("실패");
 		}
