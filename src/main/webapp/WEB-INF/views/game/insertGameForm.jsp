@@ -1,13 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>보드 게임 등록 페이지</title>
 
+<script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
 
+$("input[value=등록]").click(function(){
+	   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
+	   
+	   
+	  console.debug("insertGameForm::socket>>", socket)
+	  if(socket){
+		  // websocket에 보내기(insertGame, 게시글 작성자, 게시글 작성자, 글번호)
+		  let socketmsg = "insertGame," + ${member.getNickname()} + "," + "test200" + "," + "123";
+		  console.debug("ssssssssssmsg>", socketMsg);
+		  socket.send(socketMsg);
+	  }
+});
 
 
 </script>
@@ -92,7 +108,7 @@
             <p align="right"><b><span style="font-size:9pt;">상세 설명</span></b></p>
         </td>
         <td width="450" height="200" ><b><span style="font-size:9pt;">
-		<textarea name="playPersonnelMax"></textarea></span></b></td>
+		<textarea name="gameDetail"></textarea></span></b></td>
     </tr>
     
     <tr>
@@ -150,6 +166,7 @@
         <td width="450" height="20" colspan="2" align="center"><b><span style="font-size:9pt;"><input type=submit value=등록> 
         <input type=reset value=다시쓰기></span></b></td>
     </tr>
+    
 </table>
 
 </form>
@@ -172,3 +189,5 @@
 
 </body>
 </html>
+
+<jsp:include page="../common/footer.jsp" />

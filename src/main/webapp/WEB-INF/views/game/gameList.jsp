@@ -136,3 +136,5 @@ ${pageList.hasPrevious()}  /  ${pageList.hasNext()}
 
 </body>
 </html>
+
+<jsp:include page="../common/footer.jsp" />

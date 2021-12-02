@@ -65,7 +65,7 @@ public class AlarmEchoHandler extends TextWebSocketHandler {
 				
 				WebSocketSession boardWriterSession = userSessions.get(boardWriter);
 					//우리 경우에는 같은 지역 사람
-					if("reply".equals(cmd) && boardWriterSession != null) {
+					if("insertGame".equals(cmd) && boardWriterSession != null) {
 						TextMessage tmpMsg = new TextMessage(replyWriter + "님이" + bno + "번 게시글에 댓글을 달았습니다.");
 						boardWriterSession.sendMessage(tmpMsg);
 					}
@@ -80,7 +80,7 @@ public class AlarmEchoHandler extends TextWebSocketHandler {
 		Map<String, Object> httpSession = session.getAttributes();
 		
 		//현재 로그인 한 유저
-		Member loginUser = (Member)httpSession.get("loginUser");
+		Member loginUser = (Member)httpSession.get("member");
 
 		if(loginUser == null) {
 			return session.getId();
