@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -79,5 +80,9 @@ public class Member {
 	@JoinColumn(name = "member")
 	@Transient
 	private List<Authorities> roles;
+	
+	@ManyToOne
+	@JoinColumn(name = "match_alarm_no")
+	private MatchAlarm matchAlarm;
 
 }
