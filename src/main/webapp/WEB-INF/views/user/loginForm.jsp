@@ -26,5 +26,7 @@
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+      
+      <a href = ${pageContext.request.contextPath}/user/searchId">아이디 찾기</a>
 </div>
 </body></html>
