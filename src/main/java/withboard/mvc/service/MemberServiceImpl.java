@@ -132,6 +132,17 @@ public class MemberServiceImpl implements MemberService {
 		mb1.setNickname(member.getNickname());
 			
 	}
+	
+	//아이디 찾기
+	@Override
+	public String searchId(String email) {
+		String id = memberRepository.searchId(email);
+		if(id==null) {
+			throw new RuntimeException("해당 이메일로 가입한 회원이 존재하지 않습니다.");
+		}
+		
+		return id;
+	}
 
 
 	

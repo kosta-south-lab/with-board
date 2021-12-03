@@ -48,4 +48,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query(value= "update member set image=?, location=?, location2=?, nickname =? where member_no=?;", nativeQuery = true)
 	Member updateInfo(Member member);
 	
+	//이메일로 아이디 찾기
+	@Query(value="select id from member where email = :email", nativeQuery = true)
+	String searchId(String email);
+	
 }

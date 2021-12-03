@@ -54,6 +54,11 @@ public interface MemberService {
 	 * .jsp에 message 저장해서 error 떴을때 다시 되돌리기
 	 */
 	String messageBack(Model model, String msg);
+	
+	/**
+	 * 아이디 찾기
+	 * */
+	String searchId(String email);
 
 	
 	

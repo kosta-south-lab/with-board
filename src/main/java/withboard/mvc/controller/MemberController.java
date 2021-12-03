@@ -185,4 +185,14 @@ public class MemberController {
 		return "user/emailSuccess";
 	}
 	
+	//아이디 찾기
+	@RequestMapping("/user/searchId")
+	public String searchId(@PathVariable String email) {
+		
+		String id = memberService.searchId(email);
+		
+		return id;
+		
+	}
+	
 }
