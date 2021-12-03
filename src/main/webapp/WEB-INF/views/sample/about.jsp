@@ -60,20 +60,20 @@
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.jsp">Eterna</a></h1>
+        <h1><a href="${pageContext.request.contextPath}/sample/index">Eterna</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.jsp">Home</a></li>
-          <li><a class="active" href="about.jsp">About</a></li>
-          <li><a href="services.jsp">Services</a></li>
-          <li><a href="portfolio.jsp">Portfolio</a></li>
-          <li><a href="team.jsp">Team</a></li>
-          <li><a href="pricing.jsp">Pricing</a></li>
-          <li><a href="blog.jsp">Blog</a></li>
+          <li><a href="${pageContext.request.contextPath}/sample/index">Home</a></li>
+          <li><a class="active" href="${pageContext.request.contextPath}/sample/about">About</a></li>
+          <li><a href="${pageContext.request.contextPath}/sample/services">Services</a></li>
+          <li><a href="${pageContext.request.contextPath}/sample/portfolio">Portfolio</a></li>
+          <li><a href="${pageContext.request.contextPath}/sample/team">Team</a></li>
+          <li><a href="${pageContext.request.contextPath}/sample/pricing">Pricing</a></li>
+          <li><a href="${pageContext.request.contextPath}/sample/blog">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
