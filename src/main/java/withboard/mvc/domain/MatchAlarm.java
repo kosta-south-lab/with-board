@@ -35,12 +35,12 @@ public class MatchAlarm {
 	@SequenceGenerator(sequenceName = "match_alarm_no_seq", allocationSize = 1, name = "match_alarm_no_seq")
 	public Long matchAlarmNo;
 	
+	@Column(nullable = false, length = 30)
+	private String writerNickName;
+	
 	@ManyToOne
 	@JoinColumn(name = "member_no")
-	private Member writer;
-	
-	@OneToMany(mappedBy = "matchAlarm", cascade = CascadeType.ALL)
-	private List<Member> receivers;
+	private Member receiver;
 	
 	@Column(nullable = false, length = 250)
 	private String title;
@@ -53,7 +53,6 @@ public class MatchAlarm {
 		
 	@Column(nullable = false, length = 250)
 	private String location2;
-	
 	
 	private int receiveCheck;
 	

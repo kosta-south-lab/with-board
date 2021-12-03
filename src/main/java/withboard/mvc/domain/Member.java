@@ -81,8 +81,7 @@ public class Member {
 	@Transient
 	private List<Authorities> roles;
 	
-	@ManyToOne
-	@JoinColumn(name = "match_alarm_no")
-	private MatchAlarm matchAlarm;
+	@OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<MatchAlarm> matchAlarmList;
 
 }
