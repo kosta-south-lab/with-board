@@ -14,17 +14,16 @@
 $(function() {
 	$("input[value=등록]").click(function(){
 		   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
-		   
-		   
-		  console.debug("insertGameForm::socket>>", socket)
-		  if(socket){
+		   				   
+		  console.debug("insertGameForm::socket>>", matchSocket)
+		  if(matchSocket){
 			  // websocket에 보내기(insertGame, 게시글 작성자, 게시글 작성자, 글번호)
 			  var socketMsg1 = "insertGame," + "${member.nickname}" + ",test200,123";
 			 
 			  console.debug("ssssssssssmsg>", socketMsg1);
-			  socket.send(socketMsg1);
+			  matchSocket.send(socketMsg1);
 		  }
-	});	
+	});
 })
 
 

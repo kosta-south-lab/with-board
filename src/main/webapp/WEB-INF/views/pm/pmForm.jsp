@@ -14,6 +14,7 @@
 		제목 : <input type="text" name="title"> <br>
 		내용 : <textarea rows="10" cols="40"></textarea> <br>
 		<button>보내기</button>
+		<input type="button" value=등록> 
 	</div>
 	
 	<div>
@@ -23,25 +24,27 @@
 	<script type="text/javascript">
 		var webSocket;
 		$(function() {
-			function connect() {
-				alert("11");
-				webSocket = new WebSocket("ws://localhost:9999/postMessage");
-				webSocket.onmessage = onMessage;
-			}
-			
-			function onMessage(e) {
-				alert(e.data);
-			}
-			
 			function send() {
-				console.log(webSocket);
 				let message = JSON.stringify({receiveId:$('input[name=receiveId]').val(), title: $('input[name=title]').val(), content: $('textarea').val()})
-				webSocket.send(message);
-			}
-			
+				pmSocket.send(message);
+			}			
 			$('button').click(send);
-			connect();
+			
+			$("input[value=등록]").click(function(){
+				   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
+				   				   
+				  console.debug("insertGameForm::socket>>", matchSocket)
+				  if(matchSocket){
+					  // websocket에 보내기(insertGame, 게시글 작성자, 게시글 작성자, 글번호)
+					  var socketMsg1 = "insertGame," + "${member.nickname}" + ",test200,123";
+					 
+					  console.debug("ssssssssssmsg>", socketMsg1);
+					  matchSocket.send(socketMsg1);
+				  }
+			});
 		})
+		
 	</script>
 </body>
+<jsp:include page="../common/footer.jsp" />
 </html>
