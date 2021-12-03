@@ -51,7 +51,7 @@ public class AlarmEchoHandler extends TextWebSocketHandler {
 		//JSON으로 하면 좋다
 		
 		String msg = message.getPayload();
-		
+
 		if(msg != null) {
 			
 			String [] strs = msg.split(",");
@@ -63,9 +63,16 @@ public class AlarmEchoHandler extends TextWebSocketHandler {
 				String boardWriter = strs[2];
 				String bno = strs[3];
 				
+				System.out.println(cmd + "," + replyWriter + ", " + boardWriter + ", " + bno);
+				
+				for(String id : userSessions.keySet()) {
+					System.out.println(id + " | " + userSessions.get(id));
+				}
+				
 				WebSocketSession boardWriterSession = userSessions.get(boardWriter);
 					//우리 경우에는 같은 지역 사람
 					if("insertGame".equals(cmd) && boardWriterSession != null) {
+						System.out.println(123);
 						TextMessage tmpMsg = new TextMessage(replyWriter + "님이" + bno + "번 게시글에 댓글을 달았습니다.");
 						boardWriterSession.sendMessage(tmpMsg);
 					}
@@ -81,7 +88,7 @@ public class AlarmEchoHandler extends TextWebSocketHandler {
 		
 		//현재 로그인 한 유저
 		Member loginUser = (Member)httpSession.get("member");
-
+		System.out.println(loginUser);
 		if(loginUser == null) {
 			return session.getId();
 		}else {
