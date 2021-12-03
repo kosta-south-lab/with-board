@@ -11,19 +11,21 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
-
-$("input[value=등록]").click(function(){
-	   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
-	   
-	   
-	  console.debug("insertGameForm::socket>>", socket)
-	  if(socket){
-		  // websocket에 보내기(insertGame, 게시글 작성자, 게시글 작성자, 글번호)
-		  let socketmsg = "insertGame," + ${member.getNickname()} + "," + "test200" + "," + "123";
-		  console.debug("ssssssssssmsg>", socketMsg);
-		  socket.send(socketMsg);
-	  }
-});
+$(function() {
+	$("input[value=등록]").click(function(){
+		   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
+		   
+		   
+		  console.debug("insertGameForm::socket>>", socket)
+		  if(socket){
+			  // websocket에 보내기(insertGame, 게시글 작성자, 게시글 작성자, 글번호)
+			  var socketMsg1 = "insertGame," + "${member.nickname}" + ",test200,123";
+			 
+			  console.debug("ssssssssssmsg>", socketMsg1);
+			  socket.send(socketMsg1);
+		  }
+	});	
+})
 
 
 </script>
@@ -163,7 +165,7 @@ $("input[value=등록]").click(function(){
         </td>
     </tr>
     <tr>
-        <td width="450" height="20" colspan="2" align="center"><b><span style="font-size:9pt;"><input type=submit value=등록> 
+        <td width="450" height="20" colspan="2" align="center"><b><span style="font-size:9pt;"><input type="button" value=등록> 
         <input type=reset value=다시쓰기></span></b></td>
     </tr>
     
