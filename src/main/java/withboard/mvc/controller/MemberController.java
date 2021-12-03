@@ -121,16 +121,9 @@ public class MemberController {
 	
 		
 	// 마이페이지 보기
-	@RequestMapping("/user/mypage/{id}")
-	public ModelAndView myPage(@PathVariable String id) {
-		Member member = memberService.userInfo(id);
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/mypage");
-		mv.addObject("user", member);
-		
-	    return mv;
-	  }
+	@RequestMapping("/user/mypage")
+	public void myPage() {
+	}
 	
 	
 	// 회원정보 수정 처리
