@@ -121,7 +121,7 @@ public class MemberController {
 	
 		
 	// 마이페이지 보기
-	@RequestMapping("/user/mypage")
+	@RequestMapping("/user/mypage/{id}")
 	public ModelAndView myPage(@PathVariable String id) {
 		Member member = memberService.userInfo(id);
 		
