@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.AllArgsConstructor;
 import withboard.mvc.domain.Authorities;
@@ -135,7 +136,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	//아이디 찾기
 	@Override
-	public String searchId(String email) {
+	public String searchId(@PathVariable String email)  {
+		System.out.println(email);
 		String id = memberRepository.searchId(email);
 		if(id==null) {
 			throw new RuntimeException("해당 이메일로 가입한 회원이 존재하지 않습니다.");

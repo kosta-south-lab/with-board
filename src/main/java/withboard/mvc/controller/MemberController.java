@@ -179,13 +179,15 @@ public class MemberController {
 	}
 	
 	//아이디 찾기
-	@RequestMapping("/user/searchId")
-	public String searchId(@PathVariable String email) {
-		
-		String id = memberService.searchId(email);
-		
-		return id;
-		
-	}
+		@RequestMapping("/user/searchId")
+		public String searchId(String email, HttpServletRequest request) {
+			
+			String id = memberService.searchId(email);
+			System.out.println(id);
+			request.getSession().setAttribute("serchId", id);
+			
+			return "redirect:/user/idView";
+			
+		}
 	
 }
