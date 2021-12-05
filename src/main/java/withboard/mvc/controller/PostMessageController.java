@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +28,13 @@ public class PostMessageController {
 		Member member = (Member)session.getAttribute("member");
 		List<PostMessage> postMessageList = postMessageService.selectAll(member);
 		ModelAndView mv = new ModelAndView("pm/pmList", "postMessageList", postMessageList);
+		return mv;
+	}
+	
+	@RequestMapping("/pm/read/{postMessageNo}")
+	public ModelAndView read(@PathVariable Long postMessageNo) throws Exception{
+		PostMessage postMessage = postMessageService.read(postMessageNo);
+		ModelAndView mv = new ModelAndView("pm/pmRead", "postMessage", postMessage);
 		return mv;
 	}
 }

@@ -1,5 +1,6 @@
 package withboard.mvc.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +30,18 @@ public class PostMessageServiceImpl implements PostMessageService {
 	@Override
 	public List<PostMessage> selectAll(Member member) {
 		return postMessageRepository.findByReceiveId(member.getId());
+	}
+
+	@Override
+	public PostMessage read(Long postMessageNo) throws Exception{
+
+		PostMessage pm = postMessageRepository.findById(postMessageNo).orElse(null);
+		if(pm == null) {
+			throw new SQLException("번호에 해당하는 쪽지가 없습니다.");
+		}
+		return pm;
+	
+	
 	}
 
 

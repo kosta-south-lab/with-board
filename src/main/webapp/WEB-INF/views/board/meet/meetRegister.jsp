@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -307,11 +308,12 @@ function displayInfowindow(marker, title,addr) {
             	if(str.includes("리")==true){
                 	addArray[2]="";
                 	};
-    console.log(addArray[0],addArray[1],addArray[2]);
-    document.registerForm.location.value = addArray[0]
-    document.registerForm.location2.value = addArray[1] + addArray[2]
+                	
+   var name2 = addr.address_name+" / "+title;
+   var addArray2=name2.split(' / ');
+   document.registerForm.location.value = addr.address_name+" / "+title;
+   document.registerForm.location2.value = addArray[0]+" "+addArray[1]+" "+addArray[2];
 
-    
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
@@ -330,6 +332,14 @@ function removeAllChildNods(el) {
 <form action="${pageContext.request.contextPath}/board/meet/insert" method="post" name="registerForm" enctype="multipart/form-data">
 	제목 : 
 	<input type="text" name="title"> 
+	<p>
+	대표게임 : 
+	<select name="gameNo">
+		<option value="0">------대표게임 선택------</option>
+		<c:forEach items="${gameList}" var="game">
+			<option value="${game.gameNo}">${game.gameName}</option>
+		</c:forEach>
+	</select>
 	<p>
 	카테고리 : 
 	<select name="meetCategoryNo">

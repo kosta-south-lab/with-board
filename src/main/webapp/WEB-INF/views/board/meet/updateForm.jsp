@@ -53,7 +53,7 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="${meet.location} ${meet.location2}" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="${meet.location}" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -308,9 +308,10 @@ function displayInfowindow(marker, title,addr) {
             	if(str.includes("리")==true){
                 	addArray[2]="";
                 	};
-    console.log(addArray[0],addArray[1],addArray[2]);
-    document.registerForm.location.value = addArray[0]
-    document.registerForm.location2.value = addArray[1] + addArray[2]
+      		var name2 = addr.address_name+" / "+title;
+      	   var addArray2=name2.split(' / ');
+      	   document.registerForm.location.value = addr.address_name+" / "+title;
+      	   document.registerForm.location2.value = addArray[0]+" "+addArray[1]+" "+addArray[2];
 
     
 
@@ -332,6 +333,14 @@ function removeAllChildNods(el) {
 	<input type="hidden" name="boardNo" value="${meet.boardNo}">
 	제목 : 
 	<input type="text" name="title" value="${meet.title}"> 
+	<p>
+	대표게임 : 
+	<select name="gameNo">
+		<option value="0">------대표게임 선택------</option>
+		<c:forEach items="${gameList}" var="game">
+			<option value="${game.gameNo}" <c:if test="${meet.game.gameNo == game.gameNo}">selected</c:if>>${game.gameName}</option>
+		</c:forEach>
+	</select>
 	<p>
 	카테고리 : 
 	<select name="meetCategoryNo">

@@ -41,12 +41,12 @@ public class PostMessageHandler extends TextWebSocketHandler {
 		
 		PostMessage postMessage = objectMapper.readValue(message.getPayload(),PostMessage.class);
 		
-		/*
+		
 		//이 부분에 DB에 쪽지 넣는 코드 작성하면 된다.
 		String sendId = this.getId(session);
 		postMessage.setSendId(sendId);
 		postMessageService.insert(postMessage);
-		*/
+		
 		//수신인 한테만 메시지 보내기
 		String receiveId = postMessage.getReceiveId();
 		WebSocketSession receiveSession =  sessionMap.get(receiveId);
