@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
+import withboard.mvc.domain.Game;
 import withboard.mvc.domain.Meet;
 import withboard.mvc.domain.Member;
 import withboard.mvc.service.MeetBoardService;
@@ -54,14 +55,16 @@ public class MeetBoardController {
 	 * */
 	@RequestMapping("/meet/registerForm")
 	public ModelAndView writeForm() {
-		return new ModelAndView("board/meet/meetRegister");
+		
+		List<Game> gameList = meetBoardService.selectAllGame();
+		return new ModelAndView("board/meet/meetRegister", "gameList", gameList);
 	}
 	
 	/**
 	 * 모임 등록
 	 * */
 	@RequestMapping("/meet/insert")
-	public String insert(Meet meet, Long meetCategoryNo, List<MultipartFile> filename, HttpSession session) {
+	public String insert(Meet meet, Long meetCategoryNo, Long gameNo, List<MultipartFile> filename, HttpSession session) {
 		
 		//파일 저장
 		String path = session.getServletContext().getRealPath("/resources/images/board");
@@ -92,7 +95,7 @@ public class MeetBoardController {
 		System.out.println(member.getNickname());
 		System.out.println(member.getEmail());
 		System.out.println(member.getLocation2());
-		meetBoardService.insert(meet, meetCategoryNo, filenameList, member);
+		meetBoardService.insert(meet, meetCategoryNo, gameNo, filenameList, member);
 		
 		
 		return "redirect:/board/meet";
@@ -134,10 +137,12 @@ public class MeetBoardController {
 	public ModelAndView updateForm(@PathVariable Long boardNo) {
 		
 		Meet meet = meetBoardService.selectByBoardNo(boardNo, false);
+		List<Game> gameList = meetBoardService.selectAllGame();
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/meet/updateForm");
 		mv.addObject("meet", meet);
+		mv.addObject("gameList", gameList);
 	
 		return mv;
 		
@@ -147,18 +152,20 @@ public class MeetBoardController {
 	 * update
 	 * */
 	@RequestMapping("/meet/update")
-	public String update(Meet meet, Long meetCategoryNo, List<MultipartFile> filename, HttpSession session) {
+	public String update(Meet meet, Long meetCategoryNo, Long gameNo, List<MultipartFile> filename, HttpSession session) {
 		
 		//파일 저장
 		String path = session.getServletContext().getRealPath("/resources/images/board");
 		List<String> filenameList = new ArrayList<String>();
 		
 		for(MultipartFile file : filename) {
-			System.out.println(file.getOriginalFilename());
 			
 			String originalFileName = file.getOriginalFilename();
-			String newFileName = this.changeFileName(originalFileName);
-			
+			//파일이 들어오지 않아도 파일 1개가 ""로 들어오게된다. 그 경우 걸러내는 작업
+			if(originalFileName == "") {
+				break;
+			}
+			String newFileName = this.changeFileName(originalFileName);		
 			File newFile = new File(path + "/" + newFileName);
 			
 			filenameList.add("/resources/images/board/" + newFileName);
@@ -169,7 +176,7 @@ public class MeetBoardController {
 			}
 		}
 		
-		meetBoardService.update(meet, meetCategoryNo, filenameList);
+		meetBoardService.update(meet, meetCategoryNo, gameNo, filenameList);
 
 		return "redirect:/board/meet/read/" + meet.getBoardNo() + "?flag=1";
 	}
@@ -182,6 +189,9 @@ public class MeetBoardController {
 		meetBoardService.delete(boardNo);
 		return "redirect:/board/meet";
 	}
-
+	
+	//sample
+	@RequestMapping("/meet/meetList2")
+	public void meetList2() {}
 	
 }

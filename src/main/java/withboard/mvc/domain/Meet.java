@@ -31,13 +31,17 @@ public class Meet extends Board {
 	@JoinColumn(name = "meet_category_no")
 	private MeetCategory meetCategory;
 	
+	@ManyToOne
+	@JoinColumn(name = "game_no")
+	private Game game;
 	
 	@Builder
-	public Meet(String title, String content, Member member, String location, String location2, MeetCategory meetCategory) {
+	public Meet(String title, String content, Member member, String location, String location2, MeetCategory meetCategory, Game game) {
 		super(title, content, member);
 		this.location = location;
 		this.location2 = location2;
 		this.meetCategory = meetCategory;
+		this.game = game;
 	}
 	
 

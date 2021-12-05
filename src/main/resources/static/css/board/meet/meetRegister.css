@@ -1,5 +1,5 @@
 /**
-* Template Name: Eterna - v4.7.0
+* Template Name: Eterna - v4.6.0
 * Template URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
@@ -1069,7 +1069,6 @@ section {
   font-size: 28px;
 }
 .pricing h4 {
-  font-size: 46px;
   color: #e96b56;
   font-weight: 400;
   font-family: "Open Sans", sans-serif;
@@ -1079,6 +1078,7 @@ section {
   color: #bababa;
   font-size: 18px;
   display: block;
+  margin-top: 5px;
 }
 .pricing ul {
   padding: 0;
@@ -1252,26 +1252,9 @@ section {
   padding: 15px;
   font-weight: 600;
 }
-.contact .php-email-form .loading {
-  display: none;
-  background: #fff;
-  text-align: center;
-  padding: 15px;
-}
-.contact .php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
-  border-top-color: #eee;
-  -webkit-animation: animate-loading 1s linear infinite;
-  animation: animate-loading 1s linear infinite;
-}
+
 .contact .php-email-form input, .contact .php-email-form textarea {
-  border-radius: 0;
+  border-radius: 5px;
   box-shadow: none;
   font-size: 14px;
 }
@@ -1281,10 +1264,14 @@ section {
 .contact .php-email-form input {
   padding: 10px 15px;
 }
+.contact .php-email-form select {
+  padding: 10px 15px;
+}
+
 .contact .php-email-form textarea {
   padding: 12px 15px;
 }
-.contact .php-email-form button[type=submit] {
+.contact .php-email-form input[type=submit] {
   background: #e96b56;
   border: 0;
   border-radius: 50px;
@@ -1292,24 +1279,8 @@ section {
   color: #fff;
   transition: 0.4s;
 }
-.contact .php-email-form button[type=submit]:hover {
+.contact .php-email-form input[type=submit]:hover {
   background: #e6573f;
-}
-@-webkit-keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 /*--------------------------------------------------------------
@@ -1875,4 +1846,42 @@ section {
   text-align: center;
   font-size: 13px;
   color: #fff;
+}
+
+/*
+추가
+*/
+.search-form .inputform{
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 3px 10px;
+  position: relative;
+}
+.search-form form input[type=text] {
+  border: 0;
+  padding: 4px;
+  border-radius: 4px;
+  min-width: 250px;
+}
+.search-form form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 15px;
+  margin: -1px;
+  background: #e96b56;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 0 4px 4px 0;
+  line-height: 0;
+}
+.search-form form button i {
+  line-height: 0;
+}
+.search-form form button:hover {
+  background: #eb7b68;
 }

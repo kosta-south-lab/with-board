@@ -16,5 +16,10 @@ public interface PostMessageService {
 	 * */
 	List<PostMessage> selectAll(Member member);
 	
+	/**
+	 * 쪽지상세
+	 * */
+	PostMessage read(Long postMessageNo) throws Exception;
+	
 	
 }

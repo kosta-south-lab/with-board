@@ -47,13 +47,13 @@
 </head>
 <body>
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="width:50%;height:100%;position:relative;overflow:hidden; min-width: 350px;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="${meet.location}" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -308,12 +308,12 @@ function displayInfowindow(marker, title,addr) {
             	if(str.includes("리")==true){
                 	addArray[2]="";
                 	};
-      		var name2 = addr.address_name+" / "+title;
-      	   var addArray2=name2.split(' / ');
-      	   document.registerForm.location.value = addr.address_name+" / "+title;
-      	   document.registerForm.location2.value = addArray[0]+" "+addArray[1]+" "+addArray[2];
+                	
+   var name2 = addr.address_name+" / "+title;
+   var addArray2=name2.split(' / ');
+   document.registerForm.location.value = addr.address_name+" / "+title;
+   document.registerForm.location2.value = addArray[0]+" "+addArray[1]+" "+addArray[2];
 
-    
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
@@ -329,37 +329,40 @@ function removeAllChildNods(el) {
 </script>
 
 <!-- 등록 form -->
-<form action="${pageContext.request.contextPath}/board/meet/update" method="post" name="registerForm" enctype="multipart/form-data">
-	<input type="hidden" name="boardNo" value="${meet.boardNo}">
+<form action="${pageContext.request.contextPath}/board/meet/insert" method="post" name="registerForm" enctype="multipart/form-data">
 	제목 : 
-	<input type="text" name="title" value="${meet.title}"> 
+	<input type="text" name="title"> 
 	<p>
 	대표게임 : 
 	<select name="gameNo">
 		<option value="0">------대표게임 선택------</option>
 		<c:forEach items="${gameList}" var="game">
-			<option value="${game.gameNo}" <c:if test="${meet.game.gameNo == game.gameNo}">selected</c:if>>${game.gameName}</option>
+			<option value="${game.gameNo}">${game.gameName}</option>
 		</c:forEach>
 	</select>
 	<p>
 	카테고리 : 
 	<select name="meetCategoryNo">
-		<option value="1" <c:if test="${meet.meetCategory.meetCategoryNo == 1}">selected</c:if>>정기모임모집</option>
-		<option value="2" <c:if test="${meet.meetCategory.meetCategoryNo == 2}">selected</c:if>>정기모임후기</option>
+		<option value="1">정기모임모집</option>
+		<option value="2">정기모임후기</option>
 	</select>
 	<p>
 	지역 - 
-	대분류 : <input type="text" name="location" value="${meet.location}">
-	중분류 : <input type="text" name="location2" value="${meet.location2}">
+	대분류 : <input type="text" name="location">
+	중분류 : <input type="text" name="location2">
 	<p>
 	내용 :<p>
-	<textarea rows="20" cols="100" name="content">${meet.content}</textarea>
+	<textarea rows="20" cols="100" name="content"></textarea>
 	<p>
 	<input multiple="multiple"  type="file" name="filename" />
-	<p>
-	<input type="submit" value="수정하기">
+	<input type="submit" value="작성하기">
 	<input type="button" value="돌아가기" onclick="history.back()">
 </form>
+
+
+
+
+
 
 </body>
 </html>
