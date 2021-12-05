@@ -44,9 +44,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query(value = "select count(member_no) from member where nickname = :nickname", nativeQuery = true)
 	int nickCheck(String nickname);
 
-	//회원정보 수정
-	@Query(value= "update member set image=?, location=?, location2=?, nickname =? where member_no=?;", nativeQuery = true)
-	Member updateInfo(Member member);
+	/*
+	 * //회원정보 수정
+	 * 
+	 * @Query(value=
+	 * "update member set image=?, location=?, location2=?, nickname =? where id = :id"
+	 * , nativeQuery = true) Member updateInfo(String id);
+	 */
 	
 	//이메일로 아이디 찾기
 	@Query(value="select id from member where email = :email", nativeQuery = true)

@@ -1,12 +1,12 @@
 package withboard.mvc.service;
 
-import java.util.List;
+
 
 import org.springframework.ui.Model;
 
 import withboard.mvc.domain.Mail;
 import withboard.mvc.domain.Member;
-import withboard.mvc.domain.Normal;
+
 
 public interface MemberService {
 
@@ -26,9 +26,16 @@ public interface MemberService {
 	boolean checkLogin(String id, String pw); 
 	
 	/**
-	 * 회원정보 수정하기 
+	 * 회원정보 수정하기  
+	 * 
 	 */
-	void updateInfo(Member member);
+	Member updateInfo(Member member);
+	
+	 /**
+     * 게시물 삭제
+     * */
+    void delete(Long id);
+
 	
 	/**
 	 * 이메일 체크
@@ -59,6 +66,8 @@ public interface MemberService {
 	 * 아이디 찾기
 	 * */
 	String searchId(String email);
+
+
 
 	
 	

@@ -96,10 +96,12 @@
 
  	  <input type = hidden name = "key" value = "members">
       <input type = hidden name = "methodName" value = "joinMember">
+      
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="signupForm">  
   
-   <table width="940" style="padding:5px 0 5px 0; ">
-      <tr height="2" bgcolor="#FFC8C3"><td colspan="2"></td></tr>
+   <table width="940" style="padding:5px 0 5px 0;" align="center">
+   <h1 align="center"> 회원가입  </h1>
+     
         <tr>
          <th><label for="id">아이디</label></th>
          <td>
@@ -167,8 +169,6 @@
    		  <input type="image" name="image" id="image" value="첨부">       
 		</td>
    		 </tr>
- 
-           <tr height="2" bgcolor="#FFC8C3"><td colspan="2"></td></tr>
            <tr>
              <td colspan="2" align="center">
                <input type="submit" value="가입하기">

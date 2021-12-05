@@ -1,5 +1,8 @@
 package withboard.mvc.service;
 
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.AllArgsConstructor;
 import withboard.mvc.domain.Authorities;
+import withboard.mvc.domain.Game;
 import withboard.mvc.domain.Mail;
 import withboard.mvc.domain.Member;
 import withboard.mvc.repository.AuthoritiesRepository;
@@ -121,18 +125,6 @@ public class MemberServiceImpl implements MemberService {
 		return "/user/messageBack";
 	}
 	
-	// 회원정보 수정
-	@Override
-	public void updateInfo(Member member) {
-		Member mb1 = memberRepository.updateInfo(member);
-		
-		//정보수정
-		mb1.setImage(member.getImage());
-		mb1.setLocation(member.getLocation());
-		mb1.setLocation2(member.getLocation2());
-		mb1.setNickname(member.getNickname());
-			
-	}
 	
 	//아이디 찾기
 	@Override
@@ -147,6 +139,35 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	//회원정보 수정하기 
+	@Override
+	public Member updateInfo(Member member) {
+		
+		Member dbMember = memberRepository.findById(member.getMemberNo()).orElse(null);
+		if(dbMember==null) throw new RuntimeException("해당 회원은 존재하지 않습니다.");
+		
+		//회원정보 수정부분 
+		
+		dbMember.setId(member.getId());
+		dbMember.setImage(member.getEmail());
+		dbMember.setNickname(member.getNickname());
+		dbMember.setLocation(member.getLocation());
+		dbMember.setLocation2(member.getLocation2());
+		
+		return dbMember;
+	}
+
+	
+	//탈퇴하기 
+	@Override
+	public void delete(Long id) {
+		Optional<Member> member = memberRepository.findById(id);
+		if (member == null)
+			throw new RuntimeException("회원탈퇴에 실패했습니다.");
+		
+		memberRepository.deleteById(id);
+		
+	}
 	
 	
 }

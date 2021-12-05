@@ -10,10 +10,11 @@
 <body>
 
 <script type="text/javascript">
-  function withdraw(){
+
+/*   function withdraw(){
 	  confirm("정말 탈퇴하시겠습니까?");
   }
-  
+   */
   
 </script>
  <form name="mypage" method="post" action="${pageContext.request.contextPath}/user/mypage">
@@ -37,14 +38,14 @@
   	<th><input type="text" readonly="readonly" id="location" name="location" value="${sessionScope.member.location}"></th>
   	<th><input type="text" readonly="readonly" id="location2" name="location2" value="${sessionScope.member.location2}"></th><br>
  	</tr>
-   <tr>
+   <tr><p>
   	<th>이메일</th>
   	  <th><input type="text" readonly="readonly" id="email" name="email" value="${sessionScope.member.email}"></th>
   </tr>
   
 </table>
-<input type="submit" id="updateInfo" value="수정하기">
-<input type="button" id="withdraw" value="탈퇴하기" onclick="withdraw()">
+<a href="${pageContext.request.contextPath}/user/updateMypage">수정하기</a>
+<a href="${pageContext.request.contextPath}/user/delete">탈퇴하기</a>
 </form>
 </body>
 </html>
