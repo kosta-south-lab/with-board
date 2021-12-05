@@ -11,7 +11,7 @@
 
 <script type="text/javascript"></script>
 
- <form name="mypage" method="post"  action="${pageContext.request.contextPath}/user/updateMypage">
+ <form name="mypage" method="post"  action="${pageContext.request.contextPath}/user/updateInfo">
   
 <table>
   <tr>
@@ -39,7 +39,7 @@
   
 </table>
 	<input type="submit" value="수정하기">
-	<input type="button" value="돌아가기" onclick="history.back()">
+	<input type="button" value="뒤로가기" onclick="history.back()">
 </form>
 
 </body>

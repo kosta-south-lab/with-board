@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Mail;
 import withboard.mvc.domain.Member;
 import withboard.mvc.service.MemberService;
@@ -23,6 +24,7 @@ import withboard.mvc.service.SendEmailService;
 
 
 @Controller
+@RequiredArgsConstructor
 //@RequestMapping("/member/")
 public class MemberController {
 
@@ -130,13 +132,12 @@ public class MemberController {
 	
 	
 	 // 회원정보 수정 처리
-	 @RequestMapping("/user/updateMypage")
-	 public ModelAndView updateInfo(Member dbMember,HttpServletRequest request) {
+	 @RequestMapping("/user/updateInfo")
+	 public ModelAndView updateInfo(Member member) {
 		 
-		 Member member1 = memberService.updateInfo(dbMember);
+		 Member mb = memberService.updateInfo(member);
 	 
-	 
-	 return new ModelAndView("user/mypage", "member", member1); //업데이트 완료후 
+	 return new ModelAndView("user/mypage", "member", mb); //업데이트 완료후 
 	 }
 	 
 	

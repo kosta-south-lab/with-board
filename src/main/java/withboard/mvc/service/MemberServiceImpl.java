@@ -1,6 +1,7 @@
 package withboard.mvc.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -143,18 +144,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member updateInfo(Member member) {
 		
-		Member dbMember = memberRepository.findById(member.getMemberNo()).orElse(null);
-		if(dbMember==null) throw new RuntimeException("해당 회원은 존재하지 않습니다.");
+		Member mb = memberRepository.findById(member.getMemberNo()).orElse(null);
+		if(mb==null) throw new RuntimeException("해당 회원은 존재하지 않습니다.");
 		
 		//회원정보 수정부분 
+		mb.setImage(member.getEmail());
+		mb.setNickname(member.getNickname());
+		mb.setLocation(member.getLocation());
+		mb.setLocation2(member.getLocation2());
 		
-		dbMember.setId(member.getId());
-		dbMember.setImage(member.getEmail());
-		dbMember.setNickname(member.getNickname());
-		dbMember.setLocation(member.getLocation());
-		dbMember.setLocation2(member.getLocation2());
-		
-		return dbMember;
+		return mb;
 	}
 
 	
@@ -167,6 +166,17 @@ public class MemberServiceImpl implements MemberService {
 		
 		memberRepository.deleteById(id);
 		
+	}
+	
+	/**
+	 * 파일이름 랜덤생성
+	 * */
+	private String changeFileName(String originalName){
+		//uuid 생성
+		UUID uuid = UUID.randomUUID();
+		//랜덤생성 + 파일이름
+		String savedName = uuid.toString() + "_" + originalName;		
+		return savedName;
 	}
 	
 	

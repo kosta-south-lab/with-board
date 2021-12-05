@@ -171,7 +171,7 @@
    		 </tr>
            <tr>
              <td colspan="2" align="center">
-               <input type="submit" value="가입하기">
+               <button type="submit">가입하기</button>
                <input type="reset" onclick="cancel();" value="취소">
             </td>
            </tr>
