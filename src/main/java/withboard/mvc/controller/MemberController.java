@@ -1,6 +1,10 @@
 package withboard.mvc.controller;
 
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
@@ -52,8 +57,25 @@ public class MemberController {
 	
 	//회원가입하기 
 	@RequestMapping("/user/joinConfirm")
-	public String joinMember(Member member, Model model,HttpServletRequest request) throws Exception {
-
+	public String joinMember(Member member, Model model,HttpServletRequest request, List<MultipartFile> filename, HttpSession session) throws Exception {
+		
+		/*
+		 * //파일 저장 String path =
+		 * session.getServletContext().getRealPath("/resources/images/board");
+		 * List<String> filenameList = new ArrayList<String>();
+		 * 
+		 * for(MultipartFile file : filename) {
+		 * 
+		 * String originalFileName = file.getOriginalFilename();
+		 * 
+		 * //파일이 들어오지 않아도 파일 1개가 ""로 들어오게된다. 그 경우 걸러내는 작업 if(originalFileName == "") {
+		 * break; }
+		 * 
+		 * String newFileName = this.changeFileName(originalFileName); File newFile =
+		 * new File(path + "/" + newFileName);
+		 * filenameList.add("/resources/images/board/" + newFileName); try {
+		 * file.transferTo(newFile); }catch (Exception e) { e.printStackTrace(); } }
+		 */
 		boolean idCheck = memberService.idCheck(member.getId());
 		if(idCheck) {
 			String msg = member.getId() + "는 이미 사용중인 아이디입니다";
@@ -71,6 +93,11 @@ public class MemberController {
 		//return "redirect:/login"; // 회원가입 완료후 갈 페이지 
 	}
 	
+
+	private String changeFileName(String originalFileName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	//현재 Controller에서 발생하는 모든 에외처리
 	@ExceptionHandler(Exception.class)

@@ -148,6 +148,7 @@ public class MemberServiceImpl implements MemberService {
 		if(mb==null) throw new RuntimeException("해당 회원은 존재하지 않습니다.");
 		
 		//회원정보 수정부분 
+		mb.setId(member.getId());
 		mb.setImage(member.getEmail());
 		mb.setNickname(member.getNickname());
 		mb.setLocation(member.getLocation());

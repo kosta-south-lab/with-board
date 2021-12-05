@@ -6,6 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title> HOME 화면 입니다. </title>
+
+<script src="../js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+
+
+function logout(){ //취소하기 눌렀을때
+		if(confirm("로그아웃 하시겠습니까?") == true){
+			parent.location.href = "/user/loginForm";
+		 }
+	}
+
+
+
+</script>
+
 </head>
 <body>
 	
@@ -21,7 +36,7 @@
 
 
 	<c:if test="${!empty nickname}">
-	<a href="/user/logout2">로그아웃</a>
+	<a href="/user/logout2" onclick="logout();">로그아웃</a>
 	</c:if>
 	<c:if test="${empty nickname}">
 	<a href="/user/loginForm">로그인</a>
