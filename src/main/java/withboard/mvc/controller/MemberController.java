@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +30,7 @@ public class MemberController {
 	 MemberService memberService;
 	@Autowired
 	SendEmailService emailService;
+
 	
 	//회원가입 페이지
 	@GetMapping("/user/signupForm")
@@ -126,13 +128,26 @@ public class MemberController {
 	}
 	
 	
-	// 회원정보 수정 처리
-/**	@RequestMapping("/user/mypage") 
-	public String updateInfo(Member member) {
-		memberService.updateInfo(member);
+	
+	 // 회원정보 수정 처리
+	 @RequestMapping("/user/updateMypage")
+	 public ModelAndView updateInfo(Member dbMember,HttpServletRequest request) {
+		 
+		 Member member1 = memberService.updateInfo(dbMember);
+	 
+	 
+	 return new ModelAndView("user/mypage", "member", member1); //업데이트 완료후 
+	 }
+	 
+	
+	//탈퇴하기
+	@RequestMapping("/user/delete")
+	public String deleteInfo(@PathVariable Long id) {
+		memberService.delete(id);
 		
-		return "user/mypage";
-	}*/
+		return "redirect:/user/loginForm"; //탈퇴 완료 후 
+		
+	}
 	
 	
 	//회원가입 완료 후 이메일 인증 처리
