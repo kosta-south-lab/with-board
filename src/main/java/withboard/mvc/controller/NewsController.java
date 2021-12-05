@@ -7,9 +7,14 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +33,9 @@ public class NewsController {
 	 * 전체검색하기
 	 * */
 	@RequestMapping("/newsList")
-	public ModelAndView list(String searchOption, String keyword) {
+	public ModelAndView list(String searchOption, String keyword,
+			@RequestParam(defaultValue = "1") int nowPage, 
+			@RequestParam(value = "sortType", defaultValue="boardNo") String sortType) {
 		
 		if(searchOption == null) {
 			searchOption = "title";
@@ -37,10 +44,19 @@ public class NewsController {
 			keyword = "";
 		}
 		
-		List<News> newsList=newsService.selectAll(searchOption, keyword);
+		Pageable pageable = PageRequest.of((nowPage - 1), 10, Sort.by(sortType));
+		
+		int blockCount = 3;
+		int temp = (nowPage - 1) % blockCount;
+		int startPage = nowPage - temp;
+		
+		Page<News> newsList=newsService.selectAll(searchOption, keyword,pageable);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/news/newsList");          
 		mv.addObject("newsList", newsList);
+		mv.addObject("blockCount", blockCount);
+	    mv.addObject("nowPage", nowPage);
+	    mv.addObject("startPage", startPage);
 		return mv;
 				
 		

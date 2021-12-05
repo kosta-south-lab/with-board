@@ -58,7 +58,7 @@
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach var="news" items="${newsList}">
+				<c:forEach var="news" items="${newsList.content}">
 					<tr onmouseover="this.style.background='#eaeaea'"
 						onmouseout="this.style.background='white'">
 	
@@ -89,6 +89,58 @@
 		</c:choose>
 	</table>
 	<hr>
+	
+	${newsList.hasPrevious()}  /  ${newsList.hasNext()}
+<div style="text-align: center">
+<!-- 페이징 처리 -->
+ <c:forEach begin="0" end="${newsList.totalPages-1}" var="i">
+   <c:choose>
+     <c:when test="${newsList.number==i}">
+         <a href="${pageContext.request.contextPath}/board/news/newsList?nowPage=${i}" style="color:red"> [ ${i+1} ] </a>
+     </c:when>
+     <c:otherwise>
+         <a href="${pageContext.request.contextPath}/board/news/newsList?nowPage=${i}"> [ ${i+1} ] </a>
+     </c:otherwise>
+   </c:choose>
+ </c:forEach>
+</div>
+	
+<!-- 이전, 다음 표시 하기 (한블럭당 페이지 개수 제한)  -->
+ <c:set var="doneLoop" value="false"/>
+	\${doneLoop} = ${doneLoop}<p>
+		<!--  블럭당  -->
+<!--  <nav class="pagination-container"> -->
+	<div class="pagination">
+	<c:set var="doneLoop" value="false"/>
+		
+		  <c:if test="${(startPage-blockCount) > 0}"> <!-- (-2) > 0  -->
+		      <a class="pagination-newer" href="${pageContext.request.contextPath}/board/news/newsList?nowPage=${startPage-1}">PREV</a>
+		  </c:if>
+		  
+				<span class="pagination-inner"> 
+				  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+blockCount}'> 
+				  
+					 <c:if test="${(i-1)>=newsList.getTotalPages()}">
+					       <c:set var="doneLoop" value="true"/>
+					    </c:if>    
+				    
+				  <c:if test="${not doneLoop}" >
+				         <a class="${i==nowPage?'pagination-active':page}" href="${pageContext.request.contextPath}/board/news/newsList?nowPage=${i}">${i}</a> 
+				  </c:if>
+				   
+				</c:forEach>
+				</span> 
+
+				 <c:if test="${(startPage+blockCount)<=newsList.getTotalPages()}">
+				     <a class="pagination-older" href="${pageContext.request.contextPath}/board/news/newsList?nowPage=${startPage+blockCount}">NEXT</a>
+				 </c:if>
+				 
+			
+		
+		</div>
+<!-- 	</nav>   -->
+	\${doneLoop} = ${doneLoop}<p>
+	
 	<div align=right>
 		<button type="submit" class="btn btn-outline-primary" onClick="location.href='${pageContext.request.contextPath}/board/news/registerForm'">글쓰기</button>
 	</div>
