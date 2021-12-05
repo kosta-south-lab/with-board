@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -26,16 +28,16 @@ public class NewsServiceImpl implements NewsService {
 	private final ImageRepository imageRepository;
 	
 	@Override
-	public List<News> selectAll(String searchOption, String keyWord) {
-		List<News> NewsList = null;
+	public Page<News> selectAll(String searchOption, String keyWord, Pageable pageable) {
+		Page<News> NewsList = null;
 		
 		switch(searchOption) {
 		case "title":
-			NewsList = newsRepository.findByTitleContaining(keyWord);
+			NewsList = newsRepository.findByTitleContaining(keyWord,pageable);
 			break;
 		case "writer":
 			Member writer = memberRepository.findByNicknameContaining(keyWord);
-			NewsList = newsRepository.findByMember(writer);
+			NewsList = newsRepository.findByMember(writer,pageable);
 			break;
 		}
 		return NewsList;
