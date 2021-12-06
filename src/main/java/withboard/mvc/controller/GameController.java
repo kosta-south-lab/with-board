@@ -177,7 +177,7 @@ public class GameController {
 	 * 한줄평 삭제 (어드민)
 	 */
 	
-	@RequestMapping("/insertComment")
+	@RequestMapping("/deleteComment")
 	public String deleteComment(GameComment gameComment) {
 		
 		gameCommentSerivce.deleteComment(gameComment);
