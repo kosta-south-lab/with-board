@@ -4,6 +4,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
+<jsp:include page="../common/header.jsp" />
  <head>
   <meta charset="UTF-8">
   
@@ -200,10 +201,11 @@
       </div>
     </div>
     <footer class="my-3 text-center text-small">
-      <p class="mb-1">&copy; 2022 YD</p>
+  <!--   <p class="mb-1">&copy; 2022 YD</p> -->  
     </footer>
   </div>
 </body>
 
 </html>
+<jsp:include page="../common/footer.jsp" />
 

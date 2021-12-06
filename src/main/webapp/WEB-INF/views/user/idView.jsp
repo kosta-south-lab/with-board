@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>아이디 찾기 결과입니다. </h1>
-<p>찾은 id : ${member.id}</p>
+<p>찾은 id : ${sessionScope.member.id}</p>
 
 </body>
 </html>
