@@ -36,10 +36,9 @@ public class SendEmailServiceImpl implements SendEmailService {
         return dto;
     }
 
-    public void updatePassword(String str,String userEmail){ 
-/**        String pw = EncryptionUtils.encryptMD5(str);
-        int id = MemberRepository.findUserByUserId(userEmail).getId();
-        MemberRepository.updateUserPassword(id,pw);*/
+    public void updatePassword(String pw,String userEmail){ 
+        String id = memberRepository.findUserByUserId(userEmail).getId();
+        memberRepository.updateUserPassword(id,pw);
     }
 
 

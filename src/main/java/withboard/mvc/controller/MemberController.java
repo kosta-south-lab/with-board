@@ -3,7 +3,9 @@ package withboard.mvc.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -251,5 +254,30 @@ public class MemberController {
 			return "user/idView";
 			
 		}
+		
+		//비번찾기 폼으로 이동
+		@RequestMapping("/user/searchPass")
+		public void searchPass() {
+			
+		}
+		
+		//Email과 name의 일치여부를 check하는 컨트롤러
+		 @GetMapping("/check/findPw")
+		    public @ResponseBody Map<String, Boolean> pw_find(String userEmail, String userName){
+		        Map<String,Boolean> json = new HashMap<>();
+		        boolean pwFindCheck = memberService.userEmailCheck(userEmail,userName);
+
+		        System.out.println(pwFindCheck);
+		        json.put("check", pwFindCheck);
+		        return json;
+		    }
+
+		//등록된 이메일로 임시비밀번호를 발송하고 발송된 임시비밀번호로 사용자의 pw를 변경하는 컨트롤러
+		    @PostMapping("/check/findPw/sendEmail")
+		    public @ResponseBody void sendEmail(String userEmail, String userName){
+		        Mail dto = emailService.createMailAndChangePassword(userEmail, userName);
+		        emailService.passwordMailSend(dto);
+
+		    }
 	
 }

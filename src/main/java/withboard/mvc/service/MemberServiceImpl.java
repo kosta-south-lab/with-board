@@ -181,5 +181,19 @@ public class MemberServiceImpl implements MemberService {
 		return savedName;
 	}
 	
+	/**
+	 * 이메일 전송 체크
+	 * */
+	public boolean userEmailCheck(String userEmail, String userName) {
+
+        Member member = memberRepository.findUserByUserId(userEmail);
+        if(member!=null && member.getName().equals(userName)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+	
 	
 }
