@@ -18,9 +18,9 @@
 	<select name="normalCategoryNo">
 		<option value="1">자유</option>
 		<option value="2">공략</option>
-		<option value="22">Q&A</option>
-		<option value="23">정보</option>
-		<option value="24">예판/핫딜</option>
+		<option value="3">Q&A</option>
+		<option value="4">정보</option>
+		<option value="5">예판/핫딜</option>
 	</select>
 <p>
 	내용 :<p>

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -29,34 +31,32 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 	private final ImageRepository imageRepository;
 	
 	@Override
-	public List<Normal> selectAll(Long normalCategoryNo, String searchOption, String keyWord) {
+	public Page<Normal> selectAll(Long normalCategoryNo, String searchOption, String keyWord, Pageable pageable) {
 		
 		NormalCategory normalCategory = normalCategoryRepository.findById(normalCategoryNo).orElse(null);
-		List<Normal> normalList = null;
+		Page<Normal> normalList = null;
 		//카테고리가 없을경우 예외 발생 추가해야함.
 		switch(searchOption) {
 		case "title":
-			normalList = normalRepository.findByNormalCategoryAndTitleContaining(normalCategory, keyWord);
+			normalList = normalRepository.findByNormalCategoryAndTitleContaining(normalCategory, keyWord,pageable);
 			break;
 		case "writer":
 			Member writer = memberRepository.findByNicknameContaining(keyWord);
-			normalList = normalRepository.findByNormalCategoryAndMember(normalCategory, writer);
+			normalList = normalRepository.findByNormalCategoryAndMember(normalCategory, writer,pageable);
 			break;
 		}
 		return normalList;
 	}
 
 	@Override
-	public void insert(Normal normal, Long normalCategoryNo, List<String> filenameList) {
+	public void insert(Normal normal, Long normalCategoryNo, List<String> filenameList, Member member) {
 		NormalCategory normalCategory = normalCategoryRepository.findById(normalCategoryNo).orElse(null);
 		if(normalCategory == null) {
 			throw new RuntimeException("해당 모임 카테고리가 존재하지 않습니다");
 		}
 		
-		//작성자Member 임시로 만들기 (추후에는 시큐리티 세션에서 얻어올 예정)
-		Member writer = Member.builder().memberNo(1l).build();
 		normal.setNormalCategory(normalCategory);
-		normal.setMember(writer);
+		normal.setMember(member);
 		normalRepository.save(normal);
 		
 		//이미지테이블에 이미지 이름 저장

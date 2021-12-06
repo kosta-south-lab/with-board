@@ -2,7 +2,10 @@ package withboard.mvc.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
+import withboard.mvc.domain.Member;
 import withboard.mvc.domain.Normal;
 
 public interface NormalBoardService {
@@ -10,12 +13,12 @@ public interface NormalBoardService {
 	 /**
 	    * 전체검색
 	    * */
-	public List<Normal> selectAll(Long normalCategoryNo, String searchOption, String keyword);
+	public Page<Normal> selectAll(Long normalCategoryNo, String searchOption, String keyword, Pageable pageable);
 	
 	/**
 	 * 게시물 등록
 	 * */
-	void insert(Normal normal, Long normalCategoryNo, List<String> filenameList);
+	void insert(Normal normal, Long normalCategoryNo, List<String> filenameList, Member member);
 	
 	/**
 	 * 게시물 상세
