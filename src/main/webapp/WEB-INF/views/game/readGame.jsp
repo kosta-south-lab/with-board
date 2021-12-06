@@ -1,148 +1,234 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<jsp:include page="../common/header.jsp" />    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<jsp:include page="../common/header.jsp" />
 <head>
-<meta charset="UTF-8">
-<title>상세 보드게임 정보</title>
 
-<script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-
-<script type="text/javascript">
-	$(function(){
-		
-		   $("input[value=수정하기]").click(function(){
-			   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
-			   
-			   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/updateGameForm");
-			   $("#requestForm").submit();
-		   });
-		   
-		   
-		   $("input[value=삭제하기]").click(function(){
-	
-				   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/deleteGame");
-				   $("#requestForm").submit();
-			   
-		   });		   
-	});
-</script>
-
+  <title>상세 정보 | 위보드</title>
+  
 </head>
+
 <body>
 
-<table align="center" cellpadding="5" cellspacing="2" width="600" border='1'>
-    <tr>
-        <td width="1220" height="20" colspan="4" bgcolor="#00cc00">
-            <p align="center"><font color="white" size="3"><b>
-             보드게임 상세 정보</b></font></p>
-        </td>
-    </tr>
-    <tr>
-        <td width="100" height="20" >
-            <p align="right"><b><span style="font-size:9pt;">번호</span></b></p>
-        </td>
-        <td width="450" height="20" colspan="3">
-        	<span style="font-size:9pt;"><b>${game.gameNo}</b></span>
-        </td>
-    </tr>
-    <tr>
-        <td width="100" height="20" >
-            <p align="right"><b><span style="font-size:9pt;">제목</span></b></p>
-        </td>
-        <td width="300" height="20">
-        	<span style="font-size:9pt;"><b>${requestScope.game.gameName}</b></span>
-        </td>
-        <td width="100" height="20" >
-			<p align="right"><b><span style="font-size:9pt;">최대 인원 수</span></b></p>
-		</td>
-        <td width="100" height="20">
-			<p><b><span style="font-size:9pt;"></span>${requestScope.game.playPersonnelMax}</b></p>
-		</td>
-    </tr>
-    <tr>
-        <td width="100" height="20">
-            <p align="right"><b><span style="font-size:9pt;">최소 인원 수</span></b></p>
-        </td>
-        <td width="450" height="20" colspan="3">
-        	<span style="font-size:9pt;"><b>${requestScope.game.playPersonnelMin}</b></span>
-        </td>
-    </tr>
-    <tr>
-		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">최대 플레이타임</span></b></p>
-        </td>
-		<!-- 브라우저에 글 내용을 뿌려줄 때는 개행문자(\n)가 <br>태그로 변환된 문자열을 보여줘야 한다. -->
-        <td width="450" height="200" valign="top" colspan="3">
-        <span style="font-size:9pt;"><b><pre>${requestScope.game.gamePlaytimeMax}</pre></b></span></td>
-    </tr>
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="${pageContext.request.contextPath}/sample/index">홈</a></li>
+          <li>보드게임 상세 정보</li>
+        </ol>
+        <h2>보드게임 상세 정보</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+		<div>즐겨찾기 추가 버튼 이곳에</div>
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="${pageContext.request.contextPath}/img/portfolio/portfolio-1.jpg" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="${pageContext.request.contextPath}/img/portfolio/portfolio-2.jpg" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="${pageContext.request.contextPath}/img/portfolio/portfolio-3.jpg" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <div class="video-url">
+            	<h2>관련 동영상</h2>
+           	<iframe width="100%" height="600px" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+            </div>
+            
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>여기에 보드게임 이름</h3>
+              <ul>
+                <li><strong>장르</strong>: 여기에 장르</li>
+                <li><strong>테마</strong>: 여기에 테마</li>
+                <li><strong>진행 방식</strong>: 여기에 진행 방식</li>
+                <li><strong>플레이 타임</strong>: 여기에 최소 플레이 타임 ~ 여기에 최대 플레이 타임</li>
+                <li><strong>플레이 인원 수</strong>: 여기에 최소 인원 수 ~ 여기에 최대 인원 수</li>
+                <li><strong>유저 평점</strong>: 여기에 평균 평점</li>
+                <li><strong>유저 난이도 평가</strong>: 여기에 평균 난이도 점수</li>               
+              </ul>
+            </div>
+            <div class="portfolio-info">
+              <h3>상세 설명</h3>
+              <p>
+                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+              </p>
+            </div>
+                        <div class="portfolio-info">
+              <h3>이 보드게임을 해보셨나요?<p>경험을 공유해 주세요!</p> </h3>
+              <ul>
+                <li><strong>평점</strong>: 별 모양 평점</li>
+                <li><strong>난이도</strong>: 별 모양 난이도</li>           
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div></div>
+        
+      </div>
+    </section><!-- End Portfolio Details Section -->
     
-        <tr>
-		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">최대 플레이타임</span></b></p>
-        </td>
-		<!-- 브라우저에 글 내용을 뿌려줄 때는 개행문자(\n)가 <br>태그로 변환된 문자열을 보여줘야 한다. -->
-        <td width="450" height="200" valign="top" colspan="3">
-        <span style="font-size:9pt;"><b><pre>${requestScope.game.gamePlaytimeMax}</pre></b></span></td>
-    </tr>
-    
-        <tr>
-		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">비디오 링크</span></b></p>
-        </td>
-		<!-- 브라우저에 글 내용을 뿌려줄 때는 개행문자(\n)가 <br>태그로 변환된 문자열을 보여줘야 한다. -->
-        <td width="450" height="200" valign="top" colspan="3">
-        <span style="font-size:9pt;"><b><pre>${requestScope.game.videoUrl}</pre></b></span></td>
-    </tr>
-    
-        <tr>
-		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">진행 방식</span></b></p>
-        </td>
-		<!-- 브라우저에 글 내용을 뿌려줄 때는 개행문자(\n)가 <br>태그로 변환된 문자열을 보여줘야 한다. -->
-        <td width="450" height="200" valign="top" colspan="3">
-        <span style="font-size:9pt;"><b><pre>${requestScope.game.gameProcess}</pre></b></span></td>
-    </tr>
-    
-            <tr>
-		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">테마</span></b></p>
-        </td>
-		<!-- 브라우저에 글 내용을 뿌려줄 때는 개행문자(\n)가 <br>태그로 변환된 문자열을 보여줘야 한다. -->
-        <td width="450" height="200" valign="top" colspan="3">
-        <span style="font-size:9pt;"><b><pre>${requestScope.game.gameTheme}</pre></b></span></td>
-    </tr>
-    
-            <tr>
-		<td width="100" height="200" valign="top">
-            <p align="right"><b><span style="font-size:9pt;">장르</span></b></p>
-        </td>
-		<!-- 브라우저에 글 내용을 뿌려줄 때는 개행문자(\n)가 <br>태그로 변환된 문자열을 보여줘야 한다. -->
-        <td width="450" height="200" valign="top" colspan="3">
-        <span style="font-size:9pt;"><b><pre>${requestScope.game.gameCategory}</pre></b></span></td>
-    </tr>
-   
-   
-    <tr>
-        <td height="20" colspan="4" align="center" valign="middle">
-			<!-- 수정시 필요한 데이터들을 hidden으로 숨겨놓고 폼 데이터로 보내준다. -->
-			<form name="requestForm" method="post" id="requestForm">
-				<input type=hidden name="gameNo" value="${game.gameNo}">
-				<input type=button value="수정하기">
-				<input type=button value="삭제하기">
+ <%--    	<c:choose>
+		<c:when test="${empty commentDTO}"> --%>
+			<!-- 댓글 없으면 댓글이 없습니다. 멘트 -->
+			<form class="replyForm" name="replyForm" method="post" action="{pageContext.request.contextPath}/front" onSubmit='return checkValid()'>
+				<input type="hidden" name="key" value="post" /> 
+				<input type="hidden" name="methodName" value="insertComment"/>
+				<input type="hidden" name="top" value="null"/>
+				<fieldset>
+					<div class="container bootstrap snippets bootdey">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="blog-comment">
+									<hr>
+									<div class="comments">
+										<div class="clearfix">
+											<div class="post-comments">
+												<p class="meta">
+													12월 6일&nbsp;&nbsp;&nbsp;<a href="#">{userDTO.nickName}</a>
+													님 :
+												</p>
+												<textarea class="form-control" name="content"
+													placeholder="메세지를 입력해주세요."></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="replyButton" style="text-align: right">
+										<button type="submit" class="btn delicious-small-btn btn-3">등록</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
 			</form>
-		</td>
-    </tr>   
+			<div class="container bootstrap snippets bootdey">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="blog-comment">
+							<hr>
+							<div class="comments">
+								<div class="clearfix" style="text-align: center">
+									<span>한줄평이 없습니다! 한줄평을 달아 플레이 경험을 공유 해보는 것은 어떨까요?</span>
+									<hr>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<%-- 		</c:when> --%>
+		
+		
+		
+	<%-- 	
+		<c:otherwise>
+		
+			<form action="{pageContext.request.contextPath}/front?key=post&methodName=insertComment" method="post">
+			<input type="hidden" name="user" value="{sessionScope.userDTO.no}">
+			<input type="hidden" name="postNo" value="{postDTO.no}">
+			<input type="hidden" name="top" value="0">
+			
+			
 
-</table>
+				<fieldset>
+					<div class="container bootstrap snippets bootdey">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="blog-comment">
+									<hr>
+									<div class="comments">
+										<div class="clearfix">
+											<div class="post-comments">
+												<p class="meta">
+													<a href="#">${userDTO.nickName}</a> 님 : 
+												</p>
+												<textarea class="form-control" id="message" 
+													placeholder="메세지를 입력해주세요." name="comments"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="replyButton" style="text-align: right">
+										<button type="submit" class="btn delicious-small-btn btn-3">등록</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-
-<div class="well">
-	<input type="text" id="msg" value="1212" class="form-control">
-	<button id="btnSend" class="btn btn-primary">Send Message</button>
-</div>
+				</fieldset>
+			</form>
+			
+			<c:forEach items="${commentDTO}" var="reply">
+				<!-- 돌려서 댓글을 꺼낸다. -->
+				<form action="${pageContext.request.contextPath}/front?key=post&methodName=insertComment" method="post">
+				<input type="hidden" name="user" value="${sessionScope.userDTO.no}">
+				<input type="hidden" name="postNo" value="${postDTO.no}">
+				<input type="hidden" name="top" value="1">
+				
+				<c:if test="${(reply.userNickName == userDTO.nickName) or (userDTO.status == 10)}">
+					<li class="clearfix">
+						<div class="post-comments">
+							<p class="meta">
+								${reply.date}
+								<a href="#">${reply.userNickName}</a> 님 : <i class="pull-right"><a
+									href="#"><small>댓글 추가</small></a></i>
+							</p>
+							<p>${reply.content}</p>
+							<a href="#"><small>수정</small></a> <a href="#"><small>삭제</small></a>
+						</div>
+					</li>
+				</c:if>
+				</form>
+				
+				<form action="${pageContext.request.contextPath}/front?key=post&methodName=insertComment" method="post">
+				<input type="hidden" name="user" value="${sessionScope.userDTO.no}">
+				<input type="hidden" name="postNo" value="${postDTO.no}">
+				<input type="text" name="top" value="2">
+				<c:if test="${(reply.userNickName != userDTO.nickName) or (userDTO.status != 10)}">
+					<li class="clearfix">
+						<div class="post-comments">
+							<p class="meta">
+								날짜 : ${reply.date} <a href="#">${reply.userNickName}</a> 님 : <i class="pull-right"><a href="#"><small>댓글 추가</small></a></i>
+							</p>
+							<p>${reply.content}</p>
+						</div>
+					</li>
+				</c:if>
+				</form>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose> --%>
+    
+  </main><!-- End #main -->
 
 </body>
+
 </html>
+
+<jsp:include page="../common/footer.jsp" />
