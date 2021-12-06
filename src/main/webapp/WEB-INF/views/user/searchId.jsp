@@ -22,10 +22,8 @@
 <body>
 		
 		<div class="card-body">
-      <form class="form-signin" method="POST" action="/searchId">
-  		 <p class="text2"> ${findid2}</p>
+      <form class="form-signin" method="POST" action="${pageContext.request.contextPath}/user/searchId2">
         <input type="email" name="email" id="email" class="form-control" placeholder="이메일" required><br>
-        	<p class="check" id="check">${check}</p><br/>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아 이 디 찾 기</button>
       
       </form>
