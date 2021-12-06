@@ -20,14 +20,13 @@ public class ReplyServiceImpl implements ReplyService {
 	private final BoardRepository boardRepository;
 	
 	@Override
-	public void insert(Reply reply, Long boardNo) {
+	public void insert(Reply reply, Long boardNo, Member member) {
 		Board board =  boardRepository.findById(boardNo).orElse(null);
 		if(board == null) {
 			throw new RuntimeException("번호에 해당하는 게시물이 존재하지 않습니다.");
 		}
 		
 		//member는 추후 로그인한 유저로 교체해야함.
-		Member member = Member.builder().memberNo(1L).build();
 		reply.setBoard(board);
 		reply.setMember(member);
 		replyRepository.save(reply);
