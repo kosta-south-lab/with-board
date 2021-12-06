@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import lombok.AllArgsConstructor;
 import withboard.mvc.domain.Authorities;
 import withboard.mvc.domain.Game;
+import withboard.mvc.domain.Image;
 import withboard.mvc.domain.Mail;
 import withboard.mvc.domain.Member;
 import withboard.mvc.repository.AuthoritiesRepository;
@@ -142,19 +143,19 @@ public class MemberServiceImpl implements MemberService {
 
 	//회원정보 수정하기 
 	@Override
-	public Member updateInfo(Member member) {
+	public void updateInfo(Member member) {
 		
-		Member mb = memberRepository.findById(member.getMemberNo()).orElse(null);
-		if(mb==null) throw new RuntimeException("해당 회원은 존재하지 않습니다.");
+		Member mb = memberRepository.findById(member.getId());
+		//Member mb = memberRepository.findById(member.getMemberNo()).orElse(null);
 		
 		//회원정보 수정부분 
-		mb.setId(member.getId());
-		mb.setImage(member.getEmail());
+		mb.setImage(member.getImage());
 		mb.setNickname(member.getNickname());
+		mb.setGender(member.getGender());
 		mb.setLocation(member.getLocation());
 		mb.setLocation2(member.getLocation2());
-		
-		return mb;
+		mb.setEmail(member.getEmail());
+	
 	}
 
 	

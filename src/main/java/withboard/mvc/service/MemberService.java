@@ -29,7 +29,7 @@ public interface MemberService {
 	 * 회원정보 수정하기  
 	 * 
 	 */
-	Member updateInfo(Member member);
+	void updateInfo(Member member);
 	
 	 /**
      * 게시물 삭제

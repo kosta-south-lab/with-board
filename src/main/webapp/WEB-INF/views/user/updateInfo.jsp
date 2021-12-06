@@ -8,11 +8,14 @@
 
 </head>
 <body>
+<script src="../js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
 
-<script type="text/javascript"></script>
 
- <form name="updateInfo" method="post"  action="${pageContext.request.contextPath}/user/updateInfo">
-  
+</script>
+
+ <form name="updateInfo" method="post" action="${pageContext.request.contextPath}/user/changeInfo">
+ <h1>수정 Form 입니다.</h1>
 <table>
   <tr>
   	<th>아이디</th>

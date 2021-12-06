@@ -39,14 +39,15 @@ public class MemberController {
 	SendEmailService emailService;
 
 	
-	//회원가입 페이지
+	// 회원가입 페이지
 	@GetMapping("/user/signupForm")
 	public String signupForm() {
 		
 		return "user/signupForm"; //WEB-INF/views/user/signupForm.jsp
 	}
 	
-	//유저 정보 저장    
+	
+	// 유저 정보 저장    
 	@GetMapping("/user/userInfo")    
 	public Member myInfo(String id ,HttpServletRequest request ) throws Exception {
 	Member user = memberService.userInfo(id);    
@@ -55,7 +56,7 @@ public class MemberController {
 	}
 	
 	
-	//회원가입하기 
+	// 회원가입하기 
 	@RequestMapping("/user/joinConfirm")
 	public String joinMember(Member member, Model model,HttpServletRequest request, List<MultipartFile> filename, HttpSession session) throws Exception {
 		
@@ -98,6 +99,8 @@ public class MemberController {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 	//현재 Controller에서 발생하는 모든 에외처리
 	@ExceptionHandler(Exception.class)
@@ -105,7 +108,9 @@ public class MemberController {
 		return new ModelAndView();
 		
 	}
-	//로그인 form
+	
+	
+	// 로그인 form
 	@GetMapping("/user/loginForm")
 	public String loginForm(HttpServletRequest request, Model model) {
 		
@@ -117,6 +122,7 @@ public class MemberController {
 		
 		return "user/loginForm";
 	}
+	
 	
 	
 	// 로그인 처리
@@ -134,6 +140,7 @@ public class MemberController {
 		
 		return "redirect:/home"; // 회원가입 완료후 갈 페이지 
 	}
+	
 	
 	
 	// 로그아웃 처리
@@ -158,17 +165,30 @@ public class MemberController {
 	
 	
 	
-	 // 회원정보 수정 처리
+	 // 회원정보 수정폼...
 	 @RequestMapping("/user/updateInfo")
-	 public ModelAndView updateInfo(Member member) {
+	 public ModelAndView updateInfo(HttpSession session) {
+		Member member = (Member)session.getAttribute("member");
+		 System.out.println("getId : " + member.getId());
 		 
-		 Member mb = memberService.updateInfo(member);
+		 Member mb = memberService.userInfo(member.getId());
 	 
-	 return new ModelAndView("user/mypage", "member", mb); //업데이트 완료후 
+	 return new ModelAndView("/user/updateInfo", "member", mb); 
 	 }
 	 
+	 
+	 
+	 // 회원정보 수정 처리
+	 @RequestMapping("/user/changeInfo")
+	 public ModelAndView changeInfo(Member member, HttpSession session) {
+			memberService.updateInfo(member);
+		 
+		 return new ModelAndView ("/user/mypage", "member", member); //수정처리 완료후 
+	 }
+	 
+	 
 	
-	//탈퇴하기
+	// 탈퇴하기
 	@RequestMapping("/user/delete")
 	public String deleteInfo(@PathVariable Long id) {
 		memberService.delete(id);
@@ -178,7 +198,7 @@ public class MemberController {
 	}
 	
 	
-	//회원가입 완료 후 이메일 인증 처리
+	// 회원가입 완료 후 이메일 인증 처리
 	@ResponseBody
 	@GetMapping(value = "/user/email/send")
 	public void sendmail(Mail dto) throws MessagingException {
@@ -221,7 +241,7 @@ public class MemberController {
 		return "user/emailSuccess";
 	}
 	
-	//아이디 찾기
+	// 아이디 찾기
 		@RequestMapping("/user/searchId")
 		public String searchId(String email, HttpServletRequest request) {
 			
