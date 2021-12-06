@@ -1,152 +1,200 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="../common/header.jsp" />
 <head>
 
-  <title>상세 정보 | 위보드</title>
-  
+<title>상세 정보 | 위보드</title>
+
+<script type="text/javascript">
+	$(function(){
+		
+	   $("input[value=수정하기]").click(function(){
+		   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
+		   
+		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/updateGameForm");
+		   $("#requestForm").submit();
+	   });
+	   
+	   
+	   $("input[value=삭제하기]").click(function(){
+
+			   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/deleteGame");
+			   $("#requestForm").submit();
+		   
+	   });		   
+	});
+</script>
+
 </head>
 
 <body>
 
-  <main id="main">
+	<main id="main">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
+		<!-- ======= Breadcrumbs ======= -->
+		<section id="breadcrumbs" class="breadcrumbs">
+			<div class="container">
 
-        <ol>
-          <li><a href="${pageContext.request.contextPath}/sample/index">홈</a></li>
-          <li>보드게임 상세 정보</li>
-        </ol>
-        <h2>보드게임 상세 정보</h2>
+				<ol>
+					<li><a href="${pageContext.request.contextPath}/sample/index">홈</a></li>
+					<li>보드게임 상세 정보</li>
+				</ol>
+				<h2>보드게임 상세 정보</h2>
 
-      </div>
-    </section><!-- End Breadcrumbs -->
+			</div>
+		</section>
+		<!-- End Breadcrumbs -->
 
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
-		<div>즐겨찾기 추가 버튼 이곳에</div>
-        <div class="row gy-4">
+		<!-- ======= Portfolio Details Section ======= -->
+		<section id="portfolio-details" class="portfolio-details">
+			<div class="container">
+				<form action="${pageContext.request.contextPath}/favorites/insert">
+					<button>즐겨찾기 추가</button>
+				</form>
+				<form action="${pageContext.request.contextPath}/favorites/delete">
+					<button>즐겨찾기 해제</button>
+				</form>
+				<div class="row gy-4">
 
-          <div class="col-lg-8">
-            <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
+					<div class="col-lg-8">
+						<div class="portfolio-details-slider swiper">
+							<div class="swiper-wrapper align-items-center">
 
-                <div class="swiper-slide">
-                  <img src="${pageContext.request.contextPath}/img/portfolio/portfolio-1.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="${pageContext.request.contextPath}/img/portfolio/portfolio-2.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="${pageContext.request.contextPath}/img/portfolio/portfolio-3.jpg" alt="">
-                </div>
-
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-            <div class="video-url">
-            	<h2>관련 동영상</h2>
-           	<iframe width="100%" height="600px" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
-            </div>
-            
-          </div>
-
-          <div class="col-lg-4">
-            <div class="portfolio-info">
-              <h3>여기에 보드게임 이름</h3>
-              <ul>
-                <li><strong>장르</strong>: 여기에 장르</li>
-                <li><strong>테마</strong>: 여기에 테마</li>
-                <li><strong>진행 방식</strong>: 여기에 진행 방식</li>
-                <li><strong>플레이 타임</strong>: 여기에 최소 플레이 타임 ~ 여기에 최대 플레이 타임</li>
-                <li><strong>플레이 인원 수</strong>: 여기에 최소 인원 수 ~ 여기에 최대 인원 수</li>
-                <li><strong>유저 평점</strong>: 여기에 평균 평점</li>
-                <li><strong>유저 난이도 평가</strong>: 여기에 평균 난이도 점수</li>               
-              </ul>
-            </div>
-            <div class="portfolio-info">
-              <h3>상세 설명</h3>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-            </div>
-                        <div class="portfolio-info">
-              <h3>이 보드게임을 해보셨나요?<p>경험을 공유해 주세요!</p> </h3>
-              <ul>
-                <li><strong>평점</strong>: 별 모양 평점</li>
-                <li><strong>난이도</strong>: 별 모양 난이도</li>           
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div></div>
-        
-      </div>
-    </section><!-- End Portfolio Details Section -->
-    
- <%--    	<c:choose>
-		<c:when test="${empty commentDTO}"> --%>
-			<!-- 댓글 없으면 댓글이 없습니다. 멘트 -->
-			<form class="replyForm" name="replyForm" method="post" action="{pageContext.request.contextPath}/front" onSubmit='return checkValid()'>
-				<input type="hidden" name="key" value="post" /> 
-				<input type="hidden" name="methodName" value="insertComment"/>
-				<input type="hidden" name="top" value="null"/>
-				<fieldset>
-					<div class="container bootstrap snippets bootdey">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="blog-comment">
-									<hr>
-									<div class="comments">
-										<div class="clearfix">
-											<div class="post-comments">
-												<p class="meta">
-													12월 6일&nbsp;&nbsp;&nbsp;<a href="#">{userDTO.nickName}</a>
-													님 :
-												</p>
-												<textarea class="form-control" name="content"
-													placeholder="메세지를 입력해주세요."></textarea>
-											</div>
-										</div>
-									</div>
-									<div class="replyButton" style="text-align: right">
-										<button type="submit" class="btn delicious-small-btn btn-3">등록</button>
-									</div>
+								<div class="swiper-slide">
+									<img
+										src="${pageContext.request.contextPath}/img/portfolio/portfolio-1.jpg"
+										alt="">
 								</div>
+
+								<div class="swiper-slide">
+									<img
+										src="${pageContext.request.contextPath}/img/portfolio/portfolio-2.jpg"
+										alt="">
+								</div>
+
+								<div class="swiper-slide">
+									<img
+										src="${pageContext.request.contextPath}/img/portfolio/portfolio-3.jpg"
+										alt="">
+								</div>
+
 							</div>
+							<div class="swiper-pagination"></div>
+						</div>
+						<div class="video-url">
+							<h2>관련 동영상</h2>
+							<iframe width="100%" height="600px"
+								src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+						</div>
+
+					</div>
+
+					<div class="col-lg-4">
+						<div class="portfolio-info">
+							<h3>${requestScope.game.gameName}</h3>
+							<ul>
+								<li><strong>장르</strong>:
+									${requestScope.game.gameCategory.gameCategoryName}</li>
+								<li><strong>테마</strong>:
+									${requestScope.game.gameTheme.themeName}</li>
+								<li><strong>진행 방식</strong>:
+									${requestScope.game.gameProcess.processName}</li>
+								<li><strong>플레이 타임</strong>:
+									${requestScope.game.gamePlaytimeMin} ~
+									${requestScope.game.gamePlaytimeMax}</li>
+								<li><strong>플레이 인원 수</strong>:
+									${requestScope.game.playPersonnelMin} ~
+									${requestScope.game.playPersonnelMax}</li>
+								<li><strong>유저 평점</strong>: 여기에 평균 평점</li>
+								<li><strong>유저 난이도 평가</strong>: 여기에 평균 난이도 점수</li>
+							</ul>
+						</div>
+						<div class="portfolio-info">
+							<h3>상세 설명</h3>
+							<p>${requestScope.game.gameDetail}</p>
+						</div>
+						<div class="portfolio-info">
+							<h3>
+								이 보드게임을 해보셨나요?
+								<p>경험을 공유해 주세요!</p>
+							</h3>
+							<ul>
+								<li><strong>평점</strong>: 별 모양 평점</li>
+								<li><strong>난이도</strong>: 별 모양 난이도</li>
+							</ul>
+						</div>
+						<div>
+							<form name="requestForm" method="post" id="requestForm">
+								<input type=hidden name="gameNo" value="${game.gameNo}">
+								<input type=button value="수정하기"> <input type=button
+									value="삭제하기">
+							</form>
 						</div>
 					</div>
-				</fieldset>
-			</form>
-			<div class="container bootstrap snippets bootdey">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="blog-comment">
-							<hr>
-							<div class="comments">
-								<div class="clearfix" style="text-align: center">
-									<span>한줄평이 없습니다! 한줄평을 달아 플레이 경험을 공유 해보는 것은 어떨까요?</span>
-									<hr>
+				</div>
+			</div>
+		</section>
+		<!-- End Portfolio Details Section -->
+
+		<%--    	<c:choose>
+		<c:when test="${empty commentDTO}"> --%>
+		<!-- 댓글 없으면 댓글이 없습니다. 멘트 -->
+		<form class="replyForm" name="replyForm" method="post"
+			action="{pageContext.request.contextPath}/front"
+			onSubmit='return checkValid()'>
+			<input type="hidden" name="key" value="post" /> <input type="hidden"
+				name="methodName" value="insertComment" /> <input type="hidden"
+				name="top" value="null" />
+			<fieldset>
+				<div class="container bootstrap snippets bootdey">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="blog-comment">
+								<hr>
+								<div class="comments">
+									<div class="clearfix">
+										<div class="post-comments">
+											<p class="meta">
+												12월 6일&nbsp;&nbsp;&nbsp;<a href="#">${member.nickname}</a> 님
+												:
+											</p>
+											<textarea class="form-control" name="content"
+												placeholder="메세지를 입력해주세요."></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="replyButton" style="text-align: right">
+									<button type="submit" class="btn delicious-small-btn btn-3">등록</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+			</fieldset>
+		</form>
+		<div class="container bootstrap snippets bootdey">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="blog-comment">
+						<hr>
+						<div class="comments">
+							<div class="clearfix" style="text-align: center">
+								<span>한줄평이 없습니다! 한줄평을 달아 플레이 경험을 공유 해보는 것은 어떨까요?</span>
+								<hr>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-<%-- 		</c:when> --%>
-		
-		
-		
-	<%-- 	
+		</div>
+		<%-- 		</c:when> --%>
+
+
+
+		<%-- 	
 		<c:otherwise>
 		
 			<form action="{pageContext.request.contextPath}/front?key=post&methodName=insertComment" method="post">
@@ -224,8 +272,9 @@
 			</c:forEach>
 		</c:otherwise>
 	</c:choose> --%>
-    
-  </main><!-- End #main -->
+
+	</main>
+	<!-- End #main -->
 
 </body>
 

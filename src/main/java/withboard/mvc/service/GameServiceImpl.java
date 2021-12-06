@@ -26,8 +26,6 @@ public class GameServiceImpl implements GameService {
 		
 		return gameRepository.findAll(pageable);
 	}
-
-	
 	
 	// 보드게임 제목 키워드로 검색
 	
@@ -42,32 +40,6 @@ public class GameServiceImpl implements GameService {
 	public Game selectBy(Long gameNo) {
 		
 		return gameRepository.findById(gameNo).orElse(null);
-	}
-
-	
-	// 보드게임 평점 부여
-	
-	@Override
-	public void insertRating(int rating) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	//보드게임 난이도 부여
-
-	@Override
-	public void insertDifficulty(int difficulty) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	//보드게임 한줄평 작성
-
-	@Override
-	public void insertComment(String comment) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	//보드게임 등록
