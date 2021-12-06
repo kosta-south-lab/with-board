@@ -2,6 +2,8 @@ package withboard.mvc.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,12 +19,12 @@ public interface MeetRepository extends JpaRepository<Meet, Long> {
 	/**
 	 * 검색조건이 title일 경우
 	 */
-	List<Meet> findByMeetCategoryAndTitleContaining(MeetCategory meetCategory, String title);
+	Page<Meet> findByMeetCategoryAndTitleContaining(MeetCategory meetCategory, String title, Pageable paging);
 	
 	/**
 	 * 검색조건이 member일 경우
 	 */
-	List<Meet> findByMeetCategoryAndMember(MeetCategory meetCategory, Member member);
+	Page<Meet> findByMeetCategoryAndMember(MeetCategory meetCategory, Member member, Pageable paging);
 	
 	/***
 	 * 조회수 증가(JPQL 문법)

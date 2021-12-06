@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>meetList</title>
+  <title>meetRegister</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -159,7 +159,7 @@
         <div class="row">
 		  <div class="col-lg-6 ">
 			<div class="map_wrap">
-				<div id="map" class="mb-4 mb-lg-0"   style="position: relative; border:0; width: 100%; height: 600px;" allowfullscreen></div>
+				<div id="map" class="mb-4 mb-lg-0" style="border:0; width: 100%; height: 600px;"></div>
 				<div id="menu_wrap" class="bg_white">
 					<div class="option">
 						<div>

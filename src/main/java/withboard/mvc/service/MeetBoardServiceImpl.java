@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -31,7 +33,7 @@ public class MeetBoardServiceImpl implements MeetBoardService {
 	private final MemberRepository memberRepository;
 	private final ImageRepository imageRepository;
 	private final GameRepository gameRepository;
-	
+	/*
 	@Override
 	public List<Meet> selectAll(Long meetCategoryNo, String searchOption, String keyWord) {
 		
@@ -51,6 +53,28 @@ public class MeetBoardServiceImpl implements MeetBoardService {
 			meetList = meetRepository.findByMeetCategory(meetCategory);
 		}
 		System.out.println("hello end");
+		return meetList;
+	}
+	*/
+	
+	@Override
+	public Page<Meet> selectAllPaging(Long meetCategoryNo, String searchOption, String keyword, Pageable pageable) {
+		MeetCategory meetCategory = meetCategoryRepository.findById(meetCategoryNo).orElse(null);
+		Page<Meet> meetList = null;
+		//카테고리가 없을경우 예외 발생 추가해야함.
+		switch(searchOption) {
+		case "title":
+			meetList = meetRepository.findByMeetCategoryAndTitleContaining(meetCategory, keyword, pageable);
+			break;
+		case "nickname":
+			Member writer = memberRepository.findByNicknameContaining(keyword);
+			System.out.println(writer);
+			meetList = meetRepository.findByMeetCategoryAndMember(meetCategory, writer, pageable);
+		case "location":
+			/*
+			meetList = meetRepository.findByMeetCategory(meetCategory);
+			*/
+		}
 		return meetList;
 	}
 	
@@ -147,6 +171,8 @@ public class MeetBoardServiceImpl implements MeetBoardService {
 	public List<Game> selectAllGame() {
 		return gameRepository.findAll();
 	}
+
+
 	
 	
 	
