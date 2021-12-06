@@ -158,17 +158,17 @@ public class MemberServiceImpl implements MemberService {
 	
 	}
 
-	
-	//탈퇴하기 
-	@Override
-	public void delete(Long id) {
-		Optional<Member> member = memberRepository.findById(id);
-		if (member == null)
-			throw new RuntimeException("회원탈퇴에 실패했습니다.");
-		
-		memberRepository.deleteById(id);
-		
-	}
+	/*
+	 * //탈퇴하기
+	 * 
+	 * @Override public void delete(Long id) { Optional<Member> member =
+	 * memberRepository.findById(id); if (member == null) throw new
+	 * RuntimeException("회원탈퇴에 실패했습니다.");
+	 * 
+	 * memberRepository.deleteById(id);
+	 * 
+	 * }
+	 */
 	
 	/**
 	 * 파일이름 랜덤생성

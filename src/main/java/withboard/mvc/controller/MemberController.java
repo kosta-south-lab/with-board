@@ -123,6 +123,9 @@ public class MemberController {
 		return "user/loginForm";
 	}
 	
+	// 로그인 form test
+	@RequestMapping("/user/test")
+	public void test() {}
 	
 	
 	// 로그인 처리
@@ -186,17 +189,7 @@ public class MemberController {
 		 return new ModelAndView ("/user/mypage", "member", member); //수정처리 완료후 
 	 }
 	 
-	 
-	
-	// 탈퇴하기
-	@RequestMapping("/user/delete")
-	public String deleteInfo(@PathVariable Long id) {
-		memberService.delete(id);
-		
-		return "redirect:/user/loginForm"; //탈퇴 완료 후 
-		
-	}
-	
+
 	
 	// 회원가입 완료 후 이메일 인증 처리
 	@ResponseBody

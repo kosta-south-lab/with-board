@@ -32,9 +32,9 @@ public interface MemberService {
 	void updateInfo(Member member);
 	
 	 /**
-     * 게시물 삭제
+     * 회원정보 삭제
      * */
-    void delete(Long id);
+    //void delete(Long id);
 
 	
 	/**

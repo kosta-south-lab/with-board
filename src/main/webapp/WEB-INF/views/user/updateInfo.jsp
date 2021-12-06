@@ -26,7 +26,7 @@
   <tr>
   	<th><input type="text" readonly="readonly" id="id" name="id" value="${member.id}"></th> 
     <th><input type="text" id="image" name="image" value="${member.image}"></th> 
-    <th><input type="text" id="nickname" name="nickname" value="${member.nickname}"></th>
+     <th><input type="text" id="nickname" name="nickname" value="${member.nickname}"></th>
     <th><input type="text" readonly="readonly" id="gender" name="gender" value="${member.gender}"></th><p>
   </tr>
   <tr>

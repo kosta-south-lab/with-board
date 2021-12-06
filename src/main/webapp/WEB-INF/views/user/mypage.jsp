@@ -47,7 +47,8 @@
   
 </table>
 <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a>
-<a href="${pageContext.request.contextPath}/user/delete">탈퇴하기</a>
+<a href="${pageContext.request.contextPath}/home">Home</a>
+<%-- <a href="${pageContext.request.contextPath}/user/delete">탈퇴하기</a> --%>
 </form>
 </body>
 </html>
