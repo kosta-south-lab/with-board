@@ -61,5 +61,8 @@ public class Game {
 	
 	@OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
 	private List<GameComment> gameCommentList;
+	
+	@OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+	private List<Image> imageList;
 
 }

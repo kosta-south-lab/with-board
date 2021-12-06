@@ -241,15 +241,21 @@ public class MemberController {
 		return "user/emailSuccess";
 	}
 	
-	// 아이디 찾기
-		@RequestMapping("/user/searchId")
+	
+	//아이디 찾기 폼으로 이동
+	@RequestMapping("/user/searchId")
+	public void searchId() {}
+	
+	
+	//아이디 찾기
+		@RequestMapping("/user/searchId2")
 		public String searchId(String email, HttpServletRequest request) {
-			
+		  
 			String id = memberService.searchId(email);
 			System.out.println(id);
 			request.getSession().setAttribute("serchId", id);
 			
-			return "redirect:/user/idView";
+			return "user/idView";
 			
 		}
 	
