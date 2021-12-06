@@ -26,7 +26,18 @@
 		}
 		
 		.form-control{
-			text-align: center;
+      
+      margin-top: 30px;
+      padding: 15px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	text-align: center;
 		}
 		
     </style>
