@@ -53,7 +53,7 @@ public class NormalBoardController {
 			keyword = "";
 		}
 
-		Pageable pageable = PageRequest.of((nowPage - 1), 10, Sort.by(sortType));
+		Pageable pageable = PageRequest.of((nowPage - 1), 9, Sort.by(sortType).descending());
 
 		
 		
@@ -180,9 +180,12 @@ public class NormalBoardController {
 		List<String> filenameList = new ArrayList<String>();
 		
 		for(MultipartFile file : filename) {
-			System.out.println(file.getOriginalFilename());
+			
 			
 			String originalFileName = file.getOriginalFilename();
+			if(originalFileName == "") {
+				break;
+			}
 			String newFileName = this.changeFileName(originalFileName);
 			
 			File newFile = new File(path + "/" + newFileName);

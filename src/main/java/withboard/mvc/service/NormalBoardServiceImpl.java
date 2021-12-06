@@ -1,5 +1,6 @@
 package withboard.mvc.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -101,9 +102,15 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 		nm.setNormalCategory(normalCategory);
 		
 		//이미지테이블에서 이미지이름 삭제
+		List<Long> imageNoList = new ArrayList<Long>();
 		for(Image image : nm.getImageList()) {
-			imageRepository.delete(image);
+			imageNoList.add(image.getImageNo());
 		}
+		nm.setImageList(null);
+		for(Long imageNo : imageNoList) {
+			imageRepository.deleteById(imageNo);
+		}
+		
 		//이미지테이블에 새로운 이미지 이름 저장
 		for(String fname : filenameList) {
 			imageRepository.save(new Image(null, fname, nm, null));
