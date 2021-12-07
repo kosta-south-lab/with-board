@@ -64,12 +64,8 @@
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
             <img class="rounded-circle mt-5" width="150px" src="${sessionScope.member.image}">
             <span class="font-weight-bold">ID : ${sessionScope.member.id}</span>
-            <span class="text-black-50">Email : ${sessionScope.member.email}</span>
-            <span>  <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> </span>     
-  			<span> <a href="/index">Home</a>  </span>
-            
-            <span> </span>
-            
+            <span class="text-black-50">Email : ${sessionScope.member.email}</span><p><p>
+            <span> <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> <a href="/index">Home</a> </span>
             </div>
     
         </div>
@@ -87,7 +83,7 @@
                     <div class="col-md-12"><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.location2}"></div>
                    </div>
       
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                <!-- <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div> -->
             </div>
         </div>
        

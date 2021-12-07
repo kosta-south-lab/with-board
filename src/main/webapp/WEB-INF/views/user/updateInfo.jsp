@@ -74,12 +74,10 @@
             <img class="rounded-circle mt-5" width="150px" src="${sessionScope.member.image}"> 
             <input class="font-weight-bold" type="text" readonly="readonly" id="id" name="id" value="${sessionScope.member.id}">
             <input class="text-black-50" type="text" readonly="readonly" id="email" name="email" value="${sessionScope.member.email}">
-            <p style="color: red;">아이디와 이메일은 수정할 수 없습니다.</p>
+            <p style="color: red;">아이디와 이메일은 수정할 수 없습니다.</p><p>
            
-            <span>  <a href="${pageContext.request.contextPath}/user/mypage">마이페이지로 돌아가기</a> </span>     
-  			<span> <a href="../index">Home</a>  </span>
-            
-            <span> </span>
+            <span>  <a href="${pageContext.request.contextPath}/user/mypage">마이페이지로 돌아가기</a> <a href="../index">Home</a> </span>     
+  			 
             
             </div>
     
