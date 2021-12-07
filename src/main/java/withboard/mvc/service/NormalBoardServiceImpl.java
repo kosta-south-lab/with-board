@@ -41,7 +41,7 @@ public class NormalBoardServiceImpl implements NormalBoardService {
 		case "title":
 			normalList = normalRepository.findByNormalCategoryAndTitleContaining(normalCategory, keyWord,pageable);
 			break;
-		case "writer":
+		case "nickname":
 			Member writer = memberRepository.findByNicknameContaining(keyWord);
 			normalList = normalRepository.findByNormalCategoryAndMember(normalCategory, writer,pageable);
 			break;

@@ -49,7 +49,7 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="index.html">board</a></li>
+          <li><a href="${pageContext.request.contextPath}/board/normal/normalList">board</a></li>
           <li>일반게시판</li>
         </ol>
         <h2>일반게시판</h2>
@@ -73,6 +73,7 @@
         <div class="row">
           <div class="col-lg-12 d-flex sidebar-item search-form justify-content-center">
             <form action="${pageContext.request.contextPath}/board/normal/normalList" method="get" class="d-flex">
+            <input type="hidden" name="normalCategoryNo" value="${normalCategoryNo}">
               <select name = "searchOption" class="inputform mx-1">
                 <option id="title" value = "title">제목</option>
                 <option id="user" value = "nickname">작성자</option>
@@ -133,7 +134,8 @@
 	<c:set var="doneLoop" value="false"/>
 		
 		  <c:if test="${(startPage-blockCount) > 0}"> <!-- (-2) > 0  -->
-		      <a class="pagination-newer" href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${startPage-1}">-PREV-</a>
+		      <a class="pagination-newer"
+					href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${startPage-1}&normalCategoryNo=${normalCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">-PREV-</a>
 		  </c:if>
 		  
 				<span class="pagination-inner"> 
@@ -144,14 +146,14 @@
 					    </c:if>    
 				    
 				  <c:if test="${not doneLoop}" >
-				         <a class="${i==nowPage?'pagination-active':page}" href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${i}">${i}</a> 
+				         <a class="${i==nowPage?'pagination-active':page}" href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${i}&normalCategoryNo=${normalCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">${i}</a> 
 				  </c:if>
 				   
 				</c:forEach>
 				</span> 
 
 				 <c:if test="${(startPage+blockCount)<=normalList.getTotalPages()}">
-				     <a class="pagination-older" href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${startPage+blockCount}">-NEXT-</a>
+				     <a class="pagination-older" href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${startPage+blockCount}&normalCategoryNo=${normalCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">-NEXT-</a>
 				 </c:if>
 		</div>
     </nav>

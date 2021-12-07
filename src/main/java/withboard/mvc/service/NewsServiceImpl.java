@@ -36,7 +36,7 @@ public class NewsServiceImpl implements NewsService {
 		case "title":
 			NewsList = newsRepository.findByTitleContaining(keyWord,pageable);
 			break;
-		case "writer":
+		case "nickname":
 			Member writer = memberRepository.findByNicknameContaining(keyWord);
 			NewsList = newsRepository.findByMember(writer,pageable);
 			break;

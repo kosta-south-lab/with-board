@@ -57,6 +57,8 @@ public class NewsController {
 		mv.addObject("blockCount", blockCount);
 	    mv.addObject("nowPage", nowPage);
 	    mv.addObject("startPage", startPage);
+	    mv.addObject("searchOption", searchOption);
+  	    mv.addObject("keyword", keyword);
 		return mv;
 				
 		

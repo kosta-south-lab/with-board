@@ -222,7 +222,10 @@
                   <button type="submit" class="btn btn-primary">댓글 달기</button>
 
                 </form>
-
+                <p>
+   	<div>
+		<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/meet'">리스트로 돌아가기</button>
+	</div>
               </div>
 
             </div><!-- End blog comments -->

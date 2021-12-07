@@ -54,25 +54,10 @@ public class NormalBoardController {
 		}
 
 		Pageable pageable = PageRequest.of((nowPage - 1), 9, Sort.by(sortType).descending());
-
-		
-		
-		//Page<Normal> normalList = normalBoardService.selectAll(normalCategoryNo, searchOption, keyword,pageable);
-		
-		
-//		 model.addAttribute("normalList",normalList);
-//		 model.addAttribute("normalCategoryNo", normalCategoryNo);
-//		 model.addAttribute("searchOption", searchOption);
-//		 model.addAttribute("keyword", keyword);
-		 
-		
+ 
 		int blockCount = 3;
 		int temp = (nowPage - 1) % blockCount;
 		int startPage = nowPage - temp;
-		
-//		model.addAttribute("blockCount", blockCount);
-//		model.addAttribute("nowPage", nowPage);
-	//	model.addAttribute("startPage", startPage);
 		
 		  Page<Normal> normalList = normalBoardService.selectAll(normalCategoryNo, searchOption, keyword,pageable); 
 		  ModelAndView mv = new ModelAndView();
@@ -82,6 +67,8 @@ public class NormalBoardController {
 		  mv.addObject("blockCount", blockCount);
 		  mv.addObject("nowPage", nowPage);
 		  mv.addObject("startPage", startPage);
+		  mv.addObject("searchOption", searchOption);
+		  mv.addObject("keyword", keyword);
 		 
 		 return mv;
 	}
