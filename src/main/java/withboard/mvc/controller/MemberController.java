@@ -144,7 +144,7 @@ public class MemberController {
 		request.getSession().setAttribute("loginId", member.getId());
         request.getSession().setAttribute("member", members); //전체 정보 가져오는 ...
 		
-		return "redirect:/home"; // 회원가입 완료후 갈 페이지 
+		return "../views/home"; // 회원가입 완료후 갈 페이지 
 	}
 	
 	

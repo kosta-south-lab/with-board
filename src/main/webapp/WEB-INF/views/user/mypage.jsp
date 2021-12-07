@@ -2,53 +2,101 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../common/header.jsp" />
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
+<!-- 부트스트랩 css 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<!--  부트스트랩 js 사용 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+	body {
+    background: #093040;
+}
 
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: #093040;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #093040;
+}
+
+.profile-button:focus {
+    background: #093040;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #093040;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+</style>
 </head>
 <body>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img class="rounded-circle mt-5" width="150px" src="${sessionScope.member.image}" onerror="this.src='../../../webapp/resources/images/profile/profile.png'">
+            <span class="font-weight-bold">ID : ${sessionScope.member.id}</span>
+            <span class="text-black-50">Email : ${sessionScope.member.email}</span>
+            <span>  <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> </span>     
+  			<span> <a href="../home">Home</a>  </span>
+            
+            <span> </span>
+            
+            </div>
+    
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">닉네임</label><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.nickname}"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">성별</label><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.gender}"></div>
+                    <div class="col-md-12"><label class="labels">지역</label><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.location}"></div>
+                    <div class="col-md-12"><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.location2}"></div>
+                   </div>
+      
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+            </div>
+        </div>
+       
+    </div>
+</div>
 
-<script type="text/javascript">
 
-/*   function withdraw(){
-	  confirm("정말 탈퇴하시겠습니까?");
-  }
-   */
-  
-</script>
- <form name="mypage" method="post" action="${pageContext.request.contextPath}/user/mypage">
-  
-<table>
-  <tr>
-  	<th>아이디</th>
-    <th>이미지</th>
-    <th>닉네임</th>
-    <th>성별</th>
-  </tr>
-  <tr>
-   <th><input type="text" readonly="readonly" id="id" name="id" value="${member.id}"></th> 
-    <th><input type="text" readonly="readonly" id="image" name="image" value="${member.image}"></th> 
-    <th><input type="text" readonly="readonly" id="nickname" name="nickname" value="${member.nickname}"></th>
-    <th><input type="text" readonly="readonly" id="gender" name="gender" value="${member.gender}"></th><p>
-  </tr>
-  <tr>
-  	<th>주소</th>
-  	
-  </tr>
-  <tr>
-  	<th><input type="text" readonly="readonly" id="location" name="location" value="${sessionScope.member.location}"></th>
-  	<th><input type="text" readonly="readonly" id="location2" name="location2" value="${sessionScope.member.location2}"></th><br>
- 	</tr>
-   <tr><p>
-  	<th>이메일</th>
-  	  <th><input type="text" readonly="readonly" id="email" name="email" value="${sessionScope.member.email}"></th>
-  </tr>
-  
-</table>
-<a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a>
-<a href="${pageContext.request.contextPath}/home">Home</a>
-<%-- <a href="${pageContext.request.contextPath}/user/delete">탈퇴하기</a> --%>
-</form>
+
+
 </body>
 </html>
+<jsp:include page="../common/footer.jsp" />
