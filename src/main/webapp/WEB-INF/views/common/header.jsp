@@ -91,7 +91,7 @@
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-		<a href="index"><img src="${pageContext.request.contextPath}/img/withboard_logo_basic.png" alt="withBoard" width="30%" height="30%"></a>
+		<a href="/index"><img src="${pageContext.request.contextPath}/img/withboard_logo_basic.png" alt="withBoard" width="30%" height="30%"></a>
       </div>
 
       <nav id="navbar" class="navbar">
