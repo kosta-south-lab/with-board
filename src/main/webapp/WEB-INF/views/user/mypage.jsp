@@ -62,9 +62,9 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-            <img class="rounded-circle mt-5" width="150px" src="${sessionScope.member.image}">
-            <span class="font-weight-bold">ID : ${sessionScope.member.id}</span>
-            <span class="text-black-50">Email : ${sessionScope.member.email}</span><p><p>
+            <img class="rounded-circle mt-5" width="150px" src="${member.image}">
+            <span class="font-weight-bold">ID : ${member.id}</span>
+            <span class="text-black-50">Email : ${member.email}</span><p><p>
             <span> <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> <a href="/index">Home</a> </span>
             </div>
     
@@ -75,12 +75,12 @@
                     <h4 class="text-right">Profile</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">닉네임</label><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.nickname}"></div>
+                    <div class="col-md-6"><label class="labels">닉네임</label><input type="text" readonly="readonly" class="form-control" value="${member.nickname}"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">성별</label><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.gender}"></div>
-                    <div class="col-md-12"><label class="labels">지역</label><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.location}"></div>
-                    <div class="col-md-12"><input type="text" readonly="readonly" class="form-control" value="${sessionScope.member.location2}"></div>
+                    <div class="col-md-12"><label class="labels">성별</label><input type="text" readonly="readonly" class="form-control" value="${member.gender}"></div>
+                    <div class="col-md-12"><label class="labels">지역</label><input type="text" readonly="readonly" class="form-control" value="${member.location}"></div>
+                    <div class="col-md-12"><input type="text" readonly="readonly" class="form-control" value="${member.location2}"></div>
                    </div>
       
                 <!-- <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div> -->
