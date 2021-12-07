@@ -23,37 +23,36 @@ import withboard.mvc.domain.Member;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/board/matchBoard")
 public class MatchBoardController {
 	private final MatchBoardService matchBoardService;
 	
-	@RequestMapping("/matchBoardList")
+	@RequestMapping("/board/matchBoard/matchBoardList")
 	public ModelAndView list() {
 		List<MatchBoard> matchBoardList = matchBoardService.selectAll();
 		return new ModelAndView("board/matchBoard/matchBoardList", "matchBoardList", matchBoardList);
 	}
 	
-	@RequestMapping("/insert")
+	@RequestMapping("/board/matchBoard/insert")
 	public String insert(MatchBoard matchBoard, HttpSession session) {
 		Member member = (Member) session.getAttribute("member");
 		matchBoardService.insert(matchBoard,member);
 		return "redirect:/board/matchBoard/matchBoardList";
 	}
 	
-	@RequestMapping("/delete/{boardNo}")
+	@RequestMapping("/board/matchBoard/delete/{boardNo}")
 	public String delete(@PathVariable Long boardNo) {
 		matchBoardService.delete(boardNo);
 		return "redirect:/board/matchBoard/matchBoardList";
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping("/board/matchBoard/update")
 	public ModelAndView update(MatchBoard matchBoard) {
 		MatchBoard mb = matchBoardService.update(matchBoard);
 		
 		return new ModelAndView("board/matchBoard/matchBoardRead","matchBoard",mb);
 	}
 	
-	@RequestMapping("/updateForm/{boardNo}")
+	@RequestMapping("/board/matchBoard/updateForm/{boardNo}")
 	public ModelAndView updateForm(@PathVariable Long boardNo) {
 		MatchBoard mb = matchBoardService.selectBy(boardNo, false);
 		
@@ -61,7 +60,7 @@ public class MatchBoardController {
 		 return mv;
 	}
 	
-	@RequestMapping("/read/{boardNo}")
+	@RequestMapping("/board/matchBoard/read/{boardNo}")
 	public ModelAndView read(@PathVariable Long boardNo , String flag) {
 		System.out.println("ddd "+boardNo);
 		
@@ -76,11 +75,11 @@ public class MatchBoardController {
 		return mv;
 	}
 	
-	@RequestMapping("/registerForm")
+	@RequestMapping("/board/matchBoard/registerForm")
 	public ModelAndView writeForm() {
 		return new ModelAndView("board/matchBoard/matchBoardRegister");
 	}
-	@RequestMapping("/test")
+	@RequestMapping("/board/matchBoard/test")
 	public ModelAndView test() {
 		return new ModelAndView("board/matchBoard/test");
 	}

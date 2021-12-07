@@ -1,120 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>ÁÖ¼Ò·Î Àå¼Ò Ç¥½ÃÇÏ±â</title>
-    
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	th, td{
+		padding: 10px 20px;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
-<p style="margin-top:-12px">
-    <em class="link">
-        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-            È¤½Ã ÁÖ¼Ò °á°ú°¡ Àß¸ø ³ª¿À´Â °æ¿ì¿¡´Â ¿©±â¿¡ Á¦º¸ÇØÁÖ¼¼¿ä.
-        </a>
-    </em>
-</p>
-<div id="map" style="width:100%;height:350px;"></div>
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e8afbfd30a8d5aef8be386257a994cf&libraries=services"></script>
-
-<script>
-
-
-var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-        level: 3 // ÁöµµÀÇ È®´ë ·¹º§
-    };  
-
-// Áöµµ¸¦ »ý¼ºÇÕ´Ï´Ù    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// ÁÖ¼Ò-ÁÂÇ¥ º¯È¯ °´Ã¼¸¦ »ý¼ºÇÕ´Ï´Ù
-var geocoder = new kakao.maps.services.Geocoder();
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-            var detailAddr = !!result[0].road_address ? '<div>µµ·Î¸íÁÖ¼Ò : ' + result[0].road_address.address_name + '</div>' : '';
-            detailAddr += '<div>Áö¹ø ÁÖ¼Ò : ' + result[0].address.address_name + '</div>';
-            
-            var content = '<div class="bAddr">' +
-                            '<span class="title">¹ýÁ¤µ¿ ÁÖ¼ÒÁ¤º¸</span>' + 
-                            detailAddr + 
-                        '</div>';
-
-            // ¸¶Ä¿¸¦ Å¬¸¯ÇÑ À§Ä¡¿¡ Ç¥½ÃÇÕ´Ï´Ù 
-            marker.setPosition(mouseEvent.latLng);
-            marker.setMap(map);
-
-            // ÀÎÆ÷À©µµ¿ì¿¡ Å¬¸¯ÇÑ À§Ä¡¿¡ ´ëÇÑ ¹ýÁ¤µ¿ »ó¼¼ ÁÖ¼ÒÁ¤º¸¸¦ Ç¥½ÃÇÕ´Ï´Ù
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
-            console.log(result[0]);
-            console.log(result[0].address.region_1depth_name+" "+result[0].address.region_2depth_name);
-            console.log(result[0].address.region_2depth_name);
-        }   
-    });
-});
-function displayCenterInfo(result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-        var infoDiv = document.getElementById('centerAddr');
-
-        for(var i = 0; i < result.length; i++) {
-            // ÇàÁ¤µ¿ÀÇ region_type °ªÀº 'H' ÀÌ¹Ç·Î
-            if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
-                break;
-            }
-        }
-    }    
-}
-var marker = new kakao.maps.Marker(), // Å¬¸¯ÇÑ À§Ä¡¸¦ Ç¥½ÃÇÒ ¸¶Ä¿ÀÔ´Ï´Ù
-infowindow = new kakao.maps.InfoWindow({zindex:1}); 
-function searchDetailAddrFromCoords(coords, callback) {
-    // ÁÂÇ¥·Î ¹ýÁ¤µ¿ »ó¼¼ ÁÖ¼Ò Á¤º¸¸¦ ¿äÃ»ÇÕ´Ï´Ù
-    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-}
-kakao.maps.event.addListener(map, 'idle', function() {
-    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-});
-
-function searchAddrFromCoords(coords, callback) {
-    // ÁÂÇ¥·Î ÇàÁ¤µ¿ ÁÖ¼Ò Á¤º¸¸¦ ¿äÃ»ÇÕ´Ï´Ù
-    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-}
-
-// ÁÖ¼Ò·Î ÁÂÇ¥¸¦ °Ë»öÇÕ´Ï´Ù
-geocoder.addressSearch('°æ±â ¼ö¿ø½Ã ÆÈ´Þ±¸ ¸Å»ê·Î1°¡ 16-5 / ·¹µå¹öÆ° ¼ö¿øÁ¡', function(result, status) {
-
-    // Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // °á°ú°ªÀ¸·Î ¹ÞÀº À§Ä¡¸¦ ¸¶Ä¿·Î Ç¥½ÃÇÕ´Ï´Ù
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // ÀÎÆ÷À©µµ¿ì·Î Àå¼Ò¿¡ ´ëÇÑ ¼³¸íÀ» Ç¥½ÃÇÕ´Ï´Ù
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">Áý</div>'
-        });
-        infowindow.open(map, marker);
-
-        // ÁöµµÀÇ Áß½ÉÀ» °á°ú°ªÀ¸·Î ¹ÞÀº À§Ä¡·Î ÀÌµ¿½ÃÅµ´Ï´Ù
-        map.setCenter(coords);
-    } 
-});    
-console.log("hi");
-console.log(content);
-function click(place) {
-	console.log(place);
 	
-}
-</script>
+	<form action="${pageContext.request.contextPath}/room/insert" method="post" name="registerForm">
+	<div class="container">
+		<h1>ì±„íŒ…ë°©</h1>
+		<div id="roomContainer" class="roomContainer">
+			<table id="roomList" class="roomList"></table>
+		</div>
+		<div>
+		<input type="hidden" id="joinMatchTitle" name="joinMatchTitle"> 
+		</div>
+		<div>
+			<table class="inputTable">
+				<tr>
+					<th>ë°© ì œëª©</th>
+					<th><input type="text" name="roomName" id="roomName"></th>
+					<th><button  id="createRoom">ë°© ë§Œë“¤ê¸°</button></th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	</form>
 </body>
 </html>

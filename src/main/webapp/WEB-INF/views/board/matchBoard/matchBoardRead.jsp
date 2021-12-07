@@ -62,7 +62,6 @@ setTimeout(function() {
 
 }); 
 
- 
 
 </script>
 <input type = "hidden" id = "location" value="${matchBoard.location}">
@@ -103,6 +102,26 @@ setTimeout(function() {
 			${matchBoard.etc}
 		</div>
 	</div>
+	<form action="${pageContext.request.contextPath}/room/insert" method="post" name="registerForm">
+	<div class="container">
+		<h1>채팅방</h1>
+		<div id="roomContainer" class="roomContainer">
+			<table id="roomList" class="roomList"></table>
+		</div>
+		<div>
+		</div>
+		<div>
+			<table class="inputTable">
+				<tr>
+				<th><input type="hidden" name="boardNo" id="boardNo" value="${matchBoard.boardNo}"></th>
+					<th>방 제목</th>
+					<th><input type="hidden" name="joinMatchTitle" id="joinMatchTitle" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></th>
+					<th><button  >채팅방 생성</button></th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	</form>
 	<div>
 		<button onclick="location.href='${pageContext.request.contextPath}/board/matchBoard/updateForm/${matchBoard.boardNo}'">수정하기</button>
 	</div>

@@ -32,4 +32,8 @@ public class JoinMatch {
 	@ManyToOne
 	@JoinColumn(name = "board_no")
 	private MatchBoard matchBoard; //MatchBoard로 해야하나 Board로 해야하나...
+	
+	private String joinMatchTitle;
+	
+	
 }
