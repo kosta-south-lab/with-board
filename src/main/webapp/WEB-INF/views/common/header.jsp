@@ -61,9 +61,7 @@
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1><a href="index.html">Eterna</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="${pageContext.request.contextPath}/img/logo.png" alt="" class="img-fluid"></a>-->
+		<a href="index"><img src="${pageContext.request.contextPath}/img/withboard_logo_basic.png" alt="withBoard" width="30%" height="30%"></a>
       </div>
 
       <nav id="navbar" class="navbar">
