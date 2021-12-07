@@ -65,7 +65,9 @@
             <img class="rounded-circle mt-5" width="150px" src="${member.image}">
             <span class="font-weight-bold">ID : ${member.id}</span>
             <span class="text-black-50">Email : ${member.email}</span><p><p>
-            <span> <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> <a href="/index">Home</a> </span>
+            <span> <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> 
+            <a href="${pageContext.request.contextPath}/user/passChange">비밀번호 변경하기</a>
+            <a href="/index">Home</a> </span>
             </div>
     
         </div>

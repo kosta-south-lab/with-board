@@ -195,5 +195,19 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 	
+
+	/**
+	 * 새 비밀번호 변경
+	 * */
+	@Override
+	public void changePass(String pass, String newPass) {
+		Member member = new Member();
+		if(member.getPw().equals(passwordEncoder.encode(pass))) {
+			boolean set = memberRepository.changePass(pass, newPass);
+			if(set==true) member.setPw(newPass);
+	}
+		
 	
+}
+
 }

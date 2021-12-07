@@ -71,6 +71,11 @@ public interface MemberService {
 	 * 비밀번호 메일 전송체크
 	 * */
 	boolean userEmailCheck(String userEmail, String userName);
+	
+	/**
+	 * 새 비밀번호 변경
+	 * */
+	public void changePass(String pass, String newPass);
 
 
 

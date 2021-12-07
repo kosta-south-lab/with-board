@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../common/header.jsp" />
 <head>
 <meta charset="UTF-8">
 	<script>
@@ -92,3 +93,4 @@
 </div>
 </body>
 </html>
+<jsp:include page="../common/footer.jsp" />

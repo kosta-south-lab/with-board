@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -280,5 +281,21 @@ public class MemberController {
 		        emailService.passwordMailSend(dto);
 
 		    }
+		    
+		    //비밀번호 변경 폼으로 이동~~
+		    @RequestMapping("/user/passChange")
+		    public void passChange() {}
+		    
+		    
+		    //비밀번호 변경
+		    @RequestMapping("/user/newPass")
+		    public String newPass(String pass, String newPass, HttpSession session) throws Exception {
+		    	
+			memberService.changePass(pass, newPass);
+			
+		       
+		        return "users/confirm";
+		    }
+		    
 	
 }
