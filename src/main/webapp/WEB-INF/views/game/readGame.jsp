@@ -25,14 +25,14 @@
 		   
 	   });
 	   
-	   $("input[id=gameRating]").click(function(){
+	   $("input:radio[name=gameRating]").click(function(){
 
 		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/insertRating");
 		   $("#requestForm").submit();
 	   
    	   });	
 	   
-	   $("input[id=gameLevel]").click(function(){
+	   $("input:radio[name=gameLevel]").click(function(){
 
 		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/insertLevel");
 		   $("#requestForm").submit();
@@ -137,9 +137,13 @@
 		<section id="portfolio-details" class="portfolio-details">
 			<div class="container">
 				<form action="${pageContext.request.contextPath}/favorites/insert">
+				<input type=hidden name="gameNo" value="${game.gameNo}">
+				<input type=hidden name="memberNo" value="${member.memberNo}">
 					<button>즐겨찾기 추가</button>
 				</form>
 				<form action="${pageContext.request.contextPath}/favorites/delete">
+				<input type=hidden name="gameNo" value="${game.gameNo}">
+				<input type=hidden name="memberNo" value="${member.memberNo}">
 					<button>즐겨찾기 해제</button>
 				</form>
 				<div class="row gy-4">
@@ -205,6 +209,8 @@
 								<form name="gameRating" id="gameRating" method="post">
 								    <fieldset>
 								        <legend>?이 보드게임을 해보셨나요<p>!경험을 공유해 주세요</p><p>평점</p></legend>
+								        	<input type=hidden name="gameNo" value="${game.gameNo}">
+								        	<input type=hidden name="memberNo" value="${member.memberNo}">
 									        <input type="radio" name="gameRating" value="5" id="gameRating1"><label for="gameRating1">⭐</label>
 									        <input type="radio" name="gameRating" value="4" id="gameRating2"><label for="gameRating2">⭐</label>
 									        <input type="radio" name="gameRating" value="3" id="gameRating3"><label for="gameRating3">⭐</label>
@@ -215,6 +221,8 @@
 								<form name="gameLevel" id="gameLevel" method="post">
 								    <fieldset>
 								        <legend>난이도</legend>
+								        	<input type=hidden name="gameNo" value="${game.gameNo}">
+								        	<input type=hidden name="memberNo" value="${member.memberNo}">
 									        <input type="radio" name="gameLevel" value="5" id="gameLevel1"><label for="gameLevel1">⭐</label>
 									        <input type="radio" name="gameLevel" value="4" id="gameLevel2"><label for="gameLevel2">⭐</label>
 									        <input type="radio" name="gameLevel" value="3" id="gameLevel3"><label for="gameLevel3">⭐</label>

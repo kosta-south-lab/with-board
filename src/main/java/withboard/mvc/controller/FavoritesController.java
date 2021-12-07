@@ -30,19 +30,19 @@ public class FavoritesController {
 	
 	
 	@RequestMapping("/insert")
-	public String insertFavorites(Favorites favorites) {
+	public String insertFavorites(Long gameNo, Long memberNo) {
 		
-		favoritesService.insertFavorites(favorites);
+		favoritesService.insertFavorites(gameNo, memberNo);
 		
-		return "redirect:/game/readGame/" + favorites.getGame().getGameNo();
+		return "redirect:/game/readGame/" + gameNo;
 	}
 	
 	@RequestMapping("/delete")
-	public String deleteFavorites(Favorites favorites) {
+	public String deleteFavorites(Long gameNo, Long memberNo) {
 		
-		favoritesService.deleteFavorites(favorites);
+		favoritesService.deleteFavorites(gameNo, memberNo);
 		
-		return "redirect:/game/readGame/" + favorites.getGame().getGameNo();
+		return "redirect:/game/readGame/" + gameNo;
 	}
 	
 }

@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Favorites;
+import withboard.mvc.domain.Game;
+import withboard.mvc.domain.Member;
 import withboard.mvc.repository.FavoritesRepository;
+import withboard.mvc.repository.GameRepository;
+import withboard.mvc.repository.MemberRepository;
 
 
 @Service
@@ -15,6 +19,10 @@ import withboard.mvc.repository.FavoritesRepository;
 public class FavoritesServiceImpl implements FavoritesService {
 
 	private final FavoritesRepository favoritesRepository;
+	
+	private final MemberRepository memberRepository;
+	
+	private final GameRepository gameRepository;
 	
 	
 	@Override
@@ -26,11 +34,18 @@ public class FavoritesServiceImpl implements FavoritesService {
 	}
 
 	@Override
-	public void insertFavorites(Favorites favorites) {
+	public void insertFavorites(Long gameNo, Long memberNo) {
 				
-		Favorites dbFavorites = selectBy(favorites.getGame().getGameNo(), favorites.getMember().getMemberNo());
+		Favorites dbFavorites = selectBy(gameNo, memberNo);
 				
 		if(dbFavorites==null) {
+			
+			Member member = memberRepository.getById(memberNo);
+			
+			Game game = gameRepository.getById(gameNo);
+			
+			Favorites favorites = new Favorites(null, member, game);
+			
 			favoritesRepository.save(favorites);
 		}else {
 			throw new RuntimeException("이미 즐겨찾기 추가 한 게임입니다!");
@@ -38,12 +53,12 @@ public class FavoritesServiceImpl implements FavoritesService {
 	}
 
 	@Override
-	public void deleteFavorites(Favorites favorites) {		
+	public void deleteFavorites(Long gameNo, Long memberNo) {		
 		
-		Favorites dbFavorites = selectBy(favorites.getGame().getGameNo(), favorites.getMember().getMemberNo());
+		Favorites dbFavorites = selectBy(gameNo, memberNo);
 		
 		if(dbFavorites!=null) {
-			favoritesRepository.delete(favorites);
+			favoritesRepository.delete(dbFavorites);
 		}else {
 			throw new RuntimeException("즐겨찾기 추가가 되지 않은 게임입니다!");
 		}	
