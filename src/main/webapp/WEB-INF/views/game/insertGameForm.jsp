@@ -13,25 +13,30 @@
  
  $(function(){
 	 
-	 $('.content')
+/* 	 $('.content')
 	 .on("dragover", dragOver)
 	 .on("dragleave", dragOver)
-	 .on("drop", uploadFiles);
+	 .on("drop", uploadFiles); */
 	 
 	 $("input[value=등록]").click(function(){
 			   				   
-		  console.debug("insertGameForm::socket>>", matchSocket)
+		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/insertGame");
+		   $("#requestForm").submit();
+		 
+/* 		  console.debug("insertGameForm::socket>>", matchSocket)
 		  if(matchSocket){
 			  var socketMsg1 = "insertGame," + "${member.nickname}" + ",test200,123";
 			 
 			  console.debug("ssssssssssmsg>", socketMsg1);
-			  matchSocket.send(socketMsg1);
+			  matchSocket.send(socketMsg1); */
 		  }
+		  
+
 	 });
 
- })
+ });
 
-function dragOver(e){
+/* function dragOver(e){
  e.stopPropagation();
  e.preventDefault();
  if (e.type == "dragover") {
@@ -67,7 +72,7 @@ function uploadFiles(e) {
    }else{
      alert('이미지가 아닙니다.');
      return;
-   }
+   } */
 }
 </script>
  

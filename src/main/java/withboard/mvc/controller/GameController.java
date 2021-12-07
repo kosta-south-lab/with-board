@@ -1,5 +1,12 @@
 package withboard.mvc.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
@@ -111,12 +119,35 @@ public class GameController {
 	 * 보드게임 등록
 	 */
 	@RequestMapping("/insertGame")
-	public String insertGame(Game game) {
+	public String insertGame(Game game, List<MultipartFile> filename, HttpSession session) {
 		
-		// 상세 내용에 특수문자, 스크립트 태그등 방지 하기 위한 코드 필요
-		//board.getContent().replace("<", "&lt;");
 		
-		gameService.insertGame(game);
+		//파일 저장
+		String path = session.getServletContext().getRealPath("/resources/images/game");
+		List<String> filenameList = new ArrayList<String>();
+
+		for(MultipartFile file : filename) {
+			
+			String originalFileName = file.getOriginalFilename();
+			
+			//파일이 들어오지 않아도 파일 1개가 ""로 들어오게된다. 그 경우 걸러내는 작업
+			if(originalFileName == "") {
+				break;
+			}
+			
+			String newFileName = this.changeFileName(originalFileName);
+			File newFile = new File(path + "/" + newFileName);
+			filenameList.add("/resources/images/game/" + newFileName);
+			try {				
+				file.transferTo(newFile);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+				
+		game.getGameDetail().replace("<", "&lt;");
+
+		gameService.insertGame(game, filenameList);
 		
 		return "redirect:/game/gameList";				
 	}
@@ -140,9 +171,32 @@ public class GameController {
 	 */
 	
 	@RequestMapping("/updateGame")
-	public ModelAndView updateGame(Game dbGame) {
+	public ModelAndView updateGame(Game dbGame, List<MultipartFile> filename, HttpSession session) {
 		
-		Game game = gameService.updateGame(dbGame);
+		//파일 저장
+		String path = session.getServletContext().getRealPath("/resources/images/board");
+		List<String> filenameList = new ArrayList<String>();
+		
+		for(MultipartFile file : filename) {
+			
+			
+			String originalFileName = file.getOriginalFilename();
+			if(originalFileName == "") {
+				break;
+			}
+			String newFileName = this.changeFileName(originalFileName);
+			
+			File newFile = new File(path + "/" + newFileName);
+			
+			filenameList.add("/resources/images/board/" + newFileName);
+			try {				
+				file.transferTo(newFile);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Game game = gameService.updateGame(dbGame, filenameList);
 		
 		return new ModelAndView("game/readGame", "game", game);
 	}
@@ -206,5 +260,15 @@ public class GameController {
 		return "redirect:/game/readGame/" + gameNo;
 	}
 	
+	/**
+	 * 파일이름 랜덤생성
+	 * */
+	private String changeFileName(String originalName){
+		//uuid 생성
+		UUID uuid = UUID.randomUUID();
+		//랜덤생성 + 파일이름
+		String savedName = uuid.toString() + "_" + originalName;		
+		return savedName;
+	}
 	
 }

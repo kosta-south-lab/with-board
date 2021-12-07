@@ -1,5 +1,8 @@
 package withboard.mvc.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -8,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Game;
+import withboard.mvc.domain.Image;
 import withboard.mvc.repository.GameRepository;
+import withboard.mvc.repository.ImageRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +22,7 @@ public class GameServiceImpl implements GameService {
 
 	
 	private final GameRepository gameRepository;
+	private final ImageRepository imageRepository;
 	
 	
 	// 검색 결과 - 페이징 처리
@@ -45,17 +51,19 @@ public class GameServiceImpl implements GameService {
 	//보드게임 등록
 
 	@Override
-	public void insertGame(Game game) {
+	public void insertGame(Game game, List<String> filenameList) {
 			
-		Game addGame = gameRepository.save(game);		
-		if(addGame == null) throw new RuntimeException("데이터 오류로 인해 등록에 실패하였습니다.");
+		gameRepository.save(game);		
 		
+		for(String fname : filenameList) {
+			imageRepository.save(new Image(null, fname, null, game));
+		}
 	}
 
 	//보드게임 수정
 	
 	@Override
-	public Game updateGame(Game game) {
+	public Game updateGame(Game game, List<String> filenameList) {
 		
 		Game dbGame = gameRepository.findById(game.getGameNo()).orElse(null);
 		if(dbGame==null) throw new RuntimeException("해당 보드게임은 존재하지 않습니다.");
@@ -72,6 +80,21 @@ public class GameServiceImpl implements GameService {
 		dbGame.setGameProcess(game.getGameProcess());
 		dbGame.setGameTheme(game.getGameTheme());
 		dbGame.setGameCategory(game.getGameCategory());
+		
+		//이미지테이블에서 이미지이름 삭제
+		List<Long> imageNoList = new ArrayList<Long>();
+		for(Image image : dbGame.getImageList()) {
+			imageNoList.add(image.getImageNo());
+		}
+		dbGame.setImageList(null);
+		for(Long imageNo : imageNoList) {
+			imageRepository.deleteById(imageNo);
+		}
+		
+		//이미지테이블에 새로운 이미지 이름 저장
+		for(String fname : filenameList) {
+			imageRepository.save(new Image(null, fname, null, dbGame));
+		}
 		
 		return dbGame;
 	}
