@@ -190,18 +190,20 @@ public class GameController {
 	 */
 	
 	@RequestMapping("/insertRating")
-	public String insertRating(GameRating gameRating) {
+	public String insertRating(Long gameNo, Long memberNo, int gameRating) {
 		
-		return "redirect:/game/readGame/" + gameRating.getGame().getGameNo();
+		gameRatingService.insertRating(gameNo, memberNo, gameRating);
+		
+		return "redirect:/game/readGame/" + gameNo;
 	}
 
 	/**
 	 * 보드게임 난이도 부여
 	 */
 	@RequestMapping("/insertLevel")
-	public String insertRating(GameLevel gameLevel) {
+	public String insertLevel(Long gameNo, Long memberNo) {
 		
-		return "redirect:/game/readGame/" + gameLevel.getGame().getGameNo();
+		return "redirect:/game/readGame/" + gameNo;
 	}
 	
 	
