@@ -151,13 +151,14 @@ public class MemberController {
 	
 	// 로그아웃 처리
 	@RequestMapping("/user/logout2")
-	public String logout2(HttpServletRequest request) throws Exception {
+	public String logout2(HttpServletRequest request, HttpSession session) throws Exception {
 		
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		if(loginId != null && !"".equals(loginId)) {
 			
 			request.getSession().setAttribute("loginId", "");
 			request.getSession().removeAttribute("loginId");//키값(loginId)에 해당되는 세션만 삭제함
+			session.invalidate();
 		}
 		
 		return "redirect:/user/loginForm";
