@@ -14,20 +14,7 @@ public class HomeController {
 	@Autowired
 	 MemberService memberService;
 	
-	@RequestMapping("/home")
-	public String home(HttpServletRequest request, Model model) {
-		
-		String nickname = "";
-		String loginId = (String) request.getSession().getAttribute("loginId");
-		
-		if(loginId != null && !"".equals(loginId)) {
-			//nickname = memberService.nickname(loginId);
-			nickname = "'로그인한 회원'";
-		}
-		
-		model.addAttribute("nickname", nickname);
-		
-		return "home";
-	}
+	@RequestMapping("/index")
+	public void index() {}
 
 }

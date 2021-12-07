@@ -3,7 +3,8 @@
     
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+<jsp:include page="../common/header.jsp" />
  <head>
   <meta charset="UTF-8">
   
@@ -11,22 +12,40 @@
   <meta id="_csrf" name="csrf" context="${_csrf.token}"/>
   <meta id="_csrf_header" neme="_csrf_header" context="${_csrf.headerName}"/>
  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
 
-  <title>회원가입 form</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <style>
+    body {
+      min-height: 100vh;
+
+      background: -webkit-gradient(linear, left bottom, right top, from(#093040), to(#093040));
+    }
+
+    .input-form {
+      max-width: 680px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
+  </style>
   
- <style type="">
- 
- </style>
  <script src="../js/jquery-3.6.0.js"></script>
  
  <script type="text/javascript">
- 
- 
- function cancel(){ //취소하기 눌렀을때
-		if(confirm("취소하시겠습니까?") == true){
-			parent.location.href = "/home";
-		 }
-	}
 
 
  function checkValid(frm){
@@ -85,97 +104,104 @@
 	}
  
  </script>
-  
-  
- </head>
- <body>
- <!-- spring security POST 전송시 무조건 csrf 를 보내야한다. (GET은 안보내도됨 )  -->
  
+</head>
+<body>
 
- <form name="signupForm" method="post" onsubmit="return checkValid(this);"action="${pageContext.request.contextPath}/user/joinConfirm">
-
- 	  <input type = hidden name = "key" value = "members">
-      <input type = hidden name = "methodName" value = "joinMember">
+  <div class="container">
+    <div class="input-form-backgroud row">
+      <div class="input-form col-md-12 mx-auto">
+        <h4 class="mb-3">회원가입</h4>
+        
+<form class="signupForm" novalidate name="signupForm" method="post" onsubmit="return checkValid(this);" action="${pageContext.request.contextPath}/user/joinConfirm">
+        
+      	<input type = hidden name = "key" value = "members">
+      	<input type = hidden name = "methodName" value = "joinMember">
       
-  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="signupForm">  
+  		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="signupForm">  
   
-   <table width="940" style="padding:5px 0 5px 0;" align="center">
-   <h1 align="center"> 회원가입  </h1>
-     
-        <tr>
-         <th><label for="id">아이디</label></th>
-         <td>
-         	<input type="text" name="id" id="id" value="">
-         	<c:if test="${!empty msg}">
+  		<div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="id">ID</label>
+              <input type="text" class="form-control" id="id" name="id" placeholder="" value="" required>
+              <c:if test="${!empty msg}">
          	<span style="color:red;margin-left:15px;">${msg}</span>
          	</c:if>
-         </td>
-       </tr>
-        <tr>
-         <th><label for="pw">비밀번호</label></th>
-         <td><input type="password" name="pw" id="pw" value="${member.pw}"> </td> <!-- 영문/숫자포함 6자 이상 -->
-       </tr>
-      <tr>
-         <th><label for="name"> 이름</label></th> <%--label을 사용할때 id값으로 지정해야한다. --%>
-         <td><input type="text" name="name" id="name" value="${member.name}"></td>
-      </tr>
-      <tr>
-         <th><label for="nickname">닉네임 </label></th>
-         <td><input type="text" name="nickname" id="nickname" value="${member.nickname}"></td>
-      </tr>
-      <!--  <tr>
-         <th>비밀번호 확인</th>
-         <td><input type="password" name="pwcheck" > </td> 영문/숫자포함 6자 이상
-       </tr> -->
-    	<tr>
-     	 <th><label for="gender1">성별</label></th>
-		<td> 
-     	<input type="radio" name="gender" id="gender1" value="male"${member.gender eq 'male' ? ' checked="checked"':''}/>
-     		<label for="gender1">MEN</label> 
-     	<input type="radio" name="gender" id="gender2" value="female"${member.gender eq 'female' ? ' checked="checked"':''}/>
-     		<label for="gender2">WOMAN</label> 
-		</td>
-   		 </tr>
-   		 <tr>
-        <tr>
-          <th><label for="email">이메일</label></th>
-          <td>
-            <input type='text' name="email" id="email" value="${member.email}">
-           <!--  <input type='text' name="email2" id="email2">
-              <select name="emailaddr">
-                 <option value="">직접입력</option>
-                 <option value="daum.net">daum.net</option>
-                 <option value="empal.com">empal.com</option>
-                 <option value="gmail.com">gmail.com</option>
-                 <option value="hanmail.net">hanmail.net</option>
-                 <option value="msn.com">msn.com</option>
-                 <option value="naver.com">naver.com</option>
-                 <option value="nate.com">nate.com</option>
-              </select> -->
-            </td>
-         </tr>
-         <tr>
-           <th><label for="location">주소</label></th>
-           <td>
-             <input type="text" name="location" id="location" value="${member.location}"> - 
-             <input type="text" name="location2" id="location2" value="${member.location2}">
-             <br>
+              <div class="invalid-feedback">
+                아이디를 입력해주세요.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="pw">PASSWORD</label>
+              <input type="password" class="form-control" id="pw" name="pw" placeholder="" value="${member.pw}" required>
+              <div class="invalid-feedback">
+                비밀번호를 입력해주세요.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="name">이름</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="" value="${member.name}" required>
+              <div class="invalid-feedback">
+                이름을 입력해주세요.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="nickname">닉네임</label>
+              <input type="text" class="form-control" id="nickname" name="nickname" placeholder="" value="${member.nickname}" required>
+              <div class="invalid-feedback">
+                닉네임을 입력해주세요.
+              </div>
+            </div>
+          </div>
+            <div class="row">
+            <div class="col-md-4 mb-2">
+              <label for="gender1">성별</label><p>
+              <input type="radio" class="form-control1" id="gender1" name="gender" value="male"${member.gender eq 'male' ? ' checked="checked"':''} />
+               <label for="gender1">MEN</label> &nbsp &nbsp &nbsp
+              <input type="radio" class="form-control2" id="gender2" name="gender" value="female"${member.gender eq 'female' ? ' checked="checked"':''}/>
+               <label for="gender2">WOMAN</label>
+              <div class="invalid-feedback">
+            </div>
+          </div>
+         </div>
+          <div class="mb-3">
+            <label for="email">이메일</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="${member.email}" required>
+            <div class="invalid-feedback">
+              이메일을 입력해주세요.
+            </div>
+          </div>
+			<div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="location">주소</label>
+              <input type="text" class="form-control" id="location" name="location" placeholder="ex) 서울특별시 " value="${member.location}" required>
+              <div class="invalid-feedback">
+                주소를 입력해주세요.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="location2">나머지 주소</label>
+              <input type="text" class="form-control" id="location2" name="location2" placeholder="ex) 강남구" value="${member.location2}" required>
+              <div class="invalid-feedback">
+                나머지 주소를 입력해주세요.
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">가입하기</button>
+          
+         <!-- <button class="btn btn-primary btn-lg btn-block" type="reset">취소</button> -->
+          <!-- <input type="reset" onclick="cancel();" value="취소">  -->
+        </form>
+      </div>
+    </div>
+    <footer class="my-3 text-center text-small">
+  <!--   <p class="mb-1">&copy; 2022 YD</p> -->  
+    </footer>
+  </div>
+</body>
 
-           </td>
-         </tr>
-        <tr>
-      <th>이미지</th>
-		<td>
-   		  <input type="image" name="image" id="image" value="첨부">       
-		</td>
-   		 </tr>
-           <tr>
-             <td colspan="2" align="center">
-               <input type="submit" value="가입하기">
-               <input type="reset" onclick="cancel();" value="취소">
-            </td>
-           </tr>
-           </table>
-          </form>
- </body>
 </html>
+<jsp:include page="../common/footer.jsp" />
+

@@ -44,7 +44,7 @@ public class NewsController {
 			keyword = "";
 		}
 		
-		Pageable pageable = PageRequest.of((nowPage - 1), 10, Sort.by(sortType));
+		Pageable pageable = PageRequest.of((nowPage - 1), 9, Sort.by(sortType).descending());
 		
 		int blockCount = 3;
 		int temp = (nowPage - 1) % blockCount;
@@ -57,6 +57,8 @@ public class NewsController {
 		mv.addObject("blockCount", blockCount);
 	    mv.addObject("nowPage", nowPage);
 	    mv.addObject("startPage", startPage);
+	    mv.addObject("searchOption", searchOption);
+  	    mv.addObject("keyword", keyword);
 		return mv;
 				
 		

@@ -2,13 +2,30 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../common/header.jsp" />
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<style type="text/css">
+	 @font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+  		font-family: 'IBMPlexSansKR-Regular';
+  		background-color: white;
+		argin: 0 auto;
+  	}
+</style>
+<title>아이디 찾기 결과</title>
 </head>
 <body>
 <h1>아이디 찾기 결과입니다. </h1>
-<p>찾은 id : ${member.id}</p>
+<p>찾은 id : ${sessionScope.member.id}</p>
+ <a href = ${pageContext.request.contextPath}/user/searchPass>비밀번호 찾기</a>
 
 </body>
 </html>
+<jsp:include page="../common/footer.jsp" />

@@ -128,6 +128,7 @@
         <div class="row">
           <div class="col-lg-12 d-flex sidebar-item search-form justify-content-center">
             <form action="${pageContext.request.contextPath}/board/meet" method="get" class="d-flex">
+              <input type="hidden" name="meetCategoryNo" value="${meetCategoryNo}">
               <select name = "searchOption" class="inputform mx-1">
                 <option id="title" value = "title">제목</option>
                 <option id="user" value = "nickname">작성자</option>
@@ -158,7 +159,7 @@
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach var="meet" items="${meetList}">
+				<c:forEach var="meet" items="${meetList.content}">
 					<div class="col-lg-4 p-3">
 			            <div class="box">
 			              <h3>${meet.meetCategory.meetCategoryName}</h3>
@@ -177,9 +178,42 @@
 		 </c:choose>       
         </div>
       </div>
-    </section><!-- End Pricing Section -->
+   </section><!-- End Pricing Section -->
+	<!-- 이전, 다음 표시 하기 (한블럭당 페이지 개수 제한)  -->
+	<c:set var="doneLoop" value="false" />
 
-  </main><!-- End #main -->
+	<!--  블럭당  -->
+	<!--  <nav class="pagination-container"> -->
+	<nav class="pagination-container">
+		<div class="pagination">
+			<c:set var="doneLoop" value="false" />
+
+			<c:if test="${(startPage-blockCount) > 0}">
+				<!-- (-2) > 0  -->
+				<a class="pagination-newer"
+					href="${pageContext.request.contextPath}/board/meet?nowPage=${startPage-1}&meetCategoryNo=${meetCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">-PREV-</a>
+			</c:if>
+
+			<span class="pagination-inner"> 
+				<c:forEach var='i' begin='${startPage}' end='${(startPage-1)+blockCount}'>
+					<c:if test="${(i-1)>=meetList.getTotalPages()}">
+						<c:set var="doneLoop" value="true" />
+					</c:if>
+
+					<c:if test="${not doneLoop}">
+						<a class="${i==nowPage?'pagination-active':page}"
+							href="${pageContext.request.contextPath}/board/meet?nowPage=${i}&meetCategoryNo=${meetCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">${i}</a>
+					</c:if>
+				</c:forEach>
+			</span>
+
+			<c:if test="${(startPage+blockCount)<=normalList.getTotalPages()}">
+				<a class="pagination-older"
+					href="${pageContext.request.contextPath}/board/meet?nowPage=${startPage+blockCount}&meetCategoryNo=${meetCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">-NEXT-</a>
+			</c:if>
+		</div>
+	</nav>
+</main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">

@@ -1,69 +1,98 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>일반게시판 목록</title>
-<style>
-	th, td{
-		padding: 10px 20px;
-		text-align: center;
-	}
-</style>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>일반게시판 목록</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
+  <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="${pageContext.request.contextPath}/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="${pageContext.request.contextPath}/css/board/normal/normalList.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Eterna - v4.7.0
+  * Template URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
+
 <body>
-	<table class="table">
-	    <tr>
-			<td colspan="2">
-				<div align="left">
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=1'">자유</button>
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=2'">공략</button>
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=3'">Q&A</button>
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=4'">정보</button>
-					<button type="button" class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=5'">예판/핫딜</button>
-				</div>
-			</td>
-			<td colspan="5">
-				<form action="${pageContext.request.contextPath}/board/normal/normalList" method="get">			
-					<input type="hidden" name="normalCategoryNo" value="${normalCategoryNo}">
-					<div align="right">
-						<select name = "searchOption" id=searchs>
-		                    <option id="title" class="btn btn-outline-dark" value = "title">제목</option>
-		                	<option id="user" class="btn btn-outline-dark" value = "writer">작성자</option>
-		                </select>
-						<input type = "text" id = "searchByTitle" placeholder="검색어를 입력하세요" name="keyword">
-		           		 <button>검색</button>
-					</div>
-				</form>
-			</td>
-		</tr>
-		<tr class="table-primary">
-	        <td valign="middle">
-	            <p align="center"><font color="black"><h6>번호</h6></font></p>
-	        </td>
- 	          <td valign="middle">
-	            <p align="center"><font color="black"><h6>카테고리</h6></font></p>
-	        </td> 
-	        <td valign="middle">
-	            <p align="center"><font color="black"><h6>제목</h6></font></p>
-	        </td>
-	        <td valign="middle">
-	            <p align="center"><font color="black"><h6>작성자</h6></font></p>
-	        </td>
-	        <td valign="middle">
-	            <p align="center"><font color="black"><h6>조회수</h6></font></p>
-	        </td>
-	        
-	        <td valign="middle">
-	            <p align="center"><font color="black"><h6>등록날짜</h6></font></p>
-	    	</td>
-	    </tr>
-	
-		<c:choose>
+
+  <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="${pageContext.request.contextPath}/board/normal/normalList">board</a></li>
+          <li>일반게시판</li>
+        </ol>
+        <h2>일반게시판</h2>
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="portfolio" class="portfolio p-1 blog">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="<c:if test="${ normalCategoryNo == 1}">filter-active</c:if>" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=1'">자유</li>
+              <li data-filter=".filter-app" class="<c:if test="${ normalCategoryNo == 2}">filter-active</c:if>" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=2'">공략</li>
+              <li data-filter=".filter-app" class="<c:if test="${ normalCategoryNo == 3}">filter-active</c:if>" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=3'">Q&A</li>
+              <li data-filter=".filter-app" class="<c:if test="${ normalCategoryNo == 4}">filter-active</c:if>" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=4'">정보</li>
+              <li data-filter=".filter-app" class="<c:if test="${ normalCategoryNo == 5}">filter-active</c:if>" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList?normalCategoryNo=5'">예판/핫딜</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 d-flex sidebar-item search-form justify-content-center">
+            <form action="${pageContext.request.contextPath}/board/normal/normalList" method="get" class="d-flex">
+            <input type="hidden" name="normalCategoryNo" value="${normalCategoryNo}">
+              <select name = "searchOption" class="inputform mx-1">
+                <option id="title" value = "title">제목</option>
+                <option id="user" value = "nickname">작성자</option>
+              </select>
+              <div class="inputform mx-1">
+                <input type="text" name="keyword">
+                <button type="submit"><i class="bi bi-search"></i></button>
+              </div>
+            </form>
+          
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="pricing" class="pricing">
+      <div class="container" style="position:relative;">
+      	<button id="gowrite" onClick="location.href='${pageContext.request.contextPath}/board/normal/registerForm'">글쓰기</button>
+        <div class="row">
+          <c:choose>
 			<c:when test="${empty requestScope.normalList}">
 				<tr>
 					<td colspan="6">
@@ -74,43 +103,65 @@
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach var="normal" items="${normalList}">
-					<tr onmouseover="this.style.background='#eaeaea'"
-						onmouseout="this.style.background='white'">
-	
-						<!-- 번호 -->
-						<td bgcolor="" align="center"><span style="font-size: 11pt;">${normal.boardNo}</span>
-						</td>
-	
-						<!-- 카테고리 -->
-						<td bgcolor="" align="center"><span style="font-size: 11pt;">${normal.normalCategory.normalCategoryName}</span>
-						</td> 
-	
-						<!-- 제목 -->
-						<td bgcolor="" align="center"><a href="${pageContext.request.contextPath}/board/normal/read/${normal.boardNo}"> <span
-								style="font-size: 11pt;">${normal.title}</span>
-						</a></td>
-	
-						<!-- 작성자 -->
-						<td bgcolor="" align="center"><span style="font-size: 11pt;">${normal.member.name}</span>
-						</td>
-	
-						<!-- 조회수 -->
-						<td bgcolor="" align="center"><span style="font-size: 11pt;">${normal.viewCount}</span>
-						</td>
-	
-						<!-- 등록날짜 -->
-						<td bgcolor="" align="center"><span style="font-size: 11pt;">${normal.regdate}</span>
-						</td>
-	
-					</tr>
+				<c:forEach var="normal" items="${normalList.content}">
+					<div class="col-lg-4 p-3">
+			            <div class="box">
+			              <h3>${normal.normalCategory.normalCategoryName}</h3>
+			              <h4>${normal.title}</h4>
+			              <ul>
+			                <li><i class="bx bx-check"></i>글번호 : ${normal.boardNo}</li>
+			                <li><i class="bx bx-check"></i>작성자 : ${normal.member.nickname}</li>
+			                <li><i class="bx bx-check"></i> 조회수 : ${normal.viewCount}</li>
+			                <li><i class="bx bx-check"></i> 등록일 : ${normal.regdate}</li>
+			              </ul>
+			              <a href="${pageContext.request.contextPath}/board/normal/read/${normal.boardNo}" class="buy-btn">상세보기</a>
+			            </div>
+			        </div>
 				</c:forEach>
 			</c:otherwise>
-		</c:choose>
-	</table>
-	<hr>
-	<div align=right>
-		<button type="submit" class="btn btn-outline-primary" onClick="location.href='${pageContext.request.contextPath}/board/normal/registerForm'">글쓰기</button>
-	</div>
+		 </c:choose>       
+        </div>
+      </div>
+    </section><!-- End Pricing Section -->
+    
+    <!-- 이전, 다음 표시 하기 (한블럭당 페이지 개수 제한)  -->
+ <c:set var="doneLoop" value="false"/>
+ 
+		<!--  블럭당  -->
+<!--  <nav class="pagination-container"> -->
+<nav class="pagination-container">
+	<div class="pagination">
+	<c:set var="doneLoop" value="false"/>
+		
+		  <c:if test="${(startPage-blockCount) > 0}"> <!-- (-2) > 0  -->
+		      <a class="pagination-newer"
+					href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${startPage-1}&normalCategoryNo=${normalCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">-PREV-</a>
+		  </c:if>
+		  
+				<span class="pagination-inner"> 
+				  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+blockCount}'> 
+				  
+					 <c:if test="${(i-1)>=normalList.getTotalPages()}">
+					       <c:set var="doneLoop" value="true"/>
+					    </c:if>    
+				    
+				  <c:if test="${not doneLoop}" >
+				         <a class="${i==nowPage?'pagination-active':page}" href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${i}&normalCategoryNo=${normalCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">${i}</a> 
+				  </c:if>
+				   
+				</c:forEach>
+				</span> 
+
+				 <c:if test="${(startPage+blockCount)<=normalList.getTotalPages()}">
+				     <a class="pagination-older" href="${pageContext.request.contextPath}/board/normal/normalList?nowPage=${startPage+blockCount}&normalCategoryNo=${normalCategoryNo}&searchOption=${searchOption}&keyword=${keyword}">-NEXT-</a>
+				 </c:if>
+		</div>
+    </nav>
+
+  </main><!-- End #main -->
+
+  <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
 </body>
+
 </html>

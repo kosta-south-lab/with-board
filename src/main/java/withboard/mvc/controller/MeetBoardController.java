@@ -7,9 +7,14 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +35,7 @@ public class MeetBoardController {
 	 * 모임 목록 페이지
 	 * */
 	@RequestMapping("/meet")
-	public ModelAndView selectAll(Long meetCategoryNo, String searchOption, String keyword) {
+	public ModelAndView selectAll(Long meetCategoryNo, String searchOption, String keyword, @RequestParam(defaultValue = "1") int nowPage) {
 		
 		if(meetCategoryNo == null) {
 			meetCategoryNo = 1L;
@@ -42,11 +47,25 @@ public class MeetBoardController {
 			keyword = "";
 		}
 		
-		List<Meet> meetList = meetBoardService.selectAll(meetCategoryNo, searchOption, keyword);
+		Pageable pageable = PageRequest.of(nowPage-1, 5, Direction.DESC, "boardNo");
+		
+		Page<Meet> meetList = meetBoardService.selectAllPaging(meetCategoryNo, searchOption, keyword, pageable);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/meet/meetList");
 		mv.addObject("meetList", meetList);
 		mv.addObject("meetCategoryNo", meetCategoryNo);
+		mv.addObject("searchOption", searchOption);
+		mv.addObject("keyword", keyword);
+		
+		//페이징 관련해서 requestScope에 담아야하는 값
+		int blockCount = 3;
+		int temp = (nowPage - 1) % blockCount;
+		int startPage = nowPage - temp;
+		
+	    mv.addObject("blockCount", blockCount);
+	    mv.addObject("nowPage", nowPage);
+	    mv.addObject("startPage", startPage);
+		
 		return mv;
 	}
 	

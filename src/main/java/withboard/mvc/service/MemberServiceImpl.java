@@ -1,6 +1,7 @@
 package withboard.mvc.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import lombok.AllArgsConstructor;
 import withboard.mvc.domain.Authorities;
 import withboard.mvc.domain.Game;
+import withboard.mvc.domain.Image;
 import withboard.mvc.domain.Mail;
 import withboard.mvc.domain.Member;
 import withboard.mvc.repository.AuthoritiesRepository;
@@ -128,46 +130,84 @@ public class MemberServiceImpl implements MemberService {
 	
 	//아이디 찾기
 	@Override
-	public String searchId(@PathVariable String email)  {
+	public Member searchId(@PathVariable String email)  {
 		System.out.println(email);
-		String id = memberRepository.searchId(email);
-		if(id==null) {
+		Member member = memberRepository.searchId(email);
+		if(member==null) {
 			throw new RuntimeException("해당 이메일로 가입한 회원이 존재하지 않습니다.");
 		}
 		
-		return id;
+		return member;
 	}
 
 
 	//회원정보 수정하기 
 	@Override
-	public Member updateInfo(Member member) {
+	public void updateInfo(Member member) {
 		
-		Member dbMember = memberRepository.findById(member.getMemberNo()).orElse(null);
-		if(dbMember==null) throw new RuntimeException("해당 회원은 존재하지 않습니다.");
+		Member mb = memberRepository.findById(member.getId());
+		//Member mb = memberRepository.findById(member.getMemberNo()).orElse(null);
 		
 		//회원정보 수정부분 
-		
-		dbMember.setId(member.getId());
-		dbMember.setImage(member.getEmail());
-		dbMember.setNickname(member.getNickname());
-		dbMember.setLocation(member.getLocation());
-		dbMember.setLocation2(member.getLocation2());
-		
-		return dbMember;
+		mb.setImage(member.getImage());
+		mb.setNickname(member.getNickname());
+		mb.setGender(member.getGender());
+		mb.setLocation(member.getLocation());
+		mb.setLocation2(member.getLocation2());
+		mb.setEmail(member.getEmail());
+	
 	}
 
+	/*
+	 * //탈퇴하기
+	 * 
+	 * @Override public void delete(Long id) { Optional<Member> member =
+	 * memberRepository.findById(id); if (member == null) throw new
+	 * RuntimeException("회원탈퇴에 실패했습니다.");
+	 * 
+	 * memberRepository.deleteById(id);
+	 * 
+	 * }
+	 */
 	
-	//탈퇴하기 
-	@Override
-	public void delete(Long id) {
-		Optional<Member> member = memberRepository.findById(id);
-		if (member == null)
-			throw new RuntimeException("회원탈퇴에 실패했습니다.");
-		
-		memberRepository.deleteById(id);
-		
+	/**
+	 * 파일이름 랜덤생성
+	 * */
+	private String changeFileName(String originalName){
+		//uuid 생성
+		UUID uuid = UUID.randomUUID();
+		//랜덤생성 + 파일이름
+		String savedName = uuid.toString() + "_" + originalName;		
+		return savedName;
 	}
 	
+	/**
+	 * 이메일 전송 체크
+	 * */
+	public boolean userEmailCheck(String userEmail, String userName) {
+
+        Member member = memberRepository.findUserByUserId(userEmail);
+        if(member!=null && member.getName().equals(userName)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 	
+
+	/**
+	 * 새 비밀번호 변경
+	 * */
+	@Override
+	public void changePass(String pass, String newPass) {
+		Member member = new Member();
+		if(member.getPw().equals(passwordEncoder.encode(pass))) {
+			boolean set = memberRepository.changePass(pass, newPass);
+			if(set==true) member.setPw(newPass);
+	}
+		
+	
+}
+
 }

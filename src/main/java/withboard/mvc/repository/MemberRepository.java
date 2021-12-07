@@ -53,7 +53,23 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	 */
 	
 	//이메일로 아이디 찾기
-	@Query(value="select id from member where email = :email", nativeQuery = true)
-	String searchId(String email);
+	@Query(value="select * from member where email = :email", nativeQuery = true)
+	Member searchId(String email);
+
+	//수정할때 
+	@Query(value = "select * from member where id = :id", nativeQuery = true)
+	Member findById(String id);
+	
+	//이메일로 비번찾기
+	@Query(value= "select * from member where email = :email", nativeQuery = true)
+	Member findUserByUserId(String email);
+	
+	//임시비번으로 변경
+	@Query(value = "update pw = :pw from member where id = :id", nativeQuery = true)
+	void updateUserPassword(String id, String pw);
+	
+	//새 비밀번호 변경
+	@Query(value = "update pw = :newPass from member where pw = :pass", nativeQuery = true)
+	boolean changePass(String pass, String newPass);
 	
 }

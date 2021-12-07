@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../common/header.jsp" />
 <head>
 <meta charset="UTF-8">
  <script type="text/javascript">
@@ -17,19 +18,37 @@
 	     });
   
   </script>
-<title>Insert title here</title>
+  <style type="text/css">
+    @font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+  	body{
+  		font-family: 'IBMPlexSansKR-Regular';
+  		background-color: white;
+		argin: 0 auto;
+  	}
+  	
+  	.card-body{
+  		 display: inline-block;
+          text-align: center;
+  	}
+  </style>
+<title>아이디/비밀번호 찾기</title>
 </head>
 <body>
 		
 		<div class="card-body">
-      <form class="form-signin" method="POST" action="/searchId">
-  		 <p class="text2"> ${findid2}</p>
-        <input type="email" name="email" id="email" class="form-control" placeholder="이메일" required><br>
-        	<p class="check" id="check">${check}</p><br/>
-        <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아 이 디 찾 기</button>
+      <form class="form-signin" method="POST" action="${pageContext.request.contextPath}/user/searchId2">
+        <input type="email" name="email" id="email" class="form-control" placeholder="등록된 이메일을 입력하세요." required><br>
+        <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아이디 찾기</button>
       
       </form>
         
 		</div>
 </body>
 </html>
+<jsp:include page="../common/footer.jsp" />

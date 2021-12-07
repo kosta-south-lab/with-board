@@ -37,28 +37,6 @@ public interface GameService {
 	/**
 	 * 검색 결과 필터
 	 */
-	
-//공용 부분 (User, Admin)	
-////////////////////////////////////////	
-	
-	/**
-	 * 보드게임 평점 부여
-	 */
-	
-	void insertRating(int rating);
-	
-	/**
-	 * 보드게임 난이도 평가
-	 */
-	
-	void insertDifficulty(int difficulty);
-	
-	/**
-	 * 보드게임 한줄평 작성
-	 */
-	
-	void insertComment(String comment);
-	
 
 //관리자 Only (Admin)
 /////////////////////////////////////////

@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Game;
+import withboard.mvc.domain.GameComment;
+import withboard.mvc.domain.GameLevel;
+import withboard.mvc.domain.GameRating;
+import withboard.mvc.service.GameCommentService;
+import withboard.mvc.service.GameLevelService;
+import withboard.mvc.service.GameRatingService;
 import withboard.mvc.service.GameService;
 
 @Controller
@@ -24,13 +29,13 @@ public class GameController {
 	
 	private final GameService gameService;
 		
-//	private final GameRatingService gameRatingService;
-//	
-//	private final GameLevelService gameLevelService;
-//	
-//	private final ImageService imageService;
-//	
-//	
+	private final GameRatingService gameRatingService;
+	
+	private final GameLevelService gameLevelService;
+	
+	private final GameCommentService gameCommentSerivce;
+	
+	
 
 	/**
 	 * 전체 검색
@@ -156,6 +161,50 @@ public class GameController {
 		
 	}
 	
+	/**
+	 * 한줄평 입력
+	 */
+	
+	@RequestMapping("/insertComment")
+	public String insertComment(GameComment gameComment) {
+		
+		gameCommentSerivce.insertComment(gameComment);
+		
+		return "redirect:/game/readGame/" + gameComment.getGame().getGameNo();
+	}
+	
+	/**
+	 * 한줄평 삭제 (어드민)
+	 */
+	
+	@RequestMapping("/deleteComment")
+	public String deleteComment(GameComment gameComment) {
+		
+		gameCommentSerivce.deleteComment(gameComment);
+		
+		return "redirect:/game/readGame/" + gameComment.getGame().getGameNo();
+	}
+	
+	/**
+	 * 보드게임 평점 부여
+	 */
+	
+	@RequestMapping("/insertRating")
+	public String insertRating(Long gameNo, Long memberNo, int gameRating) {
+		
+		gameRatingService.insertRating(gameNo, memberNo, gameRating);
+		
+		return "redirect:/game/readGame/" + gameNo;
+	}
+
+	/**
+	 * 보드게임 난이도 부여
+	 */
+	@RequestMapping("/insertLevel")
+	public String insertLevel(Long gameNo, Long memberNo) {
+		
+		return "redirect:/game/readGame/" + gameNo;
+	}
 	
 	
 }

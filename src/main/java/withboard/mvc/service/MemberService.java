@@ -29,12 +29,12 @@ public interface MemberService {
 	 * 회원정보 수정하기  
 	 * 
 	 */
-	Member updateInfo(Member member);
+	void updateInfo(Member member);
 	
 	 /**
-     * 게시물 삭제
+     * 회원정보 삭제
      * */
-    void delete(Long id);
+    //void delete(Long id);
 
 	
 	/**
@@ -65,7 +65,17 @@ public interface MemberService {
 	/**
 	 * 아이디 찾기
 	 * */
-	String searchId(String email);
+	Member searchId(String email);
+	
+	/**
+	 * 비밀번호 메일 전송체크
+	 * */
+	boolean userEmailCheck(String userEmail, String userName);
+	
+	/**
+	 * 새 비밀번호 변경
+	 * */
+	public void changePass(String pass, String newPass);
 
 
 

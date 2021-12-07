@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../common/header.jsp" />
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -10,3 +11,4 @@
 <h1> 회원가입이 성공적으로 이루어졌습니다.</h1>
 </body>
 </html>
+<jsp:include page="../common/footer.jsp" />
