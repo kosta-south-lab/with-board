@@ -12,7 +12,6 @@
 	$(function(){
 		
 	   $("input[value=수정하기]").click(function(){
-		   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
 		   
 		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/updateGameForm");
 		   $("#requestForm").submit();
@@ -24,9 +23,95 @@
 			   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/deleteGame");
 			   $("#requestForm").submit();
 		   
-	   });		   
+	   });
+	   
+	   $("input[id=gameRating]").click(function(){
+
+		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/insertRating");
+		   $("#requestForm").submit();
+	   
+   	   });	
+	   
+	   $("input[id=gameLevel]").click(function(){
+
+		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/insertLevel");
+		   $("#requestForm").submit();
+	   
+       });	
 	});
 </script>
+
+<style type="text/css">
+
+
+#gameRating fieldset {
+	width : 356px;
+	height : 196px;
+	display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+	direction: rtl; /* 이모지 순서 반전 */
+	border: 0; /* 필드셋 테두리 제거 */
+}
+
+#gameRating fieldset legend {
+	text-align: left;
+}
+
+#gameRating input[type=radio] {
+	display: none; /* 라디오박스 감춤 */
+}
+
+#gameRating label {
+	font-size: 2em; /* 이모지 크기 */
+	color: transparent; /* 기존 이모지 컬러 제거 */
+	text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+
+#gameRating label:hover {
+	text-shadow: 0 0 0 #F2AC57; /* 마우스 호버 */
+}
+
+#gameRating label:hover ~ label {
+	text-shadow: 0 0 0 #F2AC57; /* 마우스 호버 뒤에오는 이모지들 */
+}
+
+#gameRating input[type=radio]:checked ~ label {
+	text-shadow: 0 0 0 #F2AC57; /* 마우스 클릭 체크 */
+}
+
+#gameLevel fieldset {
+	width : 356px;
+	height : 196px;
+	display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+	direction: rtl; /* 이모지 순서 반전 */
+	border: 0; /* 필드셋 테두리 제거 */
+}
+
+#gameLevel fieldset legend {
+	text-align: left;
+}
+
+#gameLevel input[type=radio] {
+	display: none; /* 라디오박스 감춤 */
+}
+
+#gameLevel label {
+	font-size: 2em; /* 이모지 크기 */
+	color: transparent; /* 기존 이모지 컬러 제거 */
+	text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+
+#gameLevel label:hover {
+	text-shadow: 0 0 0 #F2AC57; /* 마우스 호버 */
+}
+
+#gameLevel label:hover ~ label {
+	text-shadow: 0 0 0 #F2AC57; /* 마우스 호버 뒤에오는 이모지들 */
+}
+
+#gameLevel input[type=radio]:checked ~ label {
+	text-shadow: 0 0 0 #F2AC57; /* 마우스 클릭 체크 */
+}
+</style>
 
 </head>
 
@@ -117,14 +202,27 @@
 							<p>${requestScope.game.gameDetail}</p>
 						</div>
 						<div class="portfolio-info">
-							<h3>
-								이 보드게임을 해보셨나요?
-								<p>경험을 공유해 주세요!</p>
-							</h3>
-							<ul>
-								<li><strong>평점</strong>: 별 모양 평점</li>
-								<li><strong>난이도</strong>: 별 모양 난이도</li>
-							</ul>
+								<form name="gameRating" id="gameRating" method="post">
+								    <fieldset>
+								        <legend>?이 보드게임을 해보셨나요<p>!경험을 공유해 주세요</p><p>평점</p></legend>
+									        <input type="radio" name="gameRating" value="5" id="gameRating1"><label for="gameRating1">⭐</label>
+									        <input type="radio" name="gameRating" value="4" id="gameRating2"><label for="gameRating2">⭐</label>
+									        <input type="radio" name="gameRating" value="3" id="gameRating3"><label for="gameRating3">⭐</label>
+									        <input type="radio" name="gameRating" value="2" id="gameRating4"><label for="gameRating4">⭐</label>
+									        <input type="radio" name="gameRating" value="1" id="gameRating5"><label for="gameRating5">⭐</label>
+								    </fieldset>
+								</form>
+								<form name="gameLevel" id="gameLevel" method="post">
+								    <fieldset>
+								        <legend>난이도</legend>
+									        <input type="radio" name="gameLevel" value="5" id="gameLevel1"><label for="gameLevel1">⭐</label>
+									        <input type="radio" name="gameLevel" value="4" id="gameLevel2"><label for="gameLevel2">⭐</label>
+									        <input type="radio" name="gameLevel" value="3" id="gameLevel3"><label for="gameLevel3">⭐</label>
+									        <input type="radio" name="gameLevel" value="2" id="gameLevel4"><label for="gameLevel4">⭐</label>
+									        <input type="radio" name="gameLevel" value="1" id="gameLevel5"><label for="gameLevel5">⭐</label>
+								    </fieldset>
+								</form>
+								
 						</div>
 						<div>
 							<form name="requestForm" method="post" id="requestForm">
