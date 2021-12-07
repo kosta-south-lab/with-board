@@ -66,7 +66,7 @@
             <span class="font-weight-bold">ID : ${sessionScope.member.id}</span>
             <span class="text-black-50">Email : ${sessionScope.member.email}</span>
             <span>  <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> </span>     
-  			<span> <a href="../home">Home</a>  </span>
+  			<span> <a href="/index">Home</a>  </span>
             
             <span> </span>
             
