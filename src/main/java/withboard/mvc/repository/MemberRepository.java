@@ -53,8 +53,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	 */
 	
 	//이메일로 아이디 찾기
-	@Query(value="select id from member where email = :email", nativeQuery = true)
-	String searchId(String email);
+	@Query(value="select * from member where email = :email", nativeQuery = true)
+	Member searchId(String email);
 
 	//수정할때 
 	@Query(value = "select * from member where id = :id", nativeQuery = true)

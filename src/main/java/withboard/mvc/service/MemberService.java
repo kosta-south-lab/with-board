@@ -65,7 +65,7 @@ public interface MemberService {
 	/**
 	 * 아이디 찾기
 	 * */
-	String searchId(String email);
+	Member searchId(String email);
 	
 	/**
 	 * 비밀번호 메일 전송체크

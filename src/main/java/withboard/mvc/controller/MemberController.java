@@ -249,11 +249,12 @@ public class MemberController {
 		@RequestMapping("/user/searchId2")
 		public String searchId(String email, HttpServletRequest request) {
 		  
-			String id = memberService.searchId(email);
+			Member member = memberService.searchId(email);
+			String id = member.getId();
 			System.out.println(id);
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("id", id);
+			session.setAttribute("member", member);
 			
 			return "user/idView";
 			

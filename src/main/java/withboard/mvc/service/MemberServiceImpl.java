@@ -130,14 +130,14 @@ public class MemberServiceImpl implements MemberService {
 	
 	//아이디 찾기
 	@Override
-	public String searchId(@PathVariable String email)  {
+	public Member searchId(@PathVariable String email)  {
 		System.out.println(email);
-		String id = memberRepository.searchId(email);
-		if(id==null) {
+		Member member = memberRepository.searchId(email);
+		if(member==null) {
 			throw new RuntimeException("해당 이메일로 가입한 회원이 존재하지 않습니다.");
 		}
 		
-		return id;
+		return member;
 	}
 
 
