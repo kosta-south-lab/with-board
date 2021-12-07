@@ -5,6 +5,9 @@
 <html lang="en">
 
 <head>
+
+<title>위보드 | 함께하는 즐거운 보드게임 커뮤니티</title>
+
 </head>
 
 <body>
