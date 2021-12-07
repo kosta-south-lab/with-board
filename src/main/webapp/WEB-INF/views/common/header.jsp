@@ -13,6 +13,18 @@
   <meta content="" name="keywords">
   
   <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript">
+  
+  
+  
+
+  function logout(){ //취소하기 눌렀을때
+  		if(confirm("로그아웃 하시겠습니까?") == true){
+  			parent.location.href = "/user/loginForm";
+  		 }
+  	}
+
+</script>
 
   <!-- Favicons -->
   <link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
@@ -49,9 +61,27 @@
         <i class="bi bi-envelope d-flex align-items-center"><a href="${pageContext.request.contextPath}/user/mypage">${sessionScope.member.id} 님 환영합니다!</a></i>
         <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
       </div>
+      
       <div class="social-links d-none d-md-flex align-items-center">
-        <a href="${pageContext.request.contextPath}/user/loginForm" class="login">로그인</a>
+		<c:if test="${!empty sessionScope.member.nickname}">
+		<a href="/user/logout2" onclick="logout();">로그아웃</a>
+		</c:if>
+		<c:if test="${empty sessionScope.member.nickname}">
+		<a href="/user/loginForm">로그인</a>
+		</c:if>
+		<c:if test="${empty sessionScope.member.nickname}">
         <a href="${pageContext.request.contextPath}/user/signupForm" class="signup">회원가입</a>
+        </c:if>
+        <c:if test="${!empty sessionScope.member.nickname}">
+        <a href="#" class="signup"></a>
+        </c:if>
+        
+        <c:if test="${!empty sessionScope.member.nickname}">
+        <a href="${pageContext.request.contextPath}/user/mypage">마이페이지</a>
+        <c:if test="${empty sessionScope.member.nickname}">
+		<a href="#"></a>
+		</c:if>
+        </c:if>
       </div>
     </div>
   </section>

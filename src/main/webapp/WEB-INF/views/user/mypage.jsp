@@ -62,7 +62,7 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-            <img class="rounded-circle mt-5" width="150px" src="${sessionScope.member.image}"> // onerror="this.src='../../../webapp/resources/images/profile/profile.png'"
+            <img class="rounded-circle mt-5" width="150px" src="${sessionScope.member.image}">
             <span class="font-weight-bold">ID : ${sessionScope.member.id}</span>
             <span class="text-black-50">Email : ${sessionScope.member.email}</span>
             <span>  <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> </span>     
