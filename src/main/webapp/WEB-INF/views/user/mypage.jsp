@@ -80,7 +80,7 @@ a:hover {
             <img class="rounded-circle mt-5" width="150px" src="${member.image}">
             <span class="font-weight-bold">ID : ${member.id}</span>
             <span class="text-black-50">Email : ${member.email}</span><p><p>
-            <hr style = "border:dotted 1px #093040;" >
+            <hr style = "border:dotted 1px #093040;">
             <span> <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a></span>
             <p>
             <span>  <a href="${pageContext.request.contextPath}/user/passChange">비밀번호 변경하기</a> </span>

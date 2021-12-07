@@ -251,7 +251,9 @@ public class MemberController {
 		  
 			String id = memberService.searchId(email);
 			System.out.println(id);
-			request.getSession().setAttribute("serchId", id);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id);
 			
 			return "user/idView";
 			
