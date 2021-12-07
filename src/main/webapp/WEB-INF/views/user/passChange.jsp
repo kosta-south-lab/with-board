@@ -63,6 +63,19 @@
     cursor: pointer;
     border: solid 1px #BA68C8
 }
+a:link {
+  color: #093040;
+  text-decoration: none;
+}
+a:visited {
+  color: #114559;
+  text-decoration: none;
+}
+a:hover {
+  color: #BFAF8F;
+  text-decoration: underline;
+}
+
 </style>
 </head>
 

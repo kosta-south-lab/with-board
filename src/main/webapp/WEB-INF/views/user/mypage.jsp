@@ -55,6 +55,21 @@
     cursor: pointer;
     border: solid 1px #BA68C8
 }
+
+a:link {
+  color: #093040;
+  text-decoration: none;
+}
+a:visited {
+  color: #114559;
+  text-decoration: none;
+}
+a:hover {
+  color: #BFAF8F;
+  text-decoration: underline;
+}
+
+
 </style>
 </head>
 <body>
@@ -65,9 +80,13 @@
             <img class="rounded-circle mt-5" width="150px" src="${member.image}">
             <span class="font-weight-bold">ID : ${member.id}</span>
             <span class="text-black-50">Email : ${member.email}</span><p><p>
-            <span> <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a> 
-            <a href="${pageContext.request.contextPath}/user/passChange">비밀번호 변경하기</a>
-            <a href="/index">Home</a> </span>
+            <hr style = "border:dotted 1px #093040;" >
+            <span> <a href="${pageContext.request.contextPath}/user/updateInfo">수정하기</a></span>
+            <p>
+            <span>  <a href="${pageContext.request.contextPath}/user/passChange">비밀번호 변경하기</a> </span>
+            <p> 
+          	<span>  <a href="/index">Home</a> </span>
+           
             </div>
     
         </div>
