@@ -85,5 +85,14 @@ public class Member {
 	
 	@OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<MatchAlarm> matchAlarmList;
+	
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+	private List<Favorites> favoritesList;
+	
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+	private List<GameRating> gameRatingList;
+	
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+	private List<GameComment> gameCommentList;
 
 }

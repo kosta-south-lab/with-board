@@ -111,9 +111,7 @@ function uploadFiles(e) {
         <div class="row gy-4">
           <div class="col-lg-8">
 			<h3>이미지 등록</h3>
-			<p class="content"></p>
-			<p class="content"></p>
-			<input class="content" multiple="multiple"  type="file" name="filename" />
+			<input multiple="multiple"  type="file" name="filename" />
             <div class="video-url">
             	<h2>관련 동영상</h2>
            		<input type=text name="videoUrl" maxlength="50" size="30">

@@ -16,35 +16,16 @@ public class GameCommentServiceImpl implements GameCommentService {
 	private final GameCommentRepository gameCommentRepository;
 
 	@Override
-	public GameComment selectBy(Long gameNo, Long memberNo) {
-
-		GameComment dbGameComment = gameCommentRepository.selectComment(gameNo, memberNo);
-
-		return dbGameComment;
+	public void insert(GameComment gameComment) {
+		gameCommentRepository.save(gameComment);
+		
 	}
 
 	@Override
-	public void insertComment(GameComment gameComment) {
-
-		GameComment dbGameComment = selectBy(gameComment.getGame().getGameNo(), gameComment.getMember().getMemberNo());
-
-		if (dbGameComment == null) {
-			gameCommentRepository.save(gameComment);
-		} else {
-			throw new RuntimeException("이미 한줄평을 등록 한 게임입니다!");
-		}
+	public void delete(Long commentNo) {
+		gameCommentRepository.deleteById(commentNo);
+		
 	}
 
-	@Override
-	public void deleteComment(GameComment gameComment) {
-
-		GameComment dbGameComment = selectBy(gameComment.getGame().getGameNo(), gameComment.getMember().getMemberNo());
-
-		if (dbGameComment != null) {
-			gameCommentRepository.delete(gameComment);
-		} else {
-			throw new RuntimeException("해당 게임에 작성한 한줄평이 없습니다!");
-		}
-	}
 
 }

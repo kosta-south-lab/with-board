@@ -33,7 +33,7 @@ public class GameController {
 	
 	private final GameLevelService gameLevelService;
 	
-	private final GameCommentService gameCommentSerivce;
+	private final GameCommentService gameCommentService;
 	
 	
 
@@ -168,7 +168,7 @@ public class GameController {
 	@RequestMapping("/insertComment")
 	public String insertComment(GameComment gameComment) {
 		
-		gameCommentSerivce.insertComment(gameComment);
+		gameCommentService.insert(gameComment);
 		
 		return "redirect:/game/readGame/" + gameComment.getGame().getGameNo();
 	}
@@ -178,11 +178,11 @@ public class GameController {
 	 */
 	
 	@RequestMapping("/deleteComment")
-	public String deleteComment(GameComment gameComment) {
+	public String deleteComment(Long commentNo) {
 		
-		gameCommentSerivce.deleteComment(gameComment);
+		gameCommentService.delete(commentNo);
 		
-		return "redirect:/game/readGame/" + gameComment.getGame().getGameNo();
+		return "redirect:/game/readGame/" + "1";
 	}
 	
 	/**
@@ -190,11 +190,11 @@ public class GameController {
 	 */
 	
 	@RequestMapping("/insertRating")
-	public String insertRating(Long gameNo, Long memberNo, int gameRating) {
+	public String insertRating(GameRating gameRating) {
 		
-		gameRatingService.insertRating(gameNo, memberNo, gameRating);
+		gameRatingService.insertRating(gameRating);
 		
-		return "redirect:/game/readGame/" + gameNo;
+		return "redirect:/game/readGame/" + "1";
 	}
 
 	/**
