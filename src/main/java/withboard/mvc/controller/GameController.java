@@ -74,16 +74,33 @@ public class GameController {
 	 */
 	
 	@RequestMapping("/searchGameList")
-	public void searchGame(Model model , @RequestParam(value = "keyword", defaultValue = "") String keyword) {
+	public void searchGame(Model model , @RequestParam(defaultValue = "1") int nowPage, 
+			@RequestParam(value = "keyword", defaultValue = "") String keyword,
+			@RequestParam(value = "sortType", defaultValue="gameNo") String sortType) {
 				
 		
-		System.out.println("내가 받은 키워드 : " + keyword);
+//		System.out.println("내가 받은 키워드 : " + keyword);
+//		
+//		List<Game> gameList = gameService.searchByName(keyword);
+//		
+//		model.addAttribute("gameList", gameList);
+//		
+//		System.out.println("내가 받은 게임리스트 : " + gameList);
 		
-		List<Game> gameList = gameService.searchByName(keyword);
+		
+		Pageable pageable = PageRequest.of((nowPage - 1), 9, Sort.by(sortType).descending());
+		
+		Page<Game> gameList = gameService.searchByName(keyword, pageable);
 		
 		model.addAttribute("gameList", gameList);
 		
-		System.out.println("내가 받은 게임리스트 : " + gameList);
+		int blockCount = 3;
+		int temp = (nowPage - 1) % blockCount;
+		int startPage = nowPage - temp;
+		
+		model.addAttribute("blockCount", blockCount);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
 			
 	}
 	

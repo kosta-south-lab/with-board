@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="../common/header.jsp" />
@@ -433,6 +434,76 @@
 			</c:forEach>
 		</c:otherwise>
 	</c:choose>
+	
+	    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-8 entries">
+            <div class="blog-comments">
+              <h4 class="comments-count">
+              <c:choose>
+              	<c:when test="${empty game.gameCommentList}">0</c:when>
+              	<c:otherwise>
+              		${fn:length(game.gameCommentList)}
+              	</c:otherwise>
+              </c:choose>
+			  개의 댓글이 달렸어요
+			  </h4>
+       
+              <c:forEach items="${game.gameCommentList}" var="gameComment">
+	              <div id="comment-1" class="comment">
+	                <div class="d-flex">
+	                  <div class="comment-img"><img src="${pageContext.request.contextPath}/resources/images/profile/profile.png" alt="프로필이미지"></div>
+	                  <div>
+	                    <h5 class="d-flex justify-content-between">
+	                    	<a href="">${gameComment.member.name}</a>
+	                    	<c:if test="${gameComment.member.id == sessionScope.member.id}">
+		                    	<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${gameComment.commentNo}?boardType=meet&boardNo=${meet.boardNo}'">삭제</button>
+	                    	</c:if>
+	                    </h5>
+	                    <fmt:parseDate value="${gameComment.commentDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedReplyDateTime" type="both"/>
+	                    <time><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${parsedReplyDateTime}"/></time>
+	                    <p>
+	                      ${gameComment.gameCommentContents}
+	                    </p>
+	                  </div>
+	                </div>
+	              </div><!-- End comment #1 -->
+			  </c:forEach>
+			  
+			
+              <div class="reply-form">
+				<c:if test="${!empty sessionScope.member.id}">
+	                <h4>댓글을 남겨주세요!</h4>
+	                <form action="${pageContext.request.contextPath}/board/reply/insert" method = "post">
+	              
+	                  <!-- 댓글달고 각각의 글 상세 페이지로 넘어오기 위함 -->
+					  <input type="hidden" name="boardNo" value="${meet.boardNo}">
+					  <input type="hidden" name="boardType" value="meet">
+					  
+	                  <div class="row">
+	                    <div class="col form-group">
+	                      <textarea name="replyContent" class="form-control" placeholder="댓글 내용"></textarea>
+	                    </div>
+	                  </div>
+	                  <button type="submit" class="btn btn-primary">댓글 달기</button>
+	
+	                </form>
+	                <p>
+				</c:if>
+			   	<div>
+					<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/meet'">리스트로 돌아가기</button>
+				</div>
+              </div>
+
+            </div><!-- End blog comments -->
+
+          </div><!-- End blog entries list -->
+        </div>
+
+      </div>
+    </section><!-- End Blog Single Section -->
 
 	</main>
 	<!-- End #main -->

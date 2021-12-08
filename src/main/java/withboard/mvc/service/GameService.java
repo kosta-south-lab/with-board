@@ -24,7 +24,7 @@ public interface GameService {
 	 * 보드게임 제목 키워드로 검색
 	 */
 	
-	List<Game> searchByName(String keyword);
+	Page<Game> searchByName(String keyword, Pageable pageable);
 	
 	/**
 	 * 상세 보드게임 조회

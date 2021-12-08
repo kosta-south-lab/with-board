@@ -78,12 +78,12 @@
                   <a href="${pageContext.request.contextPath}${image.imageUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="보드게임 이미지 확대"><i class="bx bx-plus"></i></a>
                   <a href="${pageContext.request.contextPath}/game/readGame/${game.gameNo}" title="상세 페이지로 가기"><i class="bx bx-link"></i></a>
                 </div>
-                </c:forEach>
-        		</c:forEach>
+
               </div>
             </div>
           </div>
-          
+	           </c:forEach>
+	  		</c:forEach> 
           </c:otherwise>
 		</c:choose>
         </div>

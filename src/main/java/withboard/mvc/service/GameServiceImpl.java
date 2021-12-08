@@ -35,9 +35,9 @@ public class GameServiceImpl implements GameService {
 	
 	// 보드게임 제목 키워드로 검색
 	
-	public List<Game> searchByName(String keyword){
+	public Page<Game> searchByName(String keyword, Pageable pageable){
 		
-		return gameRepository.findBygameNameLike(keyword);
+		return gameRepository.findByGameNameContaining(keyword, pageable);
 	}
 	
 	// 상세 보드게임 조회
