@@ -47,7 +47,7 @@ public class MeetBoardController {
 			keyword = "";
 		}
 		
-		Pageable pageable = PageRequest.of(nowPage-1, 5, Direction.DESC, "boardNo");
+		Pageable pageable = PageRequest.of(nowPage-1, 9, Direction.DESC, "boardNo");
 		
 		Page<Meet> meetList = meetBoardService.selectAllPaging(meetCategoryNo, searchOption, keyword, pageable);
 		ModelAndView mv = new ModelAndView();

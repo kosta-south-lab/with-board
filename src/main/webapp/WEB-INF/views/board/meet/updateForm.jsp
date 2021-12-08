@@ -100,7 +100,7 @@
             <form action="${pageContext.request.contextPath}/board/meet/update" method="post" name="registerForm" enctype="multipart/form-data" class="php-email-form">
               <input type="hidden" name="boardNo" value="${meet.boardNo}">
               <div class="form-group">
-                <input type="text" class="form-control" name="title" placeholder="제목" required>
+                <input type="text" class="form-control" name="title" placeholder="제목" required value="${meet.title}">
               </div>
               <div class="form-group mt-3">
                 <select class="form-control" name="gameNo" style="font-size:14px; color:gray;">
@@ -113,25 +113,28 @@
               <div class="form-group mt-3">
                 <select class="form-control" name="meetCategoryNo" style="font-size:14px; color:gray;">
                   <option value="0">카테고리 선택</option>
-                  <option value="1">정기모임모집</option>
-				  <option value="2">정기모임후기</option>
+                  <option value="1" <c:if test="${meet.meetCategory.meetCategoryNo == 1}">selected</c:if>>정기모임모집</option>
+				  <option value="2" <c:if test="${meet.meetCategory.meetCategoryNo == 2}">selected</c:if>>정기모임후기</option>
                 </select>
               </div>
               <div class="row mt-3">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="location" class="form-control" placeholder="상세주소" required>
+                  <input type="text" name="location" class="form-control" placeholder="상세주소" required value="${meet.location}"> 
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="text" class="form-control" name="location2" placeholder="지역" required>
+                  <input type="text" class="form-control" name="location2" placeholder="지역" required value="${meet.location2}">
                 </div>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea>
+                <textarea class="form-control" name="content" rows="10" placeholder="내용을 입력하세요" required>${meet.content}</textarea>
               </div>
               <div class="form-group mt-3">
                 <input class="form-control" type="file" name="filename" multiple style="font-size:14px; color:gray;">
               </div>
-              <div class="text-center mt-3"><input type="submit" value="등록하기"></div>
+              <div class="text-center mt-3">
+              	<input type="submit" value="수정하기">
+			  	<input type="button" value="돌아가기" onclick="history.back()">
+			  </div>
             </form>
           </div>
 
