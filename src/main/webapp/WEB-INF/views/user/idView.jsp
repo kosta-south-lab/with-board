@@ -15,7 +15,7 @@
 
 body{
   		font-family: 'IBMPlexSansKR-Regular';
-  		background-color: white;
+  		background-color: #093040;
 		argin: 0 auto;
   	}
 </style>

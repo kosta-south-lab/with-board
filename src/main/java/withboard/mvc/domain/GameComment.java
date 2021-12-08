@@ -33,7 +33,7 @@ public class GameComment {
 	private Long commentNo;
 
 	@Column(length = 1000)
-	private String gameComment;
+	private String gameCommentContents;
 
 	@CreationTimestamp
 	private LocalDateTime commentDate;

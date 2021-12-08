@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,5 +65,11 @@ public class Game {
 	
 	@OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
 	private List<Image> imageList;
+	
+	@OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+	private List<Favorites> favoritesList;
+	
+	@OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+	private List<GameRating> gameRatingList;
 
 }

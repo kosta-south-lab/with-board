@@ -77,7 +77,7 @@ a:hover {
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-            <img class="rounded-circle mt-5" width="150px" src="${member.image}">
+            <img class="rounded-circle mt-5" width="150px" src="${member.image}" onerror="this.src='${pageContext.request.contextPath}/img/user.png'">
             <span class="font-weight-bold">ID : ${member.id}</span>
             <span class="text-black-50">Email : ${member.email}</span><p><p>
             <hr style = "border:dotted 1px #093040;">

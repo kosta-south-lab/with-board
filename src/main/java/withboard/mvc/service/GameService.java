@@ -1,5 +1,7 @@
 package withboard.mvc.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -45,13 +47,13 @@ public interface GameService {
 	 * 보드게임 등록
 	 */
 	
-	void insertGame(Game game);
+	void insertGame(Game game, List<String> filenameList);
 		
 	/**
 	 * 보드게임 수정 
 	 */
 	
-	Game updateGame(Game game);
+	Game updateGame(Game game, List<String> filenameList);
 	
 	/**
 	 * 보드게임 삭제

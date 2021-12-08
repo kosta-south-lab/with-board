@@ -29,27 +29,27 @@ public class FavoritesServiceImpl implements FavoritesService {
 	public Favorites selectBy(Long gameNo, Long memberNo) {
 		
 		Favorites dbFavorites = favoritesRepository.selectFavorites(gameNo, memberNo);
-		
+				
 		return dbFavorites;
 	}
 
 	@Override
-	public void insertFavorites(Long gameNo, Long memberNo) {
+	public void insertFavorites(Favorites favorites) {
 				
-		Favorites dbFavorites = selectBy(gameNo, memberNo);
+		//Favorites dbFavorites = selectBy(favorites.getGame().getGameNo(), favorites.getMember().getMemberNo());
 				
-		if(dbFavorites==null) {
+		//if(dbFavorites==null) {
 			
-			Member member = memberRepository.getById(memberNo);
+			//Member member = memberRepository.getById(memberNo);
 			
-			Game game = gameRepository.getById(gameNo);
+			//Game game = gameRepository.getById(gameNo);
 			
-			Favorites favorites = new Favorites(null, member, game);
+			//Favorites favorites = new Favorites(null, member, game);
 			
 			favoritesRepository.save(favorites);
-		}else {
-			throw new RuntimeException("이미 즐겨찾기 추가 한 게임입니다!");
-		}				
+		//}else {
+		//	throw new RuntimeException("이미 즐겨찾기 추가 한 게임입니다!");
+		//}				
 	}
 
 	@Override

@@ -6,7 +6,7 @@ public interface FavoritesService {
 
 	public Favorites selectBy(Long gameNo, Long memberNo);
 	
-	public void insertFavorites(Long gameNo, Long memberNo);
+	public void insertFavorites(Favorites favorites);
 	
 	public void deleteFavorites(Long gameNo, Long memberNo);
 	

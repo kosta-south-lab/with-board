@@ -13,25 +13,30 @@
  
  $(function(){
 	 
-	 $('.content')
+/* 	 $('.content')
 	 .on("dragover", dragOver)
 	 .on("dragleave", dragOver)
-	 .on("drop", uploadFiles);
+	 .on("drop", uploadFiles); */
 	 
 	 $("input[value=등록]").click(function(){
 			   				   
-		  console.debug("insertGameForm::socket>>", matchSocket)
+		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/insertGame");
+		   $("#requestForm").submit();
+		 
+/* 		  console.debug("insertGameForm::socket>>", matchSocket)
 		  if(matchSocket){
 			  var socketMsg1 = "insertGame," + "${member.nickname}" + ",test200,123";
 			 
 			  console.debug("ssssssssssmsg>", socketMsg1);
-			  matchSocket.send(socketMsg1);
+			  matchSocket.send(socketMsg1); */
 		  }
+		  
+
 	 });
 
- })
+ });
 
-function dragOver(e){
+/* function dragOver(e){
  e.stopPropagation();
  e.preventDefault();
  if (e.type == "dragover") {
@@ -67,7 +72,7 @@ function uploadFiles(e) {
    }else{
      alert('이미지가 아닙니다.');
      return;
-   }
+   } */
 }
 </script>
  
@@ -111,9 +116,7 @@ function uploadFiles(e) {
         <div class="row gy-4">
           <div class="col-lg-8">
 			<h3>이미지 등록</h3>
-			<p class="content"></p>
-			<p class="content"></p>
-			<input class="content" multiple="multiple"  type="file" name="filename" />
+			<input multiple="multiple"  type="file" name="filename" />
             <div class="video-url">
             	<h2>관련 동영상</h2>
            		<input type=text name="videoUrl" maxlength="50" size="30">

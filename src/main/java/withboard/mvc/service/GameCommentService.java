@@ -4,9 +4,15 @@ import withboard.mvc.domain.GameComment;
 
 public interface GameCommentService {
 	
-	public GameComment selectBy(Long gameNo, Long memberNo);
 
-	public void insertComment(GameComment gameComment);
+	  /**
+	   * 등록하기
+	   * */
+		void insert(GameComment gameComment);
 		
-	public void deleteComment(GameComment gameComment);
+		/**
+		 * 삭제
+		 * */
+		void delete(Long commentNo);
+	
 }

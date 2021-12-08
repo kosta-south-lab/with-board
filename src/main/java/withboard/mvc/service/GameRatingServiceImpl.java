@@ -33,22 +33,22 @@ public class GameRatingServiceImpl implements GameRatingService {
 	}
 
 	@Override
-	public void insertRating(Long gameNo, Long memberNo, int gameRating) {
+	public void insertRating(GameRating gameRating) {
 
-		GameRating dbGameRating = selectBy(gameNo, memberNo);
+		//GameRating dbGameRating = selectBy(gameNo, memberNo);
 		
-		if(dbGameRating==null) {
+		//if(dbGameRating==null) {
 			
-			Game game = gameRepository.getById(gameNo);
+		//Game game = gameRepository.getById(gameNo);
 			
-			Member member = memberRepository.getById(memberNo);
+		//Member member = memberRepository.getById(memberNo);
 			
-			GameRating gr = new GameRating(null, game, member, gameRating);
+		//	GameRating gr = new GameRating(null, game, member, score);
 			
-			gameRatingRepository.save(gr);
-		}else {
-			throw new RuntimeException("이미 평점 등록을 하셨습니다!");
-		}	
+			gameRatingRepository.save(gameRating);
+		//}else {
+		//	throw new RuntimeException("이미 평점 등록을 하셨습니다!");
+		//}	
 		
 		
 	}
