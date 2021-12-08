@@ -43,11 +43,15 @@ public class SocketHandler extends TextWebSocketHandler {
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		 
+		Map<String, Object> httpSession = session.getAttributes();
+		Member loginUser = (Member)httpSession.get("member");
 		
 	
 		//메시지 발송
 		String jsonStr = message.getPayload();
 		ChatMessage obj = objectMapper.readValue(jsonStr, ChatMessage.class);
+		
+		
 		Member member = memberRepository.userInfo(obj.getUserName());
 //		Member member= new Member();
 //		member.setMemberNo(Long.parseLong(obj.getMemberNo()));
@@ -59,16 +63,54 @@ public class SocketHandler extends TextWebSocketHandler {
 		chatLog.setMember(member);
 		
 		chatLogService.insert(chatLog);
-		
-		List<ChatLog> chatLogList = chatLogService.chatLogList(Long.parseLong(obj.getRoomNumber()));
-		ChatLog[] strArray = chatLogList.toArray(new ChatLog[chatLogList.size()]);
-		for (int j=0; j< strArray.length;j++) {
-		obj.setType("message");
-		obj.setRoomNumber(Long.toString(strArray[j].getJoinMatchNo()));
-		obj.setMsg(strArray[j].getChatLogContent());
-		obj.setUserName(strArray[j].getNickname());
-		obj.setSessionId(obj.getSessionId());
-		
+	
+		if(obj.getFlag() == null) {
+			
+			List<ChatLog> chatLogList = chatLogService.chatLogList(Long.parseLong(obj.getRoomNumber()));
+			ChatLog[] strArray = chatLogList.toArray(new ChatLog[chatLogList.size()]);
+			
+			for (int j=0; j< strArray.length;j++) {
+				obj.setType("message");
+				obj.setRoomNumber(Long.toString(strArray[j].getJoinMatchNo()));
+				obj.setMsg(strArray[j].getChatLogContent());
+				obj.setUserName(strArray[j].getNickname());
+				obj.setSessionId(obj.getSessionId());
+				System.out.println(obj.getSessionId());
+			
+			
+			
+			String rN = obj.getRoomNumber();
+			HashMap<String, Object> temp = new HashMap<String, Object>();
+			if(rls.size() > 0) {
+				for(int i=0; i<rls.size(); i++) {
+					String roomNumber = (String) rls.get(i).get("roomNumber"); //세션리스트의 저장된 방번호를 가져와서
+					if(roomNumber.equals(rN)) { //같은값의 방이 존재한다면
+						temp = rls.get(i); //해당 방번호의 세션리스트의 존재하는 모든 object값을 가져온다.
+						break;
+					}
+				} 
+				
+				//해당 방의 세션들만 찾아서 메시지를 발송해준다.
+				for(String k : temp.keySet()) { 
+					if(k.equals("roomNumber")) { //다만 방번호일 경우에는 건너뛴다.
+						continue;
+					}
+					
+					WebSocketSession wss = (WebSocketSession) temp.get(k);
+					
+					if(wss != null) {
+						try {
+							if(session.getId().equals(wss.getId())) {
+							  wss.sendMessage(new TextMessage(objectMapper.writeValueAsString(obj)));
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			}
+		}else {
 		
 		String rN = obj.getRoomNumber();
 		HashMap<String, Object> temp = new HashMap<String, Object>();
@@ -98,8 +140,17 @@ public class SocketHandler extends TextWebSocketHandler {
 				}
 			}
 		}
-		}
+		
+		}//else
 	}
+	///////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -130,8 +181,6 @@ public class SocketHandler extends TextWebSocketHandler {
 			map.put("roomNumber", roomNumber);
 			map.put(session.getId(), session);
 			rls.add(map);
-			System.out.println("map = "+map);
-			System.out.println(rls);
 		}
 		
 		//세션등록이 끝나면 발급받은 세션ID값의 메시지를 발송한다.

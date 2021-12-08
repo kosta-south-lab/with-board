@@ -60,16 +60,27 @@
 		ws = new WebSocket("ws://" + location.host + "/chating/"+$("#roomNumber").val());
 		wsEvt();
 	}
+
 		
 	function wsEvt() {
 		ws.onopen = function(data){
+			userName = document.getElementById("userName").value;
+			let today = new Date(); 
 			//소켓이 열리면 동작
+			var option ={
+					type: "message",
+					roomNumber: $("#roomNumber").val(),
+					sessionId : $("#sessionId").val(),
+					userName : $("#userName").val(),
+					msg : ""+today.toLocaleString()+" "+userName+"님 입장"
+				}
+				ws.send(JSON.stringify(option));
 		}
 		
 		ws.onmessage = function(data) {
 			//메시지를 받으면 동작
 			var msg = data.data;
-			console.log(msg);
+			
 			if(msg != null && msg.trim() != ''){
 				var d = JSON.parse(msg);
 				
@@ -100,15 +111,15 @@
 
 	setTimeout(function() {
 		userName = document.getElementById("userName").value;
-		let today = new Date(); 
-		$('#chatting').val(today.toLocaleString()+" "+userName+"님 입장");
+	
+		
 		
 		if(userName == null || userName.trim() == ""){
 			alert("사용자 이름을 입력해주세요.");
 			$("#userName").focus();
 		}else{
 			wsOpen();
-			$("#yourMsg").hide();
+			$("#yourMsg").show();
 			
 		}
 	
@@ -121,21 +132,22 @@
 			roomNumber: $("#roomNumber").val(),
 			sessionId : $("#sessionId").val(),
 			userName : $("#userName").val(),
-			msg : $("#chatting").val()
+			msg : $("#chatting").val(),
+			flag : "yes"
 		}
 		ws.send(JSON.stringify(option));
 		setTimeout(function() {
-			data= $(".me").detach();
-			data= $(".other").detach();
+		//	data= $(".me").detach();
+		//	data= $(".others").detach();
 			
 		
-			}, 1500);
+			}, 100);
 		
 		
-		$("#yourName").hide();
+
 		$("#yourMsg").show();
 		$('#chatting').val("");
-	}chating
+	}
 	//room번호랑 아이디 번호 저장하고 여기서 DB가져와서 써놓으면 되지 않을까
 </script>
 <body>
@@ -149,13 +161,7 @@
 		
 		<div id="chating" class="chating">
 		</div>
-		<div id="yourName">
-			<table class="inputTable">
-				<tr>
-					<th><button onclick="send()" id="sendBtn">채팅참여하기</button></th>
-				</tr>
-			</table>
-		</div>
+		
 		
 		<input type="hidden" name="userName" id="userName"value="${member.getId()}">
 		<div id="yourMsg">

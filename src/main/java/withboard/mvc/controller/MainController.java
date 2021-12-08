@@ -47,6 +47,12 @@ public class MainController {
 		mv.setViewName("room");
 		return mv;
 	}
+	@RequestMapping("/room2")
+	public ModelAndView room2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("room2");
+		return mv;
+	}
 int lastnum=0;
 int roomNumber2=0;
 int roomNumber3=0;
@@ -63,7 +69,6 @@ int roomNumber3=0;
 		
 		List<JoinMatch> joinMatchList = joinMatchService.joinMatchList(session);
 		JoinMatch[] strArray2 = joinMatchList.toArray(new JoinMatch[joinMatchList.size()]);
-	System.out.println(strArray2);
 		this.lastnum=(Math.toIntExact(strArray2[0].getJoinMatchNo()));	
 			Room room = new Room();
 			
@@ -142,6 +147,24 @@ public @ResponseBody List<Room> getRoom(@RequestParam HashMap<Object, Object> pa
 	room.setRoomName(strArray[i].getJoinMatchTitle());
 	roomList.add(room);
 	}
+	//this.a=false; 
+	//}
+	return roomList;
+}
+@RequestMapping("/getRoom2")
+public @ResponseBody List<Room> getRoom2(@RequestParam HashMap<Object, Object> params,HttpSession session){
+	roomList.clear();
+	//if(this.a==true) {
+	List<JoinMatch> joinMatchList = joinMatchService.joinMatchList(session);
+	JoinMatch[] strArray = joinMatchList.toArray(new JoinMatch[joinMatchList.size()]);
+	
+	 
+	
+		Room room = new Room();
+	room.setRoomNumber(Math.toIntExact(strArray[0].getJoinMatchNo()));
+	room.setRoomName(strArray[0].getJoinMatchTitle());
+	roomList.add(room);
+	
 	//this.a=false; 
 	//}
 	return roomList;

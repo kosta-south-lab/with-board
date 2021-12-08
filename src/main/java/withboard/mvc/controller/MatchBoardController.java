@@ -2,6 +2,7 @@ package withboard.mvc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,14 @@ public class MatchBoardController {
 		MatchBoard mb = matchBoardService.update(matchBoard);
 		
 		return new ModelAndView("board/matchBoard/matchBoardRead","matchBoard",mb);
+	}
+	@RequestMapping("/board/matchBoard/updates")
+	public String updates(MatchBoard matchBoard) {
+	 matchBoardService.update(matchBoard);
+		
+		
+		
+		 return "redirect:/room2";
 	}
 	
 	@RequestMapping("/board/matchBoard/updateForm/{boardNo}")

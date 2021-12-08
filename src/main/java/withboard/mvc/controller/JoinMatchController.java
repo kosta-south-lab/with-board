@@ -2,6 +2,7 @@ package withboard.mvc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import withboard.mvc.service.MatchBoardService;
 
 public class JoinMatchController {
 	private final JoinMatchService joinMatchService;
-	
+	private final MatchBoardService matchBoardService;
 	@RequestMapping("chat/joinMatchList")
 	public ModelAndView list(HttpSession session) {
 		List<JoinMatch> joinMatchList = joinMatchService.joinMatchList(session);
@@ -30,12 +31,21 @@ public class JoinMatchController {
 	}
 	
 	@RequestMapping("/room/insert")
-	public String insert(JoinMatch joinMatch, HttpSession session) {
+	public String insert(JoinMatch joinMatch, HttpSession session,HttpServletRequest request) {
 		Member member = (Member) session.getAttribute("member");
 	    joinMatch.setMember(member);
 	    System.out.println(joinMatch.getJoinMatchTitle());
 		joinMatchService.insert(joinMatch);
-		return "redirect:/room";
+		
+		List<JoinMatch> joinMatchList = joinMatchService.joinMatchList(session);
+		JoinMatch[] strArray2 = joinMatchList.toArray(new JoinMatch[joinMatchList.size()]);
+		System.out.println(strArray2);
+		int lastnum=(Math.toIntExact(strArray2[0].getJoinMatchNo()));
+		session.removeAttribute("roomNum");
+		session.setAttribute("roomNum", lastnum);
+		String referer = request.getHeader("Referer");
+	
+		 return "redirect:"+ referer;
 	}
 	@RequestMapping("/chat/delete/{joinMatchNo}")
 	public String delete(@PathVariable Long joinMatchNo) {

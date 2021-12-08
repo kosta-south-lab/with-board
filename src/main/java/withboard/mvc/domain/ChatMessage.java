@@ -18,4 +18,6 @@ public class ChatMessage {
 	private String userName;
 	private String msg;
 	private Member member;
+	
+	private String flag;
 }

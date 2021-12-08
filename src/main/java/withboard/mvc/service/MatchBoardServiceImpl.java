@@ -26,7 +26,7 @@ private final MatchBoardRepository matchBoardRepository;
 	
 	public void insert(MatchBoard matchBoard,Member member) {
 		matchBoard.setMember(member);
-		System.out.println(member);
+		
 		matchBoardRepository.save(matchBoard);
 		
 		
@@ -43,6 +43,7 @@ private final MatchBoardRepository matchBoardRepository;
 		mb.setEtc(matchBoard.getEtc());
 		mb.setGameCategory(matchBoard.getGameCategory());
 		mb.setGame(matchBoard.getGame());
+		mb.setRoomNum(matchBoard.getRoomNum());
 		
 		return mb;
 		
