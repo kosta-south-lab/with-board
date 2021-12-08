@@ -37,6 +37,19 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+     <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+  <script>
+	$(function() {
+		$('#gowrite').click(function() {
+			if($('#loginId').val() != "ADMIN") {
+				alert('Admin only');
+				location.href='${pageContext.request.contextPath}/user/loginForm';
+			}else {
+				location.href='${pageContext.request.contextPath}/board/news/registerForm';
+			}
+		})
+	})
+</script>
 </head>
 
 <body>
@@ -49,10 +62,10 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="index.html">board</a></li>
+          <li><a href="/index">홈</a></li>
           <li>공지게시판</li>
         </ol>
-        <h2>공지게시판</h2>
+        <h2>공지게시판 목록</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 
@@ -77,7 +90,8 @@
     </section>
     <section id="pricing" class="pricing">
       <div class="container" style="position:relative;">
-      	<button id="gowrite" onClick="location.href='${pageContext.request.contextPath}/board/news/registerForm'">글쓰기</button>
+      	<input type="hidden" value="${sessionScope.member.id}" id="loginId">
+      	<button id="gowrite">글쓰기</button>
         <div class="row">
           <c:choose>
 			<c:when test="${empty requestScope.newsList}">
@@ -96,9 +110,10 @@
 			              <h4>${news.title}</h4>
 			              <ul>
 			                <li><i class="bx bx-check"></i>글번호 : ${news.boardNo}</li>
-			                <li><i class="bx bx-check"></i>작성자 : ${news.member.nickname}</li>
+			                <li><i class="bx bx-check"></i>작성자 : ${"관리자"}</li>
 			                <li><i class="bx bx-check"></i> 조회수 : ${news.viewCount}</li>
-			                <li><i class="bx bx-check"></i> 등록일 : ${news.regdate}</li>
+			                <fmt:parseDate value="${news.regdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+			                <li><i class="bx bx-check"></i> 등록일 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${parsedDateTime}"/></li>
 			              </ul>
 			              <a href="${pageContext.request.contextPath}/board/news/read/${news.boardNo}" class="buy-btn">상세보기</a>
 			            </div>
@@ -127,7 +142,7 @@
 				<span class="pagination-inner"> 
 				  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+blockCount}'> 
 				  
-					 <c:if test="${(i-1)>=normalList.getTotalPages()}">
+					 <c:if test="${(i-1)>=newsList.getTotalPages()}">
 					       <c:set var="doneLoop" value="true"/>
 					    </c:if>    
 				    
@@ -138,7 +153,7 @@
 				</c:forEach>
 				</span> 
 
-				 <c:if test="${(startPage+blockCount)<=normalList.getTotalPages()}">
+				 <c:if test="${(startPage+blockCount)<=newsList.getTotalPages()}">
 				     <a class="pagination-older" href="${pageContext.request.contextPath}/board/news/newsList?nowPage=${startPage+blockCount}&searchOption=${searchOption}&keyword=${keyword}">-NEXT-</a>
 				 </c:if>
 		</div>

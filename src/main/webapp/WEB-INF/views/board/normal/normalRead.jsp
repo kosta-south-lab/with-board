@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +38,9 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+     
+  
 </head>
 
 <body>
@@ -71,11 +75,14 @@
                   <li><i class="bx bx-check"></i> 조회수 : ${normal.viewCount}</li>
                   <li><i class="bx bx-check"></i>작성자 : ${normal.member.name}</li>
                   <li><i class="bx bx-check"></i> 카테고리 : ${normal.normalCategory.normalCategoryName}</li>
-                  <li><i class="bx bx-check"></i> 등록일 : ${normal.regdate}</li>
+                  <fmt:parseDate value="${normal.regdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+                  <li><i class="bx bx-check"></i> 등록일 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${parsedDateTime}"/></li>
                   <li>${normal.content}</li>
                 </ul>
-                <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/normal/updateForm/${normal.boardNo}'">수정</button>
-                <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/normal/delete/${normal.boardNo}'">삭제</button>
+                <c:if test="${normal.member.id == sessionScope.member.id}">
+	                <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/normal/updateForm/${normal.boardNo}'">수정</button>
+    	            <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/normal/delete/${normal.boardNo}'">삭제</button>
+                </c:if>
               </div>
           </div>
         </div>
@@ -129,9 +136,12 @@
 	                  <div>
 	                    <h5 class="d-flex justify-content-between">
 	                    	<a href="">${reply.member.name}</a>
-	                    	<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${reply.replyNo}?boardType=normal&boardNo=${normal.boardNo}'">삭제</button></h5>
+	                    	<c:if test="${reply.member.id == sessionScope.member.id}">
+		                    	<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${reply.replyNo}?boardType=normal&boardNo=${normal.boardNo}'">삭제</button>
+	                    	</c:if>
 	                    </h5>
-	                    <time>${reply.replyDate}</time>
+	                    <fmt:parseDate value="${reply.replyDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedReplyDateTime" type="both"/>
+	                    <time><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${parsedReplyDateTime}"/></time>
 	                    <p>
 	                      ${reply.replyContent}
 	                    </p>
@@ -140,8 +150,10 @@
 	              </div><!-- End comment #1 -->
 			  </c:forEach>
 			  
+			  
 
               <div class="reply-form">
+              <c:if test="${!empty sessionScope.member.id}">
                 <h4>댓글을 남겨주세요!</h4>
                 <form action="${pageContext.request.contextPath}/board/reply/insert" method = "post">
               
@@ -155,14 +167,12 @@
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary">댓글 달기</button>
-                </form>
-                
-                <p>
-   	<div>
-		<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList'">리스트로 돌아가기</button>
-	</div>
-                
-
+               </form>
+	                <p>
+				</c:if>
+			   	<div>
+					<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList'">리스트로 돌아가기</button>
+				</div>
               </div>
 
             </div><!-- End blog comments -->

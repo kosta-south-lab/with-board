@@ -65,7 +65,7 @@
 		  
 
 		  <div class="col-lg-6" style="text-align: center; margin: 0 auto">
-            <form action="${pageContext.request.contextPath}/board/normal/insert" method="post" enctype="multipart/form-data" name="registerForm" >
+            <form action="${pageContext.request.contextPath}/board/normal/insert" method="post" enctype="multipart/form-data" name="registerForm" class="php-email-form" >
               <div class="form-group">
                 <input type="text" class="form-control" name="title" placeholder="제목" required>
               </div>

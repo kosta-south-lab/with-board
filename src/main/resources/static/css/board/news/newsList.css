@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.5s;
   z-index: 997;
   transition: all 0.5s;
-  background: #fff;
+  background: #D9D2B0;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
 #header .logo h1 {
@@ -110,16 +110,16 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 1px;
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
-  border-left: 8px solid #e96b56;
+  border-left: 8px solid #093040;
 }
 #header .logo h1 a, #header .logo h1 a:hover {
-  color: #545454;
+  color: #114559;
   text-decoration: none;
 }
 #header .logo img {
   padding: 0;
   margin: 0;
-  max-height: 40px;
+  /* max-height: 50px; */
 }
 
 .scrolled-offset {
@@ -1913,7 +1913,7 @@ section {
 }
 
 /*
-異붽�
+�빊遺쏙옙
 */
 .search-form .inputform{
   background: #fff;

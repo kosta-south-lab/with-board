@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,12 +70,15 @@
                 <ul>
                   <li><i class="bx bx-check"></i>글번호 : ${news.boardNo}</li>
                   <li><i class="bx bx-check"></i> 조회수 : ${news.viewCount}</li>
-                  <li><i class="bx bx-check"></i>작성자 : ${news.member.name}</li>
-                  <li><i class="bx bx-check"></i> 등록일 : ${news.regdate}</li>
+                  <li><i class="bx bx-check"></i>작성자 : ${"관리자"}</li>
+                  <fmt:parseDate value="${news.regdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+                  <li><i class="bx bx-check"></i> 등록일 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${parsedDateTime}"/></li>
                   <li>${news.content}</li>
                 </ul>
-                <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/news/updateForm/${news.boardNo}'">수정</button>
-                <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/news/delete/${news.boardNo}'">삭제</button>
+                  <c:if test="${news.member.id == sessionScope.member.id}">
+	              <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/news/updateForm/${news.boardNo}'">수정</button>
+    	          <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/news/delete/${news.boardNo}'">삭제</button>
+                </c:if>
               </div>
           </div>
         </div>
@@ -97,7 +101,7 @@
                 <p>App</p>
                 <div class="portfolio-links">
                   <a href="${pageContext.request.contextPath}${image.imageUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                </div>
+              </div>
               </div>
             </div>
           </div>
@@ -143,6 +147,7 @@
 			  
 
               <div class="reply-form">
+              <c:if test="${!empty sessionScope.member.id}">
                 <h4>댓글을 남겨주세요!</h4>
                 <form action="${pageContext.request.contextPath}/board/reply/insert" method = "post">
               
@@ -157,13 +162,11 @@
                   </div>
                   <button type="submit" class="btn btn-primary">댓글 달기</button>
                 </form>
-                
-                <p>
-   	<div>
-		<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/news/newsList'">리스트로 돌아가기</button>
-	</div>
-                
-
+	                <p>
+				</c:if>
+			   	<div>
+					<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/news/newsList'">리스트로 돌아가기</button>
+				</div>
               </div>
 
             </div><!-- End blog comments -->
