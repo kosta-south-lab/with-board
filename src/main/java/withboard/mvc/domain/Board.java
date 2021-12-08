@@ -15,6 +15,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -57,6 +58,7 @@ public class Board {
 	private List<Image> imageList;
 	
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+	@OrderBy
 	private List<Reply> replyList;
 
 	//title, content, member만 받는 생성자. 자식 클래스에서 빌더 패턴 사용하기 위함.(@Builder)
