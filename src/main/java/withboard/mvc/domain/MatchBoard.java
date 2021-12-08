@@ -22,6 +22,8 @@ public class MatchBoard extends Board {
 	
 	private int headCount;
 	
+	private int roomNum;
+	
 	@Column(length = 100, nullable = false)
 	private String location;
 	
@@ -43,12 +45,13 @@ public class MatchBoard extends Board {
 	private Game game;
 
 	@Builder
-	public MatchBoard(String title, String content, Member member, int headCount, String location, String location2,
+	public MatchBoard(String title, String content, Member member, int headCount,int roomNum, String location, String location2,
 			String status, String etc, GameCategory gameCategory, Game game) {
 		super(title, content, member);
 		this.headCount = headCount;
 		this.location = location;
 		this.location2 = location2;
+		this.roomNum=roomNum;
 		this.status = status;
 		this.etc = etc;
 		this.gameCategory = gameCategory;

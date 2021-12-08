@@ -62,6 +62,11 @@ setTimeout(function() {
 
 }); 
 
+function goRoom(){
+	var number = document.getElementById("number").value;
+	var name = document.getElementById("name").value;
+	location.href="/moveChating?roomName="+name+"&"+"roomNumber="+number;
+}
 
 </script>
 <input type = "hidden" id = "location" value="${matchBoard.location}">
@@ -111,18 +116,55 @@ setTimeout(function() {
 		<div>
 		</div>
 		<div>
+			
 			<table class="inputTable">
 				<tr>
+				
 				<th><input type="hidden" name="boardNo" id="boardNo" value="${matchBoard.boardNo}"></th>
+				<th><input type="text" name="roomNum" id="roomNum" value="${roomNum}"></th>
 					<th>방 제목</th>
-					<th><input type="hidden" name="joinMatchTitle" id="joinMatchTitle" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></th>
-					<th><button  >채팅방 생성</button></th>
+					
+					<th><input type="hidden"  name="joinMatchTitle" id="joinMatchTitle" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></th>
+					<th><button >채팅방 생성</button></th>
+					
 				</tr>
 			</table>
 		</div>
+		
+		
+		
 	</div>
 	</form>
+	<form action="${pageContext.request.contextPath}/board/matchBoard/updates" method="post" name="registerForm">
+	<input type="hidden" name="boardNo" value="${matchBoard.boardNo}">
+	
+	<input type="hidden" name="title" value="${matchBoard.title}"> 
+	
+	<!--  value 1인거 나중에 값 제대로 가져와서 넣어줘야함 -->
+	<input type="hidden"  name="game" value="1">
+		
+	
+	
+	<input type="hidden" name="gameCategory" value="1">
+	
+	
+	 <input type="hidden" id = "location" name="location" value="${matchBoard.location}">
+	 <input type="hidden" name="location2" id = "location2" value="${matchBoard.location2}">
+	
+	<input type="hidden" name="content" value="${matchBoard.content}"></input>
+	
+	<input type="hidden"  name="etc" value="${matchBoard.etc}"></input><p>
+	<input type="hidden" name="roomNum" id="roomNum" value="${roomNum}"></input><p>
+	<input type="hidden"name="headCount" value="${matchBoard.headCount}"></input>
+	
+	<input type="hidden"id="name" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></input>
+	<input type="hidden"id="number" value="${matchBoard.roomNum}"></input>
+	<input type="submit" value="적용하기" >
+	
+</form>
+
 	<div>
+	<button onclick="goRoom()">이거</button>
 		<button onclick="location.href='${pageContext.request.contextPath}/board/matchBoard/updateForm/${matchBoard.boardNo}'">수정하기</button>
 	</div>
 	<div>

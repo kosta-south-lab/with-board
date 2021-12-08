@@ -115,7 +115,7 @@
     </section><!-- End Breadcrumbs -->
     <section id="pricing" class="pricing">
       <div class="container" style="position:relative;">
-      	<button id="gowrite" onClick="location.href='${pageContext.request.contextPath}/board/matchBoard/matchBoardregisterForm'">글쓰기</button>
+      	<button id="gowrite" onClick="location.href='${pageContext.request.contextPath}/board/matchBoard/registerForm'">글쓰기</button>
         <div class="row">
           <c:choose>
 			<c:when test="${empty requestScope.matchBoardList}">

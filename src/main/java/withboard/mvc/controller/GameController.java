@@ -24,6 +24,7 @@ import withboard.mvc.domain.Game;
 import withboard.mvc.domain.GameComment;
 import withboard.mvc.domain.GameLevel;
 import withboard.mvc.domain.GameRating;
+import withboard.mvc.domain.Member;
 import withboard.mvc.service.GameCommentService;
 import withboard.mvc.service.GameLevelService;
 import withboard.mvc.service.GameRatingService;
@@ -53,7 +54,7 @@ public class GameController {
 	public void gameList(Model model ,@RequestParam(defaultValue = "1") int nowPage, 
 							@RequestParam(value = "sortType", defaultValue="gameNo") String sortType) {
 		
-		Pageable pageable = PageRequest.of((nowPage - 1), 10, Sort.by(sortType));
+		Pageable pageable = PageRequest.of((nowPage - 1), 9, Sort.by(sortType).descending());
 		
 		Page<Game> gameList = gameService.selectAll(pageable);
 		
@@ -73,22 +74,17 @@ public class GameController {
 	 */
 	
 	@RequestMapping("/searchGameList")
-	public void searchGame(Model model ,@RequestParam(defaultValue = "1") int nowPage, @RequestParam(value = "sortType", defaultValue="gameNo") String sortType) {
+	public void searchGame(Model model , @RequestParam(value = "keyword", defaultValue = "") String keyword) {
 				
-		Pageable pageable = PageRequest.of((nowPage - 1), 10, Sort.by(sortType));
-				
-		Page<Game> gameList = gameService.searchByName(pageable);
+		
+		System.out.println("내가 받은 키워드 : " + keyword);
+		
+		List<Game> gameList = gameService.searchByName(keyword);
 		
 		model.addAttribute("gameList", gameList);
 		
-		int blockCount = 3;
-		int temp = (nowPage - 1) % blockCount;
-		int startPage = nowPage - temp;
-		
-		model.addAttribute("blockCount", blockCount);
-		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("startPage", startPage);
-		
+		System.out.println("내가 받은 게임리스트 : " + gameList);
+			
 	}
 	
 	
@@ -174,7 +170,7 @@ public class GameController {
 	public ModelAndView updateGame(Game dbGame, List<MultipartFile> filename, HttpSession session) {
 		
 		//파일 저장
-		String path = session.getServletContext().getRealPath("/resources/images/board");
+		String path = session.getServletContext().getRealPath("/resources/images/game");
 		List<String> filenameList = new ArrayList<String>();
 		
 		for(MultipartFile file : filename) {
@@ -188,7 +184,7 @@ public class GameController {
 			
 			File newFile = new File(path + "/" + newFileName);
 			
-			filenameList.add("/resources/images/board/" + newFileName);
+			filenameList.add("/resources/images/game/" + newFileName);
 			try {				
 				file.transferTo(newFile);
 			}catch (Exception e) {
@@ -220,23 +216,25 @@ public class GameController {
 	 */
 	
 	@RequestMapping("/insertComment")
-	public String insertComment(GameComment gameComment) {
-		
+	public String insertComment(GameComment gameComment, Long gameNo, Long memberNo) {
+				
+		gameComment.setGame(Game.builder().gameNo(gameNo).build());
+		gameComment.setMember(Member.builder().memberNo(memberNo).build());
 		gameCommentService.insert(gameComment);
 		
-		return "redirect:/game/readGame/" + gameComment.getGame().getGameNo();
+		return "redirect:/game/readGame/" + gameNo;
 	}
 	
 	/**
 	 * 한줄평 삭제 (어드민)
 	 */
 	
-	@RequestMapping("/deleteComment")
-	public String deleteComment(Long commentNo) {
+	@RequestMapping("/deleteComment/{commentNo}/{gameNo}")
+	public String deleteComment(@PathVariable Long commentNo , @PathVariable Long gameNo) {
 		
 		gameCommentService.delete(commentNo);
 		
-		return "redirect:/game/readGame/" + "1";
+		return "redirect:/game/readGame/" + gameNo;
 	}
 	
 	/**

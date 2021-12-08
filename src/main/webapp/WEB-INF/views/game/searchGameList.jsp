@@ -42,18 +42,18 @@
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-1">가족</li>
-              <li data-filter=".filter-2">어린이</li>
-              <li data-filter=".filter-3">전략</li>
+              <li data-filter=".filter-family">가족</li>
+              <li data-filter=".filter-children">어린이</li>
+              <li data-filter=".filter-strategy">전략</li>
             </ul>
           </div>
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-              <li data-filter=".filter-4">전쟁</li>
-              <li data-filter=".filter-5">추상</li>
-              <li data-filter=".filter-6">커스터마이징</li>
-              <li data-filter=".filter-7">테마</li>
-              <li data-filter=".filter-8">파티</li>
+              <li data-filter=".filter-war">전쟁</li>
+              <li data-filter=".filter-abstract">추상</li>
+              <li data-filter=".filter-customize">커스터마이징</li>
+              <li data-filter=".filter-theme">테마</li>
+              <li data-filter=".filter-party">파티</li>
             </ul>
           </div>
         </div>
@@ -66,57 +66,25 @@
           </c:when>
           
           <c:otherwise>
-            <c:forEach items="${gameList.content}" var="game">
-            <c:forEach items="${game.imageList}" var="image">
-            <div class="col-lg-4 col-md-6 portfolio-item filter-${game.gameCategory.gameCategoryNo}">        
-            <div class="portfolio-wrap">                    
+          <c:forEach items="${gameList.content}" var="game">
+          
+           <div class="col-lg-4 col-md-6 portfolio-item filter-family">
+            <div class="portfolio-wrap">
               <img src="${pageContext.request.contextPath}${image.imageUrl}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>${game.gameName}</h4>
-                <p>${game.gameCategory.gameCategoryName}</p>
+                <p>${game.gameCategory}</p>
                 <div class="portfolio-links">
                   <a href="${pageContext.request.contextPath}${image.imageUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="보드게임 이미지 확대"><i class="bx bx-plus"></i></a>
                   <a href="${pageContext.request.contextPath}/game/readGame/${game.gameNo}" title="상세 페이지로 가기"><i class="bx bx-link"></i></a>
                 </div>
-                </c:forEach>
-        		</c:forEach>
               </div>
             </div>
           </div>
-          
+          </c:forEach>
           </c:otherwise>
 		</c:choose>
         </div>
-
-<!--  블럭당  -->
-	<!--  <nav class="pagination-container"> -->
- <nav class="pagination-container">
-	<div class="pagination">
-	<c:set var="doneLoop" value="false"/>
-		
-		  <c:if test="${gameList.hasPrevious()}"> <!-- (-2) > 0  -->
-		      <a class="pagination-newer" href="${pageContext.request.contextPath}/game/gameList?nowPage=${startPage-1}">PREV</a>
-		  </c:if>
-		  
-				<span class="pagination-inner"> 
-				  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+blockCount}'> 
-				  
-					    <c:if test="${(i-1)>=gameList.getTotalPages()}">
-					       <c:set var="doneLoop" value="true"/>
-					    </c:if> 
-				    
-				  <c:if test="${gameList.hasNext()}" >
-				         <a class="${i==nowPage?'pagination-active':page}" href="${pageContext.request.contextPath}/game/gameList?nowPage=${i}">${i}</a> 
-				  </c:if>
-				   
-				</c:forEach>
-				</span> 
-				 <c:if test="${(startPage+blockCount)<=gameList.getTotalPages()}">
-				     <a class="pagination-older" href="${pageContext.request.contextPath}/game/gameList?nowPage=${startPage+blockCount}">NEXT</a>
-				 </c:if>		
-		</div>
-	</nav>  
-
       </div>
     </section><!-- End Portfolio Section -->
 
