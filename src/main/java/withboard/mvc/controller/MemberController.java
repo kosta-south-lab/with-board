@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import withboard.mvc.domain.Mail;
 import withboard.mvc.domain.Member;
 import withboard.mvc.service.MemberService;
@@ -98,12 +100,21 @@ public class MemberController {
 		//return "redirect:/login"; // 회원가입 완료후 갈 페이지 
 	}
 	
+	//@Value("${file.path}")
+	//private String fileRealPath;
 
-	private String changeFileName(String originalFileName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
+
+	/**
+	 * 파일이름 랜덤생성
+	 * */
+	private String changeFileName(String originalName){
+		//uuid 생성
+		UUID uuid = UUID.randomUUID();
+		//랜덤생성 + 파일이름
+		String savedName = uuid.toString() + "_" + originalName;		
+		return savedName;
+	}
 	
 
 	//현재 Controller에서 발생하는 모든 에외처리
