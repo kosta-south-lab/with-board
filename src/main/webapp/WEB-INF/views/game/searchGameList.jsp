@@ -70,12 +70,12 @@
           
            <div class="col-lg-4 col-md-6 portfolio-item filter-family">
             <div class="portfolio-wrap">
-              <img src="${pageContext.request.contextPath}${game.imageList.image.imageUrl}" class="img-fluid" alt="">
+              <img src="${pageContext.request.contextPath}${image.imageUrl}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>${game.gameName}</h4>
                 <p>${game.gameCategory}</p>
                 <div class="portfolio-links">
-                  <a href="${pageContext.request.contextPath}${game.imageList.image.imageUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="보드게임 이미지 확대"><i class="bx bx-plus"></i></a>
+                  <a href="${pageContext.request.contextPath}${image.imageUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="보드게임 이미지 확대"><i class="bx bx-plus"></i></a>
                   <a href="${pageContext.request.contextPath}/game/readGame/${game.gameNo}" title="상세 페이지로 가기"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -85,36 +85,6 @@
           </c:otherwise>
 		</c:choose>
         </div>
-
-<!--  블럭당  -->
-	<!--  <nav class="pagination-container"> -->
- <nav class="pagination-container">
-	<div class="pagination">
-	<c:set var="doneLoop" value="false"/>
-		
-		  <c:if test="${gameList.hasPrevious()}"> <!-- (-2) > 0  -->
-		      <a class="pagination-newer" href="${pageContext.request.contextPath}/game/gameList?nowPage=${startPage-1}">PREV</a>
-		  </c:if>
-		  
-				<span class="pagination-inner"> 
-				  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+blockCount}'> 
-				  
-					    <c:if test="${(i-1)>=gameList.getTotalPages()}">
-					       <c:set var="doneLoop" value="true"/>
-					    </c:if> 
-				    
-				  <c:if test="${gameList.hasNext()}" >
-				         <a class="${i==nowPage?'pagination-active':page}" href="${pageContext.request.contextPath}/game/gameList?nowPage=${i}">${i}</a> 
-				  </c:if>
-				   
-				</c:forEach>
-				</span> 
-				 <c:if test="${(startPage+blockCount)<=gameList.getTotalPages()}">
-				     <a class="pagination-older" href="${pageContext.request.contextPath}/game/gameList?nowPage=${startPage+blockCount}">NEXT</a>
-				 </c:if>		
-		</div>
-	</nav>  
-
       </div>
     </section><!-- End Portfolio Section -->
 
