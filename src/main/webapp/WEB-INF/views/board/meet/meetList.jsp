@@ -23,7 +23,7 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="index.html">board</a></li>
+          <li><a href="${pageContext.request.contextPath}/board/meet">board</a></li>
           <li>meet</li>
         </ol>
         <h2>meet</h2>

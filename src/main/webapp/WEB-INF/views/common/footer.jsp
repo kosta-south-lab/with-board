@@ -36,7 +36,6 @@
   <script src="${pageContext.request.contextPath}/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="${pageContext.request.contextPath}/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="${pageContext.request.contextPath}/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/js/main.js"></script>

@@ -4,19 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>meetRegister</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
-  <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
-  
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/board/meet/meetRegister.css">
-<style>
+    <meta charset="utf-8">
+    <title>키워드로 장소검색하고 목록으로 표출하기</title>
+    <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
@@ -53,96 +43,27 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-</style>  
+</style>
 </head>
 <body>
-  <jsp:include page="/WEB-INF/views/common/header.jsp" />
-  <main id="main">
+<div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
-
-        <ol>
-          <li><a href="${pageContext.request.contextPath}/board/meet">board</a></li>
-          <li>meet</li>
-        </ol>
-        <h2>Register</h2>
-
-      </div>
-    </section><!-- End Breadcrumbs -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <div class="row">
-		  <div class="col-lg-6 ">
-			<div class="map_wrap">
-				<div id="map" class="mb-4 mb-lg-0" style="border:0; width: 100%; height: 600px;"></div>
-				<div id="menu_wrap" class="bg_white">
-					<div class="option">
-						<div>
-							<form onsubmit="searchPlaces(); return false;">
-								키워드 : <input type="text" value="${meet.location}" id="keyword"
-									size="15">
-								<button type="submit">검색하기</button>
-							</form>
-						</div>
-					</div>
-					<hr>
-					<ul id="placesList"></ul>
-					<div id="pagination"></div>
-				</div>
-			</div>
-		  </div>
-
-		  <div class="col-lg-6">
-            <form action="${pageContext.request.contextPath}/board/meet/update" method="post" name="registerForm" enctype="multipart/form-data" class="php-email-form">
-              <input type="hidden" name="boardNo" value="${meet.boardNo}">
-              <div class="form-group">
-                <input type="text" class="form-control" name="title" placeholder="제목" required>
-              </div>
-              <div class="form-group mt-3">
-                <select class="form-control" name="gameNo" style="font-size:14px; color:gray;">
-                  <option value="0">대표게임 선택</option>
-                  <c:forEach items="${gameList}" var="game">
-					  <option value="${game.gameNo}" <c:if test="${meet.game.gameNo == game.gameNo}">selected</c:if>>${game.gameName}</option>
-				  </c:forEach>
-                </select>
-              </div>
-              <div class="form-group mt-3">
-                <select class="form-control" name="meetCategoryNo" style="font-size:14px; color:gray;">
-                  <option value="0">카테고리 선택</option>
-                  <option value="1">정기모임모집</option>
-				  <option value="2">정기모임후기</option>
-                </select>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="location" class="form-control" placeholder="상세주소" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="text" class="form-control" name="location2" placeholder="지역" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea>
-              </div>
-              <div class="form-group mt-3">
-                <input class="form-control" type="file" name="filename" multiple style="font-size:14px; color:gray;">
-              </div>
-              <div class="text-center mt-3"><input type="submit" value="등록하기"></div>
-            </form>
-          </div>
-
+    <div id="menu_wrap" class="bg_white">
+        <div class="option">
+            <div>
+                <form onsubmit="searchPlaces(); return false;">
+                    키워드 : <input type="text" value="${meet.location}" id="keyword" size="15"> 
+                    <button type="submit">검색하기</button> 
+                </form>
+            </div>
         </div>
+        <hr>
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+    </div>
+</div>
 
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e29de4c11a6f2afe5e4be705d0f8389&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
@@ -387,12 +308,12 @@ function displayInfowindow(marker, title,addr) {
             	if(str.includes("리")==true){
                 	addArray[2]="";
                 	};
-                	
-   var name2 = addr.address_name+" / "+title;
-   var addArray2=name2.split(' / ');
-   document.registerForm.location.value = addr.address_name+" / "+title;
-   document.registerForm.location2.value = addArray[0]+" "+addArray[1]+" "+addArray[2];
+      		var name2 = addr.address_name+" / "+title;
+      	   var addArray2=name2.split(' / ');
+      	   document.registerForm.location.value = addr.address_name+" / "+title;
+      	   document.registerForm.location2.value = addArray[0]+" "+addArray[1]+" "+addArray[2];
 
+    
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
@@ -406,5 +327,39 @@ function removeAllChildNods(el) {
     }
 }
 </script>
+
+<!-- 등록 form -->
+<form action="${pageContext.request.contextPath}/board/meet/update" method="post" name="registerForm" enctype="multipart/form-data">
+	<input type="hidden" name="boardNo" value="${meet.boardNo}">
+	제목 : 
+	<input type="text" name="title" value="${meet.title}"> 
+	<p>
+	대표게임 : 
+	<select name="gameNo">
+		<option value="0">------대표게임 선택------</option>
+		<c:forEach items="${gameList}" var="game">
+			<option value="${game.gameNo}" <c:if test="${meet.game.gameNo == game.gameNo}">selected</c:if>>${game.gameName}</option>
+		</c:forEach>
+	</select>
+	<p>
+	카테고리 : 
+	<select name="meetCategoryNo">
+		<option value="1" <c:if test="${meet.meetCategory.meetCategoryNo == 1}">selected</c:if>>정기모임모집</option>
+		<option value="2" <c:if test="${meet.meetCategory.meetCategoryNo == 2}">selected</c:if>>정기모임후기</option>
+	</select>
+	<p>
+	지역 - 
+	대분류 : <input type="text" name="location" value="${meet.location}">
+	중분류 : <input type="text" name="location2" value="${meet.location2}">
+	<p>
+	내용 :<p>
+	<textarea rows="20" cols="100" name="content">${meet.content}</textarea>
+	<p>
+	<input multiple="multiple"  type="file" name="filename" />
+	<p>
+	<input type="submit" value="수정하기">
+	<input type="button" value="돌아가기" onclick="history.back()">
+</form>
+
 </body>
 </html>

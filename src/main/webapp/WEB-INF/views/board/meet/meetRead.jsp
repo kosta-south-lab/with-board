@@ -29,7 +29,7 @@
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Board</a></li>
+          <li><a href="${pageContext.request.contextPath}/board/meet">Board</a></li>
           <li>Meet</li>
         </ol>
         <h2>글 상세보기</h2>
@@ -132,30 +132,30 @@
 	              </div><!-- End comment #1 -->
 			  </c:forEach>
 			  
-			<c:if test="${!empty sessionScope.member.id}">
 			
               <div class="reply-form">
-                <h4>댓글을 남겨주세요!</h4>
-                <form action="${pageContext.request.contextPath}/board/reply/insert" method = "post">
-              
-                  <!-- 댓글달고 각각의 글 상세 페이지로 넘어오기 위함 -->
-				  <input type="hidden" name="boardNo" value="${meet.boardNo}">
-				  <input type="hidden" name="boardType" value="meet">
-				  
-                  <div class="row">
-                    <div class="col form-group">
-                      <textarea name="replyContent" class="form-control" placeholder="댓글 내용"></textarea>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary">댓글 달기</button>
-
-                </form>
-                <p>
+				<c:if test="${!empty sessionScope.member.id}">
+	                <h4>댓글을 남겨주세요!</h4>
+	                <form action="${pageContext.request.contextPath}/board/reply/insert" method = "post">
+	              
+	                  <!-- 댓글달고 각각의 글 상세 페이지로 넘어오기 위함 -->
+					  <input type="hidden" name="boardNo" value="${meet.boardNo}">
+					  <input type="hidden" name="boardType" value="meet">
+					  
+	                  <div class="row">
+	                    <div class="col form-group">
+	                      <textarea name="replyContent" class="form-control" placeholder="댓글 내용"></textarea>
+	                    </div>
+	                  </div>
+	                  <button type="submit" class="btn btn-primary">댓글 달기</button>
+	
+	                </form>
+	                <p>
+				</c:if>
 			   	<div>
 					<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/meet'">리스트로 돌아가기</button>
 				</div>
               </div>
-			</c:if>
 
             </div><!-- End blog comments -->
 
