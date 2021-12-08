@@ -90,7 +90,9 @@ a:hover {
             <input class="text-black-50" type="text" readonly="readonly" id="email" name="email" value="${member.email}">
             <p style="color: red;">아이디와 이메일은 수정할 수 없습니다.</p>
            
-            <span>  <a href="${pageContext.request.contextPath}/user/mypage">마이페이지로 돌아가기</a> <a href="../index">Home</a> </span>     
+            <span>  <a href="${pageContext.request.contextPath}/user/mypage">마이페이지로 돌아가기</a> 
+            <br>
+            <a href="../index">Home</a> </span>     
   			 
             
             </div>

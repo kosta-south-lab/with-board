@@ -16,7 +16,7 @@
 
     	body {
     	font-family: 'IBMPlexSansKR-Regular';
-		  background-color: white;
+		  background-color: #093040;
 		  margin: 0 auto;
 		}
 		
@@ -39,6 +39,19 @@
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 	text-align: center;
 		}
+		
+		a:link {
+  color: #D9D2B0;
+  text-decoration: none;
+}
+a:visited {
+  color: #D9D2B0;
+  text-decoration: none;
+}
+a:hover {
+  color: #D9D2B0;
+  text-decoration: underline;
+}
 		
     </style>
    </head>
