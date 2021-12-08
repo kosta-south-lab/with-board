@@ -312,11 +312,11 @@
 								
 						</div>
 						<div>
-							<form name="requestForm" method="post" id="requestForm">
+<%-- 							<form name="requestForm" method="post" id="requestForm">
 								<input type=hidden name="gameNo" value="${game.gameNo}">
 								<input type=button value="수정하기"> <input type=button
 									value="삭제하기">
-							</form>
+							</form> --%>
 						</div>
 					</div>
 				</div>
@@ -324,7 +324,7 @@
 		</section>
 		<!-- End Portfolio Details Section -->
 
-	   	<c:choose>
+<%-- 	   	<c:choose>
 		<c:when test="${empty game.gameCommentList}">
 		<!-- 댓글 없으면 댓글이 없습니다. 멘트 -->
 		<form class="replyForm" name="replyForm" method="post"
@@ -433,7 +433,7 @@
 				</form>
 			</c:forEach>
 		</c:otherwise>
-	</c:choose>
+	</c:choose> --%>
 	
 	    <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
@@ -459,7 +459,7 @@
 	                    <h5 class="d-flex justify-content-between">
 	                    	<a href="">${gameComment.member.name}</a>
 	                    	<c:if test="${gameComment.member.id == sessionScope.member.id}">
-		                    	<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${gameComment.commentNo}?boardType=meet&boardNo=${meet.boardNo}'">삭제</button>
+		                    	&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='${pageContext.request.contextPath}/game/deleteComment/${gameComment.commentNo}/${game.gameNo}'">삭제</button>
 	                    	</c:if>
 	                    </h5>
 	                    <fmt:parseDate value="${gameComment.commentDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedReplyDateTime" type="both"/>
@@ -475,16 +475,14 @@
 			
               <div class="reply-form">
 				<c:if test="${!empty sessionScope.member.id}">
-	                <h4>댓글을 남겨주세요!</h4>
-	                <form action="${pageContext.request.contextPath}/board/reply/insert" method = "post">
-	              
-	                  <!-- 댓글달고 각각의 글 상세 페이지로 넘어오기 위함 -->
-					  <input type="hidden" name="boardNo" value="${meet.boardNo}">
-					  <input type="hidden" name="boardType" value="meet">
-					  
+	                <h4>댓글이 없습니다! 댓글을 달아 플레이 경험을 공유 해보는 것은 어떨까요?</h4>
+	                <form action="${pageContext.request.contextPath}/game/insertComment" method = "post">
+             			<input type="hidden" name="gameNo" value="${game.gameNo}" /> 
+						<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}" /> 	
+	         					  
 	                  <div class="row">
 	                    <div class="col form-group">
-	                      <textarea name="replyContent" class="form-control" placeholder="댓글 내용"></textarea>
+	                      <textarea name="gameCommentContents" class="form-control" placeholder="댓글 내용"></textarea>
 	                    </div>
 	                  </div>
 	                  <button type="submit" class="btn btn-primary">댓글 달기</button>
@@ -493,7 +491,7 @@
 	                <p>
 				</c:if>
 			   	<div>
-					<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/meet'">리스트로 돌아가기</button>
+					<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/game/searchGameList'">리스트로 돌아가기</button>
 				</div>
               </div>
 
