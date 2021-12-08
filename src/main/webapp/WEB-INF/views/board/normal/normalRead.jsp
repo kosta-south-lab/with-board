@@ -50,7 +50,7 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/normal/normalList">Board</a></li>
+          <li><a href="${pageContext.request.contextPath}/index">홈</a></li>
           <li>일반게시판</li>
         </ol>
         <h2>글 상세보기</h2>
@@ -94,10 +94,8 @@
             <div class="portfolio-wrap">
               <img src="${pageContext.request.contextPath}${image.imageUrl}" class="img-fluid" alt="" style="width:100%">
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
                 <div class="portfolio-links">
-                  <a href="${pageContext.request.contextPath}${image.imageUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                  <a href="${pageContext.request.contextPath}${image.imageUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox" title=""><i class="bx bx-plus"></i></a>
                 </div>
               </div>
             </div>

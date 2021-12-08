@@ -49,10 +49,10 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/normal/normalList">board</a></li>
+          <li><a href="${pageContext.request.contextPath}/index">홈</a></li>
           <li>일반게시판</li>
         </ol>
-        <h2>일반게시판</h2>
+        <h2>일반게시판 목록</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 

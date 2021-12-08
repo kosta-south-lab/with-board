@@ -87,7 +87,7 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/normal/normalList">board</a></li>
+          <li><a href="${pageContext.request.contextPath}/index">홈</a></li>
           <li>일반게시판</li>
         </ol>
         <h2>게시물 등록</h2>
@@ -103,7 +103,7 @@
 		  
 
 		  <div class="col-lg-6" style="text-align: center; margin: 0 auto">
-            <form action="${pageContext.request.contextPath}/board/normal/insert" method="post" name="registerForm" class="php-email-form">
+            <form action="${pageContext.request.contextPath}/board/normal/insert" method="post" enctype="multipart/form-data" name="registerForm" >
               <div class="form-group">
                 <input type="text" class="form-control" name="title" placeholder="제목" required>
               </div>

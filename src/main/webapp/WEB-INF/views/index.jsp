@@ -76,39 +76,39 @@
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/newslogo.png"/></div>
               <h4><a href="${pageContext.request.contextPath}/board/news/newsList">공지사항</a></h4>
-              <p>공지사항</p>
+              <p>※위보드 공지사항※</p>
             </div>
           </div>
 	
           <div class="col-lg-4 col-md-6  mt-4 mt-md-0">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/normallogo.png"/></div>
-              <h4><a href="">일반 게시판</a></h4>
-              <p></p>
+              <h4><a href="${pageContext.request.contextPath}/board/normal/normalList">일반 게시판</a></h4>
+              <p>※자유/공략/Q&A/정보/핫딜※</p>
             </div>
           </div>
 
           <div id="featured_icon_container" class="col-lg-4 col-md-6  mt-4 mt-lg-0">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/gamelogo.png"/></div>
-              <h4><a href="">게임</a></h4>
-              <p></p>
+              <h4><a href="${pageContext.request.contextPath}/game/gameList">보드게임 목록</a></h4>
+              <p>※테마별 보드게임※</p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6  mt-4">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/meetlogo.png"/></div>
-              <h4><a href="">정기 모임</a></h4>
-              <p></p>
+              <h4><a href="${pageContext.request.contextPath}/board/meet">정기 모임</a></h4>
+              <p>※Every week with board※</p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6  mt-4">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/matchlogo.png"/></div>
-              <h4><a href="">매칭 게시판</a></h4>
-              <p></p>
+              <h4><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList">매칭 게시판</a></h4>
+              <p>※Right now with board※</p>
             </div>
           </div>
 
@@ -116,7 +116,7 @@
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/04logo.png"/></div>
               <h4>서비스 준비중</h4>
-              <p>아아아아아아아아아아</p>
+              <p>※중고거래 게시판※</p>
             </div>
           </div>
 

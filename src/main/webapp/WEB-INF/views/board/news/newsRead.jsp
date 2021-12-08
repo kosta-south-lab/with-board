@@ -50,7 +50,7 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/news/newsList">Board</a></li>
+          <li><a href="${pageContext.request.contextPath}/index">홈</a></li>
           <li>공지게시판</li>
         </ol>
         <h2>글 상세보기</h2>
