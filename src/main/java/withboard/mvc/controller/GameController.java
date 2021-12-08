@@ -58,7 +58,10 @@ public class GameController {
 		
 		Page<Game> gameList = gameService.selectAll(pageable);
 		
+		//List<Object> commentGameList = gameService.selectGameByCommentDate();
+		
 		model.addAttribute("gameList", gameList);
+		//model.addAttribute("commentGameList", commentGameList);
 		
 		int blockCount = 3;
 		int temp = (nowPage - 1) % blockCount;
@@ -92,8 +95,11 @@ public class GameController {
 		
 		Page<Game> gameList = gameService.searchByName(keyword, pageable);
 		
-		model.addAttribute("gameList", gameList);
+		//List<Object> commentGameList = gameService.selectGameByCommentDate();
 		
+		model.addAttribute("gameList", gameList);
+		//model.addAttribute("commentGameList", commentGameList);
+				
 		int blockCount = 3;
 		int temp = (nowPage - 1) % blockCount;
 		int startPage = nowPage - temp;
@@ -101,6 +107,51 @@ public class GameController {
 		model.addAttribute("blockCount", blockCount);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
+		model.addAttribute("keyword", keyword);
+			
+	}
+	
+	@RequestMapping("/searchGameList/filterSearch")
+	public ModelAndView filterSearchGame(@RequestParam(defaultValue = "1") int nowPage, 
+			@RequestParam(value = "keyword", defaultValue = "") String keyword,
+			@RequestParam(value = "sortType", defaultValue="gameNo") String sortType) {
+				
+		
+//		System.out.println("내가 받은 키워드 : " + keyword);
+//		
+//		List<Game> gameList = gameService.searchByName(keyword);
+//		
+//		model.addAttribute("gameList", gameList);
+//		
+//		System.out.println("내가 받은 게임리스트 : " + gameList);
+		
+		ModelAndView mv = new ModelAndView();
+		
+		int categoryNo = Integer.parseInt(keyword);
+		
+		Pageable pageable = PageRequest.of((nowPage - 1), 9);
+		
+		Page<Game> gameList = gameService.filterSearchGame(categoryNo, pageable);
+		
+		//List<Object> commentGameList = gameService.selectGameByCommentDate();
+		
+		
+		
+		mv.setViewName("game/searchGameList"); 
+		
+		mv.addObject("gameList", gameList);
+		//mv.addObject("commentGameList", commentGameList);
+		
+		int blockCount = 3;
+		int temp = (nowPage - 1) % blockCount;
+		int startPage = nowPage - temp;
+		
+		mv.addObject("blockCount", blockCount);
+		mv.addObject("nowPage", nowPage);
+		mv.addObject("startPage", startPage);
+		mv.addObject("keyword", keyword);
+		
+		return mv;
 			
 	}
 	

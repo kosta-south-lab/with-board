@@ -152,7 +152,7 @@
 		</c:choose>
         </div>
         
-        ${startPage} / ${nowPage} / ${blockCount} / ${gameList.getTotalPages()}
+<%--         ${startPage} / ${nowPage} / ${blockCount} / ${gameList.getTotalPages()} --%>
 
 <!--  블럭당  -->
 	<!--  <nav class="pagination-container"> -->
@@ -161,7 +161,7 @@
 	<c:set var="doneLoop" value="false"/>
 		
 		  <c:if test="${gameList.hasPrevious()}"> <!-- (-2) > 0  -->
-		      <a class="pagination-newer" href="${pageContext.request.contextPath}/game/searchGameList?nowPage=${startPage-1}">PREV</a>
+		      <a class="pagination-newer" href="${pageContext.request.contextPath}/game/searchGameList?keyword=${keyword}&nowPage=${startPage-1}">PREV</a>
 		  </c:if>
 		  
 				<span class="pagination-inner"> 
@@ -172,13 +172,13 @@
 					    </c:if> 
 				    
 				  <c:if test="${gameList.hasNext()}" >
-				         <a class="${i==nowPage?'pagination-active':page}" href="${pageContext.request.contextPath}/game/searchGameList?nowPage=${i}">${i}</a> 
+				         <a class="${i==nowPage?'pagination-active':page}" href="${pageContext.request.contextPath}/game/searchGameList?keyword=${keyword}&nowPage=${i}">${i}</a> 
 				  </c:if>
 				   
 				</c:forEach>
 				</span> 
 				 <c:if test="${(startPage+blockCount)<=gameList.getTotalPages()}">
-				     <a class="pagination-older" href="${pageContext.request.contextPath}/game/searchGameList?nowPage=${startPage+blockCount}">NEXT</a>
+				     <a class="pagination-older" href="${pageContext.request.contextPath}/game/searchGameList?keyword=${keyword}&nowPage=${startPage+blockCount}">NEXT</a>
 				 </c:if>		
 		</div>
 	</nav>  
@@ -201,51 +201,35 @@
                 </form>
               </div><!-- End sidebar search formn-->
 
-              <h3 class="sidebar-title">속성별 검색</h3>
+              <h3 class="sidebar-title">카테고리별 검색</h3>
               <div class="sidebar-item categories">
                 <ul>
-                  <li><a href="#">General <span>(25)</span></a></li>
-                  <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                  <li><a href="#">Travel <span>(5)</span></a></li>
-                  <li><a href="#">Design <span>(22)</span></a></li>
-                  <li><a href="#">난이도 <span>(8)</span></a></li>
-                  <li><a href="#">평점 <span>(14)</span></a></li>
+                  <li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=1">가족</a></li>
+                  <li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=2">어린이</a></li>
+                  <li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=3">전략</a></li>
+                  <li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=4">전쟁</a></li>
+                  <li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=5">추상</a></li>
+                  <li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=6">커스터마이징</a></li>
+                  <li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=7">테마</a></li>
+                  <li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=8">파티</a></li>
                 </ul>
               </div><!-- End sidebar categories-->
 
-              <h3 class="sidebar-title">최근 출시 된 보드게임</h3>
+<%--               <h3 class="sidebar-title">최근 댓글이 등록 된 보드게임</h3>
               <div class="sidebar-item recent-posts">
+              
+              <c:forEach items="${commentGameList.game}" begin="0" end="4" var="commentGame">
+              <c:forEach items="${commentGame.imageList}" var="image">
+              
                 <div class="post-item clearfix">
-                  <img src="${pageContext.request.contextPath}/img/blog/blog-recent-1.jpg" alt="">
-                  <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
+                  <img src="${pageContext.request.contextPath}${image.imageUrl}" alt="">
+                  <h4><a href="${pageContext.request.contextPath}/game/readGame/${commentGame.gameNo}">${commentGame.gameName}</a></h4>
                   <time datetime="2020-01-01">Jan 1, 2020</time>
                 </div>
 
-                <div class="post-item clearfix">
-                  <img src="${pageContext.request.contextPath}/img/blog/blog-recent-2.jpg" alt="">
-                  <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="${pageContext.request.contextPath}/img/blog/blog-recent-3.jpg" alt="">
-                  <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="${pageContext.request.contextPath}/img/blog/blog-recent-4.jpg" alt="">
-                  <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="${pageContext.request.contextPath}/img/blog/blog-recent-5.jpg" alt="">
-                  <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
+				</c:forEach>
+				</c:forEach>
+              </div><!-- End sidebar recent posts--> --%>
 
             </div><!-- End sidebar -->
 

@@ -106,7 +106,7 @@
           <li><a href="${pageContext.request.contextPath}/sample/team">Team</a></li>
           <li><a href="${pageContext.request.contextPath}/sample/pricing">Pricing</a></li>
           <li><a class="active" href="${pageContext.request.contextPath}/sample/blog">Blog</a></li>
-          <li class="dropdown"><a href="${pageContext.request.contextPath}/game/gameList"><span>보드 게임</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="${pageContext.request.contextPath}/game/searchGameList"><span>보드 게임</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="${pageContext.request.contextPath}/game/searchGameList"><span>보드 게임</span> <i class="bi bi-chevron-right"></i></a>

@@ -27,6 +27,18 @@ public interface GameService {
 	Page<Game> searchByName(String keyword, Pageable pageable);
 	
 	/**
+	 * 보드게임 카테고리 필터 검색
+	 */
+	
+	Page<Game> filterSearchGame(int categoryNo, Pageable pageable);
+	
+	
+	/**
+	 * 최근 댓글 등록별 게임 검색 
+	 */
+	//List<Object> selectGameByCommentDate();
+	
+	/**
 	 * 상세 보드게임 조회
 	 */
 	

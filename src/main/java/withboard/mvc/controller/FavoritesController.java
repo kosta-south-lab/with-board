@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.Favorites;
 import withboard.mvc.domain.Game;
+import withboard.mvc.domain.Member;
 import withboard.mvc.service.FavoritesService;
 
 @Controller
@@ -31,9 +32,10 @@ public class FavoritesController {
 	
 	
 	@RequestMapping("/insert")
-	public String insertFavorites(Favorites favorites, Long gameNo) {
+	public String insertFavorites(Favorites favorites, Long gameNo, Long memberNo) {
 		
 		favorites.setGame(Game.builder().gameNo(gameNo).build());
+		favorites.setMember(Member.builder().memberNo(memberNo).build());
 		
 		favoritesService.insertFavorites(favorites);
 		
