@@ -111,7 +111,7 @@
                <select class="form-control" name="game" style="font-size:14px; color:gray;">
                   <option value="0">대표게임 선택</option>
                   <c:forEach items="${gameList}" var="game">
-					<option value="${game.gameNo}">${game.gameName}</option>
+					  <option value="${game.gameNo}" <c:if test="${meet.game.gameNo == game.gameNo}">selected</c:if>>${game.gameName}</option>
 				  </c:forEach>
                 </select>
               </div>
