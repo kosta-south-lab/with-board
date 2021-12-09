@@ -227,7 +227,7 @@
 		<!-- ======= Portfolio Details Section ======= -->
 		<section id="portfolio-details" class="portfolio-details">
 			<div class="container">
-				<form name="insertFavorites" method="post" action="${pageContext.request.contextPath}/favorites/insert">
+<%-- 				<form name="insertFavorites" method="post" action="${pageContext.request.contextPath}/favorites/insert">
 				<input type=hidden name="gameNo" value="${game.gameNo}">
 				<input type=hidden name="memberNo" value="${member.memberNo}">
 					<button>즐겨찾기 추가</button>
@@ -236,7 +236,7 @@
 				<input type=hidden name="gameNo" value="${game.gameNo}">
 				<input type=hidden name="memberNo" value="${member.memberNo}">
 					<button>즐겨찾기 해제</button>
-				</form>
+				</form> --%>
 				<div class="row gy-4">
 
 					<div class="col-lg-8">
@@ -276,8 +276,8 @@
 								<li><strong>플레이 인원 수</strong>:
 									${game.playPersonnelMin} ~
 									${game.playPersonnelMax}</li>
-								<li><strong>유저 평점</strong>: 여기에 평균 평점</li>
-								<li><strong>유저 난이도 평가</strong>: 여기에 평균 난이도 점수</li>
+<!-- 								<li><strong>유저 평점</strong>: 여기에 평균 평점</li>
+								<li><strong>유저 난이도 평가</strong>: 여기에 평균 난이도 점수</li> -->
 							</ul>
 						</div>
 						<div class="portfolio-info">

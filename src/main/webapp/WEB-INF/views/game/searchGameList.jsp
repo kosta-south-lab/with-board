@@ -12,6 +12,7 @@
   display: flex;
   justify-content: center;
   margin: 20px;
+
 }
 
 .pagination {
@@ -21,7 +22,7 @@
 .pagination a {
 	position: relative;
 	display: inline-block;
-	color: #2c3e50;
+	color: #BFAF8F;
 	text-decoration: none;
 	font-size: 1.2rem;
 	padding: 8px 16px 10px;
@@ -67,7 +68,6 @@
 .pagination-older {
 	margin-left: 5px;
 }
-
 
 </style> 
   
