@@ -46,7 +46,7 @@
             <form action="${pageContext.request.contextPath}/board/meet" method="get" class="d-flex">
               <input type="hidden" name="meetCategoryNo" value="${meetCategoryNo}">
               <select name = "searchOption" class="inputform mx-1">
-                <option id="title" value = "title">제목</option>
+                <option id="user" value = "title">제목</option>
                 <option id="user" value = "nickname">작성자</option>
                 <option id="user" value = "location">지역</option>
               </select>

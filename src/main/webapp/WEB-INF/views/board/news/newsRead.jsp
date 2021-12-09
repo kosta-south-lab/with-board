@@ -75,7 +75,8 @@
                   <li><i class="bx bx-check"></i> 등록일 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${parsedDateTime}"/></li>
                   <li>${news.content}</li>
                 </ul>
-                  <c:if test="${news.member.id == sessionScope.member.id}">
+                  <c:if test="${sessionScope.member.id == 'ADMIN' }"> 
+                 <%--  <c:if test="${news.member.id == sessionScope.member.id}"> --%>
 	              <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/news/updateForm/${news.boardNo}'">수정</button>
     	          <button class="bottom-btn" onclick="location.href='${pageContext.request.contextPath}/board/news/delete/${news.boardNo}'">삭제</button>
                 </c:if>
@@ -134,7 +135,9 @@
 	                  <div>
 	                    <h5 class="d-flex justify-content-between">
 	                    	<a href="">${reply.member.name}</a>
-	                    	<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${reply.replyNo}?boardType=news&boardNo=${news.boardNo}'">삭제</button></h5>
+	                    	<c:if test="${reply.member.id == sessionScope.member.id}">
+		                    	<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='${pageContext.request.contextPath}/board/reply/delete/${reply.replyNo}?boardType=news&boardNo=${news.boardNo}'">삭제</button>
+	                    	</c:if>
 	                    </h5>
 	                    <time>${reply.replyDate}</time>
 	                    <p>
