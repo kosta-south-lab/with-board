@@ -54,7 +54,7 @@ public class SendEmailServiceImpl implements SendEmailService {
         
         
         System.out.println("select문 성공");
-      memberRepository.updateUserPassword(id, pw);
+ //     memberRepository.updateUserPassword(id, pw);
         mb.setPw(pw);
         System.out.println("변경도 성공");
         
