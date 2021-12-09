@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+     <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>matchBoardRegister</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
+  <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -43,25 +53,101 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
 </head>
-<body>
-<div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<body style="color: #000000;">
+  <main id="main">
 
-    <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
-            </div>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="${pageContext.request.contextPath}/board/matchBoard">board</a></li>
+          <li>matchBoard</li>
+        </ol>
+        <h2>Register</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="row">
+		  <div class="col-lg-6 ">
+			<div class="map_wrap">
+				<div id="map" class="mb-4 mb-lg-0" style="border:0; width: 100%; height: 600px;"></div>
+				<div id="menu_wrap" class="bg_white">
+					<div class="option">
+						<div>
+							<form onsubmit="searchPlaces(); return false;">
+								키워드 : <input type="text" value="이태원 맛집" id="keyword"
+									size="15">
+								<button type="submit">검색하기</button>
+							</form>
+						</div>
+					</div>
+					<hr>
+					<ul id="placesList"></ul>
+					<div id="pagination"></div>
+				</div>
+			</div>
+		  </div>
+
+		  <div class="col-lg-6">
+		  <form action="${pageContext.request.contextPath}/board/matchBoard/insert" method="post" name="registerForm" enctype="multipart/form-data" class="php-email-form">
+           <input type="hidden" name="status" value="매칭중"> 
+                <div class="form-group">
+                <input type="text" class="form-control" name="title" placeholder="제목" required>
+              </div>
+    
+                <div class="form-group mt-3"class="form-control" style="font-size:14px; color:gray;">
+                게임 : 
+				<select name="game">
+				<option value="1">뭐시깽</option>
+				<option value="2">뭐시깽이</option>
+				</select>
+              </div>
+              <div class="form-group mt-3">
+                <select class="form-control" name="gameCategory" style="font-size:14px; color:gray;">
+                  <option value="0">카테고리 선택</option>
+                  <option value="1">정기모임모집</option>
+				  <option value="2">정기모임후기</option>
+                </select>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="location" class="form-control" placeholder="상세주소" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="text" class="form-control" name="location2" placeholder="지역" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="etc" rows="10" placeholder="조건을 입력하세요" required></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea>
+              </div>
+               <select class="form-control" name="headCount" style="font-size:14px; color:gray;">
+                  <option value="0">상관없음</option>
+                  <option value="1">1명</option>
+				  <option value="2">2명</option>
+				  <option value="3">3명</option>
+				  <option value="4">4명</option>
+                </select>
+              <div class="text-center mt-3"><input type="submit" value="등록하기"></div>
+            </form>
+          </div>
+
         </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-    </div>
-</div>
 
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+</body>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e8afbfd30a8d5aef8be386257a994cf&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
@@ -324,52 +410,9 @@ function removeAllChildNods(el) {
 }
 </script>
 
-<!-- 등록 form -->
-<form action="${pageContext.request.contextPath}/board/matchBoard/insert" method="post" name="registerForm">
-<input type="hidden" name="status" value="매칭중"> 
-	제목 : 
-	<input type="text" name="title"> 
-	<p>
-	게임 : 
-	<select name="game">
-		<option value="1">뭐시깽</option>
-		<option value="2">뭐시깽이</option>
-	</select>
-	<p>
-	게임 카테고리 : 
-	<select name="gameCategory">
-		<option value="1">뭐시깽</option>
-		<option value="2">뭐시깽이</option>
-	</select>
-	<p>
-	가게 이름 : <input type="text" name="shoptitle">
-	<p>
-	<p>
-	지역 - 
-	상세 주소 : <input type="text" name="location">
-	매칭 주소 : <input type="text" name="location2">
-	<p>
-	내용 :<p>
-	<textarea rows="20" cols="100" name="content"></textarea>
-	<p>
-	조건 :<p>
-	<textarea rows="5" cols="100" name="etc"></textarea><p>
-	최대 인원 :  <select name="headCount">
-		<option value="1">1명</option>
-		<option value="2">2명</option>
-		<option value="3">3명</option>
-		<option value="4">4명</option>
-		<option value="5">5명</option>
-		<option value="6">6명</option>
-	</select>
-	<p>
-	
-	<input type="submit" value="작성하기">
-	<input type="button" value="돌아가기" onclick="history.back()">
-</form>
 
 
 
 
-</body>
+
 </html>

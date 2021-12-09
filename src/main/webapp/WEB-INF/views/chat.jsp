@@ -11,9 +11,60 @@
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
+input {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+input.learn-more {
+  font-weight: 600;
+  color: #382b22;
+  text-transform: uppercase;
+  padding: 1.25em 2em;
+  background: #fff0f0;
+  border: 2px solid #b18597;
+  border-radius: 0.75em;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  transition: background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.container .input {
+  float: left;
+  width: 188px;
+  height: 42px;
+  padding: 0 15px;
+  border: 1px solid var(--light);
+  background-color: #eceff1;
+  border-radius: 21px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+}
+.container .input:focus {
+  outline: none;
+}
+.container .search {
+  display: block;
+  float: left;
+  width: 42px;
+  height: 42px;
+  margin-left: 10px;
+  border: 1px solid var(--light);
+  background-color: var(--blue);
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/name-type.png");
+  background-repeat: no-repeat;
+  background-position: top 12px left 14px;
+  border-radius: 50%;
+}
 :root {
-  --white: #fff;
+
   --black: #000;
   --bg: #f8f8f8;
   --grey: #999;
@@ -31,9 +82,11 @@ body {
   text-rendering: optimizeLegibility;
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/image.jpg");
+	hight:500px;
   background-size: cover;
   background-repeat: none;
+   background-color: #093040;
+  font-family: 'InfinitySans-RegularA1';
 }
 ::-webkit-scrollbar { display: none; } /*특정 부분 스크롤바 없애기*/ 
 .box{ -ms-overflow-style: none; } 
@@ -50,7 +103,7 @@ body {
 .container {
   position: relative;
   top: 50%;
-  left: 50%;
+  left: 39%;
   width: 80%;
   height: 75%;
   background-color: var(--white);
@@ -184,9 +237,10 @@ body {
 .container .chating {
   position: relative;
   float: left;
-  width: 62.4%;
-  height: 800px;
+  width: 720px;
+  height: auto;
   top:50%;
+  left:15px;
 }
 .container .chating .top {
   width: 100%;
@@ -339,14 +393,14 @@ body {
 .container .chating .bubble.you {
   float: left;
   color: var(--white);
-  background-color: var(--blue);
+  background-color: #d9d2b0;
   align-self: flex-start;
   -webkit-animation-name: slideFromLeft;
           animation-name: slideFromLeft;
 }
 .container .chating .bubble.you:before {
   left: -3px;
-  background-color: var(--blue);
+  background-color: #d9d2b0;
 }
 .container .chating .bubble.me {
   float: right;
@@ -436,11 +490,18 @@ body {
   -webkit-animation-name: slideFromRight;
           animation-name: slideFromRight;
 		}
-		
+
 	</style>
 </head>
 
 <script type="text/javascript">
+$('html, body').css({'overflow': 'hidden', 'height': '100%'});
+$('#element').on('scroll touchmove mousewheel', function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  return false;
+});
+
 	var ws;
 	var userName;
 
@@ -576,13 +637,12 @@ body {
 </script>
 <body>
 
-	<div id="container" class="container">
-		<h1>${roomName}의 채팅방</h1>
-		<h1>${roomNumber}의 채팅방</h1>
-		<h1>${member.getMemberNo()}의 채팅방</h1>
+
+	<div id="container" class="container" style="top:50px;">
+	
 		<input type="hidden" id="sessionId" value="">
 		
-		<div style="overflow:auto; width:800px; height:1400px;" id="box">
+		<div style="overflow:auto; width:730px; height:1180px;" id="box">
 		<div id="chating" class="chating">
 		
 	
@@ -593,11 +653,11 @@ body {
 		<div id="yourMsg">
 			<table class="inputTable">
 				<tr>
-					<th>메시지</th>
 					
-					<th><input type="text" name="chatting" id="chatting"value=""></th>
 					
-					<th><button onclick="send()" id="sendBtn">보내기</button></th>
+					<th><input class="learn-more" type="text" name="chatting" id="chatting"value="" style="width:300px;height:50px;"></th>
+					
+					<th><button class="search" onclick="send()" id="sendBtn"></button></th>
 					
 				</tr>
 			</table>

@@ -102,7 +102,7 @@
 	}
 
 	function goRoom(number, name){
-		location.href="/moveChating?roomName="+name+"&"+"roomNumber="+number;
+		top.reg.location.href="/moveChating?roomName="+name+"&"+"roomNumber="+number;
 	}
 
 	function createChatingRoom(res){
