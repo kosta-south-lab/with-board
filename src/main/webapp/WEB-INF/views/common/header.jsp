@@ -6,6 +6,20 @@
 <html lang="ko">
 
 <head>
+<style>
+@font-face {
+     font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+	.d-flex align-items-center {
+
+  background-color: #093040;
+  font-family: 'InfinitySans-RegularA1';
+
+}
+</style>
 
 <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -98,25 +112,25 @@
       </div>
 				<nav id="navbar" class="navbar">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/index">홈</a></li>
-						<li><a href="${pageContext.request.contextPath}/board/news/newsList">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath}/index" style="font-family: 'InfinitySans-RegularA1';">홈</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/news/newsList" style="font-family: 'InfinitySans-RegularA1';">공지사항</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/board/normal/normalList">커뮤니티</a></li>
+							href="${pageContext.request.contextPath}/board/normal/normalList"style="font-family: 'InfinitySans-RegularA1';">커뮤니티</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/board/meet">정기 모임</a></li>
-						<li><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList">온 더 보드</a></li>
+							href="${pageContext.request.contextPath}/board/meet"style="font-family: 'InfinitySans-RegularA1';">정기 모임</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList"style="font-family: 'InfinitySans-RegularA1';">온 더 보드</a></li>
 						<li class="dropdown"><a
-							href="${pageContext.request.contextPath}/game/searchGameList"><span>보드
+							href="${pageContext.request.contextPath}/game/searchGameList"style="font-family: 'InfinitySans-RegularA1';"><spanstyle="font-family: 'InfinitySans-RegularA1';">보드
 									게임</span> <i class="bi bi-chevron-down"></i></a>
 							<ul>
-								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=1">가족 게임</a></li>
-								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=2">어린이 게임</a></li>
-								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=3">전략 게임</a></li>
-								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=4">전쟁 게임</a></li>
-								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=5">추상 게임</a></li>
-								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=6">커스터마이징 게임</a></li>
-								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=7">테마 게임</a></li>
-								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=8">파티 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=1"style="font-family: 'InfinitySans-RegularA1';">가족 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=2"style="font-family: 'InfinitySans-RegularA1';">어린이 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=3"style="font-family: 'InfinitySans-RegularA1';">전략 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=4"style="font-family: 'InfinitySans-RegularA1';">전쟁 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=5"style="font-family: 'InfinitySans-RegularA1';">추상 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=6"style="font-family: 'InfinitySans-RegularA1';">커스터마이징 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=7"style="font-family: 'InfinitySans-RegularA1';">테마 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=8"style="font-family: 'InfinitySans-RegularA1';">파티 게임</a></li>
 							</ul></li>
 					</ul>
 					<i class="bi bi-list mobile-nav-toggle"></i>
