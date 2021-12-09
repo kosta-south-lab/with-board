@@ -10,7 +10,6 @@ public interface GameCommentRepository  extends JpaRepository<GameComment, Long>
 	
 	
 	@Query(value = "select * from game_comment where game_no = ? and member_no = ?", nativeQuery = true)
-	@Modifying // DDL 또는 DML문장
 	GameComment selectComment(Long gameNo, Long memberNo);
 
 }

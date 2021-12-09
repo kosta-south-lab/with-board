@@ -35,10 +35,24 @@ public class GameServiceImpl implements GameService {
 	
 	// 보드게임 제목 키워드로 검색
 	
-	public Page<Game> searchByName(Pageable pageable){
+	public Page<Game> searchByName(String keyword, Pageable pageable){
 		
-		return null; //gameRepository.findBygameNameLike();
+		return gameRepository.findByGameNameContaining(keyword, pageable);
 	}
+	
+	// 보드게임 카테고리로 필터 검색
+	
+	public Page<Game> filterSearchGame(int categoryNo, Pageable pageable){
+		
+		return gameRepository.findByGameCategoryNo(categoryNo, pageable);
+	}
+	
+	//최근 등록 된 댓글 순서 게임 검색
+	
+//	public List<Object> selectGameByCommentDate(){
+//		
+//		return gameRepository.selectGameByCommentDate();
+//	}
 	
 	// 상세 보드게임 조회
 	

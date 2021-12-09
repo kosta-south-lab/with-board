@@ -37,10 +37,24 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+   <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+  <script>
+	$(function() {
+		$('#gowrite').click(function() {
+			if($('#loginId').val() == '') {
+				alert('로그인 후 이용해주세요');
+				location.href='${pageContext.request.contextPath}/user/loginForm';
+			}else {
+				location.href='${pageContext.request.contextPath}/board/normal/registerForm';
+			}
+		})
+	})
+</script>
+  
 </head>
 
 <body>
-
+  
   <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
   <main id="main">
@@ -49,10 +63,10 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/normal/normalList">board</a></li>
+          <li><a href="${pageContext.request.contextPath}/index">홈</a></li>
           <li>일반게시판</li>
         </ol>
-        <h2>일반게시판</h2>
+        <h2>일반게시판 목록</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 
@@ -90,7 +104,8 @@
     </section>
     <section id="pricing" class="pricing">
       <div class="container" style="position:relative;">
-      	<button id="gowrite" onClick="location.href='${pageContext.request.contextPath}/board/normal/registerForm'">글쓰기</button>
+      <input type="hidden" value="${sessionScope.member.id}" id="loginId">
+      	<button id="gowrite">글쓰기</button>
         <div class="row">
           <c:choose>
 			<c:when test="${empty requestScope.normalList}">
@@ -112,7 +127,8 @@
 			                <li><i class="bx bx-check"></i>글번호 : ${normal.boardNo}</li>
 			                <li><i class="bx bx-check"></i>작성자 : ${normal.member.nickname}</li>
 			                <li><i class="bx bx-check"></i> 조회수 : ${normal.viewCount}</li>
-			                <li><i class="bx bx-check"></i> 등록일 : ${normal.regdate}</li>
+			                <fmt:parseDate value="${normal.regdate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+			                <li><i class="bx bx-check"></i> 등록일 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${parsedDateTime}"/></li>
 			              </ul>
 			              <a href="${pageContext.request.contextPath}/board/normal/read/${normal.boardNo}" class="buy-btn">상세보기</a>
 			            </div>
@@ -161,6 +177,7 @@
   </main><!-- End #main -->
 
   <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+  
 
 </body>
 

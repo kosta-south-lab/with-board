@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="../common/header.jsp" />
@@ -80,12 +82,21 @@ a:hover {
 </style>
 </head>
 <body>
-<form name="updateInfo" method="post" action="${pageContext.request.contextPath}/user/changeInfo">
+<form name="updateInfo" method="post" action="${pageContext.request.contextPath}/user/changeInfo" enctype="multipart/form-data">
+
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
             <img class="rounded-circle mt-5" width="150px" src="${member.image}"> 
+             <!-- 프로필 사진 -->
+			<div class="form-group">
+			<label for="profile"></label> 
+			<input type="image" class="form-control-file border" name="image" />
+			<p>${member.image}</p>
+			</div>
+		<button id="update--submit" class="btn btn-dark">수정</button>
+            
             <input class="font-weight-bold" type="text" readonly="readonly" id="id" name="id" value="${member.id}">
             <input class="text-black-50" type="text" readonly="readonly" id="email" name="email" value="${member.email}">
             <p style="color: red;">아이디와 이메일은 수정할 수 없습니다.</p>

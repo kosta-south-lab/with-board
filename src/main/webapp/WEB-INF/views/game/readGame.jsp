@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="../common/header.jsp" />
@@ -25,14 +26,14 @@
 		   
 	   });
 	   
-	   $("input:radio[name=gameRating]").click(function(){
-
+	   $("input:radio[name=score]").click(function(){
+               alert(111)
 		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/insertRating");
 		   $("#requestForm").submit();
 	   
    	   });	
 	   
-	   $("input:radio[name=gameLevel]").click(function(){
+	   $("input:radio[name=levelScore]").click(function(){
 
 		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/game/insertLevel");
 		   $("#requestForm").submit();
@@ -241,66 +242,54 @@
 					<div class="col-lg-8">
 						<div class="portfolio-details-slider swiper">
 							<div class="swiper-wrapper align-items-center">
-
+								<c:forEach items="${game.imageList}" var="image">
 								<div class="swiper-slide">
 									<img
-										src="${pageContext.request.contextPath}/img/portfolio/portfolio-1.jpg"
+										src="${pageContext.request.contextPath}${image.imageUrl}"
 										alt="">
 								</div>
-
-								<div class="swiper-slide">
-									<img
-										src="${pageContext.request.contextPath}/img/portfolio/portfolio-2.jpg"
-										alt="">
-								</div>
-
-								<div class="swiper-slide">
-									<img
-										src="${pageContext.request.contextPath}/img/portfolio/portfolio-3.jpg"
-										alt="">
-								</div>
-
+								</c:forEach>
 							</div>
 							<div class="swiper-pagination"></div>
 						</div>
 						<div class="video-url">
 							<h2>관련 동영상</h2>
 							<iframe width="100%" height="600px"
-								src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+								src="${game.videoUrl}"></iframe>
 						</div>
 
 					</div>
 
 					<div class="col-lg-4">
 						<div class="portfolio-info">
-							<h3>${requestScope.game.gameName}</h3>
+							<h3>${game.gameName}</h3>
 							<ul>
 								<li><strong>장르</strong>:
-									${requestScope.game.gameCategory.gameCategoryName}</li>
+									${game.gameCategory.gameCategoryName}</li>
 								<li><strong>테마</strong>:
-									${requestScope.game.gameTheme.themeName}</li>
+									${game.gameTheme.themeName}</li>
 								<li><strong>진행 방식</strong>:
-									${requestScope.game.gameProcess.processName}</li>
+									${game.gameProcess.processName}</li>
 								<li><strong>플레이 타임</strong>:
-									${requestScope.game.gamePlaytimeMin} ~
-									${requestScope.game.gamePlaytimeMax}</li>
+									${game.gamePlaytimeMin} ~
+									${game.gamePlaytimeMax}</li>
 								<li><strong>플레이 인원 수</strong>:
-									${requestScope.game.playPersonnelMin} ~
-									${requestScope.game.playPersonnelMax}</li>
+									${game.playPersonnelMin} ~
+									${game.playPersonnelMax}</li>
 								<li><strong>유저 평점</strong>: 여기에 평균 평점</li>
 								<li><strong>유저 난이도 평가</strong>: 여기에 평균 난이도 점수</li>
 							</ul>
 						</div>
 						<div class="portfolio-info">
 							<h3>상세 설명</h3>
-							<p>${requestScope.game.gameDetail}</p>
+							<p>${game.gameDetail}</p>
 						</div>
 						<div class="portfolio-info">
 								<form name="gameRating" id="gameRating" method="post">
 								    <fieldset>
 								        <legend>?이 보드게임을 해보셨나요<p>!경험을 공유해 주세요</p><p>평점</p></legend>
-								        	<input type=hidden name="gameNo" value="${requestScope.game.gameNo}">
-								        	<input type=hidden name="memberNo" value="${sessionScope.member.memberNo}">
+								        	<input type=hidden name="gameNo" value="${game.gameNo}">
+								        	<input type=hidden name="memberNo" value="${member.memberNo}">
 									        <input type="radio" name="score" value="5" id="gameRating1"><label for="gameRating1">⭐</label>
 									        <input type="radio" name="score" value="4" id="gameRating2"><label for="gameRating2">⭐</label>
 									        <input type="radio" name="score" value="3" id="gameRating3"><label for="gameRating3">⭐</label>
@@ -311,8 +300,8 @@
 								<form name="gameLevel" id="gameLevel" method="post">
 								    <fieldset>
 								        <legend>난이도</legend>
-								        	<input type=hidden name="gameNo" value="${requestScope.game.gameNo}">
-								        	<input type=hidden name="memberNo" value="${sessionScope.member.memberNo}">
+								        	<input type=hidden name="gameNo" value="${game.gameNo}">
+								        	<input type=hidden name="memberNo" value="${member.memberNo}">
 									        <input type="radio" name="levelScore" value="5" id="gameLevel1"><label for="gameLevel1">⭐</label>
 									        <input type="radio" name="levelScore" value="4" id="gameLevel2"><label for="gameLevel2">⭐</label>
 									        <input type="radio" name="levelScore" value="3" id="gameLevel3"><label for="gameLevel3">⭐</label>
@@ -323,11 +312,11 @@
 								
 						</div>
 						<div>
-							<form name="requestForm" method="post" id="requestForm">
+<%-- 							<form name="requestForm" method="post" id="requestForm">
 								<input type=hidden name="gameNo" value="${game.gameNo}">
 								<input type=button value="수정하기"> <input type=button
 									value="삭제하기">
-							</form>
+							</form> --%>
 						</div>
 					</div>
 				</div>
@@ -335,12 +324,12 @@
 		</section>
 		<!-- End Portfolio Details Section -->
 
-	   	<c:choose>
+<%-- 	   	<c:choose>
 		<c:when test="${empty game.gameCommentList}">
 		<!-- 댓글 없으면 댓글이 없습니다. 멘트 -->
 		<form class="replyForm" name="replyForm" method="post"
-			action="${pageContext.request.contextPath}/comment/insert">
-			<input type="hidden" name="gameNo" value="${requestScope.game.gameNo}" /> 
+			action="${pageContext.request.contextPath}/game/insertComment">
+			<input type="hidden" name="gameNo" value="${game.gameNo}" /> 
 			<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}" /> 
 			<fieldset>
 				<div class="container bootstrap snippets bootdey">
@@ -376,7 +365,7 @@
 						<hr>
 						<div class="comments">
 							<div class="clearfix" style="text-align: center">
-								<span>한줄평이 없습니다! 한줄평을 달아 플레이 경험을 공유 해보는 것은 어떨까요?</span>
+								<span>댓글이 없습니다! 댓글을 달아 플레이 경험을 공유 해보는 것은 어떨까요?</span>
 								<hr>
 							</div>
 						</div>
@@ -387,9 +376,9 @@
 	</c:when>
 			
 		<c:otherwise>
-		
-			<form action="${pageContext.request.contextPath}/comment/insert" method="post">
-			<input type="hidden" name="gameNo" value="${requestScope.game.gameNo}" /> 
+			<c:if test="${sessionScope.member != null}">
+			<form action="${pageContext.request.contextPath}/game/insertComment" method="post">
+			<input type="hidden" name="gameNo" value="${game.gameNo}" /> 
 			<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}" /> 	
 				<fieldset>
 					<div class="container bootstrap snippets bootdey">
@@ -418,16 +407,15 @@
 
 				</fieldset>
 			</form>
-			
+			</c:if>
 			<c:forEach items="${game.gameCommentList}" var="gameComment">
 				<!-- 돌려서 댓글을 꺼낸다. -->
-				<form action="${pageContext.request.contextPath}/comment/insert" method="post">
+				<form action="${pageContext.request.contextPath}/game/insertComment" method="post">
 				
 				<input type="hidden" name="gameNo" value="${game.gameNo}" /> 
 				<input type="hidden" name="memberNo" value="${member.memberNo}" /> 
 				
-				<c:if test="${(gameComment.member.nickname == member.nickname) or (gameComment.member.status == 10)}">
-					<li class="clearfix">
+
 					<div class="blog-comment">
 					<div class="comments">
 						<div class="post-comments">
@@ -436,16 +424,84 @@
 								<a href="#">${gameComment.member.nickname}</a> 님 :
 							</p>
 							<p>${gameComment.gameCommentContents}</p>
-							<a href="#"><small>삭제</small></a>
+						<c:if test="${(gameComment.member.nickname == sessionScope.member.nickname) or (gameComment.member.status == 10)}">
+							<a href="${pageContext.request.contextPath}/game/deleteComment/${gameComment.commentNo}/${game.gameNo}"><small>삭제</small></a>
+						</c:if>
 						</div>
 						</div>
-						</div>
-					</li>
-				</c:if>
+						</div>				
 				</form>
 			</c:forEach>
 		</c:otherwise>
-	</c:choose>
+	</c:choose> --%>
+	
+	    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-8 entries">
+            <div class="blog-comments">
+              <h4 class="comments-count">
+              <c:choose>
+              	<c:when test="${empty game.gameCommentList}">0</c:when>
+              	<c:otherwise>
+              		${fn:length(game.gameCommentList)}
+              	</c:otherwise>
+              </c:choose>
+			  개의 댓글이 달렸어요
+			  </h4>
+       
+              <c:forEach items="${game.gameCommentList}" var="gameComment">
+	              <div id="comment-1" class="comment">
+	                <div class="d-flex">
+	                  <div class="comment-img"><img src="${pageContext.request.contextPath}/resources/images/profile/profile.png" alt="프로필이미지"></div>
+	                  <div>
+	                    <h5 class="d-flex justify-content-between">
+	                    	<a href="">${gameComment.member.name}</a>
+	                    	<c:if test="${gameComment.member.id == sessionScope.member.id}">
+		                    	&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='${pageContext.request.contextPath}/game/deleteComment/${gameComment.commentNo}/${game.gameNo}'">삭제</button>
+	                    	</c:if>
+	                    </h5>
+	                    <fmt:parseDate value="${gameComment.commentDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedReplyDateTime" type="both"/>
+	                    <time><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${parsedReplyDateTime}"/></time>
+	                    <p>
+	                      ${gameComment.gameCommentContents}
+	                    </p>
+	                  </div>
+	                </div>
+	              </div><!-- End comment #1 -->
+			  </c:forEach>
+			  
+			
+              <div class="reply-form">
+				<c:if test="${!empty sessionScope.member.id}">
+	                <h4>댓글이 없습니다! 댓글을 달아 플레이 경험을 공유 해보는 것은 어떨까요?</h4>
+	                <form action="${pageContext.request.contextPath}/game/insertComment" method = "post">
+             			<input type="hidden" name="gameNo" value="${game.gameNo}" /> 
+						<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}" /> 	
+	         					  
+	                  <div class="row">
+	                    <div class="col form-group">
+	                      <textarea name="gameCommentContents" class="form-control" placeholder="댓글 내용"></textarea>
+	                    </div>
+	                  </div>
+	                  <button type="submit" class="btn btn-primary">댓글 달기</button>
+	
+	                </form>
+	                <p>
+				</c:if>
+			   	<div>
+					<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/game/searchGameList'">리스트로 돌아가기</button>
+				</div>
+              </div>
+
+            </div><!-- End blog comments -->
+
+          </div><!-- End blog entries list -->
+        </div>
+
+      </div>
+    </section><!-- End Blog Single Section -->
 
 	</main>
 	<!-- End #main -->
