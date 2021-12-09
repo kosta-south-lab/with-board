@@ -141,7 +141,7 @@
 	}
 </script>
 <body>
-  <h3>${sessionScope}</h3>
+ 
 <form action="${pageContext.request.contextPath}/room/insert" method="post" name="registerForm">
 	<div class="container">
 		<h1>채팅방</h1>

@@ -32,12 +32,13 @@ public class JoinMatchServiceImpl implements JoinMatchService{
 		return joinMatchRepository.joinMatchList(num);
 	}
 	@Override
-	public JoinMatch joinMatchList2(HttpSession session) {
+	public List<JoinMatch> joinMatchList2(HttpSession session) {
 		Member member = (Member) session.getAttribute("member");
 		Long num=member.getMemberNo();
-		JoinMatch joinMatch = joinMatchRepository.joinMatchList2(num);
-		 session.setAttribute("joinMatch", joinMatch);
-		return joinMatch;
+		//JoinMatch joinMatch = joinMatchRepository.joinMatchList2(num);
+		// session.setAttribute("joinMatch", joinMatch);
+		
+		return joinMatchRepository.joinMatchList2(num);
 	}
 
 	@Override

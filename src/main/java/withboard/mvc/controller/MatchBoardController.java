@@ -54,6 +54,7 @@ public class MatchBoardController {
 	}
 	@RequestMapping("/board/matchBoard/updates")
 	public String updates(MatchBoard matchBoard) {
+		
 	 matchBoardService.update(matchBoard);
 		
 		
@@ -88,9 +89,9 @@ public class MatchBoardController {
 	public ModelAndView writeForm() {
 		return new ModelAndView("board/matchBoard/matchBoardRegister");
 	}
-	@RequestMapping("/board/matchBoard/test")
+	@RequestMapping("/multiView")
 	public ModelAndView test() {
-		return new ModelAndView("board/matchBoard/test");
+		return new ModelAndView("multiView");
 	}
 	
 

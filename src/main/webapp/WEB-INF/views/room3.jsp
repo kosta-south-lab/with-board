@@ -82,7 +82,7 @@
 	}
 
 	function getRoom(){
-		commonAjax('/getRoom2', "", 'post', function(result){
+		commonAjax('/getRoom3', "", 'post', function(result){
 			createChatingRoom(result);
 		});
 	}
