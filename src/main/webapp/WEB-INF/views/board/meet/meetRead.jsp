@@ -114,7 +114,7 @@
               <c:forEach items="${meet.replyList}" var="reply">
 	              <div id="comment-1" class="comment">
 	                <div class="d-flex">
-	                  <div class="comment-img"><img src="${pageContext.request.contextPath}/img/user.png" alt="프로필이미지"></div>
+	                  <div class="comment-img"><img src="${pageContext.request.contextPath}/resources/images/profile/profile.png" alt="프로필이미지"></div>
 	                  <div>
 	                    <h5 class="d-flex justify-content-between">
 	                    	<a href="">${reply.member.name}</a>
