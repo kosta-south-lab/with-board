@@ -272,7 +272,7 @@ public class MemberController {
 		}
 		
 		//비번찾기 폼으로 이동
-		@RequestMapping("/user/searchPass")
+		@RequestMapping("/user/searchPass2")
 		public void searchPass() {
 			
 		}
@@ -290,11 +290,17 @@ public class MemberController {
 
 		//등록된 이메일로 임시비밀번호를 발송하고 발송된 임시비밀번호로 사용자의 pw를 변경하는 컨트롤러
 		    @PostMapping("/check/findPw/sendEmail")
-		    public @ResponseBody void sendEmail(String userEmail, String userName){
+		    public String sendEmail(String userEmail, String userName){
 		        Mail dto = emailService.createMailAndChangePassword(userEmail, userName);
 		        emailService.passwordMailSend(dto);
+		        
+		        System.out.println("컨트롤러 sendEmail");
+		        return "user/confirmMail";
 
 		    }
+		    
+		
+		    
 		    
 		    //비밀번호 변경 폼으로 이동~~
 		    @RequestMapping("/user/passChange")

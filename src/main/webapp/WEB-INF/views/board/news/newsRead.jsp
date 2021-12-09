@@ -98,8 +98,6 @@
             <div class="portfolio-wrap">
               <img src="${pageContext.request.contextPath}${image.imageUrl}" class="img-fluid" alt="" style="width:100%">
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
                 <div class="portfolio-links">
                   <a href="${pageContext.request.contextPath}${image.imageUrl}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
               </div>

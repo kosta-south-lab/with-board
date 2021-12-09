@@ -71,7 +71,7 @@
               </div>
               <div class="form-group mt-3">
                 <select class="form-control" name="normalCategoryNo" style="font-size:14px; color:gray;">
-                  <option value="0">카테고리 선택</option>
+                  <option value="1">카테고리 선택</option>
                   <option value="1">자유</option>
 				  <option value="2">공략</option>
 				  <option value="3">Q&A</option>

@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Contact - Eterna Bootstrap Template</title>
+  <title>게시물 상세</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,8 +29,8 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/meet">Board</a></li>
-          <li>Meet</li>
+          <li><a href="/index">홈</a></li>
+          <li>정기모임</li>
         </ol>
         <h2>글 상세보기</h2>
 		
