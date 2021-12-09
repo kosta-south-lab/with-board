@@ -119,12 +119,10 @@ function goRoom(){
 			
 			<table class="inputTable">
 				<tr>
-				
+				<th><input type="hidden" name="joinMatchTitle" id="joinMatchTitle" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></input></th>
 				<th><input type="hidden" name="boardNo" id="boardNo" value="${matchBoard.boardNo}"></th>
-				<th><input type="text" name="roomNum" id="roomNum" value="${roomNum}"></th>
-					<th>방 제목</th>
+				<th><input type="hidden" name="roomNum" id="roomNum" value="${roomNum}"></th>
 					
-					<th><input type="hidden"  name="joinMatchTitle" id="joinMatchTitle" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></th>
 					<th><button >채팅방 생성</button></th>
 					
 				</tr>
@@ -159,12 +157,12 @@ function goRoom(){
 	
 	<input type="hidden"id="name" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></input>
 	<input type="hidden"id="number" value="${matchBoard.roomNum}"></input>
-	<input type="submit" value="적용하기" >
+	<input type="submit" value="채팅방 이동" >
 	
 </form>
 
 	<div>
-	<button onclick="goRoom()">이거</button>
+	<button onclick="goRoom()">방장이 아닌 다른 사람들</button>
 		<button onclick="location.href='${pageContext.request.contextPath}/board/matchBoard/updateForm/${matchBoard.boardNo}'">수정하기</button>
 	</div>
 	<div>

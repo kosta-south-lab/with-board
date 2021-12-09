@@ -34,7 +34,7 @@ public class JoinMatchController {
 	public String insert(JoinMatch joinMatch, HttpSession session,HttpServletRequest request) {
 		Member member = (Member) session.getAttribute("member");
 	    joinMatch.setMember(member);
-	    System.out.println(joinMatch.getJoinMatchTitle());
+	    
 		joinMatchService.insert(joinMatch);
 		
 		List<JoinMatch> joinMatchList = joinMatchService.joinMatchList(session);

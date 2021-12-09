@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.domain.JoinMatch;
 import withboard.mvc.domain.Member;
+import withboard.mvc.repository.JoinMatchRepository;
 import withboard.mvc.service.JoinMatchService;
 import withboard.mvc.service.MatchBoardService;
 import withboard.mvc.somthing.Room;
@@ -26,6 +27,7 @@ import withboard.mvc.somthing.Room;
 @RequiredArgsConstructor
 public class MainController {
 	private final JoinMatchService joinMatchService;
+	private final JoinMatchRepository joinMatchRepository;
 	
 	List<Room> roomList = new ArrayList<Room>();
 	static int roomNumber = 0;
@@ -51,6 +53,12 @@ public class MainController {
 	public ModelAndView room2() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("room2");
+		return mv;
+	}
+	@RequestMapping("/room3")
+	public ModelAndView room3() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("room3");
 		return mv;
 	}
 int lastnum=0;
@@ -135,7 +143,7 @@ int roomNumber3=0;
  */
 @RequestMapping("/getRoom")
 public @ResponseBody List<Room> getRoom(@RequestParam HashMap<Object, Object> params,HttpSession session){
-	//roomList.clear();
+	roomList.clear();
 	//if(this.a==true) {
 	List<JoinMatch> joinMatchList = joinMatchService.joinMatchList(session);
 	JoinMatch[] strArray = joinMatchList.toArray(new JoinMatch[joinMatchList.size()]);
@@ -154,19 +162,39 @@ public @ResponseBody List<Room> getRoom(@RequestParam HashMap<Object, Object> pa
 @RequestMapping("/getRoom2")
 public @ResponseBody List<Room> getRoom2(@RequestParam HashMap<Object, Object> params,HttpSession session){
 	roomList.clear();
-	//if(this.a==true) {
+	
 	List<JoinMatch> joinMatchList = joinMatchService.joinMatchList(session);
 	JoinMatch[] strArray = joinMatchList.toArray(new JoinMatch[joinMatchList.size()]);
 	
-	 
-	
-		Room room = new Room();
+	Room room = new Room();
 	room.setRoomNumber(Math.toIntExact(strArray[0].getJoinMatchNo()));
 	room.setRoomName(strArray[0].getJoinMatchTitle());
 	roomList.add(room);
 	
-	//this.a=false; 
-	//}
+	
+	return roomList;
+}
+@RequestMapping("/getRoom3")
+public @ResponseBody List<Room> getRoom3(@RequestParam HashMap<Object, Object> params,HttpSession session){
+	roomList.clear();
+	
+	List<JoinMatch> joinMatch = joinMatchService.joinMatchList2(session);
+//		Member member = (Member) session.getAttribute("member");
+//		Long num=member.getMemberNo();
+//		List<JoinMatch> joinMatch =joinMatchRepository.joinMatchList2(num);
+		JoinMatch[] strArray = joinMatch.toArray(new JoinMatch[joinMatch.size()]);
+	
+		for (int i=0; i< strArray.length;i++) {
+			System.out.println(Math.toIntExact(strArray[i].getJoinMatchNo()));
+			//Room room = new Room();
+			//room.setRoomNumber(Math.toIntExact(strArray[i].getJoinMatchNo()));
+			//room.setRoomName(strArray[i].getJoinMatchTitle());
+			//strArray[i].getJoinMatchNo();
+			//System.out.println(joinMatchRepository.joinMatchList3(strArray[i].getJoinMatchNo()));
+			//roomList.add(room);
+		}
+
+	
 	return roomList;
 }
 	

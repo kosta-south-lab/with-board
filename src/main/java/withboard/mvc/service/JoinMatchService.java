@@ -19,6 +19,8 @@ public interface JoinMatchService {
 
 	List<JoinMatch> joinMatchList(HttpSession session);
 	
-	JoinMatch joinMatchList2(HttpSession session);
+	List<JoinMatch> joinMatchList2(HttpSession session);
+	
+	//List<JoinMatch> joinMatchList3(HttpSession session);
 
 }
