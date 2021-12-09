@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>meetList</title>
+  <title>온 더 보드</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -24,10 +24,10 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList">board</a></li>
-          <li>matchboard</li>
+          <li><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList">홈</a></li>
+          <li>온 더 보드</li>
         </ol>
-        <h2>On The Board</h2>
+        <h2>매칭 글 리스트</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 

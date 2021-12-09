@@ -44,8 +44,8 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/matchBoard">Board</a></li>
-          <li>MatchBoard</li>
+          <li><a href="${pageContext.request.contextPath}/board/matchBoard">홈</a></li>
+          <li>온 더 보드</li>
         </ol>
         <h2>글 상세보기</h2>
 		
@@ -138,11 +138,14 @@
 	<input type="hidden"id="name" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></input>
 	<input type="hidden"id="number" value="${matchBoard.roomNum}"></input>
 	
-					
+				
 	<input type="submit" class="bottom-btn" value="채팅방 이동" >
 	
 </form>
-</c:if>
+
+</c:if>	
+<input type="hidden"id="name" value="l매칭l ${matchBoard.title} l ${matchBoard.location2}"></input>
+	<input type="hidden"id="number" value="${matchBoard.roomNum}"></input>
 <c:if test="${matchBoard.member.id != sessionScope.member.id}">
 	<div>
 	
@@ -232,7 +235,6 @@
 
   </main><!-- End #main -->
 
-  
 
 	
 </body>
@@ -296,13 +298,14 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	
 
 function goRoom(){
+	console.log(document.getElementById("number").value);
 	var number = document.getElementById("number").value;
 	var name = document.getElementById("name").value;
 	//location.href="/moveChating?roomName="+name+"&"+"roomNumber="+number;
 	var post="/moveChating?roomName="+name+"&"+"roomNumber="+number;
 	sessionStorage.setItem("goRoom", post );
-	location.href="/multiView";
-	
+	//location.href="/multiView";
+	location.href=post;
 
 }
 
