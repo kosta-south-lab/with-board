@@ -87,42 +87,42 @@ color : #093040;
 
         <div class="row">
         
-          <div id="featured_icon_container" class="col-lg-4 col-md-6 ">
+          <div id="featured_icon_container" class="col-lg-4 col-md-6 "onclick="location.href='${pageContext.request.contextPath}/board/news/newsList'">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/newslogo.png"/></div>
-              <h4><a href="${pageContext.request.contextPath}/board/news/newsList">공지사항</a></h4>
+              <h4><a>공지사항</a></h4>
               <p>※위보드 공지사항※</p>
             </div>
           </div>
 	
-          <div class="col-lg-4 col-md-6  mt-4 mt-md-0">
+          <div class="col-lg-4 col-md-6  mt-4 mt-md-0" onclick="location.href='${pageContext.request.contextPath}/board/normal/normalList'">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/normallogo.png"/></div>
-              <h4><a href="${pageContext.request.contextPath}/board/normal/normalList">커뮤니티</a></h4>
+              <h4><a >커뮤니티</a></h4>
               <p>※자유/공략/Q&A/정보/핫딜※</p>
             </div>
           </div>
 
-          <div id="featured_icon_container" class="col-lg-4 col-md-6  mt-4 mt-lg-0">
+          <div id="featured_icon_container" class="col-lg-4 col-md-6  mt-4 mt-lg-0"onclick="location.href='${pageContext.request.contextPath}/game/searchGameList'">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/gamelogo.png"/></div>
-              <h4><a href="${pageContext.request.contextPath}/game/searchGameList">보드게임 목록</a></h4>
+              <h4><a >보드게임 목록</a></h4>
               <p>※테마별 보드게임※</p>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6  mt-4">
+          <div class="col-lg-4 col-md-6  mt-4" onclick="location.href='${pageContext.request.contextPath}/board/meet'">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/meetlogo.png"/></div>
-              <h4><a href="${pageContext.request.contextPath}/board/meet">정기 모임</a></h4>
+              <h4><a>정기 모임</a></h4>
               <p>※Every week with board※</p>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6  mt-4">
+          <div class="col-lg-4 col-md-6  mt-4"onclick="location.href='${pageContext.request.contextPath}/board/matchBoard/matchBoardList'">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/matchlogo.png"/></div>
-              <h4><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList">온 더 보드</a></h4>
+              <h4><a >온 더 보드</a></h4>
               <p>※Right now with board※</p>
             </div>
           </div>
