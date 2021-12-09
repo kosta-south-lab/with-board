@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ private final BoardRepository boardRepository;
 private final MatchBoardRepository matchBoardRepository;
 	
 	public List<MatchBoard> selectAll() {
-		return matchBoardRepository.findAll();
+		return matchBoardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
 	}
 	
 	public void insert(MatchBoard matchBoard,Member member) {
