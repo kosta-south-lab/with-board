@@ -75,7 +75,7 @@ public interface MemberService {
 	/**
 	 * 새 비밀번호 변경
 	 * */
-	public void changePass(String pass, String newPass);
+	public void changePass(String pass, String newPass, Member member);
 
 
 

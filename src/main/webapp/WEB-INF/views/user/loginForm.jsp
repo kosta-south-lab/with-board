@@ -70,7 +70,9 @@ a:hover {
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
       
-      <a href = ${pageContext.request.contextPath}/user/searchId >아이디/비밀번호 찾기</a>
+      <a href = ${pageContext.request.contextPath}/user/searchId >아이디 찾기</a>
+      <br>
+      <a href = ${pageContext.request.contextPath}/user/searchPass >비밀번호 찾기</a>
 </div>
 </body>
 </html>

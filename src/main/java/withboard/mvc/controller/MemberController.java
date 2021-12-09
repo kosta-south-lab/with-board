@@ -305,10 +305,14 @@ public class MemberController {
 		    @RequestMapping("/user/newPass")
 		    public String newPass(String pass, String newPass, HttpSession session) throws Exception {
 		    	
-			memberService.changePass(pass, newPass);
+		    Member member = (Member)session.getAttribute("member"); //현재 로그인한 계정
+			 System.out.println("getId : " + member.getId());
+			
+		
+			memberService.changePass(pass, newPass, member);
 			
 		       
-		        return "users/confirm";
+		        return "user/confirmPass";
 		    }
 		    
 	

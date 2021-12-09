@@ -83,8 +83,8 @@
                     <div class="text-center small mt-2" id="checkMsg" style="color: red"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span
-                            class="glyphicon glyphicon-remove"></span> Cancel
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+                    비밀번호 찾기
                     </button>
                 </div>
             </div>

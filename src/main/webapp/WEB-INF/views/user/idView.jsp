@@ -24,7 +24,7 @@ body{
 <body>
 <h1>아이디 찾기 결과입니다. </h1>
 <p>찾은 id : ${sessionScope.member.id}</p>
- <a href = ${pageContext.request.contextPath}/user/searchPass>비밀번호 찾기</a>
+
 
 </body>
 </html>

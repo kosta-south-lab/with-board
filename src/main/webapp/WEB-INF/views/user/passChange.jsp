@@ -80,7 +80,7 @@ a:hover {
 </head>
 
 <body>
-<form name="newPass" method="post" action="${pageContext.request.contextPath}/user/newPass">
+<form name="passChangeForm" method="post" action="${pageContext.request.contextPath}/user/newPass">
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">

@@ -200,13 +200,15 @@ public class MemberServiceImpl implements MemberService {
 	 * 새 비밀번호 변경
 	 * */
 	@Override
-	public void changePass(String pass, String newPass) {
-		Member member = new Member();
-		if(member.getPw().equals(passwordEncoder.encode(pass))) {
-			boolean set = memberRepository.changePass(pass, newPass);
-			if(set==true) member.setPw(newPass);
+	public void changePass(String pass, String newPass, Member member) {
+		String id = member.getId();
+		System.out.println(id);
+		System.out.println(member.getPw());
+		if(!passwordEncoder.matches(pass, member.getPw())) {
+		throw new RuntimeException("비밀번호가 일치하지 않습니다.");
 	}
 		
+		memberRepository.changePass(pass, newPass, id);
 	
 }
 
