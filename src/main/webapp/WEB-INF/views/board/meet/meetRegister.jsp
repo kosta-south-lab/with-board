@@ -55,7 +55,7 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>  
 </head>
-<body>
+<body style="color: #000000;">
   <jsp:include page="/WEB-INF/views/common/header.jsp" />
   <main id="main">
 

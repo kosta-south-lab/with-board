@@ -114,7 +114,7 @@
               <c:forEach items="${meet.replyList}" var="reply">
 	              <div id="comment-1" class="comment">
 	                <div class="d-flex">
-	                  <div class="comment-img"><img src="${pageContext.request.contextPath}/resources/images/profile/profile.png" alt="프로필이미지"></div>
+	                  <div class="comment-img"><img src="${pageContext.request.contextPath}/img/user.png" alt="프로필이미지"></div>
 	                  <div>
 	                    <h5 class="d-flex justify-content-between">
 	                    	<a href="">${reply.member.name}</a>
@@ -204,7 +204,7 @@
 	
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addArray2[1]+'</div>'
+		            content: '<div style="background-color: #000000; width:150px;text-align:center;padding:6px 0;">'+addArray2[1]+'</div>'
 		        });
 		        infowindow.open(map, marker);
 	

@@ -26,6 +26,11 @@ public interface MeetRepository extends JpaRepository<Meet, Long> {
 	 */
 	Page<Meet> findByMeetCategoryAndMember(MeetCategory meetCategory, Member member, Pageable paging);
 	
+	/**
+	 * 검색조건이 지역일 경우
+	 * */
+	Page<Meet> findByMeetCategoryAndLocation2Containing(MeetCategory meetCategory, String location2, Pageable paging);
+	
 	/***
 	 * 조회수 증가(JPQL 문법)
 	 */

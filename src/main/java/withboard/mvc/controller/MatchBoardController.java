@@ -56,10 +56,8 @@ public class MatchBoardController {
 	public String updates(MatchBoard matchBoard) {
 		
 	 matchBoardService.update(matchBoard);
-		
-		
-		
-		 return "redirect:/room2";
+
+		 return "redirect:/multiView2";
 	}
 	
 	@RequestMapping("/board/matchBoard/updateForm/{boardNo}")
@@ -92,6 +90,10 @@ public class MatchBoardController {
 	@RequestMapping("/multiView")
 	public ModelAndView test() {
 		return new ModelAndView("multiView");
+	}
+	@RequestMapping("/multiView2")
+	public ModelAndView test2() {
+		return new ModelAndView("multiView2");
 	}
 	
 

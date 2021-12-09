@@ -50,7 +50,7 @@ public class JoinMatchController {
 	@RequestMapping("/chat/delete/{joinMatchNo}")
 	public String delete(@PathVariable Long joinMatchNo) {
 		joinMatchService.delete(joinMatchNo);
-		return "redirect:/room";
+		return "redirect:/multiView";
 	}
 
 }
