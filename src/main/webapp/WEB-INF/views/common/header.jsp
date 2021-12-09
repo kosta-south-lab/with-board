@@ -98,13 +98,13 @@
       </div>
 				<nav id="navbar" class="navbar">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/sample/index">홈</a></li>
-						<li><a href="${pageContext.request.contextPath}/sample/about">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath}/index">홈</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/news/newsList">공지사항</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/sample/services">커뮤니티</a></li>
+							href="${pageContext.request.contextPath}/board/normal/normalList">커뮤니티</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/sample/portfolio">정기 모임</a></li>
-						<li><a href="${pageContext.request.contextPath}/sample/team">온 더 보드</a></li>
+							href="${pageContext.request.contextPath}/board/meet">정기 모임</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList">온 더 보드</a></li>
 						<li class="dropdown"><a
 							href="${pageContext.request.contextPath}/game/searchGameList"><span>보드
 									게임</span> <i class="bi bi-chevron-down"></i></a>
