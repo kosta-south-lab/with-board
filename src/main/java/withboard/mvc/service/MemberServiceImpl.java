@@ -202,13 +202,17 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void changePass(String pass, String newPass, Member member) {
 		String id = member.getId();
-		System.out.println(id);
-		System.out.println(member.getPw());
+		Member mb = memberRepository.findById(id);
+		newPass = passwordEncoder.encode(newPass);
+		System.out.println(newPass);
+		
 		if(!passwordEncoder.matches(pass, member.getPw())) {
 		throw new RuntimeException("비밀번호가 일치하지 않습니다.");
 	}
 		
 		memberRepository.changePass(pass, newPass, id);
+		
+		mb.setPw(newPass);
 	
 }
 

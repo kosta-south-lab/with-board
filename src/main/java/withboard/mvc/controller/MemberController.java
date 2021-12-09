@@ -303,9 +303,8 @@ public class MemberController {
 		    
 		    //비밀번호 변경
 		    @RequestMapping("/user/newPass")
-		    public String newPass(String pass, String newPass, HttpSession session) throws Exception {
-		    	
-		    Member member = (Member)session.getAttribute("member"); //현재 로그인한 계정
+		    public String newPass(String pass, String newPass, HttpSession session, HttpServletRequest request) throws Exception {
+		    	Member member = (Member) request.getSession().getAttribute("member"); //현재로그인한 계정
 			 System.out.println("getId : " + member.getId());
 			
 		

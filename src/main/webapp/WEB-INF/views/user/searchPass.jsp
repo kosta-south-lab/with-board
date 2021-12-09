@@ -75,7 +75,7 @@
                         </div>
                         <div class="form-group">
                             <label for="userName"><span class="glyphicon glyphicon-eye-open"></span> name</label>
-                            <input type="text" class="form-control" id="userName" placeholder="가입시 등록한 이름을 입력하세요.">
+                            <input type="text" class="form-control" id="userName" placeholder="가입시 등록한 아이디를 입력하세요.">
                         </div>
                         <button type="button" class="btn btn-success btn-block" id="checkEmail">OK</button>
                     </form>
