@@ -72,7 +72,7 @@ a:hover {
       
       <a href = ${pageContext.request.contextPath}/user/searchId >아이디 찾기</a>
       <br>
-      <a href = ${pageContext.request.contextPath}/user/searchPass >비밀번호 찾기</a>
+      <a href = ${pageContext.request.contextPath}/user/searchPass2>비밀번호 찾기</a>
 </div>
 </body>
 </html>
