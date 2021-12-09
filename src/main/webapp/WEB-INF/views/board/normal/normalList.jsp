@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>일반게시판 목록</title>
+  <title>커뮤니티 목록</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -64,9 +64,9 @@
       <div class="container">
         <ol>
           <li><a href="${pageContext.request.contextPath}/index">홈</a></li>
-          <li>일반게시판</li>
+          <li>커뮤니티</li>
         </ol>
-        <h2>일반게시판 목록</h2>
+        <h2>커뮤니티 목록</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 

@@ -98,7 +98,7 @@ color : #093040;
           <div class="col-lg-4 col-md-6  mt-4 mt-md-0">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/normallogo.png"/></div>
-              <h4><a href="${pageContext.request.contextPath}/board/normal/normalList">일반 게시판</a></h4>
+              <h4><a href="${pageContext.request.contextPath}/board/normal/normalList">커뮤니티</a></h4>
               <p>※자유/공략/Q&A/정보/핫딜※</p>
             </div>
           </div>
@@ -122,7 +122,7 @@ color : #093040;
           <div class="col-lg-4 col-md-6  mt-4">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/matchlogo.png"/></div>
-              <h4><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList">매칭 게시판</a></h4>
+              <h4><a href="${pageContext.request.contextPath}/board/matchBoard/matchBoardList">온 더 보드</a></h4>
               <p>※Right now with board※</p>
             </div>
           </div>

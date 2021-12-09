@@ -88,7 +88,7 @@
 
         <ol>
           <li><a href="${pageContext.request.contextPath}/index">홈</a></li>
-          <li>일반게시판</li>
+          <li>커뮤니티</li>
         </ol>
         <h2>게시물 수정</h2>
 
