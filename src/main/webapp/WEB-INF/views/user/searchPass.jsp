@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <script>
 
-    $('.modal').on('hidden.bs.modal', function (e) {
+/*    $('.modal').on('hidden.bs.modal', function (e) {
         console.log('modal close');
         $(this).find('form')[0].reset()
     });
@@ -47,7 +47,7 @@
                 }
             }
         })
-    })
+    }) */
 </script>
 <title>비밀번호 찾기</title>
 </head>

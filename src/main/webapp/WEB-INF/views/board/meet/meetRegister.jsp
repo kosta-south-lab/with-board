@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>meetRegister</title>
+  <title>게시물 등록</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -55,7 +55,7 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>  
 </head>
-<body>
+<body style="color: #000000;">
   <jsp:include page="/WEB-INF/views/common/header.jsp" />
   <main id="main">
 
@@ -64,10 +64,10 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/meet">board</a></li>
-          <li>meet</li>
+          <li><a href="/index">홈</a></li>
+          <li>정기모임</li>
         </ol>
-        <h2>Register</h2>
+        <h2>게시물 등록</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->

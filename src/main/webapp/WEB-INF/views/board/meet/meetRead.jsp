@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Contact - Eterna Bootstrap Template</title>
+  <title>게시물 상세</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,8 +29,8 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/meet">Board</a></li>
-          <li>Meet</li>
+          <li><a href="/index">홈</a></li>
+          <li>정기모임</li>
         </ol>
         <h2>글 상세보기</h2>
 		
@@ -114,7 +114,7 @@
               <c:forEach items="${meet.replyList}" var="reply">
 	              <div id="comment-1" class="comment">
 	                <div class="d-flex">
-	                  <div class="comment-img"><img src="${pageContext.request.contextPath}/resources/images/profile/profile.png" alt="프로필이미지"></div>
+	                  <div class="comment-img"><img src="${pageContext.request.contextPath}/img/user.png" alt="프로필이미지"></div>
 	                  <div>
 	                    <h5 class="d-flex justify-content-between">
 	                    	<a href="">${reply.member.name}</a>
@@ -204,7 +204,7 @@
 	
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addArray2[1]+'</div>'
+		            content: '<div style="background-color: #000000; width:150px;text-align:center;padding:6px 0;">'+addArray2[1]+'</div>'
 		        });
 		        infowindow.open(map, marker);
 	

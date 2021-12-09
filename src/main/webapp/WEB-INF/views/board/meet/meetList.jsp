@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>meetList</title>
+  <title>정기모임 목록</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -23,10 +23,10 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/meet">board</a></li>
-          <li>meet</li>
+          <li><a href="/index">홈</a></li>
+          <li>정기모임</li>
         </ol>
-        <h2>meet</h2>
+        <h2>정기모임 목록</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 

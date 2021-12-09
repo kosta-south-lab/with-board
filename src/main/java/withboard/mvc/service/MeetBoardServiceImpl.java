@@ -68,12 +68,10 @@ public class MeetBoardServiceImpl implements MeetBoardService {
 			break;
 		case "nickname":
 			Member writer = memberRepository.findByNicknameContaining(keyword);
-			System.out.println(writer);
 			meetList = meetRepository.findByMeetCategoryAndMember(meetCategory, writer, pageable);
 		case "location":
-			/*
-			meetList = meetRepository.findByMeetCategory(meetCategory);
-			*/
+			meetList = meetRepository.findByMeetCategoryAndLocation2Containing(meetCategory, keyword, pageable);
+
 		}
 		return meetList;
 	}

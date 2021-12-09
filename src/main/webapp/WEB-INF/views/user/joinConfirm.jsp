@@ -68,47 +68,42 @@
     </div>
   </section>
 
-  <!-- ======= Header ======= -->
+ <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
 		<a href="/index"><img src="${pageContext.request.contextPath}/img/withboard_logo_basic.png" alt="withBoard" width="30%" height="30%"></a>
       </div>
+				<nav id="navbar" class="navbar">
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/sample/index">홈</a></li>
+						<li><a href="${pageContext.request.contextPath}/sample/about">공지사항</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/sample/services">커뮤니티</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/sample/portfolio">정기 모임</a></li>
+						<li><a href="${pageContext.request.contextPath}/sample/team">온 더 보드</a></li>
+						<li class="dropdown"><a
+							href="${pageContext.request.contextPath}/game/searchGameList"><span>보드
+									게임</span> <i class="bi bi-chevron-down"></i></a>
+							<ul>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=1">가족 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=2">어린이 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=3">전략 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=4">전쟁 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=5">추상 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=6">커스터마이징 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=7">테마 게임</a></li>
+								<li><a href="${pageContext.request.contextPath}/game/searchGameList/filterSearch?keyword=8">파티 게임</a></li>
+							</ul></li>
+					</ul>
+					<i class="bi bi-list mobile-nav-toggle"></i>
+				</nav>
+				<!-- .navbar -->
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="${pageContext.request.contextPath}/sample/index">Home</a></li>
-          <li><a href="${pageContext.request.contextPath}/sample/about">About</a></li>
-          <li><a href="${pageContext.request.contextPath}/sample/services">Services</a></li>
-          <li><a href="${pageContext.request.contextPath}/sample/portfolio">Portfolio</a></li>
-          <li><a href="${pageContext.request.contextPath}/sample/team">Team</a></li>
-          <li><a href="${pageContext.request.contextPath}/sample/pricing">Pricing</a></li>
-          <li><a class="active" href="${pageContext.request.contextPath}/sample/blog">Blog</a></li>
-          <li class="dropdown"><a href="${pageContext.request.contextPath}/game/searchGameList"><span>보드 게임</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="${pageContext.request.contextPath}/game/searchGameList"><span>보드 게임</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a href="${pageContext.request.contextPath}/sample/contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+			</div></header><!-- End Header -->
 
-    </div>
-  </header><!-- End Header -->
 </head>
 <body>
 		<h3>${requestScope.member.nickname}님 회원가입을 축하드립니다</h3>
@@ -116,9 +111,9 @@
 		<button onclick="sendEmail(event)">이메일 인증하기</button>
 
     <form id="email_form">
-        <input type="text" name="username" value="${requestScope.member.id}">
-        <input type="text" name="email" value="${requestScope.member.email}">
-        <input type="text" name="emailConfirm" value="${requestScope.member.emailConfirm}">												
+        <input type="hidden" name="username" value="${requestScope.member.id}">
+        <input type="hidden" name="email" value="${requestScope.member.email}">
+        <input type="hidden" name="emailConfirm" value="${requestScope.member.emailConfirm}">												
 
     </form>
 
