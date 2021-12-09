@@ -104,7 +104,7 @@ a:hover {
                     <h4 class="text-right">Profile</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">현재 비밀번호</label><input type="text" id="pass" name="pass" value="" class="form-control"></div>
+                    <div class="col-md-6"><label class="labels">현재 비밀번호</label><input type="password" id="pass" name="pass" value="" class="form-control"></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-4 mb-2">   
@@ -112,7 +112,7 @@ a:hover {
               <div class="invalid-feedback">
             </div>
           </div>
-                    <div class="col-md-12"><label class="labels">새 비밀번호</label><input type="text" id="newPass" name="newPass" class="form-control" value=""></div>
+                    <div class="col-md-12"><label class="labels">새 비밀번호</label><input type="password" id="newPass" name="newPass" class="form-control" value=""></div>
                     
                    </div>
       

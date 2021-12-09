@@ -16,10 +16,10 @@
 setTimeout(function() {
 	
 	var goroom = sessionStorage.getItem("goRoom");
-	console.log(sessionStorage.getItem("goRoom"));
+	console.log(goroom);
 	if(goroom!=null)
 	top.reg.location.href=goroom;
-	
+	storage.removeItem("goRoom");
 
 	}, 2000);
 
@@ -36,7 +36,7 @@ setTimeout(function() {
 <tr>
 	
 	<tr>
-	<td><iframe src="/room"  name="reg2" frameborder="0" width="100%" height="100%"></iframe></td>
+	<td><iframe src="/room2"  name="reg2" frameborder="0" width="100%" height="100%"></iframe></td>
 
 	<td><iframe src="/chat"  name="reg" frameborder="0" width="100%" height="100%"></iframe></td>
 </tr>
