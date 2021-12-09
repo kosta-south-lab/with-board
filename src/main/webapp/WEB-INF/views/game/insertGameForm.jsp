@@ -63,7 +63,7 @@ function uploadFiles(e) {
        alert('한 칸에 한개씩만 올려주세요!');
        return;
    }
-   if (files[0].type.match(/image.*/)) {
+   if (files[0].type.match(/image.)) {
                $(e.target).css({
            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
            "outline": "none",

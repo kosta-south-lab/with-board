@@ -8,6 +8,16 @@
 
 <title>위보드 | 함께하는 즐거운 보드게임 커뮤니티</title>
 
+<style type="text/css">
+
+#main_comment{
+
+color : #093040;
+
+}
+
+</style>
+
 </head>
 
 <body>
@@ -23,9 +33,14 @@
           <div class="carousel-item active" style="background: url(${pageContext.request.contextPath}/img/slide/main.png)">
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Eterna</span></h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <h2 class="animate__animated animate__fadeInDown">함께하는 즐거운 보드게임 커뮤니티 <span>위보드</span></h2>
+                <p class="animate__animated animate__fadeInUp" id="main_comment">위보드 (with Board)는 보드게임을 사랑하는 사람들과 함께하는 
+					보드게임 커뮤니티를 지향하고자 시작된 프로젝트입니다.
+					다양한 정보와 커뮤니케이션을 제공하여 보드게임 플레이의 경험 유무와 상관없이 
+					누구나 쉽게 접목하고 즐길 수 있는 보드게임 문화를 가꾸어 나가는 것을 목표로 삼고 있습니다.
+					</p>
               </div>
+
             </div>
           </div>
         </div>
@@ -43,22 +58,22 @@
           <div class="col-lg-4">
             <div class="icon-box">
               <i class="bi bi-card-checklist"></i>
-              <h3><a href="">Lorem Ipsum</a></h3>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+              <h3><a href="">보드게임에 대한 즐거움을 알려 드립니다!</a></h3>
+              <p>새로운 취미가 필요하신 분들께 보드게임을 소개해 드리고자 합니다!</p>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-bar-chart"></i>
-              <h3><a href="">Dolor Sitema</a></h3>
-              <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+              <h3><a href="">정보 부족에 대한 해소를 위보드에서!</a></h3>
+              <p>회원 가입을 통해 더 많은 보드게임 정보와 커뮤니티를 이용해 보세요!</p>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
-              <h3><a href="">Sed ut perspiciatis</a></h3>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+              <h3><a href="">보다 더 큰 즐거움을 다 같이!</a></h3>
+              <p>온 더 보드 게시판을 이용해 원하는 때와 장소에서 함께 보드게임을 즐겨요!</p>
             </div>
           </div>
         </div>
@@ -91,7 +106,7 @@
           <div id="featured_icon_container" class="col-lg-4 col-md-6  mt-4 mt-lg-0">
             <div class="icon-box">
               <div class="icon"><img class="icon_img" src ="${pageContext.request.contextPath}/img/indexlogo/gamelogo.png"/></div>
-              <h4><a href="${pageContext.request.contextPath}/game/gameList">보드게임 목록</a></h4>
+              <h4><a href="${pageContext.request.contextPath}/game/searchGameList">보드게임 목록</a></h4>
               <p>※테마별 보드게임※</p>
             </div>
           </div>
