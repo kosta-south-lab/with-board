@@ -62,10 +62,10 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/matchBoard">board</a></li>
-          <li>matchBoard</li>
+          <li><a href="${pageContext.request.contextPath}/board/matchBoard">홈</a></li>
+          <li>온 더 보드</li>
         </ol>
-        <h2>Register</h2>
+        <h2>글 등록</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -101,28 +101,24 @@
                 <input type="text" class="form-control" name="title" placeholder="제목" required>
               </div>
     
-                <div class="form-group mt-3"class="form-control" style="font-size:14px; color:gray;">
-                게임 : 
-				<select name="game">
-				<option value="1">뭐시깽</option>
-				<option value="2">뭐시깽이</option>
-				</select>
-              </div>
-              <div class="form-group mt-3">
-                <select class="form-control" name="gameCategory" style="font-size:14px; color:gray;">
-                  <option value="0">카테고리 선택</option>
-                  <option value="1">정기모임모집</option>
-				  <option value="2">정기모임후기</option>
+                <select class="form-control" name="game" style="font-size:14px; color:gray;">
+                  <option value="0">대표게임 선택</option>
+                  <c:forEach items="${gameList}" var="game">
+					<option value="${game.gameNo}">${game.gameName}</option>
+				  </c:forEach>
                 </select>
+              <div class="form-group mt-3">
+               
+                <input type="text" name="location" class="form-control" placeholder="상세주소" required>
               </div>
-              <div class="row mt-3">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="location" class="form-control" placeholder="상세주소" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
+              
+               
+                  
+             
+                <div class="form-group mt-3">
                   <input type="text" class="form-control" name="location2" placeholder="지역" required>
                 </div>
-              </div>
+              
               <div class="form-group mt-3">
                 <textarea class="form-control" name="etc" rows="10" placeholder="조건을 입력하세요" required></textarea>
               </div>
@@ -136,6 +132,7 @@
 				  <option value="3">3명</option>
 				  <option value="4">4명</option>
                 </select>
+                <input type="hidden" name="gameCategory" class="form-control" value="${game.gameNo}"required>
               <div class="text-center mt-3"><input type="submit" value="등록하기"></div>
             </form>
           </div>

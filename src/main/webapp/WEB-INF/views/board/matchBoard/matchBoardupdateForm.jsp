@@ -66,10 +66,10 @@
       <div class="container">
 
         <ol>
-          <li><a href="${pageContext.request.contextPath}/board/meet">board</a></li>
-          <li>meet</li>
+          <li><a href="${pageContext.request.contextPath}/board/meet">홈</a></li>
+          <li>온 더 보드</li>
         </ol>
-        <h2>Register</h2>
+        <h2>글 수정</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -108,19 +108,14 @@
               </div>
            
                  <div class="form-group mt-3"class="form-control" style="font-size:14px; color:gray;">
-                게임 : 
-				<select name="game">
-				<option value="1">뭐시깽</option>
-				<option value="2">뭐시깽이</option>
-				</select>
-              </div>
-              <div class="form-group mt-3">
-                <select  class="form-control" name="gameCategory" style="font-size:14px; color:gray;">
-                  <option value="0">카테고리 선택</option>
-                  <option value="1">정기모임모집</option>
-				  <option value="2">정기모임후기</option>
+               <select class="form-control" name="game" style="font-size:14px; color:gray;">
+                  <option value="0">대표게임 선택</option>
+                  <c:forEach items="${gameList}" var="game">
+					<option value="${game.gameNo}">${game.gameName}</option>
+				  </c:forEach>
                 </select>
               </div>
+              
               <div class="row mt-3">
                 <div class="col-md-6 form-group">
                   <input type="text" name="location" class="form-control" placeholder="상세주소" required value="${matchBoard.location}"> 
@@ -144,7 +139,7 @@
 				  <option value="4">4명</option>
                 </select>
               </div>
-              
+              <input type="hidden" name="gameCategory" class="form-control" value="${game.gameNo}"required>
               <div class="text-center mt-3">
               	<input type="submit" value="수정하기">
 			  	<input type="button" value="돌아가기" onclick="history.back()">

@@ -16,8 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
 import withboard.mvc.service.MatchBoardService;
-
+import withboard.mvc.service.MeetBoardService;
 import withboard.mvc.domain.Board;
+import withboard.mvc.domain.Game;
 import withboard.mvc.domain.MatchBoard;
 import withboard.mvc.service.NormalBoardService;
 import withboard.mvc.domain.Member;
@@ -26,6 +27,7 @@ import withboard.mvc.domain.Member;
 @RequiredArgsConstructor
 public class MatchBoardController {
 	private final MatchBoardService matchBoardService;
+	private final MeetBoardService meetBoardService;
 	
 	@RequestMapping("/board/matchBoard/matchBoardList")
 	public ModelAndView list() {
@@ -50,10 +52,12 @@ public class MatchBoardController {
 	public ModelAndView update(MatchBoard matchBoard) {
 		MatchBoard mb = matchBoardService.update(matchBoard);
 		
+		
 		return new ModelAndView("board/matchBoard/matchBoardRead","matchBoard",mb);
 	}
 	@RequestMapping("/board/matchBoard/updates")
 	public String updates(MatchBoard matchBoard) {
+		
 		
 	 matchBoardService.update(matchBoard);
 
@@ -63,8 +67,11 @@ public class MatchBoardController {
 	@RequestMapping("/board/matchBoard/updateForm/{boardNo}")
 	public ModelAndView updateForm(@PathVariable Long boardNo) {
 		MatchBoard mb = matchBoardService.selectBy(boardNo, false);
+		List<Game> gameList = meetBoardService.selectAllGame();
+		
 		
 		 ModelAndView mv = new ModelAndView("board/matchBoard/matchBoardupdateForm", "matchBoard", mb);
+		 mv.addObject("gameList", gameList);
 		 return mv;
 	}
 	
@@ -82,11 +89,19 @@ public class MatchBoardController {
 		mv.addObject("matchBoard", matchBoard);
 		return mv;
 	}
-	
 	@RequestMapping("/board/matchBoard/registerForm")
 	public ModelAndView writeForm() {
-		return new ModelAndView("board/matchBoard/matchBoardRegister");
+		
+		List<Game> gameList = meetBoardService.selectAllGame();
+		return new ModelAndView("board/matchBoard/matchBoardRegister", "gameList", gameList);
 	}
+	
+	
+//	@RequestMapping("/board/matchBoard/registerForm")
+//	public ModelAndView writeForm() {
+
+//		return new ModelAndView("board/matchBoard/matchBoardRegister");
+//	}
 	@RequestMapping("/multiView")
 	public ModelAndView test() {
 		return new ModelAndView("multiView");
